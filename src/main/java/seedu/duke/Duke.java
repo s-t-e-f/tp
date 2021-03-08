@@ -9,7 +9,6 @@ public class Duke {
     private static final ArrayList<Project> projects = new ArrayList<>();
 
     public static void main(String[] args) {
-        boolean isLoop = true;
         String logo = " _____                                                  ___              _\n"
                 + "/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)\n"
                 + "  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |\n"
@@ -20,6 +19,8 @@ public class Duke {
         System.out.println("Team Project of CS2113-W10-3.");
         System.out.println("TraceYourProj - v0.1");
         System.out.println("Type 'help' for a list of command and related usage.");
+
+        boolean isLoop = true;
         while (isLoop) {
             System.out.print("System> ");
             Scanner scan = new Scanner(System.in);
@@ -53,31 +54,31 @@ public class Duke {
 
     public static void addResource(String[] projectInfo) {
         int targetProjectIndex = -1;
-        boolean isURLAlreadyExist = false;
+        boolean isUrlAlreadyExist = false;
         String projectName = projectInfo[0];
-        String projectURL = projectInfo[1];
-        String URLDescription = projectInfo[2];
+        String projectUrl = projectInfo[1];
+        String descriptionOfUrl = projectInfo[2];
 
         for (int i = 0; i < projects.size(); i++) {
             if (projects.get(i).getProjectName().equals(projectName)) {
                 targetProjectIndex = i;
-                isURLAlreadyExist = projects.get(i).isURLAlreadyExist(projectURL);
+                isUrlAlreadyExist = projects.get(i).isUrlAlreadyExist(projectUrl);
                 break;
             }
         }
 
         if (targetProjectIndex == -1) {
-            projects.add(new Project(projectName, projectURL, URLDescription));
+            projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
             System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
             return;
         }
 
-        if (isURLAlreadyExist) {
+        if (isUrlAlreadyExist) {
             projects.remove(targetProjectIndex);
-            projects.add(new Project(projectName, projectURL, URLDescription));
+            projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
             System.out.printf("The resource of the project \"%s\" is updated.\n", projectName);
         } else {
-            projects.get(targetProjectIndex).addResources(projectURL, URLDescription);
+            projects.get(targetProjectIndex).addResources(projectUrl, descriptionOfUrl);
             System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
         }
     }

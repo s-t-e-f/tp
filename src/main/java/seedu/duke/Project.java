@@ -15,13 +15,13 @@ public class Project {
         return projectName;
     }
 
-    public void addResources(String projectURL, String urlDescription) {
-        resources.add(new Resource(projectURL, urlDescription));
+    public void addResources(String projectUrl, String urlDescription) {
+        resources.add(new Resource(projectUrl, urlDescription));
     }
 
-    public boolean isURLAlreadyExist(String projectURL) {
+    public boolean isUrlAlreadyExist(String projectUrl) {
         for (Resource resource : resources) {
-            if (resource.getResourceLink().equals(projectURL)) {
+            if (resource.getResourceLink().equals(projectUrl)) {
                 return true;
             }
         }
