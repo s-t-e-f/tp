@@ -28,7 +28,6 @@ public class CommandHandler {
      * Command: add <br>
      * infoFragments: {"i/project","name","url/URL","d/description"} (separating user input with " " and ignore command)
      *
-     *
      * @param keywords             A string array of keywords. e.g. {"i/","url/","d/"} for add()
      * @param firstOptionalKeyword index of first optional keyword. If no optional keyword is required,
      *                             input length of keywords e.g. 3 for add() since d/description is optional
@@ -38,7 +37,7 @@ public class CommandHandler {
         int[] keywordLocations = getKeywordLocations(infoFragments, keywords);
 
         if (!isUserInputValid(keywordLocations, firstOptionalKeyword)) {
-            System.out.println("Parameter provided is invalid. Please try again!");
+            System.out.print("Invalid parameter is provided." + "\n");
             return null;
         }
 
