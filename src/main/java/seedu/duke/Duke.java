@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final ArrayList<Project> projects = new ArrayList<>();
+    private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
         String logo = " _____                                                  ___              _\n"
@@ -20,13 +21,20 @@ public class Duke {
         System.out.println("TraceYourProj - v0.1");
         System.out.println("Type 'help' for a list of command and related usage.");
 
-        boolean isLoop = true;
-        while (isLoop) {
-            System.out.print("System> ");
-            Scanner scan = new Scanner(System.in);
-            CommandHandler inputHandler = new CommandHandler(scan.nextLine());
-            isLoop = processCommand(inputHandler);
+        boolean isLoop;
+        do {
+            System.out.print("Duke> ");
+            CommandHandler userInput = getUserInput();
+            isLoop = processCommand(userInput);
+        } while (isLoop);
+    }
+
+    private static CommandHandler getUserInput() {
+        String userInput = "dummy";
+        if (scan.hasNextLine()) {
+            userInput = scan.nextLine();
         }
+        return new CommandHandler(userInput);
     }
 
     private static boolean processCommand(CommandHandler userInput) {
@@ -34,6 +42,8 @@ public class Duke {
         case "add":
             processInputBeforeAdding(userInput);
             return true;
+        case "shutdownForDebug":
+            return false;
         default:
             promptUserInvalidInput();
             return true;
