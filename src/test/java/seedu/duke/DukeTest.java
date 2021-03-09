@@ -10,5 +10,3 @@ class DukeTest {
         assertTrue(true);
     }
 }
-
-//Sam
