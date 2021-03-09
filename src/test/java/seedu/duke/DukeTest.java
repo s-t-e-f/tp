@@ -23,7 +23,8 @@ class DukeTest {
 
     @Test
     public void testAdd1Resource() {
-        PrintStream originalOut = System.out;
+        PrintStream originalOut;
+        originalOut = System.out;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -56,7 +57,8 @@ class DukeTest {
 
     @Test
     public void testAdd2Resource() {
-        PrintStream originalOut = System.out;
+        PrintStream originalOut;
+        originalOut = System.out;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
@@ -94,7 +96,8 @@ class DukeTest {
 
     @Test
     public void testAddAndOverwrite1Resource() {
-        PrintStream originalOut = System.out;
+        PrintStream originalOut;
+        originalOut = System.out;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
