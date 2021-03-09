@@ -27,4 +27,13 @@ public class Project {
         }
         return false;
     }
+
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
+
+    @Override
+    public String toString() {
+        return getProjectName();
+    }
 }
