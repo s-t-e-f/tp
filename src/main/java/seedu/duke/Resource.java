@@ -24,8 +24,7 @@ public class Resource {
     public String getResourceDescription() {
         if (checkIfDescriptionExists()) {
             return resourceDescription;
-        }
-        else {
+        } else {
             return "No description available";
         }
 

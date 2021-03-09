@@ -118,7 +118,7 @@ public class Duke {
         int projectCount = 0;
         System.out.println("Here is the list of all project(s) and it's resource(s)!");
         System.out.println("--------------------------------------------------------");
-        for (Project project: projects) {
+        for (Project project : projects) {
             projectCount += 1;
             System.out.println("Project " + projectCount + ": " + project);
             int resourceCount = 0;
@@ -126,7 +126,7 @@ public class Duke {
             System.out.println("Resource(s):");
             for (Resource resource : resources) {
                 resourceCount += 1;
-                System.out.println (resourceCount + "): " + resource);
+                System.out.println(resourceCount + "): " + resource);
             }
             System.out.println("--------------------------------------------------------");
         }
