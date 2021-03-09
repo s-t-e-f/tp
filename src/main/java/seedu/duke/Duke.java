@@ -54,14 +54,14 @@ public class Duke {
     }
 
     private static void processInputBeforeAdding(CommandHandler userInput) {
-        String[] keywords = {"i/", "url/", "d/"};
+        String[] keywords = {"p/", "url/", "d/"};
         int firstOptionalKeyword = 2;
         String[] projectInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
 
         if (projectInfo == null) {
-            System.out.print("Resource is failed to be added!" + "\n");
             return;
         }
+
         addResource(projectInfo);
     }
 
