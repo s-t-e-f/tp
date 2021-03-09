@@ -24,20 +24,20 @@ public class CommandHandler {
      * Transforms infoFragments to clean arguments.
      * <br><br>
      * Illustration:<br>
-     * User input: add i/project name url/URL d/description <br>
+     * User input: add p/project name url/URL d/description <br>
      * Command: add <br>
-     * infoFragments: {"i/project","name","url/URL","d/description"} (separating user input with " " and ignore command)
+     * infoFragments: {"p/project","name","url/URL","d/description"} (separating user input with " " and ignore command)
      *
-     * @param keywords             A string array of keywords. e.g. {"i/","url/","d/"} for add()
+     * @param keywords             A string array of keywords. e.g. {"p/","url/","d/"} for add()
      * @param firstOptionalKeyword index of first optional keyword. If no optional keyword is required,
-     *                             input length of keywords e.g. 3 for add() since d/description is optional
+     *                             input "length of keywords" e.g. 3 for add() since d/description is optional
      * @return clean arguments e.g. {e.g. "project name","URL","description"}
      */
     public String[] decodeInfoFragments(String[] keywords, int firstOptionalKeyword) {
         int[] keywordLocations = getKeywordLocations(infoFragments, keywords);
 
         if (!isUserInputValid(keywordLocations, firstOptionalKeyword)) {
-            System.out.print("Invalid parameter is provided." + "\n");
+            System.out.print("Mandatory parameters are not provided or given provided in invalid format." + "\n");
             return null;
         }
 
