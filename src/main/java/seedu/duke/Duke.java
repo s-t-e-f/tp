@@ -55,6 +55,9 @@ public class Duke {
         case "list-all":
             printAllProjectsAndResources();
             break;
+        case "help":
+            listAllCommands();
+            break;
         default:
             promptUserInvalidInput();
             break;
@@ -180,6 +183,18 @@ public class Duke {
             }
             System.out.println("--------------------------------------------------------");
         }
+    }
+
+    public static void listAllCommands() {
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Here are the available commands:.");
+        System.out.println("add: Adds a resource to a project");
+        System.out.println("\tFormat: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION]");
+        System.out.println("delete: Deletes a resource from the resource list based on the project.");
+        System.out.println("\tFormat: delete p/PROJECT_NAME [i/INDEX]");
+        System.out.println("list all: Shows a list of all resources used in all projects.");
+        System.out.println("exit: Exits the program.");
+        System.out.println("------------------------------------------------------------------------");
     }
 
 }
