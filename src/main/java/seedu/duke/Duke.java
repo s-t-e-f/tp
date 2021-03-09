@@ -10,22 +10,23 @@ public class Duke {
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.print(" _____                                                  ___              _" + "\n");
-        System.out.print("/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)" + "\n");
-        System.out.print("  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |" + "\n");
-        System.out.print(" / /   | |  | (_| || (__|  __/ / \\| (_) || |_| || |  / ___/ | |  | (_) || |" + "\n");
-        System.out.print(" \\/    |_|   \\__,_| \\___|\\___| \\_/ \\___/  \\__,_||_|  \\/     |_|   \\___/_/ |" + "\n");
-        System.out.print("                                                                      |__/" + "\n");
-        System.out.print("Team Project of CS2113-W10-3." + "\n");
-        System.out.print("TraceYourProj - v0.1" + "\n");
-        System.out.print("Type 'help' for a list of command and related usage." + "\n");
+        System.out.println(" _____                                                  ___              _");
+        System.out.println("/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)");
+        System.out.println("  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |");
+        System.out.println(" / /   | |  | (_| || (__|  __/ / \\| (_) || |_| || |  / ___/ | |  | (_) || |");
+        System.out.println(" \\/    |_|   \\__,_| \\___|\\___| \\_/ \\___/  \\__,_||_|  \\/     |_|   \\___/_/ |");
+        System.out.println("                                                                      |__/");
+        System.out.println("Team Project of CS2113-W10-3.");
+        System.out.println("TraceYourProj - v0.1");
+        System.out.println("Type 'help' for a list of command and related usage.");
 
         boolean isLoop;
         do {
-            System.out.print("Duke>");
+            System.out.print("Duke> ");
             CommandHandler userInput = getUserInput();
             isLoop = processCommand(userInput);
         } while (isLoop);
+        exit();
     }
 
     private static CommandHandler getUserInput() {
@@ -41,7 +42,8 @@ public class Duke {
         case "add":
             processInputBeforeAdding(userInput);
             return true;
-        case "shutdownForDebug":
+        case "exit":
+            showExitMessage();
             return false;
         default:
             promptUserInvalidInput();
@@ -50,14 +52,15 @@ public class Duke {
     }
 
     private static void processInputBeforeAdding(CommandHandler userInput) {
-        String[] keywords = {"i/", "url/", "d/"};
+        String[] keywords = {"p/", "url/", "d/"};
         int firstOptionalKeyword = 2;
         String[] projectInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
 
         if (projectInfo == null) {
-            System.out.print("Resource is failed to be added!" + "\n");
+            System.out.println("Resource is failed to be added!");
             return;
         }
+
         addResource(projectInfo);
     }
 
@@ -90,6 +93,15 @@ public class Duke {
             projects.get(targetProjectIndex).addResources(projectUrl, descriptionOfUrl);
             System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
         }
+    }
+
+    private static void showExitMessage() {
+        System.out.println("Thank you for using TraceYourProj!");
+        System.out.println("Hope you have a wonderful day.");
+    }
+
+    private static void exit() {
+        System.exit(0);
     }
 
     private static void promptUserInvalidInput() {
