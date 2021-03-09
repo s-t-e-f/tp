@@ -38,17 +38,20 @@ public class Duke {
     }
 
     private static boolean processCommand(CommandHandler userInput) {
+        boolean isLoop = true;
         switch (userInput.getCommand()) {
         case "add":
             processInputBeforeAdding(userInput);
-            return true;
+            break;
         case "exit":
             showExitMessage();
-            return false;
+            isLoop = false;
+            break;
         default:
             promptUserInvalidInput();
-            return true;
+            break;
         }
+        return isLoop;
     }
 
     private static void processInputBeforeAdding(CommandHandler userInput) {
