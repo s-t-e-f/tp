@@ -7,5 +7,6 @@
 Team Project of CS2113-W10-3.
 TraceYourProj - v0.1
 Type 'help' for a list of command and related usage.
-Duke>The resource is added into the new project "123".
-Duke>
+Duke> The resource is added into the new project "123".
+Duke> Thank you for using TraceYourProj!
+Hope you have a wonderful day.

@@ -1,2 +1,2 @@
-add i/123 url/ss
-shutdownForDebug
+add p/123 url/ss
+exit 123

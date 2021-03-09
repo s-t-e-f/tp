@@ -10,22 +10,23 @@ public class Duke {
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.print(" _____                                                  ___              _" + "\n");
-        System.out.print("/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)" + "\n");
-        System.out.print("  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |" + "\n");
-        System.out.print(" / /   | |  | (_| || (__|  __/ / \\| (_) || |_| || |  / ___/ | |  | (_) || |" + "\n");
-        System.out.print(" \\/    |_|   \\__,_| \\___|\\___| \\_/ \\___/  \\__,_||_|  \\/     |_|   \\___/_/ |" + "\n");
-        System.out.print("                                                                      |__/" + "\n");
-        System.out.print("Team Project of CS2113-W10-3." + "\n");
-        System.out.print("TraceYourProj - v0.1" + "\n");
-        System.out.print("Type 'help' for a list of command and related usage." + "\n");
+        System.out.println(" _____                                                  ___              _");
+        System.out.println("/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)");
+        System.out.println("  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |");
+        System.out.println(" / /   | |  | (_| || (__|  __/ / \\| (_) || |_| || |  / ___/ | |  | (_) || |");
+        System.out.println(" \\/    |_|   \\__,_| \\___|\\___| \\_/ \\___/  \\__,_||_|  \\/     |_|   \\___/_/ |");
+        System.out.println("                                                                      |__/");
+        System.out.println("Team Project of CS2113-W10-3.");
+        System.out.println("TraceYourProj - v0.1");
+        System.out.println("Type 'help' for a list of command and related usage.");
 
         boolean isLoop;
         do {
-            System.out.print("Duke>");
+            System.out.print("Duke> ");
             CommandHandler userInput = getUserInput();
             isLoop = processCommand(userInput);
         } while (isLoop);
+        exit();
     }
 
     private static CommandHandler getUserInput() {
@@ -37,6 +38,7 @@ public class Duke {
     }
 
     private static boolean processCommand(CommandHandler userInput) {
+        boolean isLoop = true;
         switch (userInput.getCommand()) {
         case "add":
             processInputBeforeAdding(userInput);
@@ -46,21 +48,31 @@ public class Duke {
             return true;
         case "shutdownForDebug":
             return false;
+            break;
+        case "exit":
+            showExitMessage();
+            isLoop = false;
+            break;
+        case "list-all":
+            printAllProjectsAndResources();
+            break;
         default:
             promptUserInvalidInput();
-            return true;
+            break;
         }
+        return isLoop;
     }
 
     private static void processInputBeforeAdding(CommandHandler userInput) {
-        String[] keywords = {"i/", "url/", "d/"};
+        String[] keywords = {"p/", "url/", "d/"};
         int firstOptionalKeyword = 2;
         String[] projectInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
 
         if (projectInfo == null) {
-            System.out.print("Resource is failed to be added!" + "\n");
+            System.out.println("Resource is failed to be added!");
             return;
         }
+
         addResource(projectInfo);
     }
 
@@ -138,9 +150,36 @@ public class Duke {
             targetedProj.getResources().remove(idx);
             System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
         }
+
+    private static void showExitMessage() {
+        System.out.println("Thank you for using TraceYourProj!");
+        System.out.println("Hope you have a wonderful day.");
+    }
+
+    private static void exit() {
+        System.exit(0);
     }
 
     private static void promptUserInvalidInput() {
         System.out.print("Invalid input! Please type \"help\" for more details." + "\n");
     }
+
+    private static void printAllProjectsAndResources() {
+        int projectCount = 0;
+        System.out.println("Here is the list of all project(s) and it's resource(s)!");
+        System.out.println("--------------------------------------------------------");
+        for (Project project : projects) {
+            projectCount += 1;
+            System.out.println("Project " + projectCount + ": " + project);
+            int resourceCount = 0;
+            ArrayList<Resource> resources = project.getResources();
+            System.out.println("Resource(s):");
+            for (Resource resource : resources) {
+                resourceCount += 1;
+                System.out.println(resourceCount + "): " + resource);
+            }
+            System.out.println("--------------------------------------------------------");
+        }
+    }
+
 }
