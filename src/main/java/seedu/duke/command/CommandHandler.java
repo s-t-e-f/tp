@@ -37,7 +37,7 @@ public class CommandHandler {
         int[] keywordLocations = getKeywordLocations(infoFragments, keywords);
 
         if (!isUserInputValid(keywordLocations, firstOptionalKeyword)) {
-            System.out.print("Mandatory parameters are not provided or given provided in invalid format." + "\n");
+            System.out.println("Mandatory parameters are not provided or given provided in invalid format.");
             return null;
         }
 
