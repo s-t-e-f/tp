@@ -43,7 +43,7 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Team Project)\n"
+                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
                 + "--------------------------------------------------------\n"
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + Duke.EXIT_MESSAGE + "\n";
@@ -78,8 +78,8 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Team Project)\n"
-                + "1): other website (No description available)\n"
+                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
+                + "2): other website\n"
                 + "--------------------------------------------------------\n"
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + Duke.EXIT_MESSAGE + "\n";
@@ -114,7 +114,7 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Team Project for CS2113)\n"
+                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
                 + "--------------------------------------------------------\n"
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + Duke.EXIT_MESSAGE + "\n";
