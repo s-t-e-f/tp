@@ -11,6 +11,10 @@ public class Project {
         this.resources.add(new Resource(projLink, linkDescription));
     }
 
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
+
     public String getProjectName() {
         return projectName;
     }
@@ -27,4 +31,6 @@ public class Project {
         }
         return false;
     }
+
+
 }
