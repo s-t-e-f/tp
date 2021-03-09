@@ -206,6 +206,7 @@ public class Duke {
         System.out.print("Resource(s):" + "\n");
         for (Resource resource : resources) {
             System.out.print(resourceCount + "): " + resource + "\n");
+            resourceCount += 1;
         }
     }
 

@@ -23,15 +23,13 @@ public class Resource {
 
     public String getResourceDescription() {
         if (checkIfDescriptionExists()) {
-            return resourceDescription;
-        } else {
-            return "No description available";
+            return " (Description: " + resourceDescription + ")";
         }
-
+        return "";
     }
 
     @Override
     public String toString() {
-        return getResourceLink() + " (" + getResourceDescription() + ")";
+        return getResourceLink() + getResourceDescription();
     }
 }
