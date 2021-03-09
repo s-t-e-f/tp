@@ -26,6 +26,7 @@ public class Duke {
             CommandHandler userInput = getUserInput();
             isLoop = processCommand(userInput);
         } while (isLoop);
+        exit();
     }
 
     private static CommandHandler getUserInput() {
@@ -42,6 +43,9 @@ public class Duke {
             processInputBeforeAdding(userInput);
             return true;
         case "shutdownForDebug":
+            return false;
+        case "exit":
+            showExitMessage();
             return false;
         default:
             promptUserInvalidInput();
@@ -90,6 +94,15 @@ public class Duke {
             projects.get(targetProjectIndex).addResources(projectUrl, descriptionOfUrl);
             System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
         }
+    }
+
+    private static void showExitMessage() {
+        System.out.println("Thank you for using TraceYourProj!");
+        System.out.println("Hope you have a wonderful day.");
+    }
+
+    private static void exit() {
+        System.exit(0);
     }
 
     private static void promptUserInvalidInput() {
