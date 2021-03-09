@@ -10,19 +10,19 @@ public class Duke {
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.print(" _____                                                  ___              _" + "\n");
-        System.out.print("/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)" + "\n");
-        System.out.print("  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |" + "\n");
-        System.out.print(" / /   | |  | (_| || (__|  __/ / \\| (_) || |_| || |  / ___/ | |  | (_) || |" + "\n");
-        System.out.print(" \\/    |_|   \\__,_| \\___|\\___| \\_/ \\___/  \\__,_||_|  \\/     |_|   \\___/_/ |" + "\n");
-        System.out.print("                                                                      |__/" + "\n");
-        System.out.print("Team Project of CS2113-W10-3." + "\n");
-        System.out.print("TraceYourProj - v0.1" + "\n");
-        System.out.print("Type 'help' for a list of command and related usage." + "\n");
+        System.out.println(" _____                                                  ___              _");
+        System.out.println("/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)");
+        System.out.println("  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |");
+        System.out.println(" / /   | |  | (_| || (__|  __/ / \\| (_) || |_| || |  / ___/ | |  | (_) || |");
+        System.out.println(" \\/    |_|   \\__,_| \\___|\\___| \\_/ \\___/  \\__,_||_|  \\/     |_|   \\___/_/ |");
+        System.out.println("                                                                      |__/");
+        System.out.println("Team Project of CS2113-W10-3.");
+        System.out.println("TraceYourProj - v0.1");
+        System.out.println("Type 'help' for a list of command and related usage.");
 
         boolean isLoop;
         do {
-            System.out.print("Duke>");
+            System.out.print("Duke> ");
             CommandHandler userInput = getUserInput();
             isLoop = processCommand(userInput);
         } while (isLoop);
@@ -42,8 +42,6 @@ public class Duke {
         case "add":
             processInputBeforeAdding(userInput);
             return true;
-        case "shutdownForDebug":
-            return false;
         case "exit":
             showExitMessage();
             return false;
@@ -59,6 +57,7 @@ public class Duke {
         String[] projectInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
 
         if (projectInfo == null) {
+            System.out.println("Resource is failed to be added!");
             return;
         }
 
