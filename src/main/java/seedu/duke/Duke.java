@@ -48,7 +48,6 @@ public class Duke {
             return true;
         case "shutdownForDebug":
             return false;
-            break;
         case "exit":
             showExitMessage();
             isLoop = false;
