@@ -16,6 +16,7 @@ public class Duke {
     public static final String PROJECT_TEAM_ID = "Team Project of CS2113-W10-3.";
     public static final String APP_NAME_AND_VERSION = "TraceYourProj - v0.1";
     public static final String HOW_TO_GET_HELP = "Type 'help' for a list of command and related usage.";
+    public static final String SIGNAL_FOR_USER_TO_INPUT = "Duke> ";
     public static final String ALL_COMMANDS_STRING = "-----------------------------------------"
             + "-------------------------------\n"
             + "Here are the available commands:\n"
@@ -26,18 +27,21 @@ public class Duke {
             + "list-all: Shows a list of all resources used in all projects.\n"
             + "exit: Exits the program.\n"
             + "------------------------------------------------------------------------\n";
+
     public static final String EXIT_MESSAGE = "Thank you for using TraceYourProj!\n"
             + "Hope you have a wonderful day.\n";
-    public static final String ADD_COMMAND = "add";
-    public static final String DELETE_COMMAND = "delete";
-    public static final String EXIT_COMMAND = "exit";
-    public static final String LIST_ALL_COMMAND = "list-all";
-    public static final String HELP_COMMAND = "help";
 
-    private static final ArrayList<Project> projects = new ArrayList<>();
-    private static final Scanner scan = new Scanner(System.in);
+    private static final String ADD_COMMAND = "add";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String EXIT_COMMAND = "exit";
+    private static final String LIST_ALL_COMMAND = "list-all";
+    private static final String HELP_COMMAND = "help";
+
+    private static ArrayList<Project> projects;
+    private static Scanner scan;
 
     public static void main(String[] args) {
+        initializeDuke();
         printWelcomeText();
         boolean isLoop;
         do {
@@ -45,7 +49,11 @@ public class Duke {
             CommandHandler userInput = getUserInput();
             isLoop = processCommand(userInput);
         } while (isLoop);
-        exit();
+    }
+
+    private static void initializeDuke() {
+        projects = new ArrayList<>();
+        scan = new Scanner(System.in);
     }
 
     private static CommandHandler getUserInput() {
@@ -61,12 +69,10 @@ public class Duke {
         switch (userInput.getCommand()) {
         case ADD_COMMAND:
             processInputBeforeAdding(userInput);
-            return true;
+            break;
         case DELETE_COMMAND:
             processInputBeforeDeleting(userInput);
-            return true;
-        case "shutdownForDebug":
-            return false;
+            break;
         case EXIT_COMMAND:
             showExitMessage();
             isLoop = false;
@@ -90,7 +96,7 @@ public class Duke {
         String[] projectInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
 
         if (projectInfo == null) {
-            System.out.println("Resource is failed to be added!");
+            System.out.print("Resource is failed to be added!" + "\n");
             return;
         }
 
@@ -120,8 +126,8 @@ public class Duke {
 
         if (isUrlAlreadyExist) {
             projects.remove(targetProjectIndex);
-            projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
-            System.out.printf("The resource of the project \"%s\" is updated.\n", projectName);
+            projects.add(targetProjectIndex, new Project(projectName, projectUrl, descriptionOfUrl));
+            System.out.printf("The resource of the project \"%s\" is overwritten.\n", projectName);
         } else {
             projects.get(targetProjectIndex).addResources(projectUrl, descriptionOfUrl);
             System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
@@ -152,9 +158,9 @@ public class Duke {
             return;
         }
 
-        for (int i = 0; i < projects.size(); i++) {
-            if (projects.get(i).getProjectName().equals(projectName)) {
-                targetedProj = projects.get(i);
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                targetedProj = project;
                 if (idx >= targetedProj.getResources().size() || idx < 0) {
                     isResourceExist = false;
                 }
@@ -162,11 +168,11 @@ public class Duke {
             }
         }
         if (targetedProj == null) {
-            System.out.println("Project is not found ... ");
+            System.out.print("Project is not found ... " + "\n");
             return;
         }
         if (!isResourceExist) {
-            System.out.println("Resource is not found. Please enter a valid index. ");
+            System.out.print("Resource is not found. Please enter a valid index. " + "\n");
         } else {
             targetedProj.getResources().remove(idx);
             System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
@@ -174,11 +180,7 @@ public class Duke {
     }
 
     private static void showExitMessage() {
-        System.out.println(EXIT_MESSAGE);
-    }
-
-    private static void exit() {
-        System.exit(0);
+        System.out.print(EXIT_MESSAGE + "\n");
     }
 
     private static void promptUserInvalidInput() {
@@ -187,39 +189,39 @@ public class Duke {
 
     private static void printAllProjectsAndResources() {
         int projectCount = 0;
-        System.out.println("Here is the list of all project(s) and it's resource(s)!");
-        System.out.println("--------------------------------------------------------");
+        System.out.print("Here is the list of all project(s) and it's resource(s)!" + "\n");
+        System.out.print("--------------------------------------------------------" + "\n");
         for (Project project : projects) {
             projectCount += 1;
-            System.out.println("Project " + projectCount + ": " + project);
+            System.out.print("Project " + projectCount + ": " + project + "\n");
             ArrayList<Resource> resources = project.getResources();
             int resourceCount = 0;
             resourceCount += 1;
             printResourcesForAProject(resourceCount, resources);
-            System.out.println("--------------------------------------------------------");
+            System.out.print("--------------------------------------------------------" + "\n");
         }
     }
 
     private static void printResourcesForAProject(int resourceCount, ArrayList<Resource> resources) {
-        System.out.println("Resource(s):");
+        System.out.print("Resource(s):" + "\n");
         for (Resource resource : resources) {
-            System.out.println(resourceCount + "): " + resource);
+            System.out.print(resourceCount + "): " + resource + "\n");
         }
     }
 
     public static void listAllCommands() {
-        System.out.println(ALL_COMMANDS_STRING);
+        System.out.print(ALL_COMMANDS_STRING + "\n");
     }
 
     private static void printWelcomeText() {
-        System.out.println(LOGO_STRING);
-        System.out.println(PROJECT_TEAM_ID);
-        System.out.println(APP_NAME_AND_VERSION);
-        System.out.println(HOW_TO_GET_HELP);
+        System.out.print(LOGO_STRING + "\n");
+        System.out.print(PROJECT_TEAM_ID + "\n");
+        System.out.print(APP_NAME_AND_VERSION + "\n");
+        System.out.print(HOW_TO_GET_HELP + "\n");
     }
 
     private static void printSignalForUserToEnterInput() {
-        System.out.print("Duke> ");
+        System.out.print(SIGNAL_FOR_USER_TO_INPUT);
     }
 
 }
