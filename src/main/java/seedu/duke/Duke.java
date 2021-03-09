@@ -37,10 +37,11 @@ public class Duke {
     private static final String LIST_ALL_COMMAND = "list-all";
     private static final String HELP_COMMAND = "help";
 
-    private static final ArrayList<Project> projects = new ArrayList<>();
-    private static final Scanner scan = new Scanner(System.in);
+    private static ArrayList<Project> projects;
+    private static Scanner scan;
 
     public static void main(String[] args) {
+        initializeDuke();
         printWelcomeText();
         boolean isLoop;
         do {
@@ -48,6 +49,11 @@ public class Duke {
             CommandHandler userInput = getUserInput();
             isLoop = processCommand(userInput);
         } while (isLoop);
+    }
+
+    private static void initializeDuke() {
+        projects = new ArrayList<>();
+        scan = new Scanner(System.in);
     }
 
     private static CommandHandler getUserInput() {
