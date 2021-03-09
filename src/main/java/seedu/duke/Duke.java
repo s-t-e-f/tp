@@ -113,14 +113,14 @@ public class Duke {
 
     private static void printAllProjects() {
         int projectCount = 0;
-        System.out.println("Here is the list of all projects and it's resources!");
+        System.out.println("Here is the list of all project(s) and it's resource(s)!");
         System.out.println("--------------------------------------------------------");
         for (Project project: projects) {
             projectCount += 1;
             System.out.println("Project " + projectCount + ": " + project);
             int resourceCount = 0;
             ArrayList<Resource> resources = project.getResources();
-            System.out.println("Resources:");
+            System.out.println("Resource(s):");
             for (Resource resource : resources) {
                 resourceCount += 1;
                 System.out.println (resourceCount + "): " + resource);
