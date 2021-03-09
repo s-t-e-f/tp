@@ -47,8 +47,8 @@ public class Duke {
             showExitMessage();
             isLoop = false;
             break;
-        case "list":
-            printAllProjects();
+        case "list-all":
+            printAllProjectsAndResources();
             break;
         default:
             promptUserInvalidInput();
@@ -114,7 +114,7 @@ public class Duke {
         System.out.print("Invalid input! Please type \"help\" for more details." + "\n");
     }
 
-    private static void printAllProjects() {
+    private static void printAllProjectsAndResources() {
         int projectCount = 0;
         System.out.println("Here is the list of all project(s) and it's resource(s)!");
         System.out.println("--------------------------------------------------------");
@@ -131,4 +131,5 @@ public class Duke {
             System.out.println("--------------------------------------------------------");
         }
     }
+
 }
