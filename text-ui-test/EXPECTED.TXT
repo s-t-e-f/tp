@@ -4,9 +4,11 @@
  / /   | |  | (_| || (__|  __/ / \| (_) || |_| || |  / ___/ | |  | (_) || |
  \/    |_|   \__,_| \___|\___| \_/ \___/  \__,_||_|  \/     |_|   \___/_/ |
                                                                       |__/
+
 Team Project of CS2113-W10-3.
 TraceYourProj - v0.1
 Type 'help' for a list of command and related usage.
 Duke> The resource is added into the new project "123".
 Duke> Thank you for using TraceYourProj!
 Hope you have a wonderful day.
+
