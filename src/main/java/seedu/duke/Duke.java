@@ -42,7 +42,12 @@ public class Duke {
         switch (userInput.getCommand()) {
         case "add":
             processInputBeforeAdding(userInput);
-            break;
+            return true;
+        case "delete":
+            processInputBeforeDeleting(userInput);
+            return true;
+        case "shutdownForDebug":
+            return false;
         case "exit":
             showExitMessage();
             isLoop = false;
@@ -98,6 +103,51 @@ public class Duke {
         } else {
             projects.get(targetProjectIndex).addResources(projectUrl, descriptionOfUrl);
             System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
+        }
+    }
+
+    private static void processInputBeforeDeleting(CommandHandler userInput) {
+        String[] keywords = {"p/", "i/"};
+        int firstOptionalKeyword = 1;
+        String[] projectInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
+
+        if (projectInfo == null) {
+            System.out.print("Resource is failed to be deleted!" + "\n");
+            return;
+        }
+        deleteResource(projectInfo);
+    }
+
+    public static void deleteResource(String[] projectInfo) {
+        Project targetedProj = null;
+        boolean isResourceExist = true;
+        String projectName = projectInfo[0];
+        int idx;
+        try {
+            idx = Integer.parseInt(projectInfo[1]) - 1;
+        } catch (Exception e) {
+            promptUserInvalidInput();
+            return;
+        }
+
+        for (int i = 0; i < projects.size(); i++) {
+            if (projects.get(i).getProjectName().equals(projectName)) {
+                targetedProj = projects.get(i);
+                if (idx >= targetedProj.getResources().size() || idx < 0) {
+                    isResourceExist = false;
+                }
+                break;
+            }
+        }
+        if (targetedProj == null) {
+            System.out.println("Project is not found ... ");
+            return;
+        }
+        if (!isResourceExist) {
+            System.out.println("Resource is not found. Please enter a valid index. ");
+        } else {
+            targetedProj.getResources().remove(idx);
+            System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
         }
     }
 
