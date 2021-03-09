@@ -6,23 +6,42 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public static final String LOGO_STRING = " _____                                 " +
+            "                 ___              _\n" +
+            "/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)\n" +
+            "  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |\n" +
+            " / /   | |  | (_| || (__|  __/ / \\| (_) || |_| || |  / ___/ | |  | (_) || |\n" +
+            " \\/    |_|   \\__,_| \\___|\\___| \\_/ \\___/  \\__,_||_|  \\/     |_|   \\___/_/ |\n" +
+            "                                                                      |__/\n";
+    public static final String PROJECT_TEAM_ID = "Team Project of CS2113-W10-3.";
+    public static final String APP_NAME_AND_VERSION = "TraceYourProj - v0.1";
+    public static final String HOW_TO_GET_HELP = "Type 'help' for a list of command and related usage.";
+    public static final String ALL_COMMANDS_STRING = "-----------------------------------------" +
+            "-------------------------------\n" +
+            "Here are the available commands:\n" +
+            "add: Adds a resource to a project\n" +
+            "\tFormat: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION]\n" +
+            "delete: Deletes a resource from the resource list based on the project.\n" +
+            "\tFormat: delete p/PROJECT_NAME [i/INDEX]\n" +
+            "list-all: Shows a list of all resources used in all projects.\n" +
+            "exit: Exits the program.\n" +
+            "------------------------------------------------------------------------\n";
+    public static final String EXIT_MESSAGE = "Thank you for using TraceYourProj!\n" +
+            "Hope you have a wonderful day.\n";
+    public static final String ADD_COMMAND = "add";
+    public static final String DELETE_COMMAND = "delete";
+    public static final String EXIT_COMMAND = "exit";
+    public static final String LIST_ALL_COMMAND = "list-all";
+    public static final String HELP_COMMAND = "help";
+
     private static final ArrayList<Project> projects = new ArrayList<>();
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println(" _____                                                  ___              _");
-        System.out.println("/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)");
-        System.out.println("  / /\\/| '__|/ _` | / __|/ _ \\\\_ _// _ \\ | | | || '__|/ /_)/| '__|/ _ \\ | |");
-        System.out.println(" / /   | |  | (_| || (__|  __/ / \\| (_) || |_| || |  / ___/ | |  | (_) || |");
-        System.out.println(" \\/    |_|   \\__,_| \\___|\\___| \\_/ \\___/  \\__,_||_|  \\/     |_|   \\___/_/ |");
-        System.out.println("                                                                      |__/");
-        System.out.println("Team Project of CS2113-W10-3.");
-        System.out.println("TraceYourProj - v0.1");
-        System.out.println("Type 'help' for a list of command and related usage.");
-
+        printWelcomeText();
         boolean isLoop;
         do {
-            System.out.print("Duke> ");
+            printSignalForUserToEnterInput();
             CommandHandler userInput = getUserInput();
             isLoop = processCommand(userInput);
         } while (isLoop);
@@ -40,22 +59,22 @@ public class Duke {
     private static boolean processCommand(CommandHandler userInput) {
         boolean isLoop = true;
         switch (userInput.getCommand()) {
-        case "add":
+        case ADD_COMMAND:
             processInputBeforeAdding(userInput);
             return true;
-        case "delete":
+        case DELETE_COMMAND:
             processInputBeforeDeleting(userInput);
             return true;
         case "shutdownForDebug":
             return false;
-        case "exit":
+        case EXIT_COMMAND:
             showExitMessage();
             isLoop = false;
             break;
-        case "list-all":
+        case LIST_ALL_COMMAND:
             printAllProjectsAndResources();
             break;
-        case "help":
+        case HELP_COMMAND:
             listAllCommands();
             break;
         default:
@@ -155,8 +174,7 @@ public class Duke {
     }
 
     private static void showExitMessage() {
-        System.out.println("Thank you for using TraceYourProj!");
-        System.out.println("Hope you have a wonderful day.");
+        System.out.println(EXIT_MESSAGE);
     }
 
     private static void exit() {
@@ -174,27 +192,34 @@ public class Duke {
         for (Project project : projects) {
             projectCount += 1;
             System.out.println("Project " + projectCount + ": " + project);
-            int resourceCount = 0;
             ArrayList<Resource> resources = project.getResources();
-            System.out.println("Resource(s):");
-            for (Resource resource : resources) {
-                resourceCount += 1;
-                System.out.println(resourceCount + "): " + resource);
-            }
+            int resourceCount = 0;
+            resourceCount += 1;
+            printResourcesForAProject(resourceCount, resources);
             System.out.println("--------------------------------------------------------");
         }
     }
 
+    private static void printResourcesForAProject(int resourceCount, ArrayList<Resource> resources) {
+        System.out.println("Resource(s):");
+        for (Resource resource : resources) {
+            System.out.println(resourceCount + "): " + resource);
+        }
+    }
+
     public static void listAllCommands() {
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println("Here are the available commands:.");
-        System.out.println("add: Adds a resource to a project");
-        System.out.println("\tFormat: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION]");
-        System.out.println("delete: Deletes a resource from the resource list based on the project.");
-        System.out.println("\tFormat: delete p/PROJECT_NAME [i/INDEX]");
-        System.out.println("list all: Shows a list of all resources used in all projects.");
-        System.out.println("exit: Exits the program.");
-        System.out.println("------------------------------------------------------------------------");
+        System.out.println(ALL_COMMANDS_STRING);
+    }
+
+    private static void printWelcomeText() {
+        System.out.println(LOGO_STRING);
+        System.out.println(PROJECT_TEAM_ID);
+        System.out.println(APP_NAME_AND_VERSION);
+        System.out.println(HOW_TO_GET_HELP);
+    }
+
+    private static void printSignalForUserToEnterInput() {
+        System.out.print("Duke> ");
     }
 
 }
