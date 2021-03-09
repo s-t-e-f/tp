@@ -150,6 +150,7 @@ public class Duke {
             targetedProj.getResources().remove(idx);
             System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
         }
+    }
 
     private static void showExitMessage() {
         System.out.println("Thank you for using TraceYourProj!");
