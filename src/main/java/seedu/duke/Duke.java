@@ -4,7 +4,6 @@ import seedu.duke.command.CommandHandler;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.lang.*;
 
 public class Duke {
     public static final String LOGO_STRING = " _____                                 "
