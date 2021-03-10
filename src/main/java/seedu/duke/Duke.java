@@ -140,7 +140,7 @@ public class Duke {
         String[] projectInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
 
         if (projectInfo == null) {
-            System.out.print("Resource is failed to be deleted!" + "\n");
+            System.out.print("Resource failed to be deleted!" + "\n");
             return;
         }
         deleteResource(projectInfo);
