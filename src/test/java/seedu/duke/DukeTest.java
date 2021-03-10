@@ -23,14 +23,16 @@ class DukeTest {
 
     @Test
     public void testAdd1Resource() {
-        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(newOutputStream));
+        PrintStream originalOut;
+        originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
+        String data = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
                 + "list-all\n"
                 + "exit";
 
-        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
 
         Duke.main(null);
 
@@ -46,22 +48,24 @@ class DukeTest {
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + Duke.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(bos.toString(), targetString);
 
-        System.setOut(System.out);
+        System.setOut(originalOut);
     }
 
     @Test
     public void testAdd2Resource() {
-        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(newOutputStream));
+        PrintStream originalOut;
+        originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
+        String data = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
                 + "add p/CS2113 Group Project url/other website\n"
                 + "list-all\n"
                 + "exit";
 
-        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
 
         Duke.main(null);
 
@@ -80,22 +84,24 @@ class DukeTest {
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + Duke.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(bos.toString(), targetString);
 
-        System.setOut(System.out);
+        System.setOut(originalOut);
     }
 
     @Test
     public void testAddAndOverwrite1Resource() {
-        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(newOutputStream));
+        PrintStream originalOut;
+        originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
+        String data = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
                 + "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
                 + "list-all\n"
                 + "exit";
 
-        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
 
         Duke.main(null);
 
@@ -113,8 +119,8 @@ class DukeTest {
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + Duke.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(bos.toString(), targetString);
 
-        System.setOut(System.out);
+        System.setOut(originalOut);
     }
 }
