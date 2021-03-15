@@ -228,4 +228,25 @@ class DukeTest {
 
         System.setOut(System.out);
     }
+  
+    @Test
+    public void testListAllCommands() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String helpExpectedOutput = "-----------------------------------------"
+                + "-------------------------------\n"
+                + "Here are the available commands:\n"
+                + "add: Adds a resource to a project\n"
+                + "\tFormat: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION]\n"
+                + "delete: Deletes a resource from the resource list based on the project.\n"
+                + "\tFormat: delete p/PROJECT_NAME [i/INDEX]\n"
+                + "list-all: Shows a list of all resources used in all projects.\n"
+                + "exit: Exits the program.\n"
+                + "------------------------------------------------------------------------\n\n";
+
+        Duke.listAllCommands();
+        assertEquals(newOutputStream.toString(), helpExpectedOutput);
+    }
+
 }
