@@ -201,6 +201,7 @@ class DukeTest {
                 + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
                 + "list-all\n"
                 + "delete p/CS2113 Group Project i/1\n"
+                + "list-all\n"
                 + "exit";
 
         System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
@@ -221,6 +222,13 @@ class DukeTest {
                 + "--------------------------------------------------------\n"
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is deleted from the project \"CS2113 Group Project\".\n"
+                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "Resource(s):\n"
+                + "1): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "--------------------------------------------------------\n"
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + Duke.EXIT_MESSAGE + "\n";
 
@@ -247,6 +255,27 @@ class DukeTest {
 
         Duke.listAllCommands();
         assertEquals(newOutputStream.toString(), helpExpectedOutput);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testExit() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String helpExpectedOutput = dukeStandardHeading
+                + Duke.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), helpExpectedOutput);
+
+        System.setOut(System.out);
     }
 
 }
