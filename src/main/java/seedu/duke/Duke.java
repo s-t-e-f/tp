@@ -159,24 +159,23 @@ public class Duke {
                 break;
             }
         }
+
+        if (targetedProj == null) {
+            System.out.print("Project is not found ... " + "\n");
+            return;
+        }
         
         try {
             if (projectInfo[1] != null) {
                 idx = Integer.parseInt(projectInfo[1]) - 1;
                 isIdxExists = true;
-            } else {
                 isResourceExist = targetedProj.checkResourceExistsByIndex(idx);
             }
         } catch (Exception e) {
             promptUserInvalidInput();
             return;
         }
-        
-        
-        if (targetedProj == null) {
-            System.out.print("Project is not found ... " + "\n");
-            return;
-        }
+
         // If index is not indicated, remove all resources from the specified project.
         if (isIdxExists == false) {
             targetedProj.getResources().removeAll(targetedProj.getResources());
