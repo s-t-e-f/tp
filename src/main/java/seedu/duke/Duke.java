@@ -150,27 +150,39 @@ public class Duke {
         Project targetedProj = null;
         boolean isResourceExist = true;
         String projectName = projectInfo[0];
-        int idx;
-        try {
-            idx = Integer.parseInt(projectInfo[1]) - 1;
-        } catch (Exception e) {
-            promptUserInvalidInput();
-            return;
-        }
+        int idx = -1;
+        boolean isIdxExists = false;
 
         for (Project project : projects) {
             if (project.getProjectName().equals(projectName)) {
                 targetedProj = project;
-                if (idx >= targetedProj.getResources().size() || idx < 0) {
-                    isResourceExist = false;
-                }
                 break;
             }
         }
+        
+        try {
+            if (projectInfo[1] != null) {
+                idx = Integer.parseInt(projectInfo[1]) - 1;
+                isIdxExists = true;
+            } else {
+                isResourceExist = targetedProj.checkResourceExistsByIndex(idx);
+            }
+        } catch (Exception e) {
+            promptUserInvalidInput();
+            return;
+        }
+        
+        
         if (targetedProj == null) {
             System.out.print("Project is not found ... " + "\n");
             return;
         }
+        // If index is not indicated, remove all resources from the specified project.
+        if (isIdxExists == false) {
+            targetedProj.getResources().removeAll(targetedProj.getResources());
+            return;
+        }
+
         if (!isResourceExist) {
             System.out.print("Resource is not found. Please enter a valid index. " + "\n");
         } else {
