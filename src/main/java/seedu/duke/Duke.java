@@ -200,6 +200,7 @@ public class Duke {
             printResourcesForAProject(resourceCount, resources);
             System.out.print("--------------------------------------------------------" + "\n");
         }
+        assert true;
     }
 
     private static void printResourcesForAProject(int resourceCount, ArrayList<Resource> resources) {
@@ -208,6 +209,7 @@ public class Duke {
             System.out.print(resourceCount + "): " + resource + "\n");
             resourceCount += 1;
         }
+        assert true;
     }
 
     public static void listAllCommands() {
