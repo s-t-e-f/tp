@@ -32,6 +32,13 @@ public class Project {
         return false;
     }
 
+    public boolean checkResourceExistsByIndex(int idx) {
+        if (idx >= resources.size() || idx < 0) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return getProjectName();
