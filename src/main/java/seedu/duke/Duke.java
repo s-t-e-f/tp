@@ -106,6 +106,7 @@ public class Duke {
     public static void addResource(String[] projectInfo) {
         int targetProjectIndex = -1;
         boolean isUrlAlreadyExist = false;
+        assert projectInfo != null;
         String projectName = projectInfo[0];
         String projectUrl = projectInfo[1];
         String descriptionOfUrl = projectInfo[2];
