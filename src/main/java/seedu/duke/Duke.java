@@ -1,6 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.command.CommandHandler;
+import seedu.duke.resource.Resource;
+import seedu.duke.resource.ResourceManager;
+import seedu.duke.parser.InputParser;
+import seedu.duke.storage.Storage;
+import seedu.duke.exception.DukeException;
+import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
 import java.util.Scanner;
