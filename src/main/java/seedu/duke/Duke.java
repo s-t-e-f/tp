@@ -1,7 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.command.CommandHandler;
-import seedu.duke.resource.*;
+import seedu.duke.resource.Resource;
+import seedu.duke.resource.ResourceManager;
 import seedu.duke.parser.InputParser;
 import seedu.duke.storage.Storage;
 import seedu.duke.exception.DukeException;
