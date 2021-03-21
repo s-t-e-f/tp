@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.resource.Resource;
+
 import java.util.ArrayList;
 
 public class Project {

@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.resource;
 
 public class Resource {
 
