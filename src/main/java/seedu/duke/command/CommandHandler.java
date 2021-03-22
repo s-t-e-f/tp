@@ -20,6 +20,10 @@ public class CommandHandler {
         return command;
     }
 
+    public String[] getInfoFragments() {
+        return infoFragments;
+    }
+
     /**
      * Transforms infoFragments to clean arguments.
      * <br><br>

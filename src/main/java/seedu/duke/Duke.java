@@ -42,6 +42,7 @@ public class Duke {
     private static final String EXIT_COMMAND = "exit";
     private static final String LIST_ALL_COMMAND = "list-all";
     private static final String HELP_COMMAND = "help";
+    private static final String LIST_ONE_PROJECT_COMMAND = "list";
 
     private static ArrayList<Project> projects;
     private static Scanner scan;
@@ -86,6 +87,10 @@ public class Duke {
         case LIST_ALL_COMMAND:
             printAllProjectsAndResources();
             break;
+        case LIST_ONE_PROJECT_COMMAND:
+            String projectName = processProjectName(userInput);
+            printProjectResources(projectName);
+            break;
         case HELP_COMMAND:
             listAllCommands();
             break;
@@ -94,6 +99,41 @@ public class Duke {
             break;
         }
         return isLoop;
+    }
+
+    /**
+     * This method will return the project name from userInput.
+     * @param userInput Input received from user in command line
+     * @return Project Name
+     */
+    private static String processProjectName(CommandHandler userInput) {
+        String[] projectNameArray = userInput.getInfoFragments();
+        String projectName = String.join(" ", projectNameArray);
+        return projectName;
+    }
+
+    /**
+     * This method will print the resources for a particular project.
+     * @param projectName input Project Name
+     */
+    private static void printProjectResources(String projectName) {
+        if (projectName.equals("")) {
+            System.out.println("You did not key in the Project Name! Please type \"help\" for more details.");
+            return;
+        }
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                System.out.print("--------------------------------------------------------" + "\n");
+                System.out.println("Project: " + projectName);
+                ArrayList<Resource> resources = project.getResources();
+                int resourceCount = 0;
+                resourceCount += 1;
+                printResourcesForAProject(resourceCount, resources);
+                System.out.print("--------------------------------------------------------" + "\n");
+                return;
+            }
+        }
+        System.out.println("Project not found!");
     }
 
     private static void processInputBeforeAdding(CommandHandler userInput) {
