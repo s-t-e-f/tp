@@ -102,7 +102,7 @@ public class Duke {
     }
 
     /**
-     * This method will return the project name from userInput
+     * This method will return the project name from userInput.
      * @param userInput Input received from user in command line
      * @return Project Name
      */
