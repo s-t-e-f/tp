@@ -37,7 +37,7 @@ Aspect: How list-all executes
   * This list-all feature will do a loop through all the projects in the projects arraylist. For each project, it will loop through all the resources and print it out.
 * Alternative 2 (none)
 
-#### List all the resources for a particular project feature
+### List all the resources for a particular project feature
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -65,8 +65,32 @@ Aspect: How list PROJECTNAME executes
     * **Pros**: When there is an error, we will know if the error is due to the fact that the project does not exist.
 * Alternative 2:
     * Print the project’s resources straight away without checking if project exists.  
-    * **Cons**: Harder to pinpoint the cause of the error if an error is thrown.  
-    
+    * **Cons**: Harder to pinpoint the cause of the error if an error is thrown.
+
+
+### Deleting resource from a specified project 
+**Proposed Implementation**
+
+Given below is an example usage scenario and how deleting resource(s) works.
+
+**Step 1**:
+The user launches the application. The application state is initialised by the Storage class which reads the text file.
+
+**Step 2**:
+The user executes the following command to delete the 2nd resource in the resource list of the project 'CS2113'.
+>delete p/CS2113 i/2
+
+**Step 3**:
+If PROJECT_NAME is not found in the database, the application prompts the user that the project is not found. 
+<br> If INDEX is invalid <i>(i.e. negative integer or exceeds the number of resources in that project)</i>, the application prompts the user to reenter a valid index.
+<br> Else, the system feedbacks to the user that the specified resource has been successfully deleted.
+
+**Step 4**:
+The user can execute `list p/CS2113` to verify that the specified resource has been deleted from the project.
+
+
+
+
 ## Product scope
 ### Target user profile
 

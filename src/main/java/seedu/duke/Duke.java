@@ -44,6 +44,7 @@ public class Duke {
     private static final String HELP_COMMAND = "help";
     private static final String LIST_ONE_PROJECT_COMMAND = "list";
     private static final String FIND_COMMAND = "find";
+    private static final String EDIT_COMMAND = "edit";
 
     private static ArrayList<Project> projects;
     private static Scanner scan;
@@ -91,6 +92,9 @@ public class Duke {
         case LIST_ONE_PROJECT_COMMAND:
             String projectName = processProjectName(userInput);
             printProjectResources(projectName);
+            break;
+        case EDIT_COMMAND:
+            processInputBeforeEditing(userInput);
             break;
         case FIND_COMMAND:
             processInputBeforeFinding(userInput);
@@ -199,10 +203,8 @@ public class Duke {
 
     public static void deleteResource(String[] projectInfo) {
         Project targetedProj = null;
-        boolean isResourceExist = true;
         String projectName = projectInfo[0];
         int idx = -1;
-        boolean isIdxExists = false;
 
         for (Project project : projects) {
             if (project.getProjectName().equals(projectName)) {
@@ -210,35 +212,82 @@ public class Duke {
                 break;
             }
         }
-
         if (targetedProj == null) {
             System.out.print("Project is not found ... " + "\n");
             return;
         }
-        
+
         try {
             if (projectInfo[1] != null) {
                 idx = Integer.parseInt(projectInfo[1]) - 1;
-                isIdxExists = true;
-                isResourceExist = targetedProj.checkResourceExistsByIndex(idx);
+                targetedProj.getResources().remove(idx);
+                System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
+            } else {
+                // If index is not indicated, remove all resources from the specified project.
+                targetedProj.getResources().removeAll(targetedProj.getResources());
+                System.out.printf("All the resources in %s has been deleted.\n", projectName);
+                return;
             }
         } catch (Exception e) {
-            promptUserInvalidInput();
-            return;
-        }
-
-        // If index is not indicated, remove all resources from the specified project.
-        if (isIdxExists == false) {
-            targetedProj.getResources().removeAll(targetedProj.getResources());
-            return;
-        }
-
-        if (!isResourceExist) {
             System.out.print("Resource is not found. Please enter a valid index. " + "\n");
-        } else {
-            targetedProj.getResources().remove(idx);
-            System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
+            return;
         }
+    }
+
+    private static void processInputBeforeEditing(CommandHandler userInput) {
+        String[] keywords = {"p/", "i/", "url/", "d/"};
+        int firstOptionalKeyword = 1;
+        String[] projectInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
+
+        if (projectInfo == null) {
+            System.out.print("Resource failed to be edited!" + "\n");
+            return;
+        }
+        editResource(projectInfo);
+    }
+
+    public static void editResource(String[] projectInfo) {
+        Project targetedProj = null;
+        Resource targetedResource = null;
+        String projectName = projectInfo[0];
+        int idx = -1;
+
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                targetedProj = project;
+                break;
+            }
+        }
+        if (targetedProj == null) {
+            System.out.print("Project is not found ... " + "\n");
+            return;
+        }
+
+        try {
+            idx = Integer.parseInt(projectInfo[1]) - 1;
+            targetedResource = targetedProj.getResources().get(idx);
+            if (projectInfo[2] != null) {
+                targetedResource.setResourceLink(projectInfo[2]);
+                System.out.printf("The resource is successfully edited to : \n");
+                System.out.printf("    " + targetedResource.toString() + "\n");
+            }
+            // GOT ERROR HERE. -- cannot edit description without editing url
+            // edit p/Jester's jokes i/1 d/test will be read as :
+            // projectInfo[0] = 'Jester's jokes'
+            // projectInfo[1] = '1 d/test'
+            if (projectInfo[3] != null) {
+                targetedResource.setResourceDescription(projectInfo[3]);
+            }
+            if (projectInfo[2] == null & projectInfo[3] == null) {
+                System.out.println("The resource is not edited.");
+            }
+        } catch (Exception e) {
+            System.out.printf("Resource is not found. Please enter a valid index. " + "\n");
+            return;
+        }
+
+
+
     }
 
     private static void showExitMessage() {
