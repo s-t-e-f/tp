@@ -32,6 +32,14 @@ public class Resource {
         return resourceDescription;
     }
 
+    public void setResourceLink(String resourceLink) {
+        this.resourceLink = resourceLink;
+    }
+
+    public void setResourceDescription(String resourceDescription) {
+        this.resourceDescription = resourceDescription;
+    }
+
     @Override
     public String toString() {
         return getResourceLink() + getResourceDescription();
