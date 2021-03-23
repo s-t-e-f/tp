@@ -326,14 +326,19 @@ public class Duke {
     }
 
     private static void printResourcesInProjectMatchingKeyword(String projectName, String keyword) {
+        Boolean isProject = Boolean.FALSE;
         for (Project project : projects) {
             if (project.getProjectName().equals(projectName)) {
+                isProject = Boolean.TRUE;
                 System.out.print("--------------------------------------------------------" + "\n");
                 System.out.println("Project: " + projectName);
                 ArrayList<Resource> resources = project.getResources();
                 printResourcesMatchingKeyword(resources, keyword);
                 System.out.print("--------------------------------------------------------" + "\n");
             }
+        }
+        if (!isProject) {
+            System.out.println("Project cannot be found! Please enter a valid project name!");
         }
     }
 
