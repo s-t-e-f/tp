@@ -28,6 +28,10 @@ public class Resource {
         return "";
     }
 
+    public String getResourceDescriptionOnly() {
+        return resourceDescription;
+    }
+
     @Override
     public String toString() {
         return getResourceLink() + getResourceDescription();

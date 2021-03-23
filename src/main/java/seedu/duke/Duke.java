@@ -43,6 +43,7 @@ public class Duke {
     private static final String LIST_ALL_COMMAND = "list-all";
     private static final String HELP_COMMAND = "help";
     private static final String LIST_ONE_PROJECT_COMMAND = "list";
+    private static final String FIND_COMMAND = "find";
 
     private static ArrayList<Project> projects;
     private static Scanner scan;
@@ -90,6 +91,9 @@ public class Duke {
         case LIST_ONE_PROJECT_COMMAND:
             String projectName = processProjectName(userInput);
             printProjectResources(projectName);
+            break;
+        case FIND_COMMAND:
+            processInputBeforeFinding(userInput);
             break;
         case HELP_COMMAND:
             listAllCommands();
@@ -285,4 +289,72 @@ public class Duke {
         System.out.print(SIGNAL_FOR_USER_TO_INPUT);
     }
 
+    private static void processInputBeforeFinding(CommandHandler userInput) {
+        String[] keywords = {"k/", "p/"};
+        int firstOptionalKeyword = 1;
+        String[] keywordInfo = userInput.decodeInfoFragments(keywords, firstOptionalKeyword);
+
+        if (keywordInfo == null) {
+            System.out.print("Resources matching keyword failed to be found!" + "\n");
+            return;
+        }
+        findResources(keywordInfo);
+    }
+
+    private static void findResources(String[] keywordInfo) {
+        if (keywordInfo[1] == null) {
+            String keyword = keywordInfo[0];
+            printAllProjectsAndResourcesMatchingKeyword(keyword);
+        } else {
+            String keyword = keywordInfo[0];
+            String projectName = keywordInfo[1];
+            printResourcesInProjectMatchingKeyword(projectName, keyword);
+        }
+    }
+
+    private static void printAllProjectsAndResourcesMatchingKeyword(String keyword) {
+        int projectCount = 0;
+        System.out.print("Here is the list of all project(s) and its resource(s) matching the keyword!" + "\n");
+        System.out.print("--------------------------------------------------------" + "\n");
+        for (Project project : projects) {
+            projectCount += 1;
+            System.out.print("Project " + projectCount + ": " + project + "\n");
+            ArrayList<Resource> resources = project.getResources();
+            printResourcesMatchingKeyword(resources, keyword);
+            System.out.print("--------------------------------------------------------" + "\n");
+        }
+    }
+
+    private static void printResourcesInProjectMatchingKeyword(String projectName, String keyword) {
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                System.out.print("--------------------------------------------------------" + "\n");
+                System.out.println("Project: " + projectName);
+                ArrayList<Resource> resources = project.getResources();
+                printResourcesMatchingKeyword(resources, keyword);
+                System.out.print("--------------------------------------------------------" + "\n");
+            }
+        }
+    }
+
+    private static void printResourcesMatchingKeyword(ArrayList<Resource> resources, String keyword) {
+        int resourceCount = 1;
+        for (Resource resource : resources) {
+            if (checkKeywordMatch(resource, keyword)) {
+                System.out.print(resourceCount + "): " + resource + "\n");
+                resourceCount += 1;
+            }
+        }
+        if (resourceCount == 1) {
+            System.out.printf("No resources matching keyword \"%s\" found!\n", keyword);
+        }
+    }
+
+    private static Boolean checkKeywordMatch(Resource resource, String keyword) {
+        if (resource.getResourceDescriptionOnly().toLowerCase().contains(keyword.toLowerCase())) {
+            return Boolean.TRUE;
+        } else {
+            return Boolean.FALSE;
+        }
+    }
 }
