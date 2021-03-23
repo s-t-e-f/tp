@@ -266,7 +266,7 @@ public class Duke {
         try {
             idx = Integer.parseInt(projectInfo[1]) - 1;
             targetedResource = targetedProj.getResources().get(idx);
-            if (projectInfo[2]!=null) {
+            if (projectInfo[2] != null) {
                 targetedResource.setResourceLink(projectInfo[2]);
                 System.out.printf("The resource is successfully edited to : \n");
                 System.out.printf("    " + targetedResource.toString() + "\n");
@@ -275,10 +275,10 @@ public class Duke {
             // edit p/Jester's jokes i/1 d/test will be read as :
             // projectInfo[0] = 'Jester's jokes'
             // projectInfo[1] = '1 d/test'
-            if (projectInfo[3]!=null) {
+            if (projectInfo[3] != null) {
                 targetedResource.setResourceDescription(projectInfo[3]);
             }
-            if (projectInfo[2]==null & projectInfo[3]==null) {
+            if (projectInfo[2] == null & projectInfo[3] == null) {
                 System.out.println("The resource is not edited.");
             }
         } catch (Exception e) {
