@@ -246,7 +246,7 @@ public class Duke {
         editResource(projectInfo);
     }
 
-    public static void editResource(String projectInfo[]) {
+    public static void editResource(String[] projectInfo) {
         Project targetedProj = null;
         Resource targetedResource = null;
         String projectName = projectInfo[0];
