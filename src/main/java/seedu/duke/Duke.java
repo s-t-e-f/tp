@@ -310,6 +310,7 @@ public class Duke {
             String projectName = keywordInfo[1];
             printResourcesInProjectMatchingKeyword(projectName, keyword);
         }
+        assert true;
     }
 
     private static void printAllProjectsAndResourcesMatchingKeyword(String keyword) {
@@ -323,7 +324,6 @@ public class Duke {
             printResourcesMatchingKeyword(resources, keyword);
             System.out.print("--------------------------------------------------------" + "\n");
         }
-        assert true;
     }
 
     private static void printResourcesInProjectMatchingKeyword(String projectName, String keyword) {
@@ -341,7 +341,6 @@ public class Duke {
         if (!isProject) {
             System.out.println("Project cannot be found! Please enter a valid project name!");
         }
-        assert true;
     }
 
     private static void printResourcesMatchingKeyword(ArrayList<Resource> resources, String keyword) {
