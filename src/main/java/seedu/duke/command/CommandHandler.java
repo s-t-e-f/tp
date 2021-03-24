@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Project;
+import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.parser.InputParser;
 import seedu.duke.resource.Resource;
@@ -102,22 +103,23 @@ public class CommandHandler {
     private void processInputBeforeAdding() {
         String[] keywords = {"p/", "url/", "d/"};
         int firstOptionalKeyword = 2;
-        String[] projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
-
-        if (projectInfo != null) {
-            addResource(projectInfo);
-        } else {
-            System.out.print("Resource is failed to be added!" + "\n");
+        String[] projectInfo;
+        try {
+            projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+        } catch (InvalidArgumentException e) {
+            e.printErrorMsg();
+            return;
         }
+
+        addResource(projectInfo);
 
     }
 
-    public void addResource(String[] projectInfo) {
+    private void addResource(String[] projectInfo) {
         assert projectInfo != null;
         String projectName = projectInfo[0];
         String projectUrl = projectInfo[1];
         String descriptionOfUrl = projectInfo[2];
-
         int projectIndex = searchExistingProjectIndex(projectName);
 
         if (projectIndex == -1) {
@@ -137,15 +139,15 @@ public class CommandHandler {
         System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
     }
 
-    private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
-        projects.get(projectIndex).addResources(projectUrl, descriptionOfUrl);
-        System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
-    }
-
     private void overwriteResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
         projects.remove(projectIndex);
         projects.add(projectIndex, new Project(projectName, projectUrl, descriptionOfUrl));
         System.out.printf("The resource of the project \"%s\" is overwritten.\n", projectName);
+    }
+
+    private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
+        projects.get(projectIndex).addResources(projectUrl, descriptionOfUrl);
+        System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
     }
 
     private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
@@ -164,19 +166,21 @@ public class CommandHandler {
     private void processInputBeforeDeleting() {
         String[] keywords = {"p/", "i/"};
         int firstOptionalKeyword = 1;
-        String[] projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
-
-        if (projectInfo == null) {
-            System.out.print("Resource failed to be deleted!" + "\n");
+        String[] projectInfo;
+        try {
+            projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+        } catch (InvalidArgumentException e) {
+            e.printErrorMsg();
             return;
         }
+
         deleteResource(projectInfo);
     }
 
     public void deleteResource(String[] projectInfo) {
         Project targetedProj = null;
         String projectName = projectInfo[0];
-        int idx = -1;
+        int idx;
 
         for (Project project : projects) {
             if (project.getProjectName().equals(projectName)) {
@@ -209,12 +213,14 @@ public class CommandHandler {
     private void processInputBeforeEditing() {
         String[] keywords = {"p/", "i/", "url/", "d/"};
         int firstOptionalKeyword = 1;
-        String[] projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
-
-        if (projectInfo == null) {
-            System.out.print("Resource failed to be edited!" + "\n");
+        String[] projectInfo;
+        try {
+            projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+        } catch (InvalidArgumentException e) {
+            e.printErrorMsg();
             return;
         }
+
         editResource(projectInfo);
     }
 
@@ -297,12 +303,14 @@ public class CommandHandler {
     private void processInputBeforeFinding() {
         String[] keywords = {"k/", "p/"};
         int firstOptionalKeyword = 1;
-        String[] keywordInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
-
-        if (keywordInfo == null) {
-            System.out.print("Resources matching keyword failed to be found!" + "\n");
+        String[] keywordInfo;
+        try {
+            keywordInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+        } catch (InvalidArgumentException e) {
+            e.printErrorMsg();
             return;
         }
+
         findResources(keywordInfo);
     }
 

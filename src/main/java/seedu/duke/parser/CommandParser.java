@@ -1,5 +1,7 @@
 package seedu.duke.parser;
 
+import seedu.duke.exception.InvalidArgumentException;
+
 import java.util.Arrays;
 
 public class CommandParser {
@@ -17,12 +19,14 @@ public class CommandParser {
      *                             input "length of keywords" e.g. 3 for add() since d/description is optional
      * @return clean arguments e.g. {e.g. "project name","URL","description"}
      */
-    public static String[] decodeInfoFragments(String[] infoFragments, String[] keywords, int firstOptionalKeyword) {
+    public static String[] decodeInfoFragments(String[] infoFragments, String[] keywords, int firstOptionalKeyword)
+            throws InvalidArgumentException {
         int[] keywordLocations = getKeywordLocations(infoFragments, keywords);
 
         if (!isUserInputValid(keywordLocations, firstOptionalKeyword)) {
-            System.out.print("Mandatory parameters are not provided or given provided in invalid format." + "\n");
-            return null;
+            String errorMsg = "Mandatory parameters are not provided or given provided in invalid order. "
+                    + "Resource failed to be added!";
+            throw new InvalidArgumentException(errorMsg);
         }
         return getUsefulInfo(infoFragments, keywordLocations, keywords);
     }
@@ -77,7 +81,8 @@ public class CommandParser {
         return isMustKeywordPositionOkay;
     }
 
-    private static String[] getUsefulInfo(String[] arguments, int[] keywordLocations, String[] keywords) {
+    private static String[] getUsefulInfo(String[] arguments, int[] keywordLocations, String[] keywords)
+            throws InvalidArgumentException {
         String[] processedArguments = new String[keywords.length];
         for (int i = 0; i < processedArguments.length; i++) {
             if (keywordLocations[i] == -1) {
@@ -87,6 +92,10 @@ public class CommandParser {
             int endLocation = getEndLocation(arguments, keywordLocations, keywords, i);
             processedArguments[i] = extractInfo(arguments, keywords[i].length(), keywordLocations[i],
                     endLocation - 1);
+            if (processedArguments[i].length() == 0) {
+                String errorMsg = "Argument cannot be empty. Resource failed to be added!";
+                throw new InvalidArgumentException(errorMsg);
+            }
         }
         return processedArguments;
     }

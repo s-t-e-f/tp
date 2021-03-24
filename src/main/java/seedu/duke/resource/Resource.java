@@ -1,13 +1,17 @@
 package seedu.duke.resource;
 
+import java.time.LocalDate;
+
 public class Resource {
 
     private String resourceLink;
     private String resourceDescription;
+    private LocalDate dateOfCreation;
 
     public Resource(String resourceLink, String resourceDescription) {
         this.resourceLink = resourceLink;
         this.resourceDescription = resourceDescription;
+        this.dateOfCreation = LocalDate.now();
     }
 
     public String getResourceLink() {
@@ -42,6 +46,6 @@ public class Resource {
 
     @Override
     public String toString() {
-        return getResourceLink() + getResourceDescription();
+        return "[" + dateOfCreation + "] " + getResourceLink() + getResourceDescription();
     }
 }
