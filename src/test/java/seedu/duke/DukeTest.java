@@ -284,6 +284,48 @@ class DukeTest {
     }
 
     @Test
+    public void testFindInAllProjects() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
+                + "add p/Data Science Project url/https://www.kaggle.com/fedesoriano/stroke-prediction-dataset d/Kaggle Stroke Prediction Dataset Website\n"
+                + "find k/Website\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added into the new project \"Data Science Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and its resource(s) matching the keyword!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "--------------------------------------------------------\n"
+                + "Project 2: Data Science Project\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://www.kaggle.com/fedesoriano/stroke-prediction-dataset (Description: Kaggle Stroke Prediction Dataset Website)\n"
+                + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
     public void testExit() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
@@ -298,6 +340,67 @@ class DukeTest {
                 + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), helpExpectedOutput);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testFindInProject() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
+                + "find k/Website p/CS2113 Group Project\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "--------------------------------------------------------" + "\n"
+                + "Project: CS2113 Group Project\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                +"https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testFindInNotFoundProject() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
+                + "find k/Website p/Data Science Project\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Project cannot be found! Please enter a valid project name!" + "\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
 
         System.setOut(System.out);
     }
