@@ -258,7 +258,7 @@ class DukeTest {
 
         System.setOut(System.out);
     }
-    
+
     @Test
     public void testFindInAllProjects() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -289,6 +289,65 @@ class DukeTest {
                 + "Project 2: Data Science Project\n"
                 + "1): https://www.kaggle.com/fedesoriano/stroke-prediction-dataset (Description: Kaggle Stroke Prediction Dataset Website)\n"
                 + "--------------------------------------------------------\n"
+                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + Duke.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testFindInProject() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
+                + "find k/Website p/CS2113 Group Project\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + "--------------------------------------------------------" + "\n"
+                + "Project: CS2113 Group Project\n"
+                + "1): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "--------------------------------------------------------\n"
+                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + Duke.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testFindInNotFoundProject() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
+                + "find k/Website p/Data Science Project\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + "Project cannot be found! Please enter a valid project name!" + "\n"
                 + Duke.SIGNAL_FOR_USER_TO_INPUT
                 + Duke.EXIT_MESSAGE + "\n";
 
