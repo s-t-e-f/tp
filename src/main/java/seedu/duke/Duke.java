@@ -35,5 +35,4 @@ public class Duke {
         }
         return new InputParser(userInput);
     }
-
 }
