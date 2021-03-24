@@ -24,7 +24,6 @@ public class CommandParser {
             System.out.print("Mandatory parameters are not provided or given provided in invalid format." + "\n");
             return null;
         }
-
         return getUsefulInfo(infoFragments, keywordLocations, keywords);
     }
 
@@ -46,48 +45,60 @@ public class CommandParser {
         return newArray;
     }
 
-    private static boolean isUserInputValid(int[] keywordLocation, int firstOptionalArgumentIndex) {
-        boolean isMandatoryInputProvided = true;
+    private static boolean isUserInputValid(int[] keywordLocation, int firstOptionalIndex) {
+        boolean isMustInputProvided = isMustInputProvided(keywordLocation, firstOptionalIndex);
+        boolean isMustKeywordPositionOkay = isMustKeywordPositionOkay(keywordLocation, firstOptionalIndex);
+        boolean isOptionalKeywordPositionOkay = isOptionalKeywordPositionOkay(keywordLocation, firstOptionalIndex);
+        return (isMustInputProvided && isMustKeywordPositionOkay && isOptionalKeywordPositionOkay);
+    }
+
+    private static boolean isMustInputProvided(int[] keywordLocation, int firstOptionalArgumentIndex) {
+        boolean isMustInputProvided = true;
         for (int i = 0; i < firstOptionalArgumentIndex; i++) {
-            isMandatoryInputProvided = isMandatoryInputProvided && keywordLocation[i] != -1;
+            isMustInputProvided = isMustInputProvided && keywordLocation[i] != -1;
         }
-        boolean isPositionCorrect = true;
-        for (int i = 0; i < firstOptionalArgumentIndex - 1; i++) {
-            isPositionCorrect = isPositionCorrect && (keywordLocation[i] < keywordLocation[i + 1]);
-        }
-        boolean isCorrectOptionalKeywordPosition = true;
+        return isMustInputProvided;
+    }
+
+    private static boolean isOptionalKeywordPositionOkay(int[] keywordLocation, int firstOptionalArgumentIndex) {
+        boolean isOptionalKeywordPositionOkay = true;
         for (int i = firstOptionalArgumentIndex; i < keywordLocation.length; i++) {
             boolean isCorrectPosition = keywordLocation[i] > keywordLocation[i - 1] || keywordLocation[i] == -1;
-            isCorrectOptionalKeywordPosition = isCorrectOptionalKeywordPosition && isCorrectPosition;
+            isOptionalKeywordPositionOkay = isOptionalKeywordPositionOkay && isCorrectPosition;
         }
-        return (isMandatoryInputProvided && isPositionCorrect && isCorrectOptionalKeywordPosition);
+        return isOptionalKeywordPositionOkay;
+    }
+
+    private static boolean isMustKeywordPositionOkay(int[] keywordLocation, int firstOptionalArgumentIndex) {
+        boolean isMustKeywordPositionOkay = true;
+        for (int i = 0; i < firstOptionalArgumentIndex - 1; i++) {
+            isMustKeywordPositionOkay = isMustKeywordPositionOkay && (keywordLocation[i] < keywordLocation[i + 1]);
+        }
+        return isMustKeywordPositionOkay;
     }
 
     private static String[] getUsefulInfo(String[] arguments, int[] keywordLocations, String[] keywords) {
         String[] processedArguments = new String[keywords.length];
-        int nextIndex;
         for (int i = 0; i < processedArguments.length; i++) {
             if (keywordLocations[i] == -1) {
                 processedArguments[i] = null;
                 continue;
             }
-            nextIndex = i + 1;
-            int endLocation;
-            if (nextIndex < keywords.length) {
-                endLocation = keywordLocations[nextIndex];
-            } else {
-                endLocation = arguments.length;
-            }
-            while (++nextIndex < keywords.length && endLocation == -1) {
-                endLocation = keywordLocations[nextIndex];
-            }
-            if (endLocation == -1) {
-                endLocation = arguments.length;
-            }
+            int endLocation = getEndLocation(arguments, keywordLocations, keywords, i);
             processedArguments[i] = extractInfo(arguments, keywords[i].length(), keywordLocations[i],
                     endLocation - 1);
         }
         return processedArguments;
+    }
+
+    private static int getEndLocation(String[] arguments, int[] keywordLocations, String[] keywords, int i) {
+        int nextIndex = i;
+        int endLocation = -1;
+        while (++nextIndex < keywords.length && endLocation == -1) {
+            endLocation = keywordLocations[nextIndex];
+        }
+
+        return (endLocation != -1) ? endLocation : arguments.length;
     }
 
     private static String extractInfo(String[] arguments, int chopLocation, int from, int to) {

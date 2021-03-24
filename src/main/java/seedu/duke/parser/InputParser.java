@@ -7,10 +7,10 @@ public class InputParser {
     String[] infoFragments;
 
     public InputParser(String rawInput) {
-        processInput(rawInput);
+        parserInput(rawInput);
     }
 
-    private void processInput(String rawInput) {
+    private void parserInput(String rawInput) {
         String[] inputFragments = rawInput.split(" ");
         this.command = inputFragments[0];
         this.infoFragments = Arrays.copyOfRange(inputFragments, 1, inputFragments.length);

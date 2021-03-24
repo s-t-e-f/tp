@@ -27,9 +27,9 @@ public class CommandHandler {
         this.projects = projects;
     }
 
-    public boolean processCommand(InputParser userInput) {
+    public boolean processCommand() {
         boolean isLoop = true;
-        switch (userInput.getCommand()) {
+        switch (this.command) {
         case ADD_COMMAND:
             processInputBeforeAdding();
             break;
@@ -44,7 +44,7 @@ public class CommandHandler {
             printAllProjectsAndResources();
             break;
         case LIST_ONE_PROJECT_COMMAND:
-            String projectName = processProjectName(userInput);
+            String projectName = processProjectName();
             printProjectResources(projectName);
             break;
         case EDIT_COMMAND:
@@ -66,11 +66,10 @@ public class CommandHandler {
     /**
      * This method will return the project name from userInput.
      *
-     * @param userInput Input received from user in command line
      * @return Project Name
      */
-    private String processProjectName(InputParser userInput) {
-        String[] projectNameArray = userInput.getInfoFragments();
+    private String processProjectName() {
+        String[] projectNameArray = infoFragments;
         String projectName = String.join(" ", projectNameArray);
         return projectName;
     }
@@ -105,44 +104,61 @@ public class CommandHandler {
         int firstOptionalKeyword = 2;
         String[] projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
 
-        if (projectInfo == null) {
+        if (projectInfo != null) {
+            addResource(projectInfo);
+        } else {
             System.out.print("Resource is failed to be added!" + "\n");
-            return;
         }
 
-        addResource(projectInfo);
     }
 
     public void addResource(String[] projectInfo) {
-        int targetProjectIndex = -1;
-        boolean isUrlAlreadyExist = false;
         assert projectInfo != null;
         String projectName = projectInfo[0];
         String projectUrl = projectInfo[1];
         String descriptionOfUrl = projectInfo[2];
 
-        for (int i = 0; i < projects.size(); i++) {
-            if (projects.get(i).getProjectName().equals(projectName)) {
-                targetProjectIndex = i;
-                isUrlAlreadyExist = projects.get(i).isUrlAlreadyExist(projectUrl);
-                break;
-            }
-        }
+        int projectIndex = searchExistingProjectIndex(projectName);
 
-        if (targetProjectIndex == -1) {
-            projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
-            System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
+        if (projectIndex == -1) {
+            createNewProject(projectName, projectUrl, descriptionOfUrl);
             return;
         }
 
-        if (isUrlAlreadyExist) {
-            projects.remove(targetProjectIndex);
-            projects.add(targetProjectIndex, new Project(projectName, projectUrl, descriptionOfUrl));
-            System.out.printf("The resource of the project \"%s\" is overwritten.\n", projectName);
+        if (isUrlAlreadyExist(projectIndex,projectUrl)) {
+            overwriteResource(projectName, projectUrl, descriptionOfUrl, projectIndex);
         } else {
-            projects.get(targetProjectIndex).addResources(projectUrl, descriptionOfUrl);
-            System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
+            addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex);
         }
+    }
+
+    private void createNewProject(String projectName, String projectUrl, String descriptionOfUrl) {
+        projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
+        System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
+    }
+
+    private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
+        projects.get(projectIndex).addResources(projectUrl, descriptionOfUrl);
+        System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
+    }
+
+    private void overwriteResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
+        projects.remove(projectIndex);
+        projects.add(projectIndex, new Project(projectName, projectUrl, descriptionOfUrl));
+        System.out.printf("The resource of the project \"%s\" is overwritten.\n", projectName);
+    }
+
+    private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
+        return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
+    }
+
+    private int searchExistingProjectIndex(String projectName){
+        for (int i = 0; i < projects.size(); i++) {
+            if (projects.get(i).getProjectName().equals(projectName)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private void processInputBeforeDeleting() {
