@@ -310,7 +310,6 @@ public class Duke {
             String projectName = keywordInfo[1];
             printResourcesInProjectMatchingKeyword(projectName, keyword);
         }
-        assert true;
     }
 
     private static void printAllProjectsAndResourcesMatchingKeyword(String keyword) {
