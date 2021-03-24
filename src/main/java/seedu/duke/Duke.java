@@ -19,7 +19,7 @@ public class Duke {
             MainUi.printSignalForUserToEnterInput();
             InputParser userInput = getUserInput();
             CommandHandler commandHandler = new CommandHandler(userInput, projects);
-            isLoop = commandHandler.processCommand(userInput);
+            isLoop = commandHandler.processCommand();
         } while (isLoop);
     }
 
