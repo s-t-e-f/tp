@@ -4,17 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.ui.MainUi;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 class DukeTest {
-    String dukeStandardHeading = Duke.LOGO_STRING + "\n"
-            + Duke.PROJECT_TEAM_ID + "\n"
-            + Duke.APP_NAME_AND_VERSION + "\n"
-            + Duke.HOW_TO_GET_HELP + "\n"
-            + Duke.SIGNAL_FOR_USER_TO_INPUT;
+    String dukeStandardHeading = MainUi.LOGO_STRING + "\n"
+            + MainUi.PROJECT_TEAM_ID + "\n"
+            + MainUi.APP_NAME_AND_VERSION + "\n"
+            + MainUi.HOW_TO_GET_HELP + "\n"
+            + MainUi.SIGNAL_FOR_USER_TO_INPUT;
 
     @Test
     public void dummyTest() {
@@ -36,15 +37,15 @@ class DukeTest {
 
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
                 + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
@@ -67,9 +68,9 @@ class DukeTest {
 
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added to the existing project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
@@ -77,8 +78,8 @@ class DukeTest {
                 + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
                 + "2): other website\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
@@ -101,17 +102,17 @@ class DukeTest {
 
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource of the project \"CS2113 Group Project\" is overwritten.\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
                 + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
@@ -135,9 +136,9 @@ class DukeTest {
 
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added to the existing project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
@@ -145,10 +146,10 @@ class DukeTest {
                 + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
                 + "2): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Resource is not found. Please enter a valid index. \n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
@@ -172,9 +173,9 @@ class DukeTest {
 
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added to the existing project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
@@ -182,10 +183,10 @@ class DukeTest {
                 + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
                 + "2): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Project is not found ... \n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
@@ -210,9 +211,9 @@ class DukeTest {
 
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added to the existing project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
@@ -220,23 +221,23 @@ class DukeTest {
                 + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
                 + "2): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is deleted from the project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
                 + "1): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
         System.setOut(System.out);
     }
-  
+
     @Test
     public void testListAllCommands() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -253,7 +254,7 @@ class DukeTest {
                 + "exit: Exits the program.\n"
                 + "------------------------------------------------------------------------\n\n";
 
-        Duke.listAllCommands();
+        MainUi.listAllCommands();
         assertEquals(newOutputStream.toString(), helpExpectedOutput);
 
         System.setOut(System.out);
@@ -276,11 +277,11 @@ class DukeTest {
 
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added to the existing project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added into the new project \"Data Science Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and its resource(s) matching the keyword!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
@@ -289,8 +290,8 @@ class DukeTest {
                 + "Project 2: Data Science Project\n"
                 + "1): https://www.kaggle.com/fedesoriano/stroke-prediction-dataset (Description: Kaggle Stroke Prediction Dataset Website)\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
@@ -309,7 +310,7 @@ class DukeTest {
         Duke.main(null);
 
         String helpExpectedOutput = dukeStandardHeading
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), helpExpectedOutput);
 
@@ -332,15 +333,15 @@ class DukeTest {
 
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added to the existing project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "--------------------------------------------------------" + "\n"
                 + "Project: CS2113 Group Project\n"
                 + "1): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
@@ -362,13 +363,13 @@ class DukeTest {
         Duke.main(null);
 
         String targetString = dukeStandardHeading
-                + "The resource is added into the new project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added into the new project \"CS2113 Group Project\"." + "\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\"." + "\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Project cannot be found! Please enter a valid project name!" + "\n"
-                + Duke.SIGNAL_FOR_USER_TO_INPUT
-                + Duke.EXIT_MESSAGE + "\n";
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
 
         assertEquals(newOutputStream.toString(), targetString);
 
