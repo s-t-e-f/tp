@@ -237,7 +237,7 @@ class DukeTest {
 
         System.setOut(System.out);
     }
-  
+
     @Test
     public void testListAllCommands() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -365,7 +365,7 @@ class DukeTest {
         String targetString = dukeStandardHeading
                 + "The resource is added into the new project \"CS2113 Group Project\"." + "\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
-                + "The resource is added to the existing project \"CS2113 Group Project\"."+ "\n"
+                + "The resource is added to the existing project \"CS2113 Group Project\"." + "\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Project cannot be found! Please enter a valid project name!" + "\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
