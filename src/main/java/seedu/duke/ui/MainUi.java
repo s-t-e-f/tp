@@ -16,6 +16,8 @@ public class MainUi {
             + "delete: Deletes a resource from the resource list based on the project.\n"
             + "\tFormat: delete p/PROJECT_NAME [i/INDEX]\n"
             + "list-all: Shows a list of all resources used in all projects.\n"
+            + "save: Saves the current projects and resources to a data file.\n"
+            + "load: Loads the projects and resources from the data file if it exists.\n"
             + "exit: Exits the program.\n"
             + "------------------------------------------------------------------------\n";
     public static final String PROJECT_TEAM_ID = "Team Project of CS2113-W10-3.";

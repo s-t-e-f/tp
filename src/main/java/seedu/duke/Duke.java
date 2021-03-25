@@ -2,9 +2,11 @@ package seedu.duke;
 
 import seedu.duke.command.CommandHandler;
 import seedu.duke.parser.InputParser;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -34,5 +36,13 @@ public class Duke {
             userInput = scan.nextLine();
         }
         return new InputParser(userInput);
+    }
+
+    public static ArrayList<Project> getProjects() {
+        return projects;
+    }
+
+    public static void setProjects(ArrayList<Project> projects) {
+        Duke.projects = projects;
     }
 }

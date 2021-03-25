@@ -1,10 +1,12 @@
 package seedu.duke.command;
 
+import seedu.duke.Duke;
 import seedu.duke.Project;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.parser.InputParser;
 import seedu.duke.resource.Resource;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ public class CommandHandler {
     private static final String LIST_ONE_PROJECT_COMMAND = "list";
     private static final String FIND_COMMAND = "find";
     private static final String EDIT_COMMAND = "edit";
+    private static final String SAVE_COMMAND = "save";
+    private static final String LOAD_COMMAND = "load";
     String command;
     String[] infoFragments;
     private final ArrayList<Project> projects;
@@ -56,6 +60,12 @@ public class CommandHandler {
             break;
         case HELP_COMMAND:
             listAllCommands();
+            break;
+        case SAVE_COMMAND:
+            Storage.updateStorage(Duke.getProjects());
+            break;
+        case LOAD_COMMAND:
+            Duke.setProjects(Storage.readFromStorage());
             break;
         default:
             promptUserInvalidInput();
