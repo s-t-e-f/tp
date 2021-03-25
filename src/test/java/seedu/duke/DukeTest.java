@@ -9,6 +9,7 @@ import seedu.duke.ui.MainUi;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
 
 class DukeTest {
     String dukeStandardHeading = MainUi.LOGO_STRING + "\n"
@@ -42,7 +43,9 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -75,8 +78,12 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
-                + "2): other website\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "other website\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -109,7 +116,9 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -143,8 +152,12 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
-                + "2): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Resource is not found. Please enter a valid index. \n"
@@ -180,8 +193,12 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
-                + "2): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Project is not found ... \n"
@@ -218,8 +235,12 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
-                + "2): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is deleted from the project \"CS2113 Group Project\".\n"
@@ -228,7 +249,9 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
-                + "1): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -285,10 +308,14 @@ class DukeTest {
                 + "Here is the list of all project(s) and its resource(s) matching the keyword!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
-                + "1): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
                 + "Project 2: Data Science Project\n"
-                + "1): https://www.kaggle.com/fedesoriano/stroke-prediction-dataset (Description: Kaggle Stroke Prediction Dataset Website)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://www.kaggle.com/fedesoriano/stroke-prediction-dataset (Description: Kaggle Stroke Prediction Dataset Website)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -338,7 +365,9 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "--------------------------------------------------------" + "\n"
                 + "Project: CS2113 Group Project\n"
-                + "1): https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -363,9 +392,9 @@ class DukeTest {
         Duke.main(null);
 
         String targetString = dukeStandardHeading
-                + "The resource is added into the new project \"CS2113 Group Project\"." + "\n"
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
-                + "The resource is added to the existing project \"CS2113 Group Project\"." + "\n"
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Project cannot be found! Please enter a valid project name!" + "\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
