@@ -1,7 +1,6 @@
 # Developer Guide
 
 ## Design & implementation
-
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 ### Design
@@ -10,7 +9,39 @@
 ### Implementation
 This section describes some noteworthy details on how certain features are implemented.
 
-#### List all projects & their respective resources feature
+### Add projects and resources
+**Proposed Implementation**
+
+Given below is an example usage scenario and how the add mechanism behaves at each step.
+
+**Step 1**:
+The user launches the application for the first time. The application’s initialised database will be empty at the start.
+
+**Step 2**:
+The user executes the following commands in order to add a certain project’s resources.
+
+>add p/CS2113 url/www.traceyourproj.com d/Project Website
+
+If the project name is not found in the ArrayList, a new project will be created, and the resource will be added into it.
+If the project is found while there is no resource with the same URL within the project, the resource will be added into
+the project. Otherwise, the original resource will be overwritten.
+
+**Design Consideration**
+
+Aspect: How add executes
+* Alternative 1 (current choice):
+  * The add feature will do a loop through all the projects in the ArrayList projects to see if the project has already
+    existed. For each project, it will loop through all the resources to see if a resource with the same URL has already
+    existed.
+    
+    If the project does not exist in the ArrayList: Create a new project and add the new resource.
+    
+    if the project does exist:
+    - If resource with the same URL exists: Overwrite the original resource in the ArrayList with the new resource.
+    - If resource with the same URL does not exist: Add the new resource into the project.
+* Alternative 2 (none)
+---
+### List all projects & their respective resources feature
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
