@@ -82,13 +82,13 @@ public class CommandHandler {
      */
     private void printProjectResources(String projectName) {
         if (projectName.equals("")) {
-            System.out.println("You did not key in the Project Name! Please type \"help\" for more details.");
+            System.out.print("You did not key in the Project Name! Please type \"help\" for more details." + "\n");
             return;
         }
         for (Project project : projects) {
             if (project.getProjectName().equals(projectName)) {
                 System.out.print("--------------------------------------------------------" + "\n");
-                System.out.println("Project: " + projectName);
+                System.out.print("Project: " + projectName + "\n");
                 ArrayList<Resource> resources = project.getResources();
                 int resourceCount = 0;
                 resourceCount += 1;
@@ -97,7 +97,7 @@ public class CommandHandler {
                 return;
             }
         }
-        System.out.println("Project not found!");
+        System.out.print("Project not found!" + "\n");
     }
 
     private void processInputBeforeAdding() {
@@ -257,10 +257,10 @@ public class CommandHandler {
                 targetedResource.setResourceDescription(projectInfo[3]);
             }
             if (projectInfo[2] == null & projectInfo[3] == null) {
-                System.out.println("The resource is not edited.");
+                System.out.print("The resource is not edited." + "\n");
             }
         } catch (Exception e) {
-            System.out.printf("Resource is not found. Please enter a valid index. " + "\n");
+            System.out.print("Resource is not found. Please enter a valid index. " + "\n");
             return;
         }
 
@@ -344,14 +344,14 @@ public class CommandHandler {
             if (project.getProjectName().equals(projectName)) {
                 isProject = Boolean.TRUE;
                 System.out.print("--------------------------------------------------------" + "\n");
-                System.out.println("Project: " + projectName);
+                System.out.print("Project: " + projectName + "\n");
                 ArrayList<Resource> resources = project.getResources();
                 printResourcesMatchingKeyword(resources, keyword);
                 System.out.print("--------------------------------------------------------" + "\n");
             }
         }
         if (!isProject) {
-            System.out.println("Project cannot be found! Please enter a valid project name!");
+            System.out.print("Project cannot be found! Please enter a valid project name!" + "\n");
         }
     }
 

@@ -367,7 +367,7 @@ class DukeTest {
                 + "Project: CS2113 Group Project\n"
                 + "1): "
                 + "[" + LocalDate.now() + "] "
-                +"https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
