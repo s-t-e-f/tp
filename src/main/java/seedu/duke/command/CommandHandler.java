@@ -238,6 +238,7 @@ public class CommandHandler {
         Project targetedProj = null;
         Resource targetedResource = null;
         String projectName = projectInfo[0];
+        Boolean isEdited = false;
         int idx = -1;
 
         for (Project project : projects) {
@@ -256,8 +257,7 @@ public class CommandHandler {
             targetedResource = targetedProj.getResources().get(idx);
             if (projectInfo[2] != null) {
                 targetedResource.setResourceLink(projectInfo[2]);
-                System.out.printf("The resource is successfully edited to : \n");
-                System.out.printf("    " + targetedResource.toString() + "\n");
+                isEdited = true;
             }
             // GOT ERROR HERE. -- cannot edit description without editing url
             // edit p/Jester's jokes i/1 d/test will be read as :
@@ -265,6 +265,7 @@ public class CommandHandler {
             // projectInfo[1] = '1 d/test'
             if (projectInfo[3] != null) {
                 targetedResource.setResourceDescription(projectInfo[3]);
+                isEdited = true;
             }
             if (projectInfo[2] == null & projectInfo[3] == null) {
                 System.out.print("The resource is not edited." + "\n");
@@ -272,6 +273,11 @@ public class CommandHandler {
         } catch (Exception e) {
             System.out.print("Resource is not found. Please enter a valid index. " + "\n");
             return;
+        }
+
+        if (isEdited) {
+            System.out.printf("The resource is successfully edited to : \n");
+            System.out.printf("    " + targetedResource.toString() + "\n");
         }
 
 
