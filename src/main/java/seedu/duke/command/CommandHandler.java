@@ -1,120 +1,388 @@
 package seedu.duke.command;
 
-import java.util.Arrays;
+import seedu.duke.Duke;
+import seedu.duke.Project;
+import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.parser.CommandParser;
+import seedu.duke.parser.InputParser;
+import seedu.duke.resource.Resource;
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.MainUi;
+
+import java.util.ArrayList;
 
 public class CommandHandler {
+    private static final String ADD_COMMAND = "add";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String EXIT_COMMAND = "exit";
+    private static final String LIST_ALL_COMMAND = "list-all";
+    private static final String HELP_COMMAND = "help";
+    private static final String LIST_ONE_PROJECT_COMMAND = "list";
+    private static final String FIND_COMMAND = "find";
+    private static final String EDIT_COMMAND = "edit";
+    private static final String SAVE_COMMAND = "save";
+    private static final String LOAD_COMMAND = "load";
     String command;
     String[] infoFragments;
+    private final ArrayList<Project> projects;
 
-    public CommandHandler(String rawInput) {
-        processInput(rawInput);
+    public CommandHandler(InputParser userInput, ArrayList<Project> projects) {
+        this.command = userInput.getCommand();
+        this.infoFragments = userInput.getInfoFragments();
+        this.projects = projects;
     }
 
-    private void processInput(String rawInput) {
-        String[] inputFragments = rawInput.split(" ");
-        this.command = inputFragments[0];
-        this.infoFragments = Arrays.copyOfRange(inputFragments, 1, inputFragments.length);
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    public String[] getInfoFragments() {
-        return infoFragments;
+    public boolean processCommand() {
+        boolean isLoop = true;
+        switch (this.command) {
+        case ADD_COMMAND:
+            processInputBeforeAdding();
+            break;
+        case DELETE_COMMAND:
+            processInputBeforeDeleting();
+            break;
+        case EXIT_COMMAND:
+            MainUi.showExitMessage();
+            isLoop = false;
+            break;
+        case LIST_ALL_COMMAND:
+            printAllProjectsAndResources();
+            break;
+        case LIST_ONE_PROJECT_COMMAND:
+            String projectName = processProjectName();
+            printProjectResources(projectName);
+            break;
+        case EDIT_COMMAND:
+            processInputBeforeEditing();
+            break;
+        case FIND_COMMAND:
+            processInputBeforeFinding();
+            break;
+        case HELP_COMMAND:
+            listAllCommands();
+            break;
+        case SAVE_COMMAND:
+            Storage.updateStorage(Duke.getProjects());
+            break;
+        case LOAD_COMMAND:
+            Duke.setProjects(Storage.readFromStorage());
+            break;
+        default:
+            promptUserInvalidInput();
+            break;
+        }
+        return isLoop;
     }
 
     /**
-     * Transforms infoFragments to clean arguments.
-     * <br><br>
-     * Illustration:<br>
-     * User input: add p/project name url/URL d/description <br>
-     * Command: add <br>
-     * infoFragments: {"p/project","name","url/URL","d/description"} (separating user input with " " and ignore command)
+     * This method will return the project name from userInput.
      *
-     * @param keywords             A string array of keywords. e.g. {"p/","url/","d/"} for add()
-     * @param firstOptionalKeyword index of first optional keyword. If no optional keyword is required,
-     *                             input "length of keywords" e.g. 3 for add() since d/description is optional
-     * @return clean arguments e.g. {e.g. "project name","URL","description"}
+     * @return Project Name
      */
-    public String[] decodeInfoFragments(String[] keywords, int firstOptionalKeyword) {
-        int[] keywordLocations = getKeywordLocations(infoFragments, keywords);
-
-        if (!isUserInputValid(keywordLocations, firstOptionalKeyword)) {
-            System.out.print("Mandatory parameters are not provided or given provided in invalid format." + "\n");
-            return null;
-        }
-
-        return getUsefulInfo(infoFragments, keywordLocations, keywords);
+    private String processProjectName() {
+        String[] projectNameArray = infoFragments;
+        String projectName = String.join(" ", projectNameArray);
+        return projectName;
     }
 
-    private int[] getKeywordLocations(String[] arguments, String[] keywords) {
-        int[] keywordLocations = makeEmptyArray(keywords.length);
-        int index = 0;
-        for (int i = 0; i < arguments.length && index < keywords.length; i++) {
-            if (arguments[i].contains(keywords[index])) {
-                keywordLocations[index] = i;
-                index++;
+    /**
+     * This method will print the resources for a particular project.
+     *
+     * @param projectName input Project Name
+     */
+    private void printProjectResources(String projectName) {
+        if (projectName.equals("")) {
+            System.out.print("You did not key in the Project Name! Please type \"help\" for more details." + "\n");
+            return;
+        }
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                System.out.print("--------------------------------------------------------" + "\n");
+                System.out.print("Project: " + projectName + "\n");
+                ArrayList<Resource> resources = project.getResources();
+                int resourceCount = 0;
+                resourceCount += 1;
+                printResourcesForAProject(resourceCount, resources);
+                System.out.print("--------------------------------------------------------" + "\n");
+                return;
             }
         }
-        return keywordLocations;
+        System.out.print("Project not found!" + "\n");
     }
 
-    private int[] makeEmptyArray(int numberOfKeywords) {
-        int[] newArray = new int[numberOfKeywords];
-        Arrays.fill(newArray, -1);
-        return newArray;
+    private void processInputBeforeAdding() {
+        String[] keywords = {"p/", "url/", "d/"};
+        int firstOptionalKeyword = 2;
+        String[] projectInfo;
+        try {
+            projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+        } catch (InvalidArgumentException e) {
+            e.printErrorMsg();
+            return;
+        }
+
+        addResource(projectInfo);
+
     }
 
-    private boolean isUserInputValid(int[] keywordLocation, int firstOptionalArgumentIndex) {
-        boolean isMandatoryInputProvided = true;
-        for (int i = 0; i < firstOptionalArgumentIndex; i++) {
-            isMandatoryInputProvided = isMandatoryInputProvided && keywordLocation[i] != -1;
+    private void addResource(String[] projectInfo) {
+        assert projectInfo != null;
+        String projectName = projectInfo[0];
+        String projectUrl = projectInfo[1];
+        String descriptionOfUrl = projectInfo[2];
+        int projectIndex = searchExistingProjectIndex(projectName);
+
+        if (projectIndex == -1) {
+            createNewProject(projectName, projectUrl, descriptionOfUrl);
+            return;
         }
-        boolean isPositionCorrect = true;
-        for (int i = 0; i < firstOptionalArgumentIndex - 1; i++) {
-            isPositionCorrect = isPositionCorrect && (keywordLocation[i] < keywordLocation[i + 1]);
+
+        if (isUrlAlreadyExist(projectIndex, projectUrl)) {
+            overwriteResource(projectName, projectUrl, descriptionOfUrl, projectIndex);
+        } else {
+            addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex);
         }
-        boolean isCorrectOptionalKeywordPosition = true;
-        for (int i = firstOptionalArgumentIndex; i < keywordLocation.length; i++) {
-            boolean isCorrectPosition = keywordLocation[i] > keywordLocation[i - 1] || keywordLocation[i] == -1;
-            isCorrectOptionalKeywordPosition = isCorrectOptionalKeywordPosition && isCorrectPosition;
-        }
-        return (isMandatoryInputProvided && isPositionCorrect && isCorrectOptionalKeywordPosition);
     }
 
-    private String[] getUsefulInfo(String[] arguments, int[] keywordLocations, String[] keywords) {
-        String[] processedArguments = new String[keywords.length];
-        int nextIndex;
-        for (int i = 0; i < processedArguments.length; i++) {
-            if (keywordLocations[i] == -1) {
-                processedArguments[i] = null;
-                continue;
+    private void createNewProject(String projectName, String projectUrl, String descriptionOfUrl) {
+        projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
+        System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
+    }
+
+    private void overwriteResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
+        projects.remove(projectIndex);
+        projects.add(projectIndex, new Project(projectName, projectUrl, descriptionOfUrl));
+        System.out.printf("The resource of the project \"%s\" is overwritten.\n", projectName);
+    }
+
+    private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
+        projects.get(projectIndex).addResources(projectUrl, descriptionOfUrl);
+        System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
+    }
+
+    private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
+        return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
+    }
+
+    private int searchExistingProjectIndex(String projectName) {
+        for (int i = 0; i < projects.size(); i++) {
+            if (projects.get(i).getProjectName().equals(projectName)) {
+                return i;
             }
-            nextIndex = i + 1;
-            int endLocation;
-            if (nextIndex < keywords.length) {
-                endLocation = keywordLocations[nextIndex];
+        }
+        return -1;
+    }
+
+    private void processInputBeforeDeleting() {
+        String[] keywords = {"p/", "i/"};
+        int firstOptionalKeyword = 1;
+        String[] projectInfo;
+        try {
+            projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+        } catch (InvalidArgumentException e) {
+            e.printErrorMsg();
+            return;
+        }
+
+        deleteResource(projectInfo);
+    }
+
+    public void deleteResource(String[] projectInfo) {
+        Project targetedProj = null;
+        String projectName = projectInfo[0];
+        int idx;
+
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                targetedProj = project;
+                break;
+            }
+        }
+        if (targetedProj == null) {
+            System.out.print("Project is not found ... " + "\n");
+            return;
+        }
+
+        try {
+            if (projectInfo[1] != null) {
+                idx = Integer.parseInt(projectInfo[1]) - 1;
+                targetedProj.getResources().remove(idx);
+                System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
             } else {
-                endLocation = arguments.length;
+                // If index is not indicated, remove all resources from the specified project.
+                targetedProj.getResources().removeAll(targetedProj.getResources());
+                System.out.printf("All the resources in %s has been deleted.\n", projectName);
+                return;
             }
-            while (++nextIndex < keywords.length && endLocation == -1) {
-                endLocation = keywordLocations[nextIndex];
-            }
-            if (endLocation == -1) {
-                endLocation = arguments.length;
-            }
-            processedArguments[i] = extractInfo(arguments, keywords[i].length(), keywordLocations[i],
-                    endLocation - 1);
+        } catch (Exception e) {
+            System.out.print("Resource is not found. Please enter a valid index. " + "\n");
+            return;
         }
-        return processedArguments;
     }
 
-    private String extractInfo(String[] arguments, int chopLocation, int from, int to) {
-        String output = arguments[from].substring(chopLocation);
-        for (int i = from + 1; i <= to; i++) {
-            output = String.join(" ", output, arguments[i]);
+    private void processInputBeforeEditing() {
+        String[] keywords = {"p/", "i/", "url/", "d/"};
+        int firstOptionalKeyword = 1;
+        String[] projectInfo;
+        try {
+            projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+        } catch (InvalidArgumentException e) {
+            e.printErrorMsg();
+            return;
         }
-        return output;
+
+        editResource(projectInfo);
+    }
+
+    public void editResource(String[] projectInfo) {
+        Project targetedProj = null;
+        Resource targetedResource = null;
+        String projectName = projectInfo[0];
+        int idx = -1;
+
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                targetedProj = project;
+                break;
+            }
+        }
+        if (targetedProj == null) {
+            System.out.print("Project is not found ... " + "\n");
+            return;
+        }
+
+        try {
+            idx = Integer.parseInt(projectInfo[1]) - 1;
+            targetedResource = targetedProj.getResources().get(idx);
+            if (projectInfo[2] != null) {
+                targetedResource.setResourceLink(projectInfo[2]);
+                System.out.printf("The resource is successfully edited to : \n");
+                System.out.printf("    " + targetedResource.toString() + "\n");
+            }
+            // GOT ERROR HERE. -- cannot edit description without editing url
+            // edit p/Jester's jokes i/1 d/test will be read as :
+            // projectInfo[0] = 'Jester's jokes'
+            // projectInfo[1] = '1 d/test'
+            if (projectInfo[3] != null) {
+                targetedResource.setResourceDescription(projectInfo[3]);
+            }
+            if (projectInfo[2] == null & projectInfo[3] == null) {
+                System.out.print("The resource is not edited." + "\n");
+            }
+        } catch (Exception e) {
+            System.out.print("Resource is not found. Please enter a valid index. " + "\n");
+            return;
+        }
+
+
+    }
+
+    private void promptUserInvalidInput() {
+        System.out.print("Invalid input! Please type \"help\" for more details." + "\n");
+    }
+
+    private void printAllProjectsAndResources() {
+        int projectCount = 0;
+        System.out.print("Here is the list of all project(s) and it's resource(s)!" + "\n");
+        System.out.print("--------------------------------------------------------" + "\n");
+        for (Project project : projects) {
+            projectCount += 1;
+            System.out.print("Project " + projectCount + ": " + project + "\n");
+            ArrayList<Resource> resources = project.getResources();
+            int resourceCount = 0;
+            resourceCount += 1;
+            printResourcesForAProject(resourceCount, resources);
+            System.out.print("--------------------------------------------------------" + "\n");
+        }
+        assert true;
+    }
+
+    private static void printResourcesForAProject(int resourceCount, ArrayList<Resource> resources) {
+        System.out.print("Resource(s):" + "\n");
+        for (Resource resource : resources) {
+            System.out.print(resourceCount + "): " + resource + "\n");
+            resourceCount += 1;
+        }
+        assert true;
+    }
+
+    public void listAllCommands() {
+        MainUi.listAllCommands();
+    }
+
+    private void processInputBeforeFinding() {
+        String[] keywords = {"k/", "p/"};
+        int firstOptionalKeyword = 1;
+        String[] keywordInfo;
+        try {
+            keywordInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+        } catch (InvalidArgumentException e) {
+            e.printErrorMsg();
+            return;
+        }
+
+        findResources(keywordInfo);
+    }
+
+    private void findResources(String[] keywordInfo) {
+        if (keywordInfo[1] == null) {
+            String keyword = keywordInfo[0];
+            printAllProjectsAndResourcesMatchingKeyword(keyword);
+        } else {
+            String keyword = keywordInfo[0];
+            String projectName = keywordInfo[1];
+            printResourcesInProjectMatchingKeyword(projectName, keyword);
+        }
+    }
+
+    private void printAllProjectsAndResourcesMatchingKeyword(String keyword) {
+        int projectCount = 0;
+        System.out.print("Here is the list of all project(s) and its resource(s) matching the keyword!" + "\n");
+        System.out.print("--------------------------------------------------------" + "\n");
+        for (Project project : projects) {
+            projectCount += 1;
+            System.out.print("Project " + projectCount + ": " + project + "\n");
+            ArrayList<Resource> resources = project.getResources();
+            printResourcesMatchingKeyword(resources, keyword);
+            System.out.print("--------------------------------------------------------" + "\n");
+        }
+    }
+
+    private void printResourcesInProjectMatchingKeyword(String projectName, String keyword) {
+        Boolean isProject = Boolean.FALSE;
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                isProject = Boolean.TRUE;
+                System.out.print("--------------------------------------------------------" + "\n");
+                System.out.print("Project: " + projectName + "\n");
+                ArrayList<Resource> resources = project.getResources();
+                printResourcesMatchingKeyword(resources, keyword);
+                System.out.print("--------------------------------------------------------" + "\n");
+            }
+        }
+        if (!isProject) {
+            System.out.print("Project cannot be found! Please enter a valid project name!" + "\n");
+        }
+    }
+
+    private void printResourcesMatchingKeyword(ArrayList<Resource> resources, String keyword) {
+        int resourceCount = 1;
+        for (Resource resource : resources) {
+            if (checkKeywordMatch(resource, keyword)) {
+                System.out.print(resourceCount + "): " + resource + "\n");
+                resourceCount += 1;
+            }
+        }
+        if (resourceCount == 1) {
+            System.out.printf("No resources matching keyword \"%s\" found!\n", keyword);
+        }
+    }
+
+    private Boolean checkKeywordMatch(Resource resource, String keyword) {
+        if (resource.getResourceDescriptionOnly().toLowerCase().contains(keyword.toLowerCase())) {
+            return Boolean.TRUE;
+        } else {
+            return Boolean.FALSE;
+        }
     }
 }

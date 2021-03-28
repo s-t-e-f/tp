@@ -13,6 +13,10 @@ public class Project {
         this.resources.add(new Resource(projLink, linkDescription));
     }
 
+    public Project(String projectName) {
+        this.projectName = projectName;
+    }
+
     public ArrayList<Resource> getResources() {
         return resources;
     }
@@ -34,12 +38,16 @@ public class Project {
         return false;
     }
 
-
     public boolean checkResourceExistsByIndex(int idx) {
-        if (idx >= resources.size() || idx < 0) {
-            return false;
-        }
-        return true;
+        return !(idx >= resources.size() || idx < 0);
+    }
+
+    public void loadResource(Resource resource) {
+        resources.add(resource);
+    }
+
+    public int getNumberOfResources() {
+        return resources.size();
     }
 
     @Override
