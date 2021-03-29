@@ -164,6 +164,9 @@ If the project name cannot be found, the user will be prompted to search for a v
 If the project name is not given, such as in the following command, all projects will be searched to find resources matching the keyword. 
 > find k/website
 
+The following sequence diagram shows how the find operation works:
+![Exit_puml](puml_img/Find.png)
+
 **Design Consideration**
 
 Aspect: How find executes
@@ -188,6 +191,9 @@ The user initialises the application and adds the resources, Project and Resourc
 **Step 2**:
 The user has finished using the application and wishes to exit the application. He executes the following command to leave the application. 
 > exit
+
+The following sequence diagram shows how the exit operation works:
+![Exit_puml](puml_img/Exit.png)
 
 **Design Consideration**
 
