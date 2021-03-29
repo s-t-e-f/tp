@@ -260,7 +260,7 @@ class DukeTest {
 
         System.setOut(System.out);
     }
-    
+
     @ Test
     public void testEditNotFoundResource() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
