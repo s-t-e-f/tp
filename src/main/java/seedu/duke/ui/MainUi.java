@@ -15,6 +15,8 @@ public class MainUi {
             + "\tFormat: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION]\n"
             + "delete: Deletes a resource from the resource list based on the project.\n"
             + "\tFormat: delete p/PROJECT_NAME [i/INDEX]\n"
+            + "edit : Edits a resource from the resource list based on the project.\n"
+            + "\tFormat: edit p/PROJECT_NAME i/INDEX [url/URL_LINK] [d/LINK_DESCRIPTION]\n"
             + "list-all: Shows a list of all resources used in all projects.\n"
             + "save: Saves the current projects and resources to a data file.\n"
             + "load: Loads the projects and resources from the data file if it exists.\n"

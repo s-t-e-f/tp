@@ -260,6 +260,148 @@ class DukeTest {
 
         System.setOut(System.out);
     }
+    
+    @ Test
+    public void testEditNotFoundResource() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "edit p/CS2113 Group Project i/3 url/https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Resource is not found. Please enter a valid index. " + "\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @ Test
+    public void testEditNotFoundProject() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "edit p/CS2113 Individual Project i/1 url/https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Project is not found ... " + "\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @ Test
+    public void testEditResourceUrl() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
+                + "list-all\n"
+                + "edit p/CS2113 Group Project i/1 url/https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html\n"
+                + "list-all\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "Resource(s):\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is successfully edited to : \n"
+                + "    "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html (Description: Team Project for CS2113)\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "Resource(s):\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html (Description: Team Project for CS2113)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @ Test
+    public void testEditResourceLinkDescription() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "edit p/CS2113 Group Project i/1 url/https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html d/tp Progress Dashboard\n"
+                + "list-all\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = dukeStandardHeading
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is successfully edited to : \n"
+                + "    "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html (Description: tp Progress Dashboard)\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "Resource(s):\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html (Description: tp Progress Dashboard)\n"
+                + "--------------------------------------------------------" + "\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
 
     @Test
     public void testListAllCommands() {
@@ -273,6 +415,8 @@ class DukeTest {
                 + "\tFormat: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION]\n"
                 + "delete: Deletes a resource from the resource list based on the project.\n"
                 + "\tFormat: delete p/PROJECT_NAME [i/INDEX]\n"
+                + "edit : Edits a resource from the resource list based on the project.\n"
+                + "\tFormat: edit p/PROJECT_NAME i/INDEX [url/URL_LINK] [d/LINK_DESCRIPTION]\n"
                 + "list-all: Shows a list of all resources used in all projects.\n"
                 + "save: Saves the current projects and resources to a data file.\n"
                 + "load: Loads the projects and resources from the data file if it exists.\n"
