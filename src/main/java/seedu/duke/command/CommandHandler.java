@@ -3,6 +3,8 @@ package seedu.duke.command;
 import seedu.duke.Duke;
 import seedu.duke.Project;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.NoProjectNameException;
+import seedu.duke.exception.ProjectNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.parser.InputParser;
 import seedu.duke.resource.Resource;
@@ -51,6 +53,13 @@ public class CommandHandler {
         case LIST_ONE_PROJECT_COMMAND:
             String projectName = processProjectName();
             printProjectResources(projectName);
+            try {
+                printResourceListForAProject();
+            } catch (NoProjectNameException e) {
+                System.out.print(NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
+            } catch (ProjectNotFoundException e) {
+                System.out.print(PROJECT_NOT_FOUND_ERROR_MESSAGE);
+            }
             break;
         case EDIT_COMMAND:
             processInputBeforeEditing();
@@ -285,6 +294,31 @@ public class CommandHandler {
 
     private void promptUserInvalidInput() {
         System.out.print("Invalid input! Please type \"help\" for more details." + "\n");
+    /**
+     * This method will print the resources for a particular project.
+     *
+     */
+    private void printResourceListForAProject() throws NoProjectNameException, ProjectNotFoundException {
+        String projectName = processProjectName();
+        if (checkIfProjectNameEmpty(projectName)) {
+            throw new NoProjectNameException();
+        }
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                printDivider();
+                System.out.print("Project: " + projectName + NEW_LINE);
+                ArrayList<Resource> resources = project.getResources();
+                printResourceList(resources);
+                printDivider();
+                return;
+            }
+        }
+        throw new ProjectNotFoundException();
+    }
+
+    private boolean checkIfProjectNameEmpty(String projectName) {
+        boolean isProjectNameEmpty = projectName.equals("");
+        return isProjectNameEmpty;
     }
 
     private void printAllProjectsAndResources() {
