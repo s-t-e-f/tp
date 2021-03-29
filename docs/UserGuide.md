@@ -25,6 +25,32 @@ p/PROJECT_NAME i/INDEX [url/LINK] [d/DESCRIPTION] can be used as p/Jester’s jo
 * Extra parameters after commands that do not take in parameters such as list and exit will be ignored.
   * e.g. if the command entered is exit 1234, it will be interpreted as exit.
 
+
+### Deleting resource(s) : `delete`
+Deletes the specified resource from the resource list based on the project.
+
+Format : `delete p/PROJECT_NAME [i/INDEX]`
+* Deletes the resource at the specified index of the specified project.
+* The index refers to the index number shown in the displayed resource list of the specified project.
+* This index must be a positive integer.
+* If the index is not given, all the resources for that specified project are deleted.
+
+Examples : 
+<br>`delete p/Jester Jokes i/3` deletes the 3rd resource in the resource list of the project 'Jester Jokes'. 
+<br> `delete p/Jester Jokes` deletes all resources from the project 'Jester Jokes'.
+
+### Editing a resource : `edit`
+Edits an existing resource in the resource list based on the project.
+
+Format: `edit p/PROJECT_NAME i/INDEX url/LINK [d/DESCRIPTION]`
+* Edits the resource at the specified index of the specified project.
+* The index refers to the index number shown in the displayed resource list of the specified project.
+* This index must be a positive integer.
+
+Examples : 
+<br> `edit p/Jester Jokes 2 url/https://www.kaggle.com/sameerdev7/joke-rating d/Jester Jokes Dataset'`
+<br>Edits the url and description of the 2nd resource in ‘Jester Jokes’ project to be https://www.kaggle.com/sameerdev7/joke-rating and Jester Jokes Dataset respectively.
+
 ### Finding resources: `find`
 
 Finds resources in a specified project or in all projects based on a user-specified keyword
