@@ -119,6 +119,32 @@ If PROJECT_NAME is not found in the database, the application prompts the user t
 **Step 4**:
 The user can execute `list p/CS2113` to verify that the specified resource has been deleted from the project.
 
+<p align="center">
+  <img alt="Sequence diagram for delete feature." src="diagrams/deleteResource.png" />
+</p>
+
+
+### Editing resource from a specified project
+**Proposed Implementation**
+
+Given below is an example usage scenario and how editing a resource works.
+
+**Step 1**:
+The user launches the application. The application state is initialised by the Storage class which reads the text file.
+
+**Step 2**:
+The user executes the following command to edit the url and link description of the 3nd resource in the resource list of the project 'CS2113'.
+>edit p/CS2113 i/2 url/www.CS2113tp.com d/This is tp site.
+
+**Step 3**:
+If PROJECT_NAME is not found in the database, the application prompts the user that the project is not found.
+<br> If INDEX is invalid <i>(i.e. negative integer or exceeds the number of resources in that project)</i>, the application prompts the user to reenter a valid index.
+<br> Else, the system feedbacks to the user that the specified resource has been successfully edited.
+
+**Step 4**:
+The user can execute `list p/CS2113` to verify that the specified resource has been successfully edited.
+
+
 
 ### Finding resource(s) in a project or all projects based on a keyword
 **Proposed Implementation**
