@@ -2,32 +2,49 @@
 
 ## Introduction
 
-{Give a product intro}
+TraceYourProj is a desktop app for tracking resources for data science projects, optimized 
+for use via a Command Line Interface (CLI).
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Download and install Java 11 or above in your device.
+2. Get the latest version of TraceYourProj from [HERE](https://github.com/AY2021S2-CS2113-W10-3/tp/releases).
+3. Double-click the .jar file to start the program. A command-line user interface (CLI) should appear quickly after execution.
+4. Start using the app by entering commands to the user interface. Please refer to the Features section below for detailed description of each command.
 
 ## Features 
 
-{Give detailed description of each feature}
+### Notes about command format
+* Words in UPPER_CASE are parameters specified by the user.
+  * e.g. in delete i/INDEX, INDEX is a parameter which can be used as delete 3. This will delete the third resource in the list.
+* Items in square brackets are optional.
+  * e.g. Command for editing resources:
+p/PROJECT_NAME i/INDEX [url/LINK] [d/DESCRIPTION] can be used as p/Jester’s jokes i/2 url/https://www.kaggle.com/sameerdev7/joke-rating or as p/Jester’s jokes i/2
+* Items with … after them can be used multiple times with the exception of zero times.
+  * e.g. list p/PROJECT_NAME… can be used as: list p/Jester’s jokes p/Titanic.
+* Extra parameters after commands that do not take in parameters such as list and exit will be ignored.
+  * e.g. if the command entered is exit 1234, it will be interpreted as exit.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Finding resources: `find`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Finds resources in a specified project or in all projects based on a user-specified keyword
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Format: `find k/KEYWORD [p/PROJECT_NAME]`
 
-Example of usage: 
+* The `KEYWORD` can consist of multiple words
 
-`todo n/Write the rest of the User Guide d/next week`
+Example of usage:
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+`find k/website p/CS2113`
+
+`find k/dataset`
+
+
+### Exiting TraceYourProj: `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ## FAQ
 
@@ -39,4 +56,5 @@ Example of usage:
 
 {Give a 'cheat sheet' of commands here}
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Find resources `find k/KEYWORD [p/PROJECT_NAME]`
+* Exit TraceYourProj `exit`

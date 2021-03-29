@@ -1,0 +1,80 @@
+@startuml
+!include Style.puml
+
+box Logic LOGIC_COLOR_T2
+participant ":CommandHandler" as CommandHandler LOGIC_COLOR_T1
+participant ":InputParser" as InputParser LOGIC_COLOR_T1
+participant ":CommandParser" as CommandParser LOGIC_COLOR_T1
+participant ":Project" as Project LOGIC_COLOR_T1
+participant ":Resource" as Resource LOGIC_COLOR_T1
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as MODEL_COLOR
+end box
+
+[-> CommandHandler : execute("find k/website p/CS2113")]
+activate CommandHandler
+
+CommandHandler -> InputParser : getCommand()
+activate InputParser
+
+CommandHandler -> InputParser : getInfoFragments()
+deactivate InputParser
+
+CommandHandler -> CommandHandler : processInputBeforeFinding()
+activate CommandHandler
+
+CommandHandler -> CommandParser : decodeInfoFragments()
+activate CommandParser
+
+CommandParser --> CommandHandler : keywordInfo
+deactivate CommandParser
+
+CommandHandler -> CommandHandler : findResources()
+activate CommandHandler
+alt Indicated Specific Project
+    CommandHandler -> CommandHandler : printResourcesInProjectMatchingKeyword()
+    activate CommandHandler
+    loop project in all Projects
+        CommandHandler -> Project : getProjectName()
+        activate Project
+        deactivate Project
+        alt Project name matches user-specified project name
+            CommandHandler -> Project : getResources()
+            activate Project
+            deactivate Project
+            CommandHandler -> CommandHandler : printResourcesMatchingKeyword()
+            activate CommandHandler
+            loop resource in Project's Resource List
+                alt keyword found in Resource Info
+                    CommandHandler -> Resource : printResource()
+                    activate Resource
+                    deactivate Resource
+                end
+            end
+            deactivate CommandHandler
+        end
+    end
+    deactivate CommandHandler
+else Did Not Indicate Specific Project
+    CommandHandler -> CommandHandler : printAllProjectsAndResourcesMatchingKeyword()
+    activate CommandHandler
+    loop project in all Projects
+        CommandHandler -> CommandHandler : printResourcesMatchingKeyword()
+        activate CommandHandler
+        loop resource in Project's Resource List
+            alt keyword found in Resource Info
+                CommandHandler -> Resource : printResource()
+                activate Resource
+                deactivate Resource
+            end
+        end
+        deactivate CommandHandler
+    end
+    deactivate CommandHandler
+end
+
+
+
+@enduml
