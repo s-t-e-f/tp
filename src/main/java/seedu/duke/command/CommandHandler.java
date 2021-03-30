@@ -245,10 +245,6 @@ public class CommandHandler {
                 targetedResource.setResourceLink(projectInfo[2]);
                 isEdited = true;
             }
-            // GOT ERROR HERE. -- cannot edit description without editing url
-            // edit p/Jester's jokes i/1 d/test will be read as :
-            // projectInfo[0] = 'Jester's jokes'
-            // projectInfo[1] = '1 d/test'
             if (projectInfo[3] != null) {
                 targetedResource.setResourceDescription(projectInfo[3]);
                 isEdited = true;

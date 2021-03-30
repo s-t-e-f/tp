@@ -119,10 +119,8 @@ If PROJECT_NAME is not found in the database, the application prompts the user t
 **Step 4**:
 The user can execute `list p/CS2113` to verify that the specified resource has been deleted from the project.
 
-<p align="center">
-  <img alt="Sequence diagram for delete feature." src="diagrams/deleteResource.png" />
-</p>
-
+The following sequence diagram shows how the delete operation works:
+![delete_puml](puml_img/deleteResource.png)
 
 ### Editing resource from a specified project
 **Proposed Implementation**
