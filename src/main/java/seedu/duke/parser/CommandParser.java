@@ -83,21 +83,22 @@ public class CommandParser {
 
     private static String[] getUsefulInfo(String[] arguments, int[] keywordLocations, String[] keywords)
             throws InvalidArgumentException {
-        String[] processedArguments = new String[keywords.length];
-        for (int i = 0; i < processedArguments.length; i++) {
+        String[] cleanArguments = new String[keywords.length];
+        for (int i = 0; i < cleanArguments.length; i++) {
             if (keywordLocations[i] == -1) {
-                processedArguments[i] = null;
+                cleanArguments[i] = null;
                 continue;
             }
+
             int endLocation = getEndLocation(arguments, keywordLocations, keywords, i);
-            processedArguments[i] = extractInfo(arguments, keywords[i].length(), keywordLocations[i],
-                    endLocation - 1);
-            if (processedArguments[i].length() == 0) {
+            cleanArguments[i] = extractInfo(arguments, keywords[i].length(), keywordLocations[i], endLocation - 1);
+
+            if (cleanArguments[i].length() == 0) {
                 String errorMsg = "Argument cannot be empty. Resource failed to be added!";
                 throw new InvalidArgumentException(errorMsg);
             }
         }
-        return processedArguments;
+        return cleanArguments;
     }
 
     private static int getEndLocation(String[] arguments, int[] keywordLocations, String[] keywords, int i) {
@@ -110,8 +111,8 @@ public class CommandParser {
         return (endLocation != -1) ? endLocation : arguments.length;
     }
 
-    private static String extractInfo(String[] arguments, int chopLocation, int from, int to) {
-        String output = arguments[from].substring(chopLocation);
+    private static String extractInfo(String[] arguments, int splitLocation, int from, int to) {
+        String output = arguments[from].substring(splitLocation);
         for (int i = from + 1; i <= to; i++) {
             output = String.join(" ", output, arguments[i]);
         }
