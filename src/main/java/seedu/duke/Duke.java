@@ -15,6 +15,10 @@ public class Duke {
     public static void main(String[] args) {
         initializeDuke();
         MainUi.printWelcomeText();
+        startProgram();
+    }
+
+    private static void startProgram() {
         boolean isLoop;
         do {
             MainUi.printSignalForUserToEnterInput();
