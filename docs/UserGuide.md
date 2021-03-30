@@ -91,6 +91,17 @@ Example of usage:
 
 `find k/dataset`
 
+### Loading data from storage `load`
+
+Loads the projects and resources from the data storage text file.
+
+Format: `load`
+
+### Saving data to storage: `save`
+
+Saves the project and resources to the data storage text file.
+
+Format: `save`
 
 ### Exiting TraceYourProj: `exit`
 
