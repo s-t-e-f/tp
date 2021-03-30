@@ -1,6 +1,6 @@
 package seedu.duke.storage;
 
-import seedu.duke.Project;
+import seedu.duke.project.Project;
 import seedu.duke.resource.Resource;
 
 import java.io.File;

@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Duke;
-import seedu.duke.Project;
+import seedu.duke.project.Project;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.NoProjectNameException;
 import seedu.duke.exception.ProjectNotFoundException;
