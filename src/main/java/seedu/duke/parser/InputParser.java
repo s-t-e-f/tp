@@ -11,9 +11,13 @@ public class InputParser {
     }
 
     private void parserInput(String rawInput) {
-        String[] inputFragments = rawInput.split(" ");
+        String[] inputFragments = splitString(rawInput);
         this.command = inputFragments[0];
         this.infoFragments = Arrays.copyOfRange(inputFragments, 1, inputFragments.length);
+    }
+
+    private String[] splitString(String rawInput) {
+        return rawInput.split(" ");
     }
 
     public String getCommand() {

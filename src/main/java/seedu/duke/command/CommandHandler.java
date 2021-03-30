@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Duke;
-import seedu.duke.Project;
+import seedu.duke.project.Project;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.NoProjectNameException;
 import seedu.duke.exception.ProjectNotFoundException;
@@ -30,13 +30,17 @@ public class CommandHandler {
             + "Please type \"help\" for more details." + NEW_LINE;
     public static final String DIVIDER = "--------------------------------------------------------";
     String command;
-    String[] infoFragments;
+    static String[] infoFragments;
     private final ArrayList<Project> projects;
 
     public CommandHandler(InputParser userInput, ArrayList<Project> projects) {
         this.command = userInput.getCommand();
         this.infoFragments = userInput.getInfoFragments();
         this.projects = projects;
+    }
+
+    public static String[] getInfoFragments() {
+        return infoFragments;
     }
 
     public boolean processCommand() {
@@ -92,12 +96,12 @@ public class CommandHandler {
      *
      * @return Project Name is the name of the project.
      */
-    private String processProjectName() {
-        String[] projectNameArray = infoFragments;
-        String projectName = String.join(" ", projectNameArray);
+    public String processProjectName(String[] infoFragments) {
+        String projectName = String.join(" ", infoFragments);
         return projectName;
     }
 
+    //@@author NgManSing
     private void processInputBeforeAdding() {
         String[] keywords = {"p/", "url/", "d/"};
         int firstOptionalKeyword = 2;
@@ -111,6 +115,7 @@ public class CommandHandler {
         addResource(projectInfo);
     }
 
+    //@@author NgManSing
     private void addResource(String[] projectInfo) {
         assert projectInfo != null;
         String projectName = projectInfo[0];
@@ -130,26 +135,26 @@ public class CommandHandler {
         }
     }
 
+    //@@author NgManSing
     private void createNewProject(String projectName, String projectUrl, String descriptionOfUrl) {
         projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
         System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
     }
 
+    //@@author NgManSing
     private void overwriteResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
         projects.remove(projectIndex);
         projects.add(projectIndex, new Project(projectName, projectUrl, descriptionOfUrl));
         System.out.printf("The resource of the project \"%s\" is overwritten.\n", projectName);
     }
 
+    //@@author NgManSing
     private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
         projects.get(projectIndex).addResources(projectUrl, descriptionOfUrl);
         System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
     }
 
-    private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
-        return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
-    }
-
+    //@@author NgManSing
     private int searchExistingProjectIndex(String projectName) {
         for (int i = 0; i < projects.size(); i++) {
             if (projects.get(i).getProjectName().equals(projectName)) {
@@ -157,6 +162,11 @@ public class CommandHandler {
             }
         }
         return -1;
+    }
+
+    //@@author NgManSing
+    private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
+        return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
     }
 
     private void processInputBeforeDeleting() {
@@ -261,8 +271,6 @@ public class CommandHandler {
             System.out.printf("The resource is successfully edited to : \n");
             System.out.printf("    " + targetedResource.toString() + NEW_LINE);
         }
-
-
     }
 
     private void promptUserInvalidInput() {
@@ -275,8 +283,8 @@ public class CommandHandler {
      * @throws NoProjectNameException when user did not enter project name.
      * @throws ProjectNotFoundException when project is not found in database.
      */
-    private void printResourceListForAProject() throws NoProjectNameException, ProjectNotFoundException {
-        String projectName = processProjectName();
+    public void printResourceListForAProject() throws NoProjectNameException, ProjectNotFoundException {
+        String projectName = processProjectName(getInfoFragments());
         if (checkIfProjectNameEmpty(projectName)) {
             throw new NoProjectNameException();
         }
@@ -299,7 +307,7 @@ public class CommandHandler {
      * @param projectName This string user's input for projectName.
      * @return true if empty, false if not empty.
      */
-    private boolean checkIfProjectNameEmpty(String projectName) {
+    public boolean checkIfProjectNameEmpty(String projectName) {
         boolean isProjectNameEmpty = projectName.equals("");
         return isProjectNameEmpty;
     }
@@ -316,7 +324,7 @@ public class CommandHandler {
     /**
      * This method will print the resource list for all projects.
      */
-    private void printResourceListForAllProjects() {
+    public void printResourceListForAllProjects() {
         int projectCount = 0;
         System.out.print("Here is the list of all project(s) and it's resource(s)!" + NEW_LINE);
         printDivider();
@@ -335,7 +343,7 @@ public class CommandHandler {
      * This is a helper method that loops through a resource list and print it out.
      * @param resources an arraylist containing resources for a project.
      */
-    private static void printResourceList(ArrayList<Resource> resources) {
+    public static void printResourceList(ArrayList<Resource> resources) {
         System.out.print("Resource(s):" + NEW_LINE);
         int resourceCount = 1;
         for (Resource resource : resources) {
@@ -345,6 +353,7 @@ public class CommandHandler {
         assert true;
     }
 
+    //@@author
     public void listAllCommands() {
         MainUi.listAllCommands();
     }

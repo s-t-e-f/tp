@@ -20,6 +20,8 @@ public class MainUi {
             + "list: View the resource list for a specified project.\n"
             + "\tFormat: list PROJECT_NAME\n"
             + "list-all: Shows the resource list for all projects.\n"
+            + "find: Find resources in a specified project or all projects related to a keyword.\n"
+            + "\tFormat: find k/KEYWORD [p/PROJECT_NAME]\n"
             + "save: Saves the current projects and resources to a data file.\n"
             + "load: Loads the projects and resources from the data file if it exists.\n"
             + "exit: Exits the program.\n"
@@ -30,6 +32,12 @@ public class MainUi {
     public static final String SIGNAL_FOR_USER_TO_INPUT = "Duke> ";
     public static final String EXIT_MESSAGE = "Thank you for using TraceYourProj!\n"
             + "Hope you have a wonderful day.\n";
+
+    public static final String DUKE_STANDARD_HEADING = MainUi.LOGO_STRING + "\n"
+            + MainUi.PROJECT_TEAM_ID + "\n"
+            + MainUi.APP_NAME_AND_VERSION + "\n"
+            + MainUi.HOW_TO_GET_HELP + "\n"
+            + MainUi.SIGNAL_FOR_USER_TO_INPUT;
 
     public static void printWelcomeText() {
         System.out.print(LOGO_STRING + "\n");

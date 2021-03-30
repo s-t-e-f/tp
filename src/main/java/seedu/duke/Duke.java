@@ -2,11 +2,10 @@ package seedu.duke;
 
 import seedu.duke.command.CommandHandler;
 import seedu.duke.parser.InputParser;
-import seedu.duke.storage.Storage;
+import seedu.duke.project.Project;
 import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,6 +15,10 @@ public class Duke {
     public static void main(String[] args) {
         initializeDuke();
         MainUi.printWelcomeText();
+        startProgram();
+    }
+
+    private static void startProgram() {
         boolean isLoop;
         do {
             MainUi.printSignalForUserToEnterInput();
@@ -31,7 +34,7 @@ public class Duke {
     }
 
     private static InputParser getUserInput() {
-        String userInput = "dummy";
+        String userInput = "";
         if (scan.hasNextLine()) {
             userInput = scan.nextLine();
         }

@@ -15,16 +15,23 @@ This section describes some noteworthy details on how certain features are imple
 Given below is an example usage scenario and how the add mechanism behaves at each step.
 
 **Step 1**:
-The user launches the application for the first time. The application’s initialised database will be empty at the start.
+The user launches the application.
 
-**Step 2**:
-The user executes the following commands in order to add a certain project’s resources.
+**Step 2**: 
+The program will extract stored projects from data.txt file, which is a local text file. If the file
+does not exist, the project list will be initialized as empty. (May need to be modified)
+
+**Step 3**:
+The user executes the following commands in order to add a resources to a project.
 
 >add p/CS2113 url/www.traceyourproj.com d/Project Website
 
-If the project name is not found in the ArrayList, a new project will be created, and the resource will be added into it.
-If the project is found while there is no resource with the same URL within the project, the resource will be added into
-the project. Otherwise, the original resource will be overwritten.
+The following sequence diagram shows how the add operation works:
+![add_png](puml_img/Add.png)
+
+> Note: The position of P3:Project should be lower than ArrayList<Project> since P3 represents a project entity that is 
+> already stored inside ArrayList<Project>. However, due to a limitation in PlantUML, the position of P3 is higher than
+> ArrayList<Project>.
 
 **Design Consideration**
 
@@ -34,11 +41,11 @@ Aspect: How add executes
     existed. For each project, it will loop through all the resources to see if a resource with the same URL has already
     existed.
     
-    If the project does not exist in the ArrayList: Create a new project and add the new resource.
+    If the project does not exist in the ArrayList: Create a new project and append the new resource into it.
     
     if the project does exist:
-    - If resource with the same URL exists: Overwrite the original resource in the ArrayList with the new resource.
-    - If resource with the same URL does not exist: Add the new resource into the project.
+    - If resource with the same URL exists: Overwrite the original resource in the ArrayList with the new counterpart.
+    - If resource with the same URL does not exist: Append the new resource into the project.
 * Alternative 2 (none)
 ---
 ### List all projects & their respective resources feature
@@ -206,6 +213,44 @@ Aspect: How exit executes
   * **Pros**: Easy to implement.
   * **Cons**: Reduces testability since more code is required to throw an exception when System.exit is 
     called and catch that exception, so the JUnit test does not fail.
+
+## Saving and loading data
+
+**Proposed Implementation**
+
+Given below is an example usage of how the saving and loading functionality works.
+
+**Step 1:**
+The user initialises the application and adds the resources, Project and Resource objects are created accordingly.
+
+**Step 2:**
+The user issues the save command by typing “save”
+
+**Step 3:**
+The Project and Resource objects contents are saved to a text file upon exiting the program
+
+**Step 4:**
+The application state can be restored by the Storage class which can read the text file and creates the objects 
+to create an application state when the program starts by issuing the load command by typing “load”
+
+The following sequence diagram shows how the **save** operation works:
+![Save_puml](puml_img/Save.png)
+
+The following sequence diagram shows how the **load** operation works:
+![Load_puml](puml_img/Load.png)
+
+**Design Consideration**
+
+* Alternative 1: 
+  * Save upon exit, load upon startup.  
+
+  * **Pros:** Easier to implement, program will not have performance issues as it is done at exit.
+  * **Cons:** Changes may be lost if the program exits in an unexpected way.
+
+* Alternative 2: 
+  * Save and load only if command is issued. (Current choice)
+  * **Pros:** Easy to implement, user has freedom of choice whether to save and load.
+  * **Cons:** User may not be aware of the functionality without referring to the user guide.
 
 
 ## Product scope
