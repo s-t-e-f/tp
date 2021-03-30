@@ -13,12 +13,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandHandlerTest {
 
     /**
-     * Test Case 1 for printResourceListForAProject
+     * Test Case 1 for printResourceListForAProject.
      */
     @Test
     public void testCase1ForPrintResourceListForAProject() {
@@ -53,7 +53,7 @@ class CommandHandlerTest {
     }
 
     /**
-     * Test Case 2 for printResourceListForAProject
+     * Test Case 2 for printResourceListForAProject.
      */
     @Test
     public void testCase2ForPrintResourceListForAProject() {
@@ -78,7 +78,7 @@ class CommandHandlerTest {
     }
 
     /**
-     * Test Case 3 for printResourceListForAProject
+     * Test Case 3 for printResourceListForAProject.
      */
     @Test
     public void testCase3ForPrintResourceListForAProject() {
@@ -93,7 +93,8 @@ class CommandHandlerTest {
         Duke.main(null);
 
         String targetString = MainUi.DUKE_STANDARD_HEADING
-                + "You did not key in the Project Name! Please type \"help\" for more details." + CommandHandler.NEW_LINE
+                + "You did not key in the Project Name! Please type \"help\" for more details."
+                + CommandHandler.NEW_LINE
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
 
@@ -103,7 +104,7 @@ class CommandHandlerTest {
     }
 
     /**
-     * Test cases for processProjectName
+     * Test cases for processProjectName.
      */
     @Test
     public void testProcessProjectName() {
@@ -127,7 +128,7 @@ class CommandHandlerTest {
     }
 
     /**
-     * Test cases for checkIfProjectNameEmpty
+     * Test cases for checkIfProjectNameEmpty.
      */
     @Test
     public void checkIfProjectNameEmpty() {
