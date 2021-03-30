@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.CommandHandler;
 import seedu.duke.parser.InputParser;
+import seedu.duke.project.Project;
 import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
