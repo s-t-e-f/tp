@@ -33,14 +33,14 @@ public class CommandHandler {
     static String[] infoFragments;
     private final ArrayList<Project> projects;
 
-    public static String[] getInfoFragments() {
-        return infoFragments;
-    }
-
     public CommandHandler(InputParser userInput, ArrayList<Project> projects) {
         this.command = userInput.getCommand();
         this.infoFragments = userInput.getInfoFragments();
         this.projects = projects;
+    }
+
+    public static String[] getInfoFragments() {
+        return infoFragments;
     }
 
     public boolean processCommand() {
