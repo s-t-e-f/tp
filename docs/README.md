@@ -1,8 +1,9 @@
-# Duke
+# TraceYourProj
 
-{Give product intro here}
+TraceYourProj is a desktop app for tracking resources for data science projects, optimized for use via 
+a Command Line Interface (CLI).
 
-Useful links:
+You may want to visit:
 * [User Guide](UserGuide.md)
 * [Developer Guide](DeveloperGuide.md)
 * [About Us](AboutUs.md)
