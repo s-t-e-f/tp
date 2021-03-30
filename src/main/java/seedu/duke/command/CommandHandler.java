@@ -30,8 +30,12 @@ public class CommandHandler {
             + "Please type \"help\" for more details." + NEW_LINE;
     public static final String DIVIDER = "--------------------------------------------------------";
     String command;
-    String[] infoFragments;
+    static String[] infoFragments;
     private final ArrayList<Project> projects;
+
+    public static String[] getInfoFragments() {
+        return infoFragments;
+    }
 
     public CommandHandler(InputParser userInput, ArrayList<Project> projects) {
         this.command = userInput.getCommand();
@@ -92,9 +96,8 @@ public class CommandHandler {
      *
      * @return Project Name is the name of the project.
      */
-    private String processProjectName() {
-        String[] projectNameArray = infoFragments;
-        String projectName = String.join(" ", projectNameArray);
+    public String processProjectName(String[] infoFragments) {
+        String projectName = String.join(" ", infoFragments);
         return projectName;
     }
 
@@ -280,8 +283,8 @@ public class CommandHandler {
      * @throws NoProjectNameException when user did not enter project name.
      * @throws ProjectNotFoundException when project is not found in database.
      */
-    private void printResourceListForAProject() throws NoProjectNameException, ProjectNotFoundException {
-        String projectName = processProjectName();
+    public void printResourceListForAProject() throws NoProjectNameException, ProjectNotFoundException {
+        String projectName = processProjectName(getInfoFragments());
         if (checkIfProjectNameEmpty(projectName)) {
             throw new NoProjectNameException();
         }
@@ -304,7 +307,7 @@ public class CommandHandler {
      * @param projectName This string user's input for projectName.
      * @return true if empty, false if not empty.
      */
-    private boolean checkIfProjectNameEmpty(String projectName) {
+    public boolean checkIfProjectNameEmpty(String projectName) {
         boolean isProjectNameEmpty = projectName.equals("");
         return isProjectNameEmpty;
     }
@@ -321,7 +324,7 @@ public class CommandHandler {
     /**
      * This method will print the resource list for all projects.
      */
-    private void printResourceListForAllProjects() {
+    public void printResourceListForAllProjects() {
         int projectCount = 0;
         System.out.print("Here is the list of all project(s) and it's resource(s)!" + NEW_LINE);
         printDivider();
@@ -340,7 +343,7 @@ public class CommandHandler {
      * This is a helper method that loops through a resource list and print it out.
      * @param resources an arraylist containing resources for a project.
      */
-    private static void printResourceList(ArrayList<Resource> resources) {
+    public static void printResourceList(ArrayList<Resource> resources) {
         System.out.print("Resource(s):" + NEW_LINE);
         int resourceCount = 1;
         for (Resource resource : resources) {
