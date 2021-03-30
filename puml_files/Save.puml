@@ -1,0 +1,30 @@
+@startuml
+!include Style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":CommandHandler" as CommandHandler LOGIC_COLOR_T1
+participant ":Duke" as Duke LOGIC_COLOR_T1
+participant ":Storage" as Storage LOGIC_COLOR_T1
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as MODEL_COLOR
+end box
+
+activate CommandHandler
+[-> CommandHandler : execute("save")]
+
+CommandHandler -> Duke : getProjects()
+activate Duke
+
+Duke --> CommandHandler : projects
+deactivate Duke
+
+CommandHandler -> Storage :  updateStorage(projects)
+activate Storage
+
+Storage --> CommandHandler : "Saved projects to storage"
+deactivate Storage
+deactivate CommandHandler
+
+@enduml

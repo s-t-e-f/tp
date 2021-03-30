@@ -1,0 +1,31 @@
+@startuml
+!include Style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":CommandHandler" as CommandHandler LOGIC_COLOR_T1
+participant ":Storage" as Storage LOGIC_COLOR_T1
+participant ":Duke" as Duke LOGIC_COLOR_T1
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as MODEL_COLOR
+end box
+
+activate CommandHandler
+[-> CommandHandler : execute("load")]
+
+CommandHandler -> Storage :  readFromStorage()
+activate Storage
+
+Storage --> CommandHandler : projects
+deactivate Storage
+
+CommandHandler -> Duke : setProjects(projects)
+activate Duke
+
+Duke --> CommandHandler : "Projects loaded into TraceMyProj"
+deactivate Duke
+
+deactivate CommandHandler
+
+@enduml
