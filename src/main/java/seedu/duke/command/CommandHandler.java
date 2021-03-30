@@ -98,6 +98,7 @@ public class CommandHandler {
         return projectName;
     }
 
+    //@@author
     private void processInputBeforeAdding() {
         String[] keywords = {"p/", "url/", "d/"};
         int firstOptionalKeyword = 2;
@@ -261,8 +262,6 @@ public class CommandHandler {
             System.out.printf("The resource is successfully edited to : \n");
             System.out.printf("    " + targetedResource.toString() + NEW_LINE);
         }
-
-
     }
 
     private void promptUserInvalidInput() {
@@ -345,6 +344,7 @@ public class CommandHandler {
         assert true;
     }
 
+    //@@author
     public void listAllCommands() {
         MainUi.listAllCommands();
     }
