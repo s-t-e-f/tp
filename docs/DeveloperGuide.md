@@ -75,6 +75,9 @@ Aspect: How list-all executes
   * This list-all feature will do a loop through all the projects in the projects arraylist. For each project, it will loop through all the resources and print it out.
 * Alternative 2 (none)
 
+The following sequence diagram shows how the list-all operation works:
+![add_png](puml_img/list-allfinal.png)
+
 ### List all the resources for a particular project feature
 **Proposed Implementation**  
 
@@ -91,9 +94,9 @@ The user executes the following command in order to add a certain project’s re
 > add p/CZ2003 url/www.google.com  
 
 **Step 3**:
-The user wishes to see the list of resources for one project. He executes the following command to see them.  
+The user wishes to see the list of resources for one project, CZ2003. He executes the following command to see them.  
 
->list *PROJECTNAME*
+>list *CZ2003*
 
 **Design Consideration**  
 
@@ -105,6 +108,8 @@ Aspect: How list PROJECTNAME executes
     * Print the project’s resources straight away without checking if project exists.  
     * **Cons**: Harder to pinpoint the cause of the error if an error is thrown.
 
+The following sequence diagram shows how the list PROJECTNAME operation works:
+![add_png](puml_img/listPROJECTNAMEfinal.png)
 
 ### Deleting resource from a specified project 
 **Proposed Implementation**
