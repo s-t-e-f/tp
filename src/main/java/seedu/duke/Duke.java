@@ -34,7 +34,7 @@ public class Duke {
     }
 
     private static InputParser getUserInput() {
-        String userInput = "dummy";
+        String userInput = "";
         if (scan.hasNextLine()) {
             userInput = scan.nextLine();
         }

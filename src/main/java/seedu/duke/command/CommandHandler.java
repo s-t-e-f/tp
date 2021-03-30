@@ -98,7 +98,7 @@ public class CommandHandler {
         return projectName;
     }
 
-    //@@author
+    //@@author NgManSing
     private void processInputBeforeAdding() {
         String[] keywords = {"p/", "url/", "d/"};
         int firstOptionalKeyword = 2;
@@ -112,6 +112,7 @@ public class CommandHandler {
         addResource(projectInfo);
     }
 
+    //@@author NgManSing
     private void addResource(String[] projectInfo) {
         assert projectInfo != null;
         String projectName = projectInfo[0];
@@ -131,26 +132,26 @@ public class CommandHandler {
         }
     }
 
+    //@@author NgManSing
     private void createNewProject(String projectName, String projectUrl, String descriptionOfUrl) {
         projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
         System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
     }
 
+    //@@author NgManSing
     private void overwriteResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
         projects.remove(projectIndex);
         projects.add(projectIndex, new Project(projectName, projectUrl, descriptionOfUrl));
         System.out.printf("The resource of the project \"%s\" is overwritten.\n", projectName);
     }
 
+    //@@author NgManSing
     private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
         projects.get(projectIndex).addResources(projectUrl, descriptionOfUrl);
         System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
     }
 
-    private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
-        return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
-    }
-
+    //@@author NgManSing
     private int searchExistingProjectIndex(String projectName) {
         for (int i = 0; i < projects.size(); i++) {
             if (projects.get(i).getProjectName().equals(projectName)) {
@@ -158,6 +159,11 @@ public class CommandHandler {
             }
         }
         return -1;
+    }
+
+    //@@author NgManSing
+    private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
+        return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
     }
 
     private void processInputBeforeDeleting() {
