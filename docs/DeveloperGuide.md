@@ -207,6 +207,44 @@ Aspect: How exit executes
   * **Cons**: Reduces testability since more code is required to throw an exception when System.exit is 
     called and catch that exception, so the JUnit test does not fail.
 
+## Saving and loading data
+
+**Proposed Implementation**
+
+Given below is an example usage of how the saving and loading functionality works.
+
+**Step 1:**
+The user initialises the application and adds the resources, Project and Resource objects are created accordingly.
+
+**Step 2:**
+The user issues the save command by typing “save”
+
+**Step 3:**
+The Project and Resource objects contents are saved to a text file upon exiting the program
+
+**Step 4:**
+The application state can be restored by the Storage class which can read the text file and creates the objects 
+to create an application state when the program starts by issuing the load command by typing “load”
+
+The following sequence diagram shows how the **save** operation works:
+![Save_puml](puml_img/Save.png)
+
+The following sequence diagram shows how the **load** operation works:
+![Load_puml](puml_img/Load.png)
+
+**Design Consideration**
+
+* Alternative 1: 
+  * Save upon exit, load upon startup.  
+
+  * **Pros:** Easier to implement, program will not have performance issues as it is done at exit.
+  * **Cons:** Changes may be lost if the program exits in an unexpected way.
+
+* Alternative 2: 
+  * Save and load only if command is issued. (Current choice)
+  * **Pros:** Easy to implement, user has freedom of choice whether to save and load.
+  * **Cons:** User may not be aware of the functionality without referring to the user guide.
+
 
 ## Product scope
 ### Target user profile
