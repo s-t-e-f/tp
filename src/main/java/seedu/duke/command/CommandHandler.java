@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Duke;
-import seedu.duke.Project;
+import seedu.duke.project.Project;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.NoProjectNameException;
 import seedu.duke.exception.ProjectNotFoundException;
@@ -268,8 +268,6 @@ public class CommandHandler {
             System.out.printf("The resource is successfully edited to : \n");
             System.out.printf("    " + targetedResource.toString() + NEW_LINE);
         }
-
-
     }
 
     private void promptUserInvalidInput() {
@@ -352,6 +350,7 @@ public class CommandHandler {
         assert true;
     }
 
+    //@@author
     public void listAllCommands() {
         MainUi.listAllCommands();
     }
