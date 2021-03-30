@@ -420,6 +420,8 @@ class DukeTest {
                 + "list: View the resource list for a specified project.\n"
                 + "\tFormat: list PROJECT_NAME\n"
                 + "list-all: Shows the resource list for all projects.\n"
+                + "find: Find resources in a specified project or all projects related to a keyword.\n"
+                + "\tFormat: find k/KEYWORD [p/PROJECT_NAME]\n"
                 + "save: Saves the current projects and resources to a data file.\n"
                 + "load: Loads the projects and resources from the data file if it exists.\n"
                 + "exit: Exits the program.\n"
