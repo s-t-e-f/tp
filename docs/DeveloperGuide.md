@@ -273,9 +273,10 @@ The following sequence diagram shows how the **load** operation works:
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v1.0|user|exit TraceYourProj when I finish managing my resources|leave TraceYourProj|
+|v1.0|user|see the list of resources for all my projects|recall what are all the projects and resources in the database of TraceYourProj 
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 |v2.0|user|find resources I have that are related to a keyword I specify|easily find resources I need without going through each project and resources
-
+|v2.0|user|see the list of resources for one of my project|recall what are the resources of one particular project in the database of TraceYourProj
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
