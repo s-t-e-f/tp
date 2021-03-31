@@ -77,6 +77,25 @@ Examples :
 <br> `edit p/Jester Jokes 2 url/https://www.kaggle.com/sameerdev7/joke-rating d/Jester Jokes Dataset'`
 <br>Edits the url and description of the 2nd resource in ‘Jester Jokes’ project to be https://www.kaggle.com/sameerdev7/joke-rating and Jester Jokes Dataset respectively.
 
+### List the resources of all projects: `list-all`
+Shows a list of all resources in all projects created in TraceYourProj.  
+
+Format: `list-all`
+
+Example of usage:  
+`list-all`
+
+### List the resources of one projects: `list PROJECTNAME`
+Shows a list of all resources in one project created in TraceYourProj.
+
+Format: `list PROJECTNAME`
+
+Example of usage:  
+
+`list CS2113`  
+`list CS3245 Project`  
+`list IT3011 Machine Learning References`
+
 ### Finding resources: `find`
 
 Finds resources in a specified project or in all projects based on a user-specified keyword
@@ -91,6 +110,17 @@ Example of usage:
 
 `find k/dataset`
 
+### Loading data from storage `load`
+
+Loads the projects and resources from the data storage text file.
+
+Format: `load`
+
+### Saving data to storage: `save`
+
+Saves the project and resources to the data storage text file.
+
+Format: `save`
 
 ### Exiting TraceYourProj: `exit`
 
@@ -108,5 +138,7 @@ Format: `exit`
 
 {Give a 'cheat sheet' of commands here}
 
+* List all projects and their respective resources `list-all`
+* List a project's resources `list PROJECTNAME`
 * Find resources `find k/KEYWORD [p/PROJECT_NAME]`
 * Exit TraceYourProj `exit`
