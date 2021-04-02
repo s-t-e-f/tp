@@ -1,11 +1,10 @@
 @startuml
 
-box Adding Project / Resource
+box Adding Resource
 participant ":CommandHandler" as CH
 participant "<<class>>\n:CommandParser" as CP
 participant "P1:Project" as P1
 participant "P2:Project" as P2
-participant "P3:Project" as P3
 participant ":ArrayList<Project>" as PA
 
 create PA
@@ -40,26 +39,17 @@ opt ProjectNotExist
 end
 
 alt UrlAlreadyExist
-    CH -> CH: overwriteResource(projectName:String, projectUrl:String, descriptionOfUrl:String, projectIndex:int)
+    CH -> CH: promptUserUrlAlreadyExist()
     activate CH
-    CH -> PA: remove(projectIndex:int)
-    activate PA
     return
-    create P2
-    CH -> P2: new Project(projectName:String, projectUrl:String, descriptionOfUrl:String)
-    CH <-- P2: P2:Project
-    CH -> PA: add(P2:Project)
-    activate PA
-    return
-    return
-else
+else else
     CH -> CH: addNewResource(projectName:String, projectUrl:String, descriptionOfUrl:String, projectIndex:int)
     activate CH
     CH -> PA: get(projectIndex:int)
     activate PA
-    return P3:Project
-    CH -> P3: addResources(projectUrl, descriptionOfUrl)
-    activate P3
+    return P2:Project
+    CH -> P2: addResources(projectUrl, descriptionOfUrl)
+    activate P2
     return
     return
 end

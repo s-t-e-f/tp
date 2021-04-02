@@ -33,21 +33,21 @@ Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION]`
 * Adds a resource to a Project.
 * If the given project name has already existed in the project list:
   * If the given URL exists in the resource list of the project:
-    * The original resource will be overwritten.
+    * Prompt the user that the resource with the same URL has already existed in the project.
   * If the given URL does **not** exist in the resource list of the project:
-    * The resource will be appended to the resource list.
+    * The resource will be appended to the resource project's resource list
 * If the given project name does **not** exist in the project list:
   * A new project with the given project name will be created, and the resource will be appended to its resource list.
 * Description is optional.
 
 Examples :
 1. Assume project "NUS" does not exist in the project list:
-<br>`add p/NUS url/https://www.nus.edu.sg/ d/NUS website`
+    <br>`add p/NUS url/https://www.nus.edu.sg/ d/NUS website`
    creates a project named "NUS" and the resource (URL and description) will be added into its resource list.
 2. Assume a project "NUS" exists in the project list, and a resource with URL = https://www.nus.edu.sg/ exists:
-<br> `add p/NUS url/https://www.nus.edu.sg/ d/NUS Offical Website`
-   overwrites the original resource.
-2. Assume a project "NUS" exists in the project list, and a resource with URL = https://nusmods.com/ does not exist:
+    <br> `add p/NUS url/https://www.nus.edu.sg/ d/NUS Offical Website`
+   returns the prompt showing that the resource with the same URL has already existed in the project's resource list.
+3. Assume a project "NUS" exists in the project list, and a resource with URL = https://nusmods.com/ does not exist:
    <br> `add p/NUS url/https://nusmods.com/`
    appends the resource to the resource list of the project "NUS".
    
@@ -106,7 +106,15 @@ Format: `exit`
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+|Command|Syntax|Remark|
+|--------|----------|--------|
+|add|add p/PROJECT NAME url/URL [d/DESCRIPTION]|Add a resource to a project|
+|delete|...|...|
+|edit|...|...|
+|list|...|...|
+|list-all|...|...|
+|find|find k/KEYWORD [p/PROJECT_NAME]|...|
+|exit|exit|...|
 
 * Find resources `find k/KEYWORD [p/PROJECT_NAME]`
 * Exit TraceYourProj `exit`

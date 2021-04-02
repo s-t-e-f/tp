@@ -15,13 +15,9 @@ This section describes some noteworthy details on how certain features are imple
 Given below is an example usage scenario and how the add mechanism behaves at each step.
 
 **Step 1**:
-The user launches the application.
+The user launches the application. The project list of the application will be initialized as an empty list.
 
-**Step 2**: 
-The program will extract stored projects from data.txt file, which is a local text file. If the file
-does not exist, the project list will be initialized as empty. (May need to be modified)
-
-**Step 3**:
+**Step 2**:
 The user executes the following commands in order to add a resources to a project.
 
 >add p/CS2113 url/www.traceyourproj.com d/Project Website
@@ -29,9 +25,9 @@ The user executes the following commands in order to add a resources to a projec
 The following sequence diagram shows how the add operation works:
 ![add_png](puml_img/Add.png)
 
-> Note: The position of P3:Project should be lower than ArrayList<Project> since P3 represents a project entity that is 
-> already stored inside ArrayList<Project>. However, due to a limitation in PlantUML, the position of P3 is higher than
-> ArrayList<Project>.
+> Note: P2:Project is defined as an entity that is already existing in the project list ArrayList<Project>, the position
+> of which should be lower than ArrayList<Project>. However, due to a limitation in PlantUML, the position of P3 is 
+> higher than ArrayList<Project>.
 
 **Design Consideration**
 
@@ -41,11 +37,16 @@ Aspect: How add executes
     existed. For each project, it will loop through all the resources to see if a resource with the same URL has already
     existed.
     
-    If the project does not exist in the ArrayList: Create a new project and append the new resource into it.
+    > If the project does not exist in the ArrayList:
+    >   * Create a new project and append the resource into its resource list.
     
-    if the project does exist:
-    - If resource with the same URL exists: Overwrite the original resource in the ArrayList with the new counterpart.
-    - If resource with the same URL does not exist: Append the new resource into the project.
+    > If the project does exist:
+    > * If resource with the same URL exists:
+    >   * Prompt the user that the resource with the same URL has already existed
+        in the project's resource list.
+    > * If resource with the same URL does not exist:
+    >   * Append the new resource into the project resource list.
+
 * Alternative 2 (none)
 ---
 ### List all projects & their respective resources feature

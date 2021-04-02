@@ -25,8 +25,8 @@ public class Project {
         return projectName;
     }
 
-    public void addResources(String projectUrl, String urlDescription) {
-        resources.add(new Resource(projectUrl, urlDescription));
+    public void addResources(String projectUrl, String urlDescription, int index) {
+        resources.add(index, new Resource(projectUrl, urlDescription));
     }
 
     public boolean isUrlAlreadyExist(String projectUrl) {
@@ -38,8 +38,8 @@ public class Project {
         return false;
     }
 
-    public boolean checkResourceExistsByIndex(int idx) {
-        return !(idx >= resources.size() || idx < 0);
+    public void deleteResources(int index) {
+        resources.remove(index);
     }
 
     public void loadResource(Resource resource) {
