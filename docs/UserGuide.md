@@ -42,7 +42,10 @@ Type 'help' for a list of command and related usage.
   e.g.`exit 1234` will be interpreted as `exit`.  
   e.g.`list-all CZ2003` will be interpreted as `list-all`. 
 
+
 ---
+
+
 ### Viewing help: `help`
 Shows the available commands of TraceYourProj.
 
@@ -74,7 +77,10 @@ load: Loads the projects and resources from the data file if it exists.
 exit: Exits the program.
 ------------------------------------------------------------------------
 ```
+
 ---
+
+
 ### Adding project(s) or resource(s) : `add`
 Adds a resource to a Project.
 
@@ -165,7 +171,11 @@ list-all
     1): [2021-04-03] https://ntu.com/
     --------------------------------------------------------
     ```
+
+
 ---
+
+
 ### List the resources of one projects: `list PROJECTNAME`
 Shows a list of all resources in one project created in TraceYourProj.
 
@@ -221,7 +231,10 @@ Format : `delete p/PROJECT_NAME [i/INDEX]`
    ```
    All the resources in NUS has been deleted.
    ```
+   
+
 ---
+
 
 ### Editing a resource : `edit`
 Edits an existing resource in the resource list based on the project.
@@ -276,7 +289,11 @@ Example of usage:
    ```
     
    ```
+   
+
 ---
+
+
 ### Loading data from storage `load`
 
 Loads the projects and resources from the data storage text file.  
@@ -296,6 +313,8 @@ Loaded projects from storage
 ```
 
 ---
+
+
 ### Saving data to storage: `save`
 
 Saves the project and resources to the data storage text file.
