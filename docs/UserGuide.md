@@ -74,7 +74,7 @@ load: Loads the projects and resources from the data file if it exists.
 exit: Exits the program.
 ------------------------------------------------------------------------
 ```
-
+---
 ### Adding project(s) or resource(s) : `add`
 Adds a resource to a Project.
 
