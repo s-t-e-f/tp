@@ -91,6 +91,7 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will return the project name from userInput.
      *
@@ -128,8 +129,10 @@ public class CommandHandler {
             return;
         }
 
-        if (isUrlAlreadyExist(projectIndex, projectUrl)) {
-            overwriteResource(projectName, projectUrl, descriptionOfUrl, projectIndex);
+        boolean isUrlAlreadyExist = isUrlAlreadyExist(projectIndex, projectUrl);
+
+        if (isUrlAlreadyExist) {
+            promptUserUrlAlreadyExist();
         } else {
             addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex);
         }
@@ -142,15 +145,15 @@ public class CommandHandler {
     }
 
     //@@author NgManSing
-    private void overwriteResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
-        projects.remove(projectIndex);
-        projects.add(projectIndex, new Project(projectName, projectUrl, descriptionOfUrl));
-        System.out.printf("The resource of the project \"%s\" is overwritten.\n", projectName);
+    private void promptUserUrlAlreadyExist() {
+        System.out.print("A resource with The same URL has already existed in its resource list. "
+                + "If you want to edit the resource, please use \"edit\" command." + NEW_LINE);
     }
 
     //@@author NgManSing
     private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
-        projects.get(projectIndex).addResources(projectUrl, descriptionOfUrl);
+        Project targetProject = projects.get(projectIndex);
+        targetProject.addResources(projectUrl, descriptionOfUrl, targetProject.getNumberOfResources());
         System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
     }
 
@@ -278,9 +281,11 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will print the resources for a particular project.
-     * @throws NoProjectNameException when user did not enter project name.
+     *
+     * @throws NoProjectNameException   when user did not enter project name.
      * @throws ProjectNotFoundException when project is not found in database.
      */
     public void printResourceListForAProject() throws NoProjectNameException, ProjectNotFoundException {
@@ -302,8 +307,10 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will check if project name is empty.
+     *
      * @param projectName This string user's input for projectName.
      * @return true if empty, false if not empty.
      */
@@ -313,6 +320,7 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will print divider.
      */
@@ -321,6 +329,7 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will print the resource list for all projects.
      */
@@ -339,8 +348,10 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This is a helper method that loops through a resource list and print it out.
+     *
      * @param resources an arraylist containing resources for a project.
      */
     public static void printResourceList(ArrayList<Resource> resources) {

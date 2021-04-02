@@ -12,7 +12,7 @@ import java.io.PrintStream;
 import java.time.LocalDate;
 
 class DukeTest {
-    
+
     @Test
     public void dummyTest() {
         assertTrue(true);
@@ -89,7 +89,7 @@ class DukeTest {
     }
 
     @Test
-    public void testAddAndOverwrite1Resource() {
+    public void testAddResourceWithExistingUrl() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
@@ -105,7 +105,8 @@ class DukeTest {
         String targetString = MainUi.DUKE_STANDARD_HEADING
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
-                + "The resource of the project \"CS2113 Group Project\" is overwritten.\n"
+                + "A resource with The same URL has already existed in its resource list. "
+                + "If you want to edit the resource, please use \"edit\" command.\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
@@ -113,7 +114,7 @@ class DukeTest {
                 + "Resource(s):\n"
                 + "1): "
                 + "[" + LocalDate.now() + "] "
-                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -256,7 +257,7 @@ class DukeTest {
         System.setOut(System.out);
     }
 
-    @ Test
+    @Test
     public void testEditNotFoundResource() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
@@ -280,7 +281,7 @@ class DukeTest {
         System.setOut(System.out);
     }
 
-    @ Test
+    @Test
     public void testEditNotFoundProject() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
@@ -304,7 +305,7 @@ class DukeTest {
         System.setOut(System.out);
     }
 
-    @ Test
+    @Test
     public void testEditResourceUrl() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
@@ -361,7 +362,7 @@ class DukeTest {
         System.setOut(System.out);
     }
 
-    @ Test
+    @Test
     public void testEditResourceLinkDescription() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
