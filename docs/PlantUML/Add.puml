@@ -6,7 +6,7 @@ participant "<<class>>\n:CommandParser" as CP
 participant ":Project" as P1
 participant "projectInStorage:Project" as P2
 
-[-> CH: processCommand():Boolean
+[-> CH: processCommand()
 activate CH
 
 CH -> CH: processInputBeforeAdding()
