@@ -19,10 +19,6 @@ return projectInfo:String[]
 CH -> CH: addResource(projectInfo:String[])
 activate CH
 
-CH -> CH: searchExistingProjectIndex(projectName:String):int
-activate CH
-return projectIndex:int
-
 opt ProjectNotExist
     CH -> CH: createNewProject(projectName:String, projectUrl:String, descriptionOfUrl:String)
     activate CH
