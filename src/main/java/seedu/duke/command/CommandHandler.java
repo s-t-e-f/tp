@@ -101,6 +101,7 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will return the project name from userInput.
      *

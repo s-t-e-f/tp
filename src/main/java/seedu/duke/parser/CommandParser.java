@@ -69,8 +69,8 @@ public class CommandParser {
     private static boolean isCompulsoryKeywordPositionOkay(int[] keywordLocation, int firstOptionalArgumentIndex) {
         boolean isCompulsoryKeywordPositionOkay = true;
         for (int i = 0; i < firstOptionalArgumentIndex - 1; i++) {
-            isCompulsoryKeywordPositionOkay = isCompulsoryKeywordPositionOkay &&
-                    (keywordLocation[i] < keywordLocation[i + 1]);
+            isCompulsoryKeywordPositionOkay = isCompulsoryKeywordPositionOkay
+                    && (keywordLocation[i] < keywordLocation[i + 1]);
         }
         return isCompulsoryKeywordPositionOkay;
     }
