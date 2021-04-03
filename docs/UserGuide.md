@@ -274,24 +274,33 @@ Example of usage:
 1. Find the resources using a keyword, 'website' under project "CS2113".  
    **Input:** 
    ```
-    find k/website p/CS2113
+    find k/website p/NUS
    ```
    **Output:**
    ```
-    
+    --------------------------------------------------------
+    Project: NUS
+    1): [2021-04-03] https://www.nus.edu.sg/ (Description: NUS website)
+    --------------------------------------------------------
    ```
 
 2. Find the resources using a keyword, 'website' in all projects.  
     **Input:**
    ```
-   find k/dataset
+   find k/website
    ```
    **Output:**  
    ```
-    
+    Here is the list of all project(s) and its resource(s) matching the keyword!
+    --------------------------------------------------------
+    Project 1: NUS
+    1): [2021-04-03] https://www.nus.edu.sg/ (Description: NUS website)
+    --------------------------------------------------------
+    Project 2: CS2113
+    1): [2021-04-03] https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: CS2113 website)
+    --------------------------------------------------------
    ```
    
-
 ---
 
 
