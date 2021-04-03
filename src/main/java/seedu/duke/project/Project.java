@@ -29,6 +29,10 @@ public class Project {
         resources.add(index, new Resource(projectUrl, urlDescription));
     }
 
+    public void addResources(String projectUrl, String urlDescription) {
+        resources.add(new Resource(projectUrl, urlDescription));
+    }
+
     public boolean isUrlAlreadyExist(String projectUrl) {
         for (Resource resource : resources) {
             if (resource.getResourceLink().equals(projectUrl)) {
