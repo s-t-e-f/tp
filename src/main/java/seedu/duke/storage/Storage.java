@@ -95,7 +95,7 @@ public class Storage {
     private static Resource createResource(String input) {
         String[] parts = input.split(Pattern.quote("|"));
         String link = parts[0];
-        String description = parts[1];
+        String description = parts[1].equals("") ? null : parts[1];
         LocalDate dateOfCreation = LocalDate.parse(parts[2]);
         return new Resource(link, description, dateOfCreation);
     }

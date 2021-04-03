@@ -39,7 +39,7 @@ public class Resource {
     }
 
     public String getResourceDescriptionOnly() {
-        return resourceDescription;
+        return resourceDescription == null ? "" : resourceDescription;
     }
 
     public void setResourceLink(String resourceLink) {
