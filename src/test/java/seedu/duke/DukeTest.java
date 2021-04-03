@@ -412,7 +412,7 @@ class DukeTest {
                 + "delete: Deletes a resource from the resource list for a specified project.\n"
                 + "\tFormat: delete p/PROJECT_NAME [i/INDEX]\n"
                 + "edit: Edits a resource from the resource list for a specified project.\n"
-                + "\tFormat: edit p/PROJECT_NAME i/INDEX [url/URL_LINK] [d/LINK_DESCRIPTION]\n"
+                + "\tFormat: edit p/PROJECT_NAME i/INDEX url/URL_LINK [d/LINK_DESCRIPTION]\n"
                 + "list: View the resource list for a specified project.\n"
                 + "\tFormat: list PROJECT_NAME\n"
                 + "list-all: Shows the resource list for all projects.\n"
