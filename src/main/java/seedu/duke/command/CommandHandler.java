@@ -7,7 +7,9 @@ import seedu.duke.exception.NoProjectNameException;
 import seedu.duke.exception.ProjectNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.parser.InputParser;
+import seedu.duke.project.ProjectManager;
 import seedu.duke.resource.Resource;
+import seedu.duke.resource.ResourceManager;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
 
@@ -380,6 +382,7 @@ public class CommandHandler {
         MainUi.listAllCommands();
     }
 
+    //@@author Yan Yi Xue
     private void processInputBeforeFinding() {
         String[] keywords = {"k/", "p/"};
         int firstOptionalKeyword = 1;
@@ -394,65 +397,27 @@ public class CommandHandler {
         findResources(keywordInfo);
     }
 
+    //@@author Yan Yi Xue
     private void findResources(String[] keywordInfo) {
         if (keywordInfo[1] == null) {
             String keyword = keywordInfo[0];
-            printAllProjectsAndResourcesMatchingKeyword(keyword);
+            System.out.print("Here is the list of all project(s) and its resource(s) matching the keyword!" + NEW_LINE);
+            printDivider();
+            ProjectManager.getAllProjectsAndResourcesMatchingKeyword(keyword, projects);
+            printDivider();
         } else {
             String keyword = keywordInfo[0];
             String projectName = keywordInfo[1];
-            printResourcesInProjectMatchingKeyword(projectName, keyword);
-        }
-    }
-
-    private void printAllProjectsAndResourcesMatchingKeyword(String keyword) {
-        int projectCount = 0;
-        System.out.print("Here is the list of all project(s) and its resource(s) matching the keyword!" + NEW_LINE);
-        printDivider();
-        for (Project project : projects) {
-            projectCount += 1;
-            System.out.print("Project " + projectCount + ": " + project + NEW_LINE);
-            ArrayList<Resource> resources = project.getResources();
-            printResourcesMatchingKeyword(resources, keyword);
+            int projectIndex = searchExistingProjectIndex(projectName);
+            printDivider();
+            if (projectIndex != -1) {
+                System.out.print("Project: " + projectName + NEW_LINE);
+                ResourceManager.printResourcesMatchingKeyword(projects.get(projectIndex).getResources(), keyword);
+            } else {
+                System.out.print("Project cannot be found! Please enter a valid project name!" + NEW_LINE);
+            }
             printDivider();
         }
     }
 
-    private void printResourcesInProjectMatchingKeyword(String projectName, String keyword) {
-        Boolean isProject = Boolean.FALSE;
-        for (Project project : projects) {
-            if (project.getProjectName().equals(projectName)) {
-                isProject = Boolean.TRUE;
-                printDivider();
-                System.out.print("Project: " + projectName + NEW_LINE);
-                ArrayList<Resource> resources = project.getResources();
-                printResourcesMatchingKeyword(resources, keyword);
-                printDivider();
-            }
-        }
-        if (!isProject) {
-            System.out.print("Project cannot be found! Please enter a valid project name!" + NEW_LINE);
-        }
-    }
-
-    private void printResourcesMatchingKeyword(ArrayList<Resource> resources, String keyword) {
-        int resourceCount = 1;
-        for (Resource resource : resources) {
-            if (checkKeywordMatch(resource, keyword)) {
-                System.out.print(resourceCount + "): " + resource + NEW_LINE);
-                resourceCount += 1;
-            }
-        }
-        if (resourceCount == 1) {
-            System.out.printf("No resources matching keyword \"%s\" found!\n", keyword);
-        }
-    }
-
-    private Boolean checkKeywordMatch(Resource resource, String keyword) {
-        if (resource.getResourceDescriptionOnly().toLowerCase().contains(keyword.toLowerCase())) {
-            return Boolean.TRUE;
-        } else {
-            return Boolean.FALSE;
-        }
-    }
 }
