@@ -12,18 +12,18 @@ activate CH
 CH -> CH: processInputBeforeAdding()
 activate CH
 
-CH -> CP: decodeInfoFragments(infoFragments:String[], keywords:String[], firstOptionalKeyword:int)
+CH -> CP: decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword)
 activate CP
-return projectInfo:String[]
+return projectInfo
 
-CH -> CH: addResource(projectInfo:String[])
+CH -> CH: addResource(projectInfo)
 activate CH
 
 opt ProjectNotExist
-    CH -> CH: createNewProject(projectName:String, projectUrl:String, descriptionOfUrl:String)
+    CH -> CH: createNewProject(projectName, projectUrl, descriptionOfUrl)
     activate CH
     create P1
-    CH -> P1:new Project(projectName:String, projectUrl:String, descriptionOfUrl:String)
+    CH -> P1:
     return
 end
 
@@ -32,9 +32,9 @@ alt UrlAlreadyExist
     activate CH
     return
 else else
-    CH -> CH: addNewResource(projectName:String, projectUrl:String, descriptionOfUrl:String, projectIndex:int)
+    CH -> CH: addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex)
     activate CH
-    CH -> P2: addResources(projectUrl:String, descriptionOfUrl:String)
+    CH -> P2: addResources(projectUrl, descriptionOfUrl)
     activate P2
     return
     return
@@ -42,6 +42,6 @@ end
 
 return
 return
-return isLoop:Boolean
+return isLoop
 
 @enduml
