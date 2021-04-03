@@ -223,8 +223,13 @@ public class CommandHandler {
                 // If index is not indicated, remove all resources from the specified project.
                 targetedProj.getResources().removeAll(targetedProj.getResources());
                 System.out.printf("All the resources in %s has been deleted.\n", projectName);
+            }
+
+            if (targetedProj.getResources().isEmpty()) {
+                projects.remove(targetedProj);
                 return;
             }
+
         } catch (Exception e) {
             System.out.print("Resource is not found. Please enter a valid index. " + NEW_LINE);
             return;
