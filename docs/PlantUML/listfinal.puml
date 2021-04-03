@@ -1,5 +1,5 @@
 @startuml
-
+hide footbox
 box list-all feature
 participant ":CommandHandler" as CH
 'participant "P1:Project" as P1
@@ -38,6 +38,6 @@ endbox
 return
 return
 
-return: IsLoop:boolean
+return
 
 @enduml
