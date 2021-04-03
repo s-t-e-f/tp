@@ -28,10 +28,10 @@ The user executes the following commands in order to add a resources to a projec
 
 The following sequence diagram shows how the add operation works:
 ![add_png](puml_img/Add.png)
+> The arrow pointing from :CommandHandler to :Project should be pointed at the middle of :project. However, due to 
+> limitation of PlantUML, the arrow is pointed at the left-hand corner of :Project.
 
-> Note: P2:Project is defined as an entity that is already existing in the project list ArrayList<Project>, the position
-> of which should be lower than ArrayList<Project>. However, due to a limitation in PlantUML, the position of P3 is 
-> higher than ArrayList<Project>.
+> projectInStorage:Project represents a project that is already existing in the project list of the program.
 
 **Design Consideration**
 

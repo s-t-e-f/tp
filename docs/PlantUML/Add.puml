@@ -3,38 +3,27 @@
 box Adding Resource
 participant ":CommandHandler" as CH
 participant "<<class>>\n:CommandParser" as CP
-participant "P1:Project" as P1
-participant "P2:Project" as P2
-participant ":ArrayList<Project>" as PA
+participant ":Project" as P1
+participant "projectInStorage:Project" as P2
 
-create PA
-CH -> PA
 [-> CH: processCommand()
 activate CH
 
 CH -> CH: processInputBeforeAdding()
 activate CH
 
-CH -> CP: decodeInfoFragments(infoFragments:String[], keywords:String[], firstOptionalKeyword:int)
+CH -> CP: decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword)
 activate CP
-return projectInfo:String[]
+return projectInfo
 
-CH -> CH: addResource(projectInfo:String[])
+CH -> CH: addResource(projectInfo)
 activate CH
-
-CH -> CH: searchExistingProjectIndex(projectName:String)
-activate CH
-return projectIndex:int
 
 opt ProjectNotExist
-    CH -> CH: createNewProject(projectName:String, projectUrl:String, descriptionOfUrl:String)
+    CH -> CH: createNewProject(projectName, projectUrl, descriptionOfUrl)
     activate CH
     create P1
-    CH -> P1: new Project(projectName:String, projectUrl:String, descriptionOfUrl:String)
-    CH <-- P1: P1:Project
-    CH -> PA: add(P1:Project)
-    activate PA
-    return
+    CH -> P1:
     return
 end
 
@@ -43,11 +32,8 @@ alt UrlAlreadyExist
     activate CH
     return
 else else
-    CH -> CH: addNewResource(projectName:String, projectUrl:String, descriptionOfUrl:String, projectIndex:int)
+    CH -> CH: addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex)
     activate CH
-    CH -> PA: get(projectIndex:int)
-    activate PA
-    return P2:Project
     CH -> P2: addResources(projectUrl, descriptionOfUrl)
     activate P2
     return
@@ -56,6 +42,6 @@ end
 
 return
 return
-return isLoop:Boolean
+return isLoop
 
 @enduml
