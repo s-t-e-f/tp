@@ -3,13 +3,10 @@
 box Adding Resource
 participant ":CommandHandler" as CH
 participant "<<class>>\n:CommandParser" as CP
-participant "P1:Project" as P1
-participant "P2:Project" as P2
-participant ":ArrayList<Project>" as PA
+participant ":Project" as P1
+participant "projectInStorage:Project" as P2
 
-create PA
-CH -> PA
-[-> CH: processCommand()
+[-> CH: processCommand():Boolean
 activate CH
 
 CH -> CH: processInputBeforeAdding()
@@ -22,7 +19,7 @@ return projectInfo:String[]
 CH -> CH: addResource(projectInfo:String[])
 activate CH
 
-CH -> CH: searchExistingProjectIndex(projectName:String)
+CH -> CH: searchExistingProjectIndex(projectName:String):int
 activate CH
 return projectIndex:int
 
@@ -30,11 +27,7 @@ opt ProjectNotExist
     CH -> CH: createNewProject(projectName:String, projectUrl:String, descriptionOfUrl:String)
     activate CH
     create P1
-    CH -> P1: new Project(projectName:String, projectUrl:String, descriptionOfUrl:String)
-    CH <-- P1: P1:Project
-    CH -> PA: add(P1:Project)
-    activate PA
-    return
+    CH -> P1:new Project(projectName:String, projectUrl:String, descriptionOfUrl:String)
     return
 end
 
@@ -45,10 +38,7 @@ alt UrlAlreadyExist
 else else
     CH -> CH: addNewResource(projectName:String, projectUrl:String, descriptionOfUrl:String, projectIndex:int)
     activate CH
-    CH -> PA: get(projectIndex:int)
-    activate PA
-    return P2:Project
-    CH -> P2: addResources(projectUrl, descriptionOfUrl)
+    CH -> P2: addResources(projectUrl:String, descriptionOfUrl:String)
     activate P2
     return
     return

@@ -153,7 +153,7 @@ public class CommandHandler {
     //@@author NgManSing
     private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
         Project targetProject = projects.get(projectIndex);
-        targetProject.addResources(projectUrl, descriptionOfUrl, targetProject.getNumberOfResources());
+        targetProject.addResources(projectUrl, descriptionOfUrl);
         System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
     }
 
