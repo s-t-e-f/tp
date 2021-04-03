@@ -1,5 +1,5 @@
 @startuml
-
+hide footbox
 box list PROJECTNAME feature
 participant ":CommandHandler" as CH
 participant ":ArrayList<Project>" as PA
@@ -24,8 +24,7 @@ activate CH
 return projectName
 
 alt isProjectNameEmpty
-    break NoProjectNameException
-    end
+    CH -->[
 else
     loop Length of ArrayList<Project>
         CH -> PA
@@ -33,6 +32,7 @@ else
         PA -> PC: getProjectName()
         activate PC
         return
+
         return
         opt getProjectName().equals(projectName)
             CH -> PA:
@@ -40,6 +40,7 @@ else
             PA -> RA: getResource()
             activate RA
             return
+
             return
             CH -> CH: printResourceList()
             activate CH
@@ -48,11 +49,11 @@ else
             end
             return
             return
-            return IsLoop:boolean
+            CH -->[
         end
     end
 end
-break ProjectNotFoundException
-end
+CH -->[
 endbox
+
 @enduml

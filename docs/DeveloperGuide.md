@@ -1,15 +1,19 @@
 # TraceYourProj's Developer Guide
 
 ## Design & implementation
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}  
+{Coming in v2.1}
+---
 
 ### Design
-{insert design}
+{insert design}  
+{Coming in v2.1}
+---
 
 ### Implementation
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add projects and resources
+#### Add projects and resources
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the add mechanism behaves at each step.
@@ -49,7 +53,7 @@ Aspect: How add executes
 
 * Alternative 2 (none)
 ---
-### List all projects & their respective resources feature
+#### List all projects & their respective resources feature
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -79,7 +83,9 @@ Aspect: How list-all executes
 The following sequence diagram shows how the list-all operation works:
 ![add_png](puml_img/list-allfinal.png)
 
-### List all the resources for a particular project feature
+---
+
+#### List all the resources for a particular project feature
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -112,7 +118,9 @@ Aspect: How list PROJECTNAME executes
 The following sequence diagram shows how the list PROJECTNAME operation works:
 ![add_png](puml_img/listPROJECTNAMEfinal.png)
 
-### Deleting resource from a specified project 
+---
+
+#### Deleting resource from a specified project 
 **Proposed Implementation**
 
 Given below is an example usage scenario and how deleting resource(s) works.
@@ -135,7 +143,9 @@ The user can execute `list p/CS2113` to verify that the specified resource has b
 The following sequence diagram shows how the delete operation works:
 ![delete_puml](puml_img/deleteResource.png)
 
-### Editing resource from a specified project
+---
+
+#### Editing resource from a specified project
 **Proposed Implementation**
 
 Given below is an example usage scenario and how editing a resource works.
@@ -155,9 +165,9 @@ If PROJECT_NAME is not found in the database, the application prompts the user t
 **Step 4**:
 The user can execute `list p/CS2113` to verify that the specified resource has been successfully edited.
 
+---
 
-
-### Finding resource(s) in a project or all projects based on a keyword
+#### Finding resource(s) in a project or all projects based on a keyword
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the find mechanism behaves at each step.
@@ -191,7 +201,9 @@ Aspect: How find executes
   * **Pros**: Simple to implement.
   * **Cons**: More functions and code required.
 
-### Exiting TraceYourProj
+---
+
+#### Exiting TraceYourProj
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the exit mechanism behaves at each step.
@@ -220,7 +232,9 @@ Aspect: How exit executes
   * **Cons**: Reduces testability since more code is required to throw an exception when System.exit is 
     called and catch that exception, so the JUnit test does not fail.
 
-## Saving and loading data
+---
+
+#### Saving and loading data
 
 **Proposed Implementation**
 
@@ -258,15 +272,21 @@ The following sequence diagram shows how the **load** operation works:
   * **Pros:** Easy to implement, user has freedom of choice whether to save and load.
   * **Cons:** User may not be aware of the functionality without referring to the user guide.
 
+---
 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+* Students doing data science projects.
+* prefers desktop apps over other types
+* can type fast
+* prefer typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
+TraceYourProj will help students to keep track of resources (links) which they have previously saved or need to use for their data science project in the future. 
+It allows a single user to use it for multiple projects.
 
-{Describe the value proposition: what problem does it solve?}
 
 ## User Stories
 
@@ -280,12 +300,15 @@ The following sequence diagram shows how the **load** operation works:
 |v2.0|user|see the list of resources for one of my project|recall what are the resources of one particular project in the database of TraceYourProj
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any **mainstream OS** as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should be able to hold up to 1000 project resourcess without a noticeable sluggishness in performance for typical usage.
 
 ## Glossary
 
-* *glossary item* - Definition
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}  
+{Coming in v2.1}
