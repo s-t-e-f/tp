@@ -53,6 +53,7 @@ public class Storage {
     }
 
     private static void createProjectsFromStorage() {
+        clearProjects();
         try {
             File dataFile = new File("data.txt");
             if (!dataFile.exists()) {
@@ -78,6 +79,10 @@ public class Storage {
             System.out.println("File not found");
             e.printStackTrace();
         }
+    }
+
+    private static void clearProjects() {
+        projects = new ArrayList<>();
     }
 
     private static Project createProject(String input) {
