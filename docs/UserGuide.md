@@ -249,13 +249,14 @@ Format: `edit p/PROJECT_NAME i/INDEX url/LINK [d/DESCRIPTION]`
 **Input:**  
 
 ```
-edit p/Jester Jokes 2 url/https://www.kaggle.com/sameerdev7/joke-rating d/Jester Jokes Dataset'
+edit p/Jester's Jokes i/2 url/https://www.kaggle.com/sameerdev7/joke-rating d/Jester Jokes Dataset
 ```
 
 **Output:**  
 
 ```
-
+The resource is successfully edited to : 
+    [2021-04-03] https://www.kaggle.com/sameerdev7/joke-rating (Description: Jester Jokes Dataset)
 ```
 
 **Edits** the url and description of the 2nd resource in ‘Jester Jokes’ project to be https://www.kaggle.com/sameerdev7/joke-rating and Jester Jokes Dataset respectively.
