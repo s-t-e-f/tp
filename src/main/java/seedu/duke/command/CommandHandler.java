@@ -30,7 +30,7 @@ public class CommandHandler {
             + "Please type \"help\" for more details." + NEW_LINE;
     public static final String DIVIDER = "--------------------------------------------------------";
     String command;
-    static String[] infoFragments;
+    String[] infoFragments;
     private final ArrayList<Project> projects;
 
     public CommandHandler(InputParser userInput, ArrayList<Project> projects) {
@@ -39,12 +39,17 @@ public class CommandHandler {
         this.projects = projects;
     }
 
-    public static String[] getInfoFragments() {
+    public String[] getInfoFragments() {
         return infoFragments;
     }
 
     public boolean processCommand() {
         boolean isLoop = true;
+        if (command == null) {
+            promptUserInvalidInput();
+            return true;
+        }
+
         switch (this.command) {
         case ADD_COMMAND:
             processInputBeforeAdding();
@@ -60,13 +65,7 @@ public class CommandHandler {
             printResourceListForAllProjects();
             break;
         case LIST_ONE_PROJECT_COMMAND:
-            try {
-                printResourceListForAProject();
-            } catch (NoProjectNameException e) {
-                System.out.print(NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
-            } catch (ProjectNotFoundException e) {
-                System.out.print(PROJECT_NOT_FOUND_ERROR_MESSAGE);
-            }
+            listProjectResource();
             break;
         case EDIT_COMMAND:
             processInputBeforeEditing();
@@ -88,6 +87,17 @@ public class CommandHandler {
             break;
         }
         return isLoop;
+    }
+
+    //@@author
+    private void listProjectResource() {
+        try {
+            printResourceListForAProject();
+        } catch (NoProjectNameException e) {
+            System.out.print(NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
+        } catch (ProjectNotFoundException e) {
+            System.out.print(PROJECT_NOT_FOUND_ERROR_MESSAGE);
+        }
     }
 
     //@@author jovanhuang

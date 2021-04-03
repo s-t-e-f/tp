@@ -19,7 +19,7 @@ public class Duke {
     }
 
     private static void startProgram() {
-        boolean isLoop;
+        boolean isLoop = true;
         do {
             MainUi.printSignalForUserToEnterInput();
             InputParser userInput = getUserInput();
