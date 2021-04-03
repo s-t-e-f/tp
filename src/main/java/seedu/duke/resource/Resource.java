@@ -38,6 +38,15 @@ public class Resource {
         return "";
     }
 
+    public boolean checkKeywordMatch(String keyword) {
+        if (resourceDescription != null) {
+            return resourceDescription.toLowerCase().contains(keyword.toLowerCase());
+        } else {
+            return false;
+        }
+
+    }
+
     public String getResourceDescriptionOnly() {
         return resourceDescription == null ? "" : resourceDescription;
     }
