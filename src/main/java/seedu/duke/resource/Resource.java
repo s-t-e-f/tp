@@ -58,4 +58,19 @@ public class Resource {
     public String toString() {
         return "[" + dateOfCreation + "] " + getResourceLink() + getResourceDescription();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Resource)) {
+            return false;
+        }
+
+        Resource compareTo = (Resource) obj;
+
+        return compareTo.getResourceLink().equals(this.resourceLink);
+    }
 }

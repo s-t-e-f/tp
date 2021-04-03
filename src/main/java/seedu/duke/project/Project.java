@@ -25,12 +25,12 @@ public class Project {
         return projectName;
     }
 
-    public void addResources(String projectUrl, String urlDescription, int index) {
-        resources.add(index, new Resource(projectUrl, urlDescription));
-    }
-
     public void addResources(String projectUrl, String urlDescription) {
         resources.add(new Resource(projectUrl, urlDescription));
+    }
+
+    public void addResourceObj(Resource resource) {
+        resources.add(resource);
     }
 
     public boolean isUrlAlreadyExist(String projectUrl) {
@@ -57,5 +57,20 @@ public class Project {
     @Override
     public String toString() {
         return getProjectName();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Project)) {
+            return false;
+        }
+
+        Project compareTo = (Project) obj;
+
+        return compareTo.getProjectName().equals(this.projectName);
     }
 }
