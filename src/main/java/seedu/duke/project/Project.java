@@ -25,8 +25,8 @@ public class Project {
         return projectName;
     }
 
-    public void addResources(String projectUrl, String urlDescription, int index) {
-        resources.add(index, new Resource(projectUrl, urlDescription));
+    public void addResources(String projectUrl, String urlDescription) {
+        resources.add(new Resource(projectUrl, urlDescription));
     }
 
     public void addResourceObj(Resource resource) {
