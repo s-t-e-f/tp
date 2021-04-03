@@ -12,7 +12,8 @@ for use via a Command Line Interface (CLI).
 3. Execute the .jar file via terminal. A command-line user interface (CLI) should appear quickly after execution.
    * For **Windows** user, you may input "java -jar (location of the .jar file)" through command prompt
 4. Start using the app by **entering commands** to the user interface. Please refer to the **Features** section below 
-   for **detailed descriptions** of **each command**.  
+   for **detailed descriptions** of **each command**.
+5. All leading and trailing space of user input will be removed.
    
 Upon running the jar file, you should see this on the command prompt console:
 ```

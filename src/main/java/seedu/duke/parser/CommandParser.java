@@ -50,35 +50,50 @@ public class CommandParser {
     }
 
     private static boolean isUserInputValid(int[] keywordLocation, int firstOptionalIndex) {
-        boolean isMustInputProvided = isMustInputProvided(keywordLocation, firstOptionalIndex);
-        boolean isMustKeywordPositionOkay = isMustKeywordPositionOkay(keywordLocation, firstOptionalIndex);
+        boolean isCompulsoryInputProvided = isCompulsoryInputProvided(keywordLocation, firstOptionalIndex);
+        boolean isCompulsoryKeywordPositionOkay = isCompulsoryKeywordPositionOkay(keywordLocation, firstOptionalIndex);
         boolean isOptionalKeywordPositionOkay = isOptionalKeywordPositionOkay(keywordLocation, firstOptionalIndex);
-        return (isMustInputProvided && isMustKeywordPositionOkay && isOptionalKeywordPositionOkay);
+        boolean isOverallPositionOkay = isOverallPositionOkay(keywordLocation, firstOptionalIndex);
+        return isCompulsoryInputProvided && isCompulsoryKeywordPositionOkay && isOptionalKeywordPositionOkay
+                && isOverallPositionOkay;
     }
 
-    private static boolean isMustInputProvided(int[] keywordLocation, int firstOptionalArgumentIndex) {
-        boolean isMustInputProvided = true;
+    private static boolean isCompulsoryInputProvided(int[] keywordLocation, int firstOptionalArgumentIndex) {
+        boolean isCompulsoryInputProvided = true;
         for (int i = 0; i < firstOptionalArgumentIndex; i++) {
-            isMustInputProvided = isMustInputProvided && keywordLocation[i] != -1;
+            isCompulsoryInputProvided = isCompulsoryInputProvided && keywordLocation[i] != -1;
         }
-        return isMustInputProvided;
+        return isCompulsoryInputProvided;
     }
 
-    private static boolean isOptionalKeywordPositionOkay(int[] keywordLocation, int firstOptionalArgumentIndex) {
+    private static boolean isCompulsoryKeywordPositionOkay(int[] keywordLocation, int firstOptionalArgumentIndex) {
+        boolean isCompulsoryKeywordPositionOkay = true;
+        for (int i = 0; i < firstOptionalArgumentIndex - 1; i++) {
+            isCompulsoryKeywordPositionOkay = isCompulsoryKeywordPositionOkay &&
+                    (keywordLocation[i] < keywordLocation[i + 1]);
+        }
+        return isCompulsoryKeywordPositionOkay;
+    }
+
+    private static boolean isOptionalKeywordPositionOkay(int[] keywordLocation, int firstOptionalIndex) {
         boolean isOptionalKeywordPositionOkay = true;
-        for (int i = firstOptionalArgumentIndex; i < keywordLocation.length; i++) {
+        for (int i = firstOptionalIndex; i < keywordLocation.length; i++) {
             boolean isCorrectPosition = keywordLocation[i] > keywordLocation[i - 1] || keywordLocation[i] == -1;
             isOptionalKeywordPositionOkay = isOptionalKeywordPositionOkay && isCorrectPosition;
         }
         return isOptionalKeywordPositionOkay;
     }
 
-    private static boolean isMustKeywordPositionOkay(int[] keywordLocation, int firstOptionalArgumentIndex) {
-        boolean isMustKeywordPositionOkay = true;
-        for (int i = 0; i < firstOptionalArgumentIndex - 1; i++) {
-            isMustKeywordPositionOkay = isMustKeywordPositionOkay && (keywordLocation[i] < keywordLocation[i + 1]);
+    private static boolean isOverallPositionOkay(int[] keywordLocation, int firstOptionalIndex) {
+        boolean hasOptional = false;
+        int firstNonNullOptionalIndex = firstOptionalIndex;
+        for (; firstNonNullOptionalIndex < keywordLocation.length; firstNonNullOptionalIndex++) {
+            if (keywordLocation[firstNonNullOptionalIndex] != -1) {
+                hasOptional = true;
+                break;
+            }
         }
-        return isMustKeywordPositionOkay;
+        return !hasOptional || keywordLocation[firstOptionalIndex - 1] < keywordLocation[firstNonNullOptionalIndex];
     }
 
     private static String[] getUsefulInfo(String[] arguments, int[] keywordLocations, String[] keywords)
@@ -91,7 +106,8 @@ public class CommandParser {
             }
 
             int endLocation = getEndLocation(arguments, keywordLocations, keywords, i);
-            cleanArguments[i] = extractInfo(arguments, keywords[i].length(), keywordLocations[i], endLocation - 1);
+            String info = extractInfo(arguments, keywords[i].length(), keywordLocations[i], endLocation - 1).trim();
+            cleanArguments[i] = info;
 
             if (cleanArguments[i].length() == 0) {
                 String errorMsg = "Argument cannot be empty. Resource failed to be added!";

@@ -37,9 +37,9 @@ The following sequence diagram shows how the add operation works:
 
 Aspect: How add executes
 * Alternative 1 (current choice):
-  * The add feature will do a loop through all the projects in the ArrayList projects to see if the project has already
-    existed. For each project, it will loop through all the resources to see if a resource with the same URL has already
-    existed.
+  * The add feature will do a loop through all the projects in the ArrayList "projects" to see if the project has 
+    already existed. For each project, it will loop through all the resources to see if a resource with the same URL
+    has already existed.
     
     > If the project does not exist in the ArrayList:
     >   * Create a new project and append the resource into its resource list.
