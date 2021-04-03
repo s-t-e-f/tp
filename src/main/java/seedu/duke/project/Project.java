@@ -29,6 +29,10 @@ public class Project {
         resources.add(index, new Resource(projectUrl, urlDescription));
     }
 
+    public void addResourceObj(Resource resource) {
+        resources.add(resource);
+    }
+
     public boolean isUrlAlreadyExist(String projectUrl) {
         for (Resource resource : resources) {
             if (resource.getResourceLink().equals(projectUrl)) {
@@ -53,5 +57,20 @@ public class Project {
     @Override
     public String toString() {
         return getProjectName();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Project)) {
+            return false;
+        }
+
+        Project compareTo = (Project) obj;
+
+        return compareTo.getProjectName().equals(this.projectName);
     }
 }
