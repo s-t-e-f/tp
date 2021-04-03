@@ -52,8 +52,10 @@ Aspect: How add executes
     >   * Append the new resource into the project resource list.
 
 * Alternative 2 (none)
+
 ---
-#### List all projects & their respective resources feature
+
+#### List all projects & their respective resources
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -85,7 +87,7 @@ The following sequence diagram shows how the list-all operation works:
 
 ---
 
-#### List all the resources for a particular project feature
+#### List all the resources for a particular project 
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -283,10 +285,13 @@ The following sequence diagram shows how the **load** operation works:
 * prefer typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
+---
+
 ### Value proposition
 TraceYourProj will help students to keep track of resources (links) which they have previously saved or need to use for their data science project in the future. 
 It allows a single user to use it for multiple projects.
 
+---
 
 ## User Stories
 
@@ -294,19 +299,26 @@ It allows a single user to use it for multiple projects.
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v1.0|user|exit TraceYourProj when I finish managing my resources|leave TraceYourProj|
-|v1.0|user|see the list of resources for all my projects|recall what are all the projects and resources in the database of TraceYourProj 
+|v1.0|user|see the list of resources for all my projects|recall what are all the projects and resources in the database of TraceYourProj|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-|v2.0|user|find resources I have that are related to a keyword I specify|easily find resources I need without going through each project and resources
-|v2.0|user|see the list of resources for one of my project|recall what are the resources of one particular project in the database of TraceYourProj
+|v2.0|user|find resources I have that are related to a keyword I specify|easily find resources I need without going through each project and resources|
+|v2.0|user|see the list of resources for one of my project|recall what are the resources of one particular project in the database of TraceYourProj|
+
+---
+
 ## Non-Functional Requirements
 
 1. Should work on any **mainstream OS** as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-3. Should be able to hold up to 1000 project resourcess without a noticeable sluggishness in performance for typical usage.
+3. Should be able to hold up to 1000 project resources without a noticeable sluggishness in performance for typical usage.
+
+---
 
 ## Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+
+---
 
 ## Instructions for manual testing
 
