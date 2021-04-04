@@ -160,7 +160,7 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
@@ -201,7 +201,7 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
@@ -252,7 +252,7 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
@@ -276,7 +276,7 @@ class DukeTest {
                 + "Resource is not found. Please enter a valid index. " + "\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
@@ -300,7 +300,7 @@ class DukeTest {
                 + "Project is not found ... " + "\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
@@ -357,7 +357,7 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
@@ -394,7 +394,7 @@ class DukeTest {
                 + "--------------------------------------------------------" + "\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
