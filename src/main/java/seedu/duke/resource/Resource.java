@@ -40,8 +40,8 @@ public class Resource {
 
     public boolean checkKeywordMatch(String keyword) {
         if (resourceDescription != null) {
-            return resourceDescription.toLowerCase().contains(keyword.toLowerCase()) ||
-                    resourceLink.toLowerCase().contains(keyword.toLowerCase());
+            return resourceDescription.toLowerCase().contains(keyword.toLowerCase())
+                    || resourceLink.toLowerCase().contains(keyword.toLowerCase());
         } else {
             return false;
         }
