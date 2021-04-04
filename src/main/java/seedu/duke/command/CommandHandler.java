@@ -238,7 +238,7 @@ public class CommandHandler {
 
     private void processInputBeforeEditing() {
         String[] keywords = {"p/", "i/", "url/", "d/"};
-        int firstOptionalKeyword = 1;
+        int firstOptionalKeyword = 2;
         String[] projectInfo;
         try {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
@@ -252,7 +252,7 @@ public class CommandHandler {
 
     public void editResource(String[] projectInfo) {
         Project targetedProj = null;
-        Resource targetedResource = null;
+        Resource targetedResource;
         String projectName = projectInfo[0];
         Boolean isEdited = false;
         int idx = -1;
