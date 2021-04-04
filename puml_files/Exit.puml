@@ -1,41 +1,20 @@
 @startuml
-!include Style.puml
 
-box Logic LOGIC_COLOR_T2
-participant ":Duke" as Duke LOGIC_COLOR_T1
-participant ":CommandHandler" as CommandHandler LOGIC_COLOR_T1
-participant ":MainUI" as MainUI LOGIC_COLOR_T1
-participant ":InputParser" as InputParser LOGIC_COLOR_T1
+box Exiting TraceYourProj
+participant ":CommandHandler" as CH
+participant ":MainUI" as MUI
 end box
 
 
-box Model MODEL_COLOR_T1
-participant ":Model" as MODEL_COLOR
-end box
+[-> CH : processCommand()]
+activate CH
 
-activate Duke
-[-> Duke : execute("exit")]
+CH -> MUI : showExitMessage()
+activate MUI
+return
 
-create CommandHandler
-Duke -> CommandHandler
-Duke -> CommandHandler : processCommand()
-activate CommandHandler
+return isLoop
 
-CommandHandler -> InputParser : getCommand()
-activate InputParser
-
-CommandHandler -> InputParser : getInfoFragments()
-deactivate InputParser
-
-CommandHandler -> MainUI : showExitMessage()
-activate MainUI
-deactivate MainUI
-
-CommandHandler --> Duke : isLoop
-deactivate CommandHandler
-
-deactivate Duke
-destroy Duke
 
 
 @enduml
