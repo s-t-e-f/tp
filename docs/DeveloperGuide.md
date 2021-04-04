@@ -1,15 +1,19 @@
 # TraceYourProj's Developer Guide
 
 ## Design & implementation
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}  
+{Coming in v2.1}
+---
 
 ### Design
-{insert design}
+{insert design}  
+{Coming in v2.1}
+---
 
 ### Implementation
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add projects and resources
+#### Add projects and resources
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the add mechanism behaves at each step.
@@ -24,18 +28,18 @@ The user executes the following commands in order to add a resources to a projec
 
 The following sequence diagram shows how the add operation works:
 ![add_png](puml_img/Add.png)
+> The arrow pointing from :CommandHandler to :Project should be pointed at the middle of :project. However, due to 
+> limitation of PlantUML, the arrow is pointed at the left-hand corner of :Project.
 
-> Note: P2:Project is defined as an entity that is already existing in the project list ArrayList<Project>, the position
-> of which should be lower than ArrayList<Project>. However, due to a limitation in PlantUML, the position of P3 is 
-> higher than ArrayList<Project>.
+> projectInStorage:Project represents a project that is already existing in the project list of the program.
 
 **Design Consideration**
 
 Aspect: How add executes
 * Alternative 1 (current choice):
-  * The add feature will do a loop through all the projects in the ArrayList projects to see if the project has already
-    existed. For each project, it will loop through all the resources to see if a resource with the same URL has already
-    existed.
+  * The add feature will do a loop through all the projects in the ArrayList "projects" to see if the project has 
+    already existed. For each project, it will loop through all the resources to see if a resource with the same URL
+    has already existed.
     
     > If the project does not exist in the ArrayList:
     >   * Create a new project and append the resource into its resource list.
@@ -48,8 +52,10 @@ Aspect: How add executes
     >   * Append the new resource into the project resource list.
 
 * Alternative 2 (none)
+
 ---
-### List all projects & their respective resources feature
+
+#### List all projects & their respective resources
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -79,7 +85,9 @@ Aspect: How list-all executes
 The following sequence diagram shows how the list-all operation works:
 ![add_png](puml_img/list-allfinal.png)
 
-### List all the resources for a particular project feature
+---
+
+#### List all the resources for a particular project 
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -112,7 +120,9 @@ Aspect: How list PROJECTNAME executes
 The following sequence diagram shows how the list PROJECTNAME operation works:
 ![add_png](puml_img/listPROJECTNAMEfinal.png)
 
-### Deleting resource from a specified project 
+---
+
+#### Deleting resource from a specified project 
 **Proposed Implementation**
 
 Given below is an example usage scenario and how deleting resource(s) works.
@@ -135,7 +145,9 @@ The user can execute `list p/CS2113` to verify that the specified resource has b
 The following sequence diagram shows how the delete operation works:
 ![delete_puml](puml_img/deleteResource.png)
 
-### Editing resource from a specified project
+---
+
+#### Editing resource from a specified project
 **Proposed Implementation**
 
 Given below is an example usage scenario and how editing a resource works.
@@ -155,9 +167,9 @@ If PROJECT_NAME is not found in the database, the application prompts the user t
 **Step 4**:
 The user can execute `list p/CS2113` to verify that the specified resource has been successfully edited.
 
+---
 
-
-### Finding resource(s) in a project or all projects based on a keyword
+#### Finding resource(s) in a project or all projects based on a keyword
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the find mechanism behaves at each step.
@@ -191,7 +203,9 @@ Aspect: How find executes
   * **Pros**: Simple to implement.
   * **Cons**: More functions and code required.
 
-### Exiting TraceYourProj
+---
+
+#### Exiting TraceYourProj
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the exit mechanism behaves at each step.
@@ -220,7 +234,9 @@ Aspect: How exit executes
   * **Cons**: Reduces testability since more code is required to throw an exception when System.exit is 
     called and catch that exception, so the JUnit test does not fail.
 
-## Saving and loading data
+---
+
+#### Saving and loading data
 
 **Proposed Implementation**
 
@@ -258,15 +274,24 @@ The following sequence diagram shows how the **load** operation works:
   * **Pros:** Easy to implement, user has freedom of choice whether to save and load.
   * **Cons:** User may not be aware of the functionality without referring to the user guide.
 
+---
 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+* Students doing data science projects.
+* prefers desktop apps over other types
+* can type fast
+* prefer typing to mouse interactions
+* is reasonably comfortable using CLI apps
+
+---
 
 ### Value proposition
+TraceYourProj will help students to keep track of resources (links) which they have previously saved or need to use for their data science project in the future. 
+It allows a single user to use it for multiple projects.
 
-{Describe the value proposition: what problem does it solve?}
+---
 
 ## User Stories
 
@@ -274,18 +299,28 @@ The following sequence diagram shows how the **load** operation works:
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v1.0|user|exit TraceYourProj when I finish managing my resources|leave TraceYourProj|
-|v1.0|user|see the list of resources for all my projects|recall what are all the projects and resources in the database of TraceYourProj 
+|v1.0|user|see the list of resources for all my projects|recall what are all the projects and resources in the database of TraceYourProj|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-|v2.0|user|find resources I have that are related to a keyword I specify|easily find resources I need without going through each project and resources
-|v2.0|user|see the list of resources for one of my project|recall what are the resources of one particular project in the database of TraceYourProj
+|v2.0|user|find resources I have that are related to a keyword I specify|easily find resources I need without going through each project and resources|
+|v2.0|user|see the list of resources for one of my project|recall what are the resources of one particular project in the database of TraceYourProj|
+
+---
+
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any **mainstream OS** as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should be able to hold up to 1000 project resources without a noticeable sluggishness in performance for typical usage.
+
+---
 
 ## Glossary
 
-* *glossary item* - Definition
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+
+---
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}  
+{Coming in v2.1}

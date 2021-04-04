@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.Duke;
 import seedu.duke.project.Project;
 import seedu.duke.resource.Resource;
 
@@ -14,6 +15,12 @@ public class Storage {
     private static ArrayList<Project> projects = new ArrayList<>();
 
     public static void updateStorage(ArrayList<Project> projects) {
+
+        if (projects.isEmpty()) {
+            System.out.println("No projects to save!");
+            return;
+        }
+
         try {
             java.io.FileWriter fileWriter  = new java.io.FileWriter("data.txt");
             for (Project project: projects) {
@@ -53,6 +60,7 @@ public class Storage {
     }
 
     private static void createProjectsFromStorage() {
+        clearProjects();
         try {
             File dataFile = new File("data.txt");
             if (!dataFile.exists()) {
@@ -71,14 +79,42 @@ public class Storage {
                     }
                     projects.add(project);
                 }
-
             }
+            updateProjects();
 
         } catch (IOException e) {
             System.out.println("File not found");
             e.printStackTrace();
         }
     }
+
+    private static void clearProjects() {
+        projects = new ArrayList<>();
+    }
+
+    private static void updateProjects() {
+
+        ArrayList<Project> dukeProjects = Duke.getProjects();
+
+        for (Project project: dukeProjects) {
+            if (projects.contains(project)) {
+                updateExistingProject(project);
+            } else {
+                projects.add(project);
+            }
+        }
+    }
+
+    private static void updateExistingProject(Project project) {
+        Project projectToUpdate = projects.get(projects.indexOf(project));
+        ArrayList<Resource> projectToUpdateResources = projectToUpdate.getResources();
+        for (Resource resource: project.getResources()) {
+            if (!projectToUpdateResources.contains(resource)) {
+                projectToUpdate.addResourceObj(resource);
+            }
+        }
+    }
+
 
     private static Project createProject(String input) {
         String[] parts = input.split(Pattern.quote("|"));
@@ -95,7 +131,7 @@ public class Storage {
     private static Resource createResource(String input) {
         String[] parts = input.split(Pattern.quote("|"));
         String link = parts[0];
-        String description = parts[1];
+        String description = parts[1].equals("") ? null : parts[1];
         LocalDate dateOfCreation = LocalDate.parse(parts[2]);
         return new Resource(link, description, dateOfCreation);
     }

@@ -457,7 +457,6 @@ class DukeTest {
                 + "1): "
                 + "[" + LocalDate.now() + "] "
                 + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
-                + "--------------------------------------------------------\n"
                 + "Project 2: Data Science Project\n"
                 + "1): "
                 + "[" + LocalDate.now() + "] "
@@ -542,7 +541,9 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added to the existing project \"CS2113 Group Project\".\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "--------------------------------------------------------" + "\n"
                 + "Project cannot be found! Please enter a valid project name!" + "\n"
+                + "--------------------------------------------------------" + "\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
