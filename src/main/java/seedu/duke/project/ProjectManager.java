@@ -32,10 +32,6 @@ public class ProjectManager {
     }
 
     //@@author stefanie
-    /**
-     * Delete all the resources in the specified project and remove the entire project from the list.
-     * @param proj
-     */
     public static void deleteWholeProject(Project proj) {
         proj.getResources().removeAll(proj.getResources());
         proj.getResources().removeAll(proj.getResources());
