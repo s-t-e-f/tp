@@ -27,7 +27,7 @@ public class ResourceManager {
             System.out.printf("No resources matching keyword \"%s\" found!\n", keyword);
         }
     }
-    
+
     //@@author stefanie
     public static void deleteResource(String[] projectInfo) {
         Project targetedProj;
