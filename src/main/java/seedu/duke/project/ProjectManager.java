@@ -37,8 +37,6 @@ public class ProjectManager {
         proj.getResources().removeAll(proj.getResources());
         System.out.printf("All the resources in %s has been deleted.\n", proj.getProjectName());
         projects.remove(proj);
-        // Confirm that project is deleted.
-        assert proj == null;
     }
 
 }
