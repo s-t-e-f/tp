@@ -40,10 +40,10 @@ public class CommandParser {
         return keywordLocations;
     }
 
-    private static void updateKeywordLocation(String[] arguments, String[] keywords, int[] keywordLocations, int index) {
+    private static void updateKeywordLocation(String[] arguments, String[] keywords, int[] keyLocations, int index) {
         for (int i = 0; i < arguments.length; i++) {
             if (arguments[i].indexOf(keywords[index]) == 0) {
-                keywordLocations[index] = i;
+                keyLocations[index] = i;
                 break;
             }
         }

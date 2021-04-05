@@ -74,7 +74,8 @@ class CommandHandlerTest {
         Duke.main(null);
 
         String targetString = MainUi.DUKE_STANDARD_HEADING
-                + "Error: Resource failed to be added. (Reason: Mandatory parameters are not provided or given provided in invalid order.)\n"
+                + "Error: Resource failed to be added. "
+                + "(Reason: Mandatory parameters are not provided or given provided in invalid order.)\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
