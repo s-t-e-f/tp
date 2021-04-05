@@ -24,8 +24,7 @@ public class CommandParser {
         int[] keywordLocations = getKeywordLocations(infoFragments, keywords);
 
         if (!isUserInputValid(keywordLocations, firstOptionalKeyword)) {
-            String errorMsg = "Mandatory parameters are not provided or given provided in invalid order. "
-                    + "Resource failed to be added!";
+            String errorMsg = "Mandatory parameters are not provided or given provided in invalid order.";
             throw new InvalidArgumentException(errorMsg);
         }
         return getUsefulInfo(infoFragments, keywordLocations, keywords);
@@ -34,13 +33,20 @@ public class CommandParser {
     private static int[] getKeywordLocations(String[] arguments, String[] keywords) {
         int[] keywordLocations = makeEmptyArray(keywords.length);
         int index = 0;
-        for (int i = 0; i < arguments.length && index < keywords.length; i++) {
-            if (arguments[i].contains(keywords[index])) {
+        do {
+            updateKeywordLocation(arguments, keywords, keywordLocations, index);
+            index++;
+        } while (index < keywords.length);
+        return keywordLocations;
+    }
+
+    private static void updateKeywordLocation(String[] arguments, String[] keywords, int[] keywordLocations, int index) {
+        for (int i = 0; i < arguments.length; i++) {
+            if (arguments[i].indexOf(keywords[index]) == 0) {
                 keywordLocations[index] = i;
-                index++;
+                break;
             }
         }
-        return keywordLocations;
     }
 
     private static int[] makeEmptyArray(int numberOfKeywords) {
@@ -110,7 +116,7 @@ public class CommandParser {
             cleanArguments[i] = info;
 
             if (cleanArguments[i].length() == 0) {
-                String errorMsg = "Argument cannot be empty. Resource failed to be added!";
+                String errorMsg = "Argument cannot be empty.";
                 throw new InvalidArgumentException(errorMsg);
             }
         }
