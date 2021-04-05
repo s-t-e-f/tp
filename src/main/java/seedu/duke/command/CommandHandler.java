@@ -199,6 +199,7 @@ public class CommandHandler {
         return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
     }
 
+    //@@author stefanie
     private void processInputBeforeDeleting() {
         String[] keywords = {"p/", "i/"};
         int firstOptionalKeyword = 1;
@@ -210,50 +211,13 @@ public class CommandHandler {
             return;
         }
 
-        deleteResource(projectInfo);
+        ResourceManager.deleteResource(projectInfo);
     }
 
-    public void deleteResource(String[] projectInfo) {
-        Project targetedProj = null;
-        String projectName = projectInfo[0];
-        int idx;
-
-        for (Project project : projects) {
-            if (project.getProjectName().equals(projectName)) {
-                targetedProj = project;
-                break;
-            }
-        }
-        if (targetedProj == null) {
-            System.out.print("Project is not found ... " + NEW_LINE);
-            return;
-        }
-
-        try {
-            if (projectInfo[1] != null) {
-                idx = Integer.parseInt(projectInfo[1]) - 1;
-                targetedProj.getResources().remove(idx);
-                System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
-            } else {
-                // If index is not indicated, remove all resources from the specified project.
-                targetedProj.getResources().removeAll(targetedProj.getResources());
-                System.out.printf("All the resources in %s has been deleted.\n", projectName);
-            }
-
-            if (targetedProj.getResources().isEmpty()) {
-                projects.remove(targetedProj);
-                return;
-            }
-
-        } catch (Exception e) {
-            System.out.print("Resource is not found. Please enter a valid index. " + NEW_LINE);
-            return;
-        }
-    }
-
+    //@@author stefanie
     private void processInputBeforeEditing() {
         String[] keywords = {"p/", "i/", "url/", "d/"};
-        int firstOptionalKeyword = 1;
+        int firstOptionalKeyword = 2;
         String[] projectInfo;
         try {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
@@ -262,51 +226,9 @@ public class CommandHandler {
             return;
         }
 
-        editResource(projectInfo);
+        ResourceManager.editResource(projectInfo);
     }
 
-    public void editResource(String[] projectInfo) {
-        Project targetedProj = null;
-        Resource targetedResource = null;
-        String projectName = projectInfo[0];
-        Boolean isEdited = false;
-        int idx = -1;
-
-        for (Project project : projects) {
-            if (project.getProjectName().equals(projectName)) {
-                targetedProj = project;
-                break;
-            }
-        }
-        if (targetedProj == null) {
-            System.out.print("Project is not found ... " + NEW_LINE);
-            return;
-        }
-
-        try {
-            idx = Integer.parseInt(projectInfo[1]) - 1;
-            targetedResource = targetedProj.getResources().get(idx);
-            if (projectInfo[2] != null) {
-                targetedResource.setResourceLink(projectInfo[2]);
-                isEdited = true;
-            }
-            if (projectInfo[3] != null) {
-                targetedResource.setResourceDescription(projectInfo[3]);
-                isEdited = true;
-            }
-            if (projectInfo[2] == null & projectInfo[3] == null) {
-                System.out.print("The resource is not edited." + NEW_LINE);
-            }
-        } catch (Exception e) {
-            System.out.print("Resource is not found. Please enter a valid index. " + NEW_LINE);
-            return;
-        }
-
-        if (isEdited) {
-            System.out.printf("The resource is successfully edited to : \n");
-            System.out.printf("    " + targetedResource.toString() + NEW_LINE);
-        }
-    }
 
     private void promptUserInvalidInput() {
         System.out.print("Invalid input! Please type \"help\" for more details." + NEW_LINE);
