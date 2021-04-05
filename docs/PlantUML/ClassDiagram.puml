@@ -1,0 +1,110 @@
+@startuml
+!include ClassDiagramStyles.puml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+package "command" COLOR_COMMAND {
+
+    class CommandHandler {
+        - projects
+        + processCommand()
+        - listProjectResources
+        - addResource
+        - deleteResource
+        - editResource
+        - findResource
+        - listAllCommands
+    }
+
+}
+
+package "parser" COLOR_PARSER {
+
+    class CommandParser {
+        + decodeInfoFragments()
+        - isUserInputValid()
+        - extractInfo()
+    }
+
+    class InputParser {
+        + InputParser(rawInput)
+        ~ command
+        ~ infoFragments
+    }
+}
+
+package "project" COLOR_PROJECT {
+
+    class Project {
+        - projectName
+        - resources
+        + Project(projectName)
+        + getResources()
+        + getProjectName()
+        + addResource(resource)
+        + isUrlAlreadyExists()
+        + deleteResource()
+        + getNumberOfResources()
+    }
+
+    class ProjectManager {
+        + getAllProjectsAndResourcesMatchingKeyword(keyword, projects) {static}
+    }
+}
+
+package "resource" COLOR_RESOURCE {
+
+    class Resource {
+        - resourceLink
+        - resourceDescription
+        - dateOfCreation
+        + Resource(resourceLink, resourceDescription)
+        + getResourceLink()
+        + getResourceDescription()
+        + getResourceDescriptionOnly()
+        + getDateOfCreation()
+        + setResourceLink()
+        + setResourceDescription()
+    }
+
+    class ResourceManager {
+        + printResourcesMatchingKeyword() {static}
+    }
+}
+
+package "storage" COLOR_STORAGE {
+    class Storage {
+        - projects {static}
+        + updateStorage(projects) {static}
+        + readFromStorage() {static}
+    }
+}
+
+package "ui" COLOR_UI {
+    class MainUi {
+        + DUKE_STANDARD_HEADING {static}
+        + printWelcomeText() {static}
+        + printSignalForUserToEnterInput() {static}
+        + showExitMessage() {static}
+        + listAllCommands() {static}
+    }
+}
+
+class Duke {
+    - projects
+    + main() {static}
+}
+
+CommandHandler  --  Duke
+InputParser  <--  Duke
+MainUi <-- Duke
+MainUi <-- CommandHandler
+ProjectManager <-up- CommandHandler
+ResourceManager <-- CommandHandler
+Storage <-- CommandHandler
+CommandParser <-- CommandHandler
+
+
+
+@endUML
