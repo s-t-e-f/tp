@@ -1,19 +1,16 @@
 package seedu.duke.resource;
 
-import seedu.duke.Duke;
+import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.ProjectNotFoundException;
 import seedu.duke.exception.ResourceNotFoundException;
 import seedu.duke.project.Project;
 import seedu.duke.project.ProjectManager;
 
-import java.security.KeyStore;
 import java.util.ArrayList;
 
-public class ResourceManager {
+public abstract class ResourceManager {
 
     public static final String NEW_LINE = "\n";
-
-    public static ArrayList<Project> projects = Duke.getProjects();
 
     public static void printResourcesMatchingKeyword(ArrayList<Resource> resources, String keyword) {
         int resourceCount = 1;
@@ -91,6 +88,65 @@ public class ResourceManager {
         System.out.printf("The resource is successfully edited to : \n");
         System.out.printf("    " + targetedResource.toString() + NEW_LINE);
 
+    }
+
+    //@@author NgManSing
+    public static void addResource(String[] projectInfo) throws InvalidArgumentException {
+        assert projectInfo != null;
+        String projectName = projectInfo[0];
+        String projectUrl = projectInfo[1];
+        String descriptionOfUrl = projectInfo[2];
+        String checkString = projectInfo[3];
+
+        if (checkString != null && checkString.equals("true")) {
+            checkIfUrlValid(projectUrl);
+        }
+
+        int projectIndex = ProjectManager.searchExistingProjectIndex(projectName);
+        if (projectIndex == -1) {
+            createNewProject(projectName, projectUrl, descriptionOfUrl);
+            return;
+        }
+
+        boolean isUrlAlreadyExist = isUrlAlreadyExist(projectIndex, projectUrl);
+        if (isUrlAlreadyExist) {
+            promptUserUrlAlreadyExist();
+        } else {
+            addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex);
+        }
+    }
+
+    //@@author NgManSing
+    private static void checkIfUrlValid(String projectUrl) throws InvalidArgumentException {
+        try {
+            (new java.net.URL(projectUrl)).openStream().close();
+        } catch (Exception e) {
+            throw new InvalidArgumentException("URL provided is not a valid URL.");
+        }
+    }
+
+    //@@author NgManSing
+    private static void createNewProject(String projectName, String projectUrl, String description) {
+        ProjectManager.newProject(projectName, projectUrl, description);
+        System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
+    }
+    //@@author NgManSing
+
+    private static void promptUserUrlAlreadyExist() {
+        System.out.print("A resource with The same URL has already existed in its resource list. "
+                + "If you want to edit the resource, please use \"edit\" command." + NEW_LINE);
+    }
+
+    //@@author NgManSing
+    private static void addNewResource(String projectName, String projectUrl, String description, int projectIndex) {
+        Project targetProject = ProjectManager.getProject(projectIndex);
+        targetProject.addResources(projectUrl, description);
+        System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
+    }
+
+    //@@author NgManSing
+    private static boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
+        return ProjectManager.getProject(projectIndex).isUrlAlreadyExist(projectUrl);
     }
 
 }

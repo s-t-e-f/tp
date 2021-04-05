@@ -4,7 +4,7 @@ import seedu.duke.exception.InvalidArgumentException;
 
 import java.util.Arrays;
 
-abstract public class CommandParser {
+public abstract class CommandParser {
 
     /**
      * Transforms infoFragments to clean arguments.

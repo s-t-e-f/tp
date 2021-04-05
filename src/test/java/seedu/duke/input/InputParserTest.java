@@ -1,4 +1,4 @@
-package seedu.duke.InputParser;
+package seedu.duke.input;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.parser.InputParser;
@@ -19,12 +19,11 @@ public class InputParserTest {
 
     @Test
     public void testInput() {
-        String rawInput = "    add       p/ p/ Happy Project    url/ CCT p/ p/ ";
+        String rawInput = "    add    p/ p/ Happy Project    url/ CCT p/ p/ ";
         InputParser inputParser = new InputParser(rawInput);
         String command = "add";
         assertEquals(inputParser.getCommand(), command);
-        String[] infoFragments = {"", "", "", "", "", "", "p/", "p/", "Happy", "Project", "", "", "", "url/",
-                "CCT", "p/", "p/"};
+        String[] infoFragments = {"", "", "", "p/", "p/", "Happy", "Project", "", "", "", "url/", "CCT", "p/", "p/"};
         assertEquals(Arrays.toString(inputParser.getInfoFragments()), Arrays.toString(infoFragments));
     }
 }
