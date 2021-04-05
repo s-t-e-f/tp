@@ -329,6 +329,64 @@ It allows a single user to use it for multiple projects.
 ---
 
 ## Instructions for manual testing
+Given below are instructions to test TraceYourProj manually.
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}  
-{Coming in v2.1}
+> **_NOTE:_**
+These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing}
+
+### Adding a Resource
+1. Adding a resource to a new project
+   1. No prerequisites
+   2. Test case: `add p/CS2113 url/www.traceyourproj.com d/Project Website`
+      * Expected: New project CS2113 created. New resource is added to the project. Details of
+        resource is shown to the user.
+   3. Test case: `add p/CS2113 d/Project Website`
+      * Expected: No project is created and no resources are added. Error details shown
+        to the user.
+2. Adding a resource to a project that already exists
+   1. Prerequisites: List all projects and resources using `list-all` command.
+      At least 1 project in the list with project name CS2113.
+   2. Test case: `add p/CS2113 url/www.traceyourproj.com d/Project Website`
+      * Expected: No new project created. New resource is added to the existing CS2113 project. Details of
+       resource is shown to the user. 
+   3. Test case: `add p/CS2113 d/Project Website`
+       * Expected: No resources is added to CS2113. Error details shown to user.
+
+### Listing Resources
+1. Listing all projects and resources
+   1. Prerequisites: At least 1 project added with 1 or more resources. 
+   2. Test case: `list-all`
+       * Expected: All projects and resources in each project listed and shown to user.
+   3. Incorrect listing format to try: `list-all x` (where x is any input string)
+       * Expected: No projects and resources are listed. Error details shown to user.
+2. Listing all resources in a project
+    1. Prerequisites: At least 1 project with project name CS2113 added with 1 or more resources.
+    2. Test case: `list p/CS2113`
+        * Expected: All resources in project CS2113 listed and shown to user.
+    3. Test case: `list p/nus' (where nus is not a project that has been added)
+        * Expected: No resources are listed. Error details shown to user.
+    4. Test case: `list`
+        * Expected: No resources are listed. Error details shown to user.
+    
+### Finding Resources
+1. Finding resources from all projects based on a keyword
+   1. Prerequisites: List all projects and resources using list-all command. At least 1 project in list with at least 1 resource.
+   2. Test case: `find k/kaggle`
+        * Expected: All resources with **'kaggle'** appearing in the description or url will be shown to user. 
+            If no such resources have been added, no resources will be shown.
+   3. Test case: `find`
+        * Expected: No resources are shown. Error details shown to user. 
+2. Finding resources from a project based on a keyword
+    1. Prerequisites: List all projects and resources using `list-all` command. At least 1 project in list with
+    project name CS2113 added with 1 or more resources.
+    2. Test case: `find k/kaggle p/CS2113`
+        * Expected: All resources in CS2113 with **'kaggle'** appearing in the description or url will be shown
+        to user. If no such resources have been added, no resources will be shown.
+    3. Test case: `find k/kaggle p/nus` (where nus is not a project that has been added)
+        * Expected: No resources shown to user. Error details shown to user.
+    
+### Exiting TraceYourProj
+1. Exiting TraceYourProj
+    1. No Prerequisites
+    2. Test case: `exit`
+        * Expected: Exit message shown to user. TraceYourProj stops running.
