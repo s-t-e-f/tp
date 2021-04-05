@@ -7,7 +7,7 @@ public class InvalidArgumentException extends Exception {
         this.errorMsg = errorMsg;
     }
 
-    public void printErrorMsg() {
-        System.out.print(errorMsg + "\n");
+    public String getErrorMsg() {
+        return errorMsg;
     }
 }

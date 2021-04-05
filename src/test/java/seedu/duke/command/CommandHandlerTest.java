@@ -17,6 +17,73 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandHandlerTest {
 
+    @Test
+    public void testInputSpacing() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = " \n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "Invalid input! Please type \"help\" for more details.\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testInvalidInput() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "Hello! :)\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "Invalid input! Please type \"help\" for more details.\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testInvalidInput2() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add url/p/ p/url/\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "Error: Resource failed to be added. "
+                + "(Reason: Mandatory parameters are not provided or given provided in invalid order.)\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
     /**
      * Test Case 1 for printResourceListForAProject.
      */

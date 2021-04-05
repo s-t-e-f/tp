@@ -19,11 +19,14 @@ class DukeTest {
     }
 
     @Test
-    public void testAdd1Resource() {
+    public void testAdd2ResourcesTo2DifferentProjects() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
-        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
+        String inputToCmd = "add p/Project 1 url/https://www.youtube.com d/YouTube\n"
+                + "add p/Project 2 url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
+                + "add p/Project 1 url/https://www.google.com\n"
+                + "add p/Project 2 url/https://www.yahoo.com\n"
                 + "list-all\n"
                 + "exit";
 
@@ -32,15 +35,33 @@ class DukeTest {
         Duke.main(null);
 
         String targetString = MainUi.DUKE_STANDARD_HEADING
-                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + "The resource is added into the new project \"Project 1\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added into the new project \"Project 2\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"Project 1\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"Project 2\".\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
-                + "Project 1: CS2113 Group Project\n"
+                + "Project 1: Project 1\n"
+                + "Resource(s):\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://www.youtube.com (Description: YouTube)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://www.google.com\n"
+                + "--------------------------------------------------------\n"
+                + "Project 2: Project 2\n"
                 + "Resource(s):\n"
                 + "1): "
                 + "[" + LocalDate.now() + "] "
                 + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://www.yahoo.com\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -51,12 +72,13 @@ class DukeTest {
     }
 
     @Test
-    public void testAdd2Resource() {
+    public void testAdd3DifferentResourceInAProject() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
-        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
-                + "add p/CS2113 Group Project url/other website\n"
+        String inputToCmd = "add p/CS2113 Group Project url/https://www.google.com\n"
+                + "add p/CS2113 Group Project url/https://www.youtube.com d/YouTube\n"
+                + "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
                 + "list-all\n"
                 + "exit";
 
@@ -69,16 +91,21 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is added to the existing project \"CS2113 Group Project\".\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "Here is the list of all project(s) and it's resource(s)!\n"
                 + "--------------------------------------------------------" + "\n"
                 + "Project 1: CS2113 Group Project\n"
                 + "Resource(s):\n"
                 + "1): "
                 + "[" + LocalDate.now() + "] "
-                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
+                + "https://www.google.com\n"
                 + "2): "
                 + "[" + LocalDate.now() + "] "
-                + "other website\n"
+                + "https://www.youtube.com (Description: YouTube)\n"
+                + "3): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
                 + "--------------------------------------------------------\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
@@ -116,6 +143,151 @@ class DukeTest {
                 + "[" + LocalDate.now() + "] "
                 + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
                 + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testStrangeSpacing() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "     add      p/        CS2113 Group Project      "
+                + "     url/    https://ay2021s2-cs2113-w10-3.github.io/tp/      d/   Team Project  \n"
+                + "list-all\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "Resource(s):\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project)\n"
+                + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testAddEmptyProjectName() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/ url/https://www.google.com\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "Error: Resource failed to be added. (Reason: Argument cannot be empty.)\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testAddEmptyUrl() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/Project 1 url/ d/YouTube\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "Error: Resource failed to be added. (Reason: Argument cannot be empty.)\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testAddInvalidUrl() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/url/ url/p/ d/testing c/true\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "Error: Resource failed to be added. (Reason: URL provided is not a valid URL.)\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testParameterOrderDetection() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/Testing d/Testing url/https://www.youtube.com\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "Error: Resource failed to be added. (Reason: Mandatory parameters are not provided or "
+                + "given provided in invalid order.)\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testCompulsoryParameterMissing() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/Testing d/Testing \n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "Error: Resource failed to be added. (Reason: Mandatory parameters are not provided or "
+                + "given provided in invalid order.)\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
