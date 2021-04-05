@@ -3,7 +3,15 @@
 ## Design & implementation
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}  
 {Coming in v2.1}
----
+--- 
+**Class Diagram:**
+
+![add_png](puml_img/ClassDiagram.png)
+
+The above shows the class diagram and relations of the classes.
+
+{Add more stuff to explain the relations and classes}
+
 
 ### Design
 {insert design}  

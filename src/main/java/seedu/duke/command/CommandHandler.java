@@ -14,6 +14,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CommandHandler {
     private static final String ADD_COMMAND = "add";
@@ -116,26 +117,31 @@ public class CommandHandler {
 
     //@@author NgManSing
     private void processInputBeforeAdding() {
-        String[] keywords = {"p/", "url/", "d/"};
+        String[] keywords = {"p/", "url/", "d/", "c/"};
         int firstOptionalKeyword = 2;
         String[] projectInfo;
         try {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+            addResource(projectInfo);
         } catch (InvalidArgumentException e) {
-            e.printErrorMsg();
-            return;
+            printErrorMsg("Resource failed to be added. (Reason: " + e.getErrorMsg() + ")");
         }
-        addResource(projectInfo);
     }
 
     //@@author NgManSing
-    private void addResource(String[] projectInfo) {
+
+    private void addResource(String[] projectInfo) throws InvalidArgumentException {
         assert projectInfo != null;
         String projectName = projectInfo[0];
         String projectUrl = projectInfo[1];
         String descriptionOfUrl = projectInfo[2];
-        int projectIndex = searchExistingProjectIndex(projectName);
+        String checkString = projectInfo[3];
 
+        if (checkString != null && checkString.equals("true")) {
+            checkIfUrlValid(projectUrl);
+        }
+
+        int projectIndex = searchExistingProjectIndex(projectName);
         if (projectIndex == -1) {
             createNewProject(projectName, projectUrl, descriptionOfUrl);
             return;
@@ -150,26 +156,35 @@ public class CommandHandler {
         }
     }
 
+    private void checkIfUrlValid(String projectUrl) throws InvalidArgumentException {
+        try {
+            (new java.net.URL(projectUrl)).openStream().close();
+        } catch (Exception e) {
+            throw new InvalidArgumentException("URL provided is not a valid URL.");
+        }
+    }
+
     //@@author NgManSing
+
     private void createNewProject(String projectName, String projectUrl, String descriptionOfUrl) {
         projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
         System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
     }
-
     //@@author NgManSing
+
     private void promptUserUrlAlreadyExist() {
         System.out.print("A resource with The same URL has already existed in its resource list. "
                 + "If you want to edit the resource, please use \"edit\" command." + NEW_LINE);
     }
-
     //@@author NgManSing
+
     private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
         Project targetProject = projects.get(projectIndex);
         targetProject.addResources(projectUrl, descriptionOfUrl);
         System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
     }
-
     //@@author NgManSing
+
     private int searchExistingProjectIndex(String projectName) {
         for (int i = 0; i < projects.size(); i++) {
             if (projects.get(i).getProjectName().equals(projectName)) {
@@ -178,12 +193,13 @@ public class CommandHandler {
         }
         return -1;
     }
-
     //@@author NgManSing
+
     private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
         return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
     }
 
+    //@@author stefanie
     private void processInputBeforeDeleting() {
         String[] keywords = {"p/", "i/"};
         int firstOptionalKeyword = 1;
@@ -191,111 +207,33 @@ public class CommandHandler {
         try {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
         } catch (InvalidArgumentException e) {
-            e.printErrorMsg();
+            printErrorMsg("Resource failed to be deleted. (Reason: " + e.getErrorMsg() + ")");
             return;
         }
 
-        deleteResource(projectInfo);
+        ResourceManager.deleteResource(projectInfo);
     }
 
-    public void deleteResource(String[] projectInfo) {
-        Project targetedProj = null;
-        String projectName = projectInfo[0];
-        int idx;
-
-        for (Project project : projects) {
-            if (project.getProjectName().equals(projectName)) {
-                targetedProj = project;
-                break;
-            }
-        }
-        if (targetedProj == null) {
-            System.out.print("Project is not found ... " + NEW_LINE);
-            return;
-        }
-
-        try {
-            if (projectInfo[1] != null) {
-                idx = Integer.parseInt(projectInfo[1]) - 1;
-                targetedProj.getResources().remove(idx);
-                System.out.printf("The resource is deleted from the project \"%s\".\n", projectName);
-            } else {
-                // If index is not indicated, remove all resources from the specified project.
-                targetedProj.getResources().removeAll(targetedProj.getResources());
-                System.out.printf("All the resources in %s has been deleted.\n", projectName);
-            }
-
-            if (targetedProj.getResources().isEmpty()) {
-                projects.remove(targetedProj);
-                return;
-            }
-
-        } catch (Exception e) {
-            System.out.print("Resource is not found. Please enter a valid index. " + NEW_LINE);
-            return;
-        }
-    }
-
+    //@@author stefanie
     private void processInputBeforeEditing() {
         String[] keywords = {"p/", "i/", "url/", "d/"};
-        int firstOptionalKeyword = 1;
+        int firstOptionalKeyword = 2;
         String[] projectInfo;
         try {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
         } catch (InvalidArgumentException e) {
-            e.printErrorMsg();
+            printErrorMsg("Resource failed to be edited. (Reason: " + e.getErrorMsg() + ")");
             return;
         }
 
-        editResource(projectInfo);
+        ResourceManager.editResource(projectInfo);
     }
 
-    public void editResource(String[] projectInfo) {
-        Project targetedProj = null;
-        Resource targetedResource = null;
-        String projectName = projectInfo[0];
-        Boolean isEdited = false;
-        int idx = -1;
-
-        for (Project project : projects) {
-            if (project.getProjectName().equals(projectName)) {
-                targetedProj = project;
-                break;
-            }
-        }
-        if (targetedProj == null) {
-            System.out.print("Project is not found ... " + NEW_LINE);
-            return;
-        }
-
-        try {
-            idx = Integer.parseInt(projectInfo[1]) - 1;
-            targetedResource = targetedProj.getResources().get(idx);
-            if (projectInfo[2] != null) {
-                targetedResource.setResourceLink(projectInfo[2]);
-                isEdited = true;
-            }
-            if (projectInfo[3] != null) {
-                targetedResource.setResourceDescription(projectInfo[3]);
-                isEdited = true;
-            }
-            if (projectInfo[2] == null & projectInfo[3] == null) {
-                System.out.print("The resource is not edited." + NEW_LINE);
-            }
-        } catch (Exception e) {
-            System.out.print("Resource is not found. Please enter a valid index. " + NEW_LINE);
-            return;
-        }
-
-        if (isEdited) {
-            System.out.printf("The resource is successfully edited to : \n");
-            System.out.printf("    " + targetedResource.toString() + NEW_LINE);
-        }
-    }
 
     private void promptUserInvalidInput() {
         System.out.print("Invalid input! Please type \"help\" for more details." + NEW_LINE);
     }
+
 
     //@@author jovanhuang
 
@@ -324,6 +262,7 @@ public class CommandHandler {
         throw new ProjectNotFoundException();
     }
 
+
     //@@author jovanhuang
 
     /**
@@ -337,6 +276,7 @@ public class CommandHandler {
         return isProjectNameEmpty;
     }
 
+
     //@@author jovanhuang
 
     /**
@@ -345,6 +285,7 @@ public class CommandHandler {
     private void printDivider() {
         System.out.print(DIVIDER + NEW_LINE);
     }
+
 
     //@@author jovanhuang
 
@@ -365,6 +306,7 @@ public class CommandHandler {
         assert true;
     }
 
+
     //@@author jovanhuang
 
     /**
@@ -383,11 +325,12 @@ public class CommandHandler {
     }
 
     //@@author
+
     public void listAllCommands() {
         MainUi.listAllCommands();
     }
-
     //@@author Yan Yi Xue
+
     private void processInputBeforeFinding() {
         String[] keywords = {"k/", "p/"};
         int firstOptionalKeyword = 1;
@@ -395,14 +338,14 @@ public class CommandHandler {
         try {
             keywordInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
         } catch (InvalidArgumentException e) {
-            e.printErrorMsg();
+            printErrorMsg("Resource failed to be found. (Reason: " + e.getErrorMsg() + ")");
             return;
         }
 
         findResources(keywordInfo);
     }
-
     //@@author Yan Yi Xue
+
     private void findResources(String[] keywordInfo) {
         if (keywordInfo[1] == null) {
             String keyword = keywordInfo[0];
@@ -425,4 +368,7 @@ public class CommandHandler {
         }
     }
 
+    private void printErrorMsg(String errorMsg) {
+        System.out.print("Error: " + errorMsg + "\n");
+    }
 }

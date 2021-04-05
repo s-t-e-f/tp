@@ -1,5 +1,6 @@
 package seedu.duke.project;
 
+import seedu.duke.Duke;
 import seedu.duke.resource.Resource;
 import seedu.duke.resource.ResourceManager;
 
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 
 public class ProjectManager {
     public static final String NEW_LINE = "\n";
+
+    public static ArrayList<Project> projects = Duke.getProjects();
 
     public static void getAllProjectsAndResourcesMatchingKeyword(String keyword, ArrayList<Project> projects) {
         int projectCount = 0;
@@ -17,4 +20,23 @@ public class ProjectManager {
             ResourceManager.printResourcesMatchingKeyword(resources, keyword);
         }
     }
+
+    //@@author stefanie
+    public static Project getProjByProjName(String projName) {
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projName)) {
+                return project;
+            }
+        }
+        return null;
+    }
+
+    //@@author stefanie
+    public static void deleteWholeProject(Project proj) {
+        proj.getResources().removeAll(proj.getResources());
+        proj.getResources().removeAll(proj.getResources());
+        System.out.printf("All the resources in %s has been deleted.\n", proj.getProjectName());
+        projects.remove(proj);
+    }
+
 }
