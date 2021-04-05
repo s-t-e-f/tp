@@ -1,6 +1,9 @@
 @startuml
 !include ClassDiagramStyles.puml
 
+hide circle
+skinparam classAttributeIconSize 0
+
 package "command" COLOR_COMMAND {
 
     class CommandHandler {
