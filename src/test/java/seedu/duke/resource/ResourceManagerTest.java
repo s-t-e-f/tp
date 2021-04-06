@@ -38,8 +38,6 @@ public class ResourceManagerTest {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
-        String targetString = "No resources matching keyword \"CS2113\" found!\n";
-
         Resource first = new Resource("github.com", "test1");
         Resource second = new Resource("nusmods.com", "test2");
         resources.add(first);
@@ -47,6 +45,8 @@ public class ResourceManagerTest {
         String keyword = "CS2113";
         ResourceManager.printResourcesMatchingKeyword(resources, keyword);
 
+        String targetString = "No resources matching keyword \"CS2113\" found!\n";
+        
         assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
