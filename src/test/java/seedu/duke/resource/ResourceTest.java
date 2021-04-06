@@ -54,4 +54,34 @@ public class ResourceTest {
         assertTrue(result);
     }
 
+    @Test
+    public void testKeywordEquals() {
+        Resource first = new Resource("github.com", "test1");
+        String keyword = "github";
+        boolean result = first.checkKeywordMatch(keyword);
+        assertTrue(result);
+    }
+
+    @Test
+    public void testKeywordNotEquals() {
+        Resource first = new Resource("github.com", "test1");
+        String keyword = "nus";
+        boolean result = first.checkKeywordMatch(keyword);
+        assertFalse(result);
+    }
+
+    @Test
+    public void testDescriptionExist() {
+        Resource first = new Resource("github.com", "test1");
+        boolean result = first.checkIfDescriptionExists();
+        assertTrue(result);
+    }
+
+    @Test
+    public void testDescriptionNotExist() {
+        Resource first = new Resource("github.com", null);
+        boolean result = first.checkIfDescriptionExists();
+        assertFalse(result);
+    }
+
 }
