@@ -307,4 +307,5 @@ public class CommandHandler {
     private void promptUserInvalidInput() {
         System.out.print("Invalid input! Please type \"help\" for more details." + NEW_LINE);
     }
+
 }
