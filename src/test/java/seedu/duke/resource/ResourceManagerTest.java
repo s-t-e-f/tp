@@ -18,14 +18,14 @@ public class ResourceManagerTest {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
-        String targetString = "1): [" + LocalDate.now() + "] github.com (Description: test1)\n";
-
         Resource first = new Resource("github.com", "test1");
         Resource second = new Resource("nusmods.com", "test2");
         resources.add(first);
         resources.add(second);
         String keyword = "github";
         ResourceManager.printResourcesMatchingKeyword(resources, keyword);
+
+        String targetString = "1): [" + LocalDate.now() + "] github.com (Description: test1)\n";
 
         assertEquals(targetString, newOutputStream.toString());
 
