@@ -13,7 +13,6 @@ for use via a Command Line Interface (CLI).
    * For **Windows** user, you may input "java -jar (location of the .jar file)" through command prompt
 4. Start using the app by **entering commands** to the user interface. Please refer to the **Features** section below 
    for **detailed descriptions** of **each command**.
-5. All leading and trailing space of user input will be removed.
    
 Upon running the jar file, you should see this on the command prompt console:
 ```
@@ -31,7 +30,7 @@ Type 'help' for a list of command and related usage.
 
 ## Features 
 
-### Notes about command format
+### Notes about command
 
 * Words in **UPPER_CASE** are **parameters** specified by the **user**.  
   e.g.`list p/PROJECTNAME`, where `PROJECTNAME` is a parameter which can be used as `list p/CS2113 Documentation`.
@@ -41,7 +40,11 @@ Type 'help' for a list of command and related usage.
   
 * **Extra parameters** after commands that do not take in parameters such as `list-all` and `exit` will be **ignored**.  
   e.g.`exit 1234` will be interpreted as `exit`.  
-  e.g.`list-all CZ2003` will be interpreted as `list-all`. 
+  e.g.`list-all CZ2003` will be interpreted as `list-all`.
+  
+* All leading and trailing space of user input will be removed.
+
+* Command parameters have to be provided in correct formats and orders, which is provided in Feature session. 
 
 
 ---
@@ -85,7 +88,7 @@ exit: Exits the program.
 ### Adding project(s) or resource(s) : `add`
 Adds a resource to a Project.
 
-Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION]`
+Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION c/CHECK]`
 * Adds a resource to a Project.
 * If the given project name has already existed in the project list:
   * If the given URL exists in the resource list of the project:
@@ -94,7 +97,8 @@ Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION]`
     * The resource will be appended to the resource project's resource list
 * If the given project name does **not** exist in the project list:
   * A new project with the given project name will be created, and the resource will be appended to its resource list.
-* Description is optional.
+* d/DESCRIPTION and c/true are optional.
+* If c/true is provided, a URL check will be performed (Requires online access).
 
 **Example of usage:**
 1. Project "NUS" **does not exist** in the list:  
@@ -118,10 +122,10 @@ Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION]`
    ```
    **Output:** 
    ```
-   The resource of the project "NUS" is overwritten.
+   A resource with The same URL has already existed in its resource list. If you want to edit the resource, please use "edit" command.
    ```  
    
-   It will **overwrite** the resource with the same URL which **already existed** in the project's resource list.  
+   The user is prompted that the resource with the same URL has already existed in the project. 
    
 
 3. Assume a project "NUS" **exists** in the project list, and a resource with URL = https://nusmods.com/ **does not exist**:  
@@ -136,6 +140,19 @@ Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION]`
    ```  
    
    It will **append** the resource to the resource list of the project "NUS".  
+
+4. Assume the user's device could access internet:
+   **Input:**
+   ```
+   add p/NUS url/nusmods c/true
+   ```
+
+   **Output:**
+   ```
+    Error: Resource failed to be added. (Reason: URL provided is not a valid URL.)
+   ```  
+
+   The user is prompted that the provided URL is invalid since it could not pass the URL test.
 
 
 ---
@@ -377,7 +394,7 @@ Hope you have a wonderful day.
 |Command|Syntax|Remark|
 |--------|----------|--------|
 |help|```help```|Shows the available commands of TraceYourProj.|
-|add|`add p/PROJECT NAME url/URL [d/DESCRIPTION]`|Add a resource to a project|
+|add|`add p/PROJECT NAME url/URL [d/DESCRIPTION c/true]`|Add a resource to a project|
 |delete|`delete p/PROJECT_NAME [i/INDEX]`|Deletes the specified resource from the resource list based on the project.|
 |edit|`edit p/PROJECT_NAME i/INDEX url/LINK [d/DESCRIPTION]`|Edits an existing resource in the resource list based on the project.|
 |list|`list PROJECTNAME`|List a project's resources|

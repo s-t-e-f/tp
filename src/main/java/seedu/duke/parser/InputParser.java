@@ -1,7 +1,5 @@
 package seedu.duke.parser;
 
-import seedu.duke.exception.InvalidArgumentException;
-
 import java.util.Arrays;
 
 public class InputParser {
@@ -39,9 +37,5 @@ public class InputParser {
 
     public String[] getInfoFragments() {
         return infoFragments;
-    }
-
-    private void printErrorMsg(String message) {
-        System.out.print(message + "\n");
     }
 }

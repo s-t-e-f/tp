@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.command.CommandHandler;
 import seedu.duke.parser.InputParser;
 import seedu.duke.project.Project;
+import seedu.duke.project.ProjectManager;
 import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Duke {
     }
 
     private static void startProgram() {
-        boolean isLoop = true;
+        boolean isLoop;
         do {
             MainUi.printSignalForUserToEnterInput();
             InputParser userInput = getUserInput();
@@ -31,6 +32,7 @@ public class Duke {
     private static void initializeDuke() {
         projects = new ArrayList<>();
         scan = new Scanner(System.in);
+        ProjectManager.updateRecords();
     }
 
     private static InputParser getUserInput() {

@@ -14,6 +14,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CommandHandler {
     private static final String ADD_COMMAND = "add";
@@ -45,13 +46,27 @@ public class CommandHandler {
         return infoFragments;
     }
 
+    //@@author NgManSing
+    /**
+     * Process the command given by the user if it is not null. A boolean value is returned to indicate whether to
+     * continue looping, which is based on what command is executed. If command is null, the method returns true.
+     *
+     * @return Whether to continue looping
+     */
     public boolean processCommand() {
-        boolean isLoop = true;
-        if (command == null) {
+        boolean isLoop;
+        if (isCommandNull()) {
             promptUserInvalidInput();
             return true;
         }
 
+        isLoop = switchCommand();
+        return isLoop;
+    }
+
+    //@@author NgManSing
+    private boolean switchCommand() {
+        boolean isLoop = true;
         switch (this.command) {
         case ADD_COMMAND:
             processInputBeforeAdding();
@@ -91,6 +106,11 @@ public class CommandHandler {
         return isLoop;
     }
 
+    //@@author NgManSing
+    private boolean isCommandNull() {
+        return command == null;
+    }
+
     //@@author
     private void listProjectResource() {
         try {
@@ -116,72 +136,15 @@ public class CommandHandler {
 
     //@@author NgManSing
     private void processInputBeforeAdding() {
-        String[] keywords = {"p/", "url/", "d/"};
+        String[] keywords = {"p/", "url/", "d/", "c/"};
         int firstOptionalKeyword = 2;
         String[] projectInfo;
         try {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+            ResourceManager.addResource(projectInfo);
         } catch (InvalidArgumentException e) {
-            e.printErrorMsg();
-            return;
+            printErrorMsg("Resource failed to be added. (Reason: " + e.getErrorMsg() + ")");
         }
-        addResource(projectInfo);
-    }
-
-    //@@author NgManSing
-    private void addResource(String[] projectInfo) {
-        assert projectInfo != null;
-        String projectName = projectInfo[0];
-        String projectUrl = projectInfo[1];
-        String descriptionOfUrl = projectInfo[2];
-        int projectIndex = searchExistingProjectIndex(projectName);
-
-        if (projectIndex == -1) {
-            createNewProject(projectName, projectUrl, descriptionOfUrl);
-            return;
-        }
-
-        boolean isUrlAlreadyExist = isUrlAlreadyExist(projectIndex, projectUrl);
-
-        if (isUrlAlreadyExist) {
-            promptUserUrlAlreadyExist();
-        } else {
-            addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex);
-        }
-    }
-
-    //@@author NgManSing
-    private void createNewProject(String projectName, String projectUrl, String descriptionOfUrl) {
-        projects.add(new Project(projectName, projectUrl, descriptionOfUrl));
-        System.out.printf("The resource is added into the new project \"%s\".\n", projectName);
-    }
-
-    //@@author NgManSing
-    private void promptUserUrlAlreadyExist() {
-        System.out.print("A resource with The same URL has already existed in its resource list. "
-                + "If you want to edit the resource, please use \"edit\" command." + NEW_LINE);
-    }
-
-    //@@author NgManSing
-    private void addNewResource(String projectName, String projectUrl, String descriptionOfUrl, int projectIndex) {
-        Project targetProject = projects.get(projectIndex);
-        targetProject.addResources(projectUrl, descriptionOfUrl);
-        System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
-    }
-
-    //@@author NgManSing
-    private int searchExistingProjectIndex(String projectName) {
-        for (int i = 0; i < projects.size(); i++) {
-            if (projects.get(i).getProjectName().equals(projectName)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    //@@author NgManSing
-    private boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
-        return projects.get(projectIndex).isUrlAlreadyExist(projectUrl);
     }
 
     //@@author stefanie
@@ -192,7 +155,7 @@ public class CommandHandler {
         try {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
         } catch (InvalidArgumentException e) {
-            e.printErrorMsg();
+            printErrorMsg("Resource failed to be deleted. (Reason: " + e.getErrorMsg() + ")");
             return;
         }
 
@@ -207,20 +170,14 @@ public class CommandHandler {
         try {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
         } catch (InvalidArgumentException e) {
-            e.printErrorMsg();
+            printErrorMsg("Resource failed to be edited. (Reason: " + e.getErrorMsg() + ")");
             return;
         }
 
         ResourceManager.editResource(projectInfo);
     }
 
-
-    private void promptUserInvalidInput() {
-        System.out.print("Invalid input! Please type \"help\" for more details." + NEW_LINE);
-    }
-
     //@@author jovanhuang
-
     /**
      * This method will print the resources for a particular project.
      *
@@ -247,7 +204,6 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
-
     /**
      * This method will check if project name is empty.
      *
@@ -260,7 +216,6 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
-
     /**
      * This method will print divider.
      */
@@ -269,7 +224,6 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
-
     /**
      * This method will print the resource list for all projects.
      */
@@ -288,7 +242,6 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
-
     /**
      * This is a helper method that loops through a resource list and print it out.
      *
@@ -317,7 +270,7 @@ public class CommandHandler {
         try {
             keywordInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
         } catch (InvalidArgumentException e) {
-            e.printErrorMsg();
+            printErrorMsg("Resource failed to be found. (Reason: " + e.getErrorMsg() + ")");
             return;
         }
 
@@ -335,7 +288,7 @@ public class CommandHandler {
         } else {
             String keyword = keywordInfo[0];
             String projectName = keywordInfo[1];
-            int projectIndex = searchExistingProjectIndex(projectName);
+            int projectIndex = ProjectManager.searchExistingProjectIndex(projectName);
             printDivider();
             if (projectIndex != -1) {
                 System.out.print("Project: " + projectName + NEW_LINE);
@@ -345,6 +298,14 @@ public class CommandHandler {
             }
             printDivider();
         }
+    }
+
+    private void printErrorMsg(String errorMsg) {
+        System.out.print("Error: " + errorMsg + "\n");
+    }
+
+    private void promptUserInvalidInput() {
+        System.out.print("Invalid input! Please type \"help\" for more details." + NEW_LINE);
     }
 
 }

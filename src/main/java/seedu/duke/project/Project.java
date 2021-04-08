@@ -8,9 +8,9 @@ public class Project {
     private final String projectName;
     private final ArrayList<Resource> resources = new ArrayList<>();
 
-    public Project(String projectName, String projLink, String linkDescription) {
+    public Project(String projectName, String projLink, String description) {
         this.projectName = projectName;
-        this.resources.add(new Resource(projLink, linkDescription));
+        this.resources.add(new Resource(projLink, description));
     }
 
     public Project(String projectName) {
@@ -25,8 +25,8 @@ public class Project {
         return projectName;
     }
 
-    public void addResources(String projectUrl, String urlDescription) {
-        resources.add(new Resource(projectUrl, urlDescription));
+    public void addResources(String projectUrl, String description) {
+        resources.add(new Resource(projectUrl, description));
     }
 
     public void addResourceObj(Resource resource) {
@@ -40,10 +40,6 @@ public class Project {
             }
         }
         return false;
-    }
-
-    public void deleteResources(int index) {
-        resources.remove(index);
     }
 
     public void loadResource(Resource resource) {
