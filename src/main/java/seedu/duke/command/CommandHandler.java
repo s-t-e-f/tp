@@ -147,7 +147,11 @@ public class CommandHandler {
         }
     }
 
-    //@@author stefanie
+    //@@author s-t-e-f
+    /**
+     * Process user's command for deleting resource(s).
+     * Check if all the mandatory keywords are present in the correct order. 
+     */
     private void processInputBeforeDeleting() {
         String[] keywords = {"p/", "i/"};
         int firstOptionalKeyword = 1;
@@ -162,7 +166,11 @@ public class CommandHandler {
         ResourceManager.deleteResource(projectInfo);
     }
 
-    //@@author stefanie
+    //@@author s-t-e-f
+    /**
+     * Process user's command for editing a resource.
+     * Check if all the mandatory keywords are present in the correct order.
+     */
     private void processInputBeforeEditing() {
         String[] keywords = {"p/", "i/", "url/", "d/"};
         int firstOptionalKeyword = 2;

@@ -25,7 +25,15 @@ public abstract class ResourceManager {
         }
     }
 
-    //@@author stefanie
+    //@@author s-t-e-f
+    /**
+     * Delete resource(s) from a specified project.
+     * If specified project is not found in the project list, throws ProjectNotFoundException.
+     * If specified resource is not found in the resource list of that project (i.e. invalid index),
+     * throws ResourceNotFoundException.
+     * If no index is specified, delete the entire targeted project from the project list.
+     * @param projectInfo Processed user's command
+     */
     public static void deleteResource(String[] projectInfo) {
         Project targetedProj;
         String projectName = projectInfo[0];
@@ -52,7 +60,15 @@ public abstract class ResourceManager {
         }
     }
 
-    //@@author stefanie
+    //@@author s-t-e-f
+    /**
+     * Edit the url/ description of a resource from a specified project.
+     * If specified project is not found in the project list, throws ProjectNotFoundException.
+     * If specified resource is not found in the resource list of that project (i.e. invalid index),
+     * throws ResourceNotFoundException.
+     * If both url/ and d/ are not specified, the resource is not edited.
+     * @param projectInfo Processed user's command
+     */
     public static void editResource(String[] projectInfo) {
         Project targetedProj;
         Resource targetedResource;
