@@ -150,7 +150,7 @@ public class CommandHandler {
     //@@author s-t-e-f
     /**
      * Process user's command for deleting resource(s).
-     * Check if all the mandatory keywords are present in the correct order. 
+     * Check if all the mandatory keywords are present in the correct order.
      */
     private void processInputBeforeDeleting() {
         String[] keywords = {"p/", "i/"};

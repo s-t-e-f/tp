@@ -390,3 +390,53 @@ These instructions only provide a starting point for testers to work on; testers
     1. No Prerequisites
     2. Test case: `exit`
         * Expected: Exit message shown to user. TraceYourProj stops running.
+    
+#### Deleting Resource(s)
+1. Deleting a resource from a specified project.
+    1. Prerequisites: List all the resources in the specified project using list command. 
+       Make sure the project exists and there is at least one resource in that project.
+       * E.g. : `list CS2113`
+    2. Test case: `delete p/CS2113 i/1`
+        * Expected: The first resource in the specified project will be deleted. 
+                    User can verify this by executing `list CS2113` command again.
+    3. Test case: `delete p/CS2113 i/4` (where CS2113 only has 1 resource)
+        * Expected: Error details (resource not found) will be shown to the user. 
+                    Prompt user to enter a valid index.
+    4. Test case: `delete p/CS2114 i/1` (where CS2114 is not in the project list)
+        * Expected: Error details (project not found) will be shown to the user.
+    
+ 2. Delete all resources of the project and the whole project from project list.   
+    1. Prerequisite: List all the projects in the project list using list command.
+                     Make sure the project exists in the project list.
+    2. Test case: `delete p/CS2113`
+        * Expected: All the resource in CS2113 will be deleted and CS2113 will be removed from the project list.
+                    User can verify this using `list` command. CS2113 should not appear.
+
+#### Editing Resource
+1. Editing a resource from a specified project.
+    1. Prerequisites: List all the resources in the specified project using list command.
+       Make sure the project exists and there is at least one resource in that project.
+   2. Test case: `edit p/CS2113 i/1 url/www.cs2113.com d/New link for CS2113`
+       * Expected: The url of the first resource in the specified project will be changed to "www.cs2113.com".
+                    The description of that resource will be changed to "New link for CS2113".
+                    <br>User can verify this by executing `list CS2113` command again.
+   3. Test case: `edit p/CS2113 i/3 url/www.cs2113.com d/New link for CS2113` (where CS2113 only has 1 resource)
+       * Expected: Error details (resource not found) will be shown to the user.
+         Prompt user to enter a valid index.
+   4. Test case: `edit p/CS2114 i/1 url/www.cs2113.com d/New link for CS2113` (where CS2114 is not in the project list)
+       * Expected: Error details (project not found) will be shown to the user.
+    
+#### Saving and Loading Data 
+1. Saving data to storage and Loading data from storage.
+    1. Prerequisites: List all projects and resources using list-all command. 
+                      At least 1 project in list with at least 1 resource.
+    2. Test case: `save`
+        * Expected: Notify the user that projects are saved to the storage.
+    3. After saving, execute `exit` to exit the application.
+    3. Run the application again.
+       <br> Execute `load`.
+        * Expected: Loaded projects from storage. 
+            <br> Verify that data is loaded using `list-all` command. 
+          
+    
+          
