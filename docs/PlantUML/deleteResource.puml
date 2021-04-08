@@ -24,7 +24,7 @@ activate ProjectManager
 ResourceManager <-- ProjectManager : targetedProj
 deactivate ProjectManager
 
-alt projectNotFound
+alt targetedProj ==  null
     [<-- ResourceManager : ProjectNotFoundException
 else invalidIndex
     [<-- ResourceManager : ResourceNotFoundException

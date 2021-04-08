@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+box Editing Resource
+participant ":Command Handler" as CommandHandler
+participant ":Resource Manager" as ResourceManager
+participant ":Project Manager" as ProjectManager
+participant "targetedResource :Resource" as Resource
+
+
+[-> CommandHandler : processInputBeforeEditing()
+activate CommandHandler
+
+
+CommandHandler -> ResourceManager : editResource(projectInfo)
+activate ResourceManager
+ResourceManager -> ProjectManager : getProjByProjName(projName)
+activate ProjectManager
+ResourceManager <-- ProjectManager : targetedProj
+deactivate ProjectManager
+
+alt targetedProj == null
+    [<-- ResourceManager : ProjectNotFoundException
+else invalidIndex
+    [<-- ResourceManager : ResourceNotFoundException
+else else
+    ResourceManager -> Resource : targetedProj.getResources().get(idx)
+    activate Resource
+    alt projectInfo[2] ! = null
+        Resource -> Resource : setResourceLink(projectInfo[2])
+        end
+    alt projectInfo[3] != null
+        Resource -> Resource : setResourceDescription(projectInfo[3])
+        end
+    deactivate Resource
+
+end
+
+
+
+
+@enduml

@@ -175,6 +175,8 @@ If PROJECT_NAME is not found in the database, the application prompts the user t
 **Step 4**:
 The user can execute `list p/CS2113` to verify that the specified resource has been successfully edited.
 
+The following sequence diagram shows how the delete operation works:
+![edit_puml](puml_img/Edit.png)
 ---
 
 #### Finding resource(s) in a project or all projects based on a keyword
