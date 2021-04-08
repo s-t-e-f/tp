@@ -6,7 +6,7 @@ import seedu.duke.resource.ResourceManager;
 
 import java.util.ArrayList;
 
-public abstract class ProjectManager {
+public class ProjectManager {
     public static final String NEW_LINE = "\n";
 
     public static ArrayList<Project> projects;
@@ -21,8 +21,16 @@ public abstract class ProjectManager {
         }
     }
 
-    //@@author stefanie
+    //@@author s-t-e-f
+    /**
+     * Search a project given the project name.
+     * Return a project object if it is found.
+     * Else, return null if the project name does not exist in the project list.
+     * @param projName Name of the project to be searched
+     * @return Project object with the specified project name
+     */
     public static Project getProjByProjName(String projName) {
+        projects = Duke.getProjects();
         for (Project project : projects) {
             if (project.getProjectName().equals(projName)) {
                 return project;
@@ -31,8 +39,13 @@ public abstract class ProjectManager {
         return null;
     }
 
-    //@@author stefanie
+    //@@author s-t-e-f
+    /**
+     * Delete all the resources in the project and the whole project from the project list.
+     * @param proj Project to be deleted
+     */
     public static void deleteWholeProject(Project proj) {
+        projects = Duke.getProjects();
         proj.getResources().removeAll(proj.getResources());
         proj.getResources().removeAll(proj.getResources());
         System.out.printf("All the resources in %s has been deleted.\n", proj.getProjectName());

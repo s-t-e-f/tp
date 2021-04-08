@@ -4,42 +4,39 @@
 box Deleting Resource
 participant ":Command Handler" as CommandHandler
 participant ":Command Parser" as CommandParser
-participant "targetedProj : Project" as Project
+participant ":Resource Manager" as ResourceManager
+participant ":Project Manager" as ProjectManager
 
-end box
 
 [-> CommandHandler : processInputBeforeDeleting()
 activate CommandHandler
 
 
-CommandHandler -> CommandParser: decodeInfoFragment(infoFragment, keywords, firstOptionalkeyword)
+CommandHandler -> CommandParser: decodeInfoFragment
 activate CommandParser
-
-CommandParser-> CommandParser : getUsefulInfo(infoFragment, keywordlocations, keywords)
 CommandHandler <-- CommandParser : String[] projectInfo
 deactivate CommandParser
 
-CommandHandler -> CommandHandler : deleteResource(projectInfo)
+CommandHandler -> ResourceManager : deleteResource(projectInfo)
+activate ResourceManager
+ResourceManager -> ProjectManager : getProjByProjName(projectName)
+activate ProjectManager
+ResourceManager <-- ProjectManager : targetedProj
+deactivate ProjectManager
 
-
-alt projectNotFound
-    [<-- CommandHandler : print("Project is not found...")
-
+alt targetedProj ==  null
+    [<-- ResourceManager : ProjectNotFoundException
 else invalidIndex
-    [<-- CommandHandler : print("Resource is not found.")
-
+    [<-- ResourceManager : ResourceNotFoundException
 else indexNotIndicated
-    CommandHandler -> Project : getResources().removeAll(targetedProj.getResources())
-    note right
-    If no index is specified,
-    remove all resources from the specified project.
-    end note
-    [<-- CommandHandler : print("All resources in PROJECTNAME has been deleted.")
+    ResourceManager -> ProjectManager: deleteWholeProject(targetedProject)
+    activate ProjectManager
+    [<-- ProjectManager :
+    deactivate ProjectManager
 
-else
-    CommandHandler -> Project : getResources().remove(idx)
-    [<-- CommandHandler : print("The resource is deleted from PROJECTNAME.")
-
+else else
+    [<-- ResourceManager : targetedProj.getResources().remove(idx)
+    deactivate
 end
 
 
