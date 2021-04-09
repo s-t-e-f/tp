@@ -1,5 +1,10 @@
 # TraceYourProj's Developer Guide
 
+## Intro
+
+TraceYourProj is a desktop app for **tracking online resources** for **data science projects**, optimized
+for use via a Command Line Interface (CLI).
+
 ## Design & implementation
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}  
 {Coming in v2.1}
@@ -441,4 +446,3 @@ These instructions only provide a starting point for testers to work on; testers
             <br> Verify that data is loaded using `list-all` command. 
           
     
-          

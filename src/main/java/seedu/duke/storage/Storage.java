@@ -11,9 +11,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a class that reads from and writes to a storage text file.
+ */
 public class Storage {
     private static ArrayList<Project> projects = new ArrayList<>();
 
+    /**
+     * Updates the storage based on the projects list that is passed into the method.
+     * @param projects The list of projects to be updated into the storage.
+     */
     public static void updateStorage(ArrayList<Project> projects) {
 
         if (projects.isEmpty()) {
@@ -53,6 +60,10 @@ public class Storage {
                 resource.getDateOfCreation().toString());
     }
 
+    /**
+     * Reads the projects from the storage text file and returns it.
+     * @return The list of projects from the storage text file.
+     */
     public static ArrayList<Project> readFromStorage() {
         createProjectsFromStorage();
         System.out.println("Loaded projects from storage");

@@ -9,12 +9,11 @@ package "command" COLOR_COMMAND {
     class CommandHandler {
         - projects
         + processCommand()
-        - listProjectResources
-        - addResource
-        - deleteResource
-        - editResource
-        - findResource
-        - listAllCommands
+        - processInputBeforeAdding()
+        - processInputBeforeDeleting()
+        - processInputBeforeFinding()
+        - processInputBeforeEditing()
+        + listAllCommands()
     }
 
 }
@@ -50,6 +49,12 @@ package "project" COLOR_PROJECT {
 
     class ProjectManager {
         + getAllProjectsAndResourcesMatchingKeyword(keyword, projects) {static}
+        + getProjByProjName(projName) {static}
+        + deleteWholeProject(proj) {static}
+        + newProject(projectName, projectUrl, description) {static}
+        + getProject(projectIndex) {static}
+        + searchExistingProjectIndex(projectName) {static}
+        + updateRecords() {static}
     }
 }
 
@@ -70,6 +75,9 @@ package "resource" COLOR_RESOURCE {
 
     class ResourceManager {
         + printResourcesMatchingKeyword() {static}
+        + addResource(projectInfo) {static}
+        + deleteResource(projectInfo) {static}
+        + editResource(projectInfo) {static}
     }
 }
 
