@@ -106,7 +106,7 @@ public class Storage {
 
     private static void updateProjects() {
 
-        ArrayList<Project> dukeProjects = ProjectManager.projects;
+        ArrayList<Project> dukeProjects = ProjectManager.getProjects();
 
         for (Project project: dukeProjects) {
             if (projects.contains(project)) {

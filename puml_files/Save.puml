@@ -3,22 +3,18 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":CommandHandler" as CommandHandler LOGIC_COLOR_T1
-participant ":Duke" as Duke LOGIC_COLOR_T1
+participant ":ProjectManager" as ProjectManager LOGIC_COLOR_T1
 participant ":Storage" as Storage LOGIC_COLOR_T1
-end box
-
-box Model MODEL_COLOR_T1
-participant ":Model" as MODEL_COLOR
 end box
 
 activate CommandHandler
 [-> CommandHandler : execute("save")]
 
-CommandHandler -> Duke : getProjects()
-activate Duke
+CommandHandler -> ProjectManager : getProjects()
+activate ProjectManager
 
-Duke --> CommandHandler : projects
-deactivate Duke
+ProjectManager --> CommandHandler : projects
+deactivate ProjectManager
 
 CommandHandler -> Storage :  updateStorage(projects)
 activate Storage
