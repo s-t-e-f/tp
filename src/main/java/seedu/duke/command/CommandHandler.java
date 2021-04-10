@@ -93,10 +93,10 @@ public class CommandHandler {
             listAllCommands();
             break;
         case SAVE_COMMAND:
-            Storage.updateStorage(Duke.getProjects());
+            Storage.updateStorage(ProjectManager.projects);
             break;
         case LOAD_COMMAND:
-            Duke.setProjects(Storage.readFromStorage());
+            ProjectManager.projects = Storage.readFromStorage();
             break;
         default:
             promptUserInvalidInput();
