@@ -1,6 +1,7 @@
 package seedu.duke.project;
 
 import seedu.duke.Duke;
+import seedu.duke.command.CommandHandler;
 import seedu.duke.exception.WrongInputFormatException;
 import seedu.duke.exception.NoProjectNameException;
 import seedu.duke.exception.ProjectNotFoundException;
@@ -21,7 +22,12 @@ public class ProjectManager {
     public static final int PROJECT_NAME_STARTING_INDEX = 2;
     public static final String MESSAGE_FOR_PRINTING_ALL_PROJECT_RESOURCES =
             "Here is the list of all project(s) and it's resource(s)!" + NEW_LINE;
-
+    public static final String ONE_WHITE_SPACE = " ";
+    public static final String NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE = "You did not key in the Project Name! "
+            + "Please type \"help\" for more details." + CommandHandler.NEW_LINE;
+    public static final String PROJECT_NOT_FOUND_ERROR_MESSAGE = "Project not found in database!" + CommandHandler.NEW_LINE;
+    public static final String WRONG_INPUT_FORMAT = "You did not insert 'p/' before the project name!"
+            + " Please type \"help\" for more details. " + CommandHandler.NEW_LINE;
     private static ArrayList<Project> projects;
 
     public static ArrayList<Project> getProjects() {
@@ -147,7 +153,7 @@ public class ProjectManager {
                 return;
             }
         }
-        throw new ProjectNotFoundException();
+        throw new ProjectNotFoundException(PROJECT_NOT_FOUND_ERROR_MESSAGE);
     }
 
     //@@author jovanhuang
@@ -158,22 +164,22 @@ public class ProjectManager {
      * @throws WrongInputFormatException thrown if format not followed.
      * @throws NoProjectNameException thrown if no project name is provided.
      */
-    private static String validateAndExtractProjectNameInput(String userInputs)
+    public static String validateAndExtractProjectNameInput(String userInputs)
             throws WrongInputFormatException, NoProjectNameException {
         if (userInputs.length() < MINIMUM_LIST_PARAMETER_LENGTH) {
-            throw new WrongInputFormatException();
+            throw new WrongInputFormatException(WRONG_INPUT_FORMAT);
         }
 
         String parameters = userInputs.substring(LIST_PARAMETER_STARTING_INDEX,LIST_PARAMETER_ENDING_INDEX);
-        if (!parameters.equals(LIST_PARAMETER) || parameters.equals(EMPTY_STRING)) {
-            throw new WrongInputFormatException();
+        if (!parameters.equals(LIST_PARAMETER)) {
+            throw new WrongInputFormatException(WRONG_INPUT_FORMAT);
         }
 
         String projectName = userInputs.substring(PROJECT_NAME_STARTING_INDEX);
         boolean isProjectNameEmpty = checkIfStringIsEmpty(projectName);
 
         if (isProjectNameEmpty) {
-            throw new NoProjectNameException();
+            throw new NoProjectNameException(NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
         }
         return projectName;
     }
@@ -185,7 +191,7 @@ public class ProjectManager {
      * @return user inputs.
      */
     public static String processInputs(String[] infoFragments) {
-        return String.join(" ", infoFragments);
+        return String.join(ONE_WHITE_SPACE, infoFragments);
     }
 
     //@@author jovanhuang
@@ -196,6 +202,6 @@ public class ProjectManager {
      * @return true if empty, false if not empty.
      */
     public static boolean checkIfStringIsEmpty(String string) {
-        return string.equals("");
+        return string.equals(EMPTY_STRING);
     }
 }

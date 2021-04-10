@@ -180,5 +180,4 @@ public abstract class ResourceManager {
         }
         assert true;
     }
-
 }
