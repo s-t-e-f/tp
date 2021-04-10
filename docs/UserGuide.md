@@ -1,11 +1,31 @@
 # TraceYourProj's User Guide
 
-## Introduction
+## Table of Contents
+#### [1. Introduction](#intro)
+#### [2. Quick Start](#start)
+#### [3. Features](#features)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Notes about command](#notes)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Viewing help](#help)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Adding project(s) or resource(s)](#add)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List the resources of all projects](#listall)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List the resources of one projects](#list)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Deleting resource(s)](#delete)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Editing a resource](#edit)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Finding resources](#find)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Loading data from storage](#load)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Saving data to storage](#save)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Exiting TraceYourProj](#exit)
+#### [4. FAQ](#faq)
+#### [5. Command Summary](#commandSummary)
+
+
+---
+## <a id="intro">Introduction</a>
 
 TraceYourProj is a desktop app for **tracking online resources** for **data science projects**, optimized 
 for use via a Command Line Interface (CLI). 
 
-## Quick Start
+## <a id="start">Quick Start</a>
 
 1. Download and install **Java 11** or above in your device.
 2. Get the **latest version** of TraceYourProj from [HERE](https://github.com/AY2021S2-CS2113-W10-3/tp/releases).
@@ -27,10 +47,9 @@ Team Project of CS2113-W10-3.
 TraceYourProj
 Type 'help' for a list of command and related usage.
 ```
+## <a id="features">Features</a>
 
-## Features 
-
-### Notes about command
+### <a id="notes">Notes about command</a>
 
 * Words in **UPPER_CASE** are **parameters** specified by the **user**.  
   e.g.`list p/PROJECTNAME`, where `PROJECTNAME` is a parameter which can be used as `list p/CS2113 Documentation`.
@@ -48,8 +67,8 @@ Type 'help' for a list of command and related usage.
 
 ---
 
+### <a id="help">Viewing help: `help`</a>
 
-### Viewing help: `help`
 Shows the available commands of TraceYourProj.
 
 Format: `help`
@@ -83,8 +102,7 @@ exit: Exits the program.
 
 ---
 
-
-### Adding project(s) or resource(s) : `add`
+### <a id="add">Adding project(s) or resource(s) : `add`</a>
 Adds a resource to a Project.
 
 Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION c/CHECK]`
@@ -155,8 +173,7 @@ Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION c/CHECK]`
 
 
 ---
-
-### List the resources of all projects: `list-all`
+### <a id="listall">List the resources of all projects: `list-all`</a>
 Shows a list of all resources in all projects created in TraceYourProj.
 
 Format: `list-all`
@@ -192,8 +209,7 @@ list-all
 
 ---
 
-
-### List the resources of one projects: `list p/PROJECTNAME`
+### <a id="list">List the resources of one projects: `list p/PROJECTNAME`</a>
 Shows a list of all resources in **one** project created in TraceYourProj.
 
 Format: `list p/PROJECTNAME`
@@ -220,7 +236,7 @@ will be for our future implementations.
 
 
 ---
-### Deleting resource(s) : `delete`
+### <a id="delete">Deleting resource(s) : `delete`</a>
 Deletes the specified resource from the resource list based on the project.
 
 Format : `delete p/PROJECT_NAME [i/INDEX]`
@@ -257,8 +273,7 @@ Format : `delete p/PROJECT_NAME [i/INDEX]`
 
 ---
 
-
-### Editing a resource : `edit`
+### <a id="edit">Editing a resource : `edit`</a>
 Edits an existing resource in the resource list based on the project.
 
 Format: `edit p/PROJECT_NAME i/INDEX url/LINK [d/DESCRIPTION]`
@@ -284,7 +299,7 @@ The resource is successfully edited to :
 **Edits** the url and description of the 2nd resource in ‘Jester Jokes’ project to be https://www.kaggle.com/sameerdev7/joke-rating and Jester Jokes Dataset respectively.
 
 ---
-### Finding resources: `find`
+### <a id="find">Finding resources: `find`</a>
 
 Finds resources in a specified project or in all projects based on a user-specified keyword
 
@@ -325,8 +340,7 @@ Example of usage:
    
 ---
 
-
-### Loading data from storage `load`
+### <a id="load">Loading data from storage `load`</a>
 
 Loads the projects and resources from the data storage text file.  
 
@@ -346,8 +360,7 @@ Loaded projects from storage
 
 ---
 
-
-### Saving data to storage: `save`
+### <a id="save">Saving data to storage: `save`</a>
 
 Saves the project and resources to the data storage text file.
 
@@ -364,7 +377,7 @@ Saved projects to storage
 ```
 
 ---
-### Exiting TraceYourProj: `exit`
+### <a id="exit">Exiting TraceYourProj: `exit`</a>
 
 Exits the program.
 
@@ -384,16 +397,16 @@ Hope you have a wonderful day.
 ```
 
 ---
+## <a id="faq">FAQ</a>
 
-## FAQ
 
 **Q**: Can I add a resource to a project without providing description?
 
 **A**: Yes, you can. It is because description is optional when adding a resource with `add` command.
 
 ---
+## <a id="commandSummary">Command Summary</a>
 
-## Command Summary
 
 |Command|Syntax|Remark|
 |--------|----------|--------|
