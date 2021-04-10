@@ -13,21 +13,26 @@ import java.util.ArrayList;
 import static seedu.duke.command.CommandHandler.printDivider;
 
 public class ProjectManager {
-    public static final String NEW_LINE = "\n";
     public static final int LIST_PARAMETER_STARTING_INDEX = 0;
     public static final int LIST_PARAMETER_ENDING_INDEX = 2;
-    public static final String LIST_PARAMETER = "p/";
-    public static final String EMPTY_STRING = "";
     public static final int MINIMUM_LIST_PARAMETER_LENGTH = 2;
     public static final int PROJECT_NAME_STARTING_INDEX = 2;
+    public static final int INITIAL_PROJECT_COUNT = 0;
+    public static final int ONE_INCREMENT = 1;
+
+    public static final String NEW_LINE = "\n";
+    public static final String LIST_PARAMETER = "p/";
+    public static final String EMPTY_STRING = "";
+    public static final String ONE_WHITE_SPACE = " ";
     public static final String MESSAGE_FOR_PRINTING_ALL_PROJECT_RESOURCES =
             "Here is the list of all project(s) and it's resource(s)!" + NEW_LINE;
-    public static final String ONE_WHITE_SPACE = " ";
     public static final String NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE = "You did not key in the Project Name! "
             + "Please type \"help\" for more details." + CommandHandler.NEW_LINE;
-    public static final String PROJECT_NOT_FOUND_ERROR_MESSAGE = "Project not found in database!" + CommandHandler.NEW_LINE;
+    public static final String PROJECT_NOT_FOUND_ERROR_MESSAGE = "Project not found in database!"
+            + CommandHandler.NEW_LINE;
     public static final String WRONG_INPUT_FORMAT = "You did not insert 'p/' before the project name!"
             + " Please type \"help\" for more details. " + CommandHandler.NEW_LINE;
+
     private static ArrayList<Project> projects;
 
     public static ArrayList<Project> getProjects() {
@@ -116,11 +121,11 @@ public class ProjectManager {
      * This method will print the resource list for all projects.
      */
     public static void printResourceListForAllProjects() {
-        int projectCount = 0;
+        int projectCount = INITIAL_PROJECT_COUNT;
         System.out.print(MESSAGE_FOR_PRINTING_ALL_PROJECT_RESOURCES);
         printDivider();
         for (Project project : projects) {
-            projectCount += 1;
+            projectCount += ONE_INCREMENT;
             System.out.print("Project " + projectCount + ": " + project + NEW_LINE);
             ArrayList<Resource> resources = project.getResources();
             ResourceManager.printResourceList(resources);
