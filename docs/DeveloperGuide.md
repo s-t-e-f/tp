@@ -142,11 +142,11 @@ The user executes the following command in order to add a certain project’s re
 **Step 3**:
 The user wishes to see the list of resources for one project, CZ2003. He executes the following command to see them.  
 
->list *CZ2003*
+>list *p/CZ2003*
 
 **Design Consideration**  
 
-Aspect: How list PROJECTNAME executes  
+Aspect: How list p/PROJECTNAME executes  
 * Alternative 1 (current choice):
     * This feature will do a check to see if the project exists first. If it exists, it will do a loop through all the resources for this project and print it out.
     * **Pros**: When there is an error, we will know if the error is due to the fact that the project does not exist.
@@ -154,7 +154,7 @@ Aspect: How list PROJECTNAME executes
     * Print the project’s resources straight away without checking if project exists.  
     * **Cons**: Harder to pinpoint the cause of the error if an error is thrown.
 
-The following sequence diagram shows how the list PROJECTNAME operation works:
+The following sequence diagram shows how the `list p/PROJECTNAME` operation works:
 ![add_png](puml_img/listPROJECTNAMEfinal.png)
 
 ---
@@ -256,7 +256,7 @@ The user initialises the application and adds the resources, Project and Resourc
 The user has finished using the application and wishes to exit the application. He executes the following command to leave the application. 
 > exit
 
-The following sequence diagram shows how the exit operation works:
+The following sequence diagram shows how the exit operation works:  
 ![Exit_puml](puml_img/Exit.png)
 
 **Design Consideration**
@@ -294,10 +294,10 @@ The Project and Resource objects contents are saved to a text file upon exiting 
 The application state can be restored by the Storage class which can read the text file and creates the objects 
 to create an application state when the program starts by issuing the load command by typing “load”
 
-The following sequence diagram shows how the **save** operation works:
+The following sequence diagram shows how the **save** operation works:  
 ![Save_puml](puml_img/Save.png)
 
-The following sequence diagram shows how the **load** operation works:
+The following sequence diagram shows how the **load** operation works:  
 ![Load_puml](puml_img/Load.png)
 
 **Design Consideration**
@@ -385,20 +385,22 @@ These instructions only provide a starting point for testers to work on; testers
        * Expected: No resources is added to CS2113. Error details shown to user.
 
 ### Listing Resources
-1. Listing all projects and resources
+1. Listing all resources in **all** projects.
    1. Prerequisites: At least 1 project added with 1 or more resources. 
    2. Test case: `list-all`
        * Expected: All projects and resources in each project listed and shown to user.
    3. Incorrect listing format to try: `list-all x` (where x is any input string)
        * Expected: No projects and resources are listed. Error details shown to user.
-2. Listing all resources in a project
-    1. Prerequisites: At least 1 project with project name CS2113 added with 1 or more resources.
-    2. Test case: `list p/CS2113`
+2. Listing all resources in **one** project  
+   Prerequisites: At least 1 project with project name CS2113 added with 1 or more resources.
+    1. Test case: `list p/CS2113`
         * Expected: All resources in project CS2113 listed and shown to user.
-    3. Test case: `list p/nus' (where nus is not a project that has been added)
+    2. Test case: `list p/nus` ("nus" project has never been added)
         * Expected: No resources are listed. Error details shown to user.
-    4. Test case: `list`
-        * Expected: No resources are listed. Error details shown to user.
+    3. Test case: `list` (missing "p/" after list)
+        * Expected: Error details shown to user.
+    4. Test case: `list p/` (missing project name after "p/")
+        * Expected: Error details shown to user.
     
 ### Finding Resources
 1. Finding resources from all projects based on a keyword
@@ -427,10 +429,10 @@ These instructions only provide a starting point for testers to work on; testers
 1. Deleting a resource from a specified project.
     1. Prerequisites: List all the resources in the specified project using list command. 
        Make sure the project exists and there is at least one resource in that project.
-       * E.g. : `list CS2113`
+       * E.g. : `list p/CS2113`
     2. Test case: `delete p/CS2113 i/1`
         * Expected: The first resource in the specified project will be deleted. 
-                    User can verify this by executing `list CS2113` command again.
+                    User can verify this by executing `list p/CS2113` command again.
     3. Test case: `delete p/CS2113 i/4` (where CS2113 only has 1 resource)
         * Expected: Error details (resource not found) will be shown to the user. 
                     Prompt user to enter a valid index.
@@ -451,7 +453,7 @@ These instructions only provide a starting point for testers to work on; testers
    2. Test case: `edit p/CS2113 i/1 url/www.cs2113.com d/New link for CS2113`
        * Expected: The url of the first resource in the specified project will be changed to "www.cs2113.com".
                     The description of that resource will be changed to "New link for CS2113".
-                    <br>User can verify this by executing `list CS2113` command again.
+                    <br>User can verify this by executing `list p/CS2113` command again.
    3. Test case: `edit p/CS2113 i/3 url/www.cs2113.com d/New link for CS2113` (where CS2113 only has 1 resource)
        * Expected: Error details (resource not found) will be shown to the user.
          Prompt user to enter a valid index.
@@ -460,8 +462,8 @@ These instructions only provide a starting point for testers to work on; testers
     
 #### Saving and Loading Data 
 1. Saving data to storage and Loading data from storage.
-    1. Prerequisites: List all projects and resources using list-all command. 
-                      At least 1 project in list with at least 1 resource.
+    1. Prerequisites: List all projects and resources using `list-all` command. 
+                       At least 1 project in list with at least 1 resource.
     2. Test case: `save`
         * Expected: Notify the user that projects are saved to the storage.
     3. After saving, execute `exit` to exit the application.
