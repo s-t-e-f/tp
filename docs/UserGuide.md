@@ -206,7 +206,7 @@ list p/NUS
 ```
 **Output:**
 ```
---------------------------------------------------------
+--------------------------------------------------------__
 Project: NUS
 Resource(s):
 1): [2021-04-03] https://www.nus.edu.sg/ (Description: NUS Offical Website)

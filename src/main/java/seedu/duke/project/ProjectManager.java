@@ -1,10 +1,14 @@
 package seedu.duke.project;
 
 import seedu.duke.Duke;
+import seedu.duke.exception.NoProjectNameException;
+import seedu.duke.exception.ProjectNotFoundException;
 import seedu.duke.resource.Resource;
 import seedu.duke.resource.ResourceManager;
 
 import java.util.ArrayList;
+
+import static seedu.duke.command.CommandHandler.printDivider;
 
 public class ProjectManager {
     public static final String NEW_LINE = "\n";
@@ -82,5 +86,74 @@ public class ProjectManager {
     //@@author NgManSing
     public static void updateRecords() {
         projects = Duke.getProjects();
+    }
+
+    //@@author jovanhuang
+    /**
+     * This method will print the resource list for all projects.
+     */
+    public static void printResourceListForAllProjects() {
+        int projectCount = 0;
+        System.out.print("Here is the list of all project(s) and it's resource(s)!" + NEW_LINE);
+        printDivider();
+        for (Project project : projects) {
+            projectCount += 1;
+            System.out.print("Project " + projectCount + ": " + project + NEW_LINE);
+            ArrayList<Resource> resources = project.getResources();
+            ResourceManager.printResourceList(resources);
+            printDivider();
+        }
+        assert true;
+    }
+
+    //@@author jovanhuang
+    /**
+     * This method will print the resources for a particular project.
+     *
+     * @param infoFragments is an string array of inputs from users
+     *
+     * @throws NoProjectNameException   when user did not enter project name.
+     * @throws ProjectNotFoundException when project is not found in database.
+     */
+    public static void printResourceListForAProject(String[] infoFragments)
+            throws NoProjectNameException, ProjectNotFoundException {
+        String projectName = processProjectName(infoFragments);
+        boolean isProjectNameEmpty = checkIfProjectNameEmpty(projectName);
+        if (isProjectNameEmpty) {
+            throw new NoProjectNameException();
+        }
+        String newProjectName = projectName.substring(2);
+        for (Project project : projects) {
+            if (project.getProjectName().equals(newProjectName)) {
+                printDivider();
+                System.out.print("Project: " + newProjectName + NEW_LINE);
+                ArrayList<Resource> resources = project.getResources();
+                ResourceManager.printResourceList(resources);
+                printDivider();
+                return;
+            }
+        }
+        throw new ProjectNotFoundException();
+    }
+
+    //@@author jovanhuang
+    /**
+     * This method will return the project name from userInput.
+     *
+     * @return Project Name is the name of the project.
+     */
+    public static String processProjectName(String[] infoFragments) {
+        return String.join(" ", infoFragments);
+    }
+
+    //@@author jovanhuang
+    /**
+     * This method will check if project name is empty.
+     *
+     * @param projectName This string user's input for projectName.
+     * @return true if empty, false if not empty.
+     */
+    public static boolean checkIfProjectNameEmpty(String projectName) {
+        return projectName.equals("");
     }
 }

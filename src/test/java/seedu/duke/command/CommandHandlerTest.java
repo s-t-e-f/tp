@@ -169,53 +169,6 @@ class CommandHandlerTest {
         System.setOut(System.out);
     }
 
-    /**
-     * Test cases for processProjectName.
-     */
-    @Test
-    public void testProcessProjectName() {
-        //test case 1
-        ArrayList<Project> projects1 = new ArrayList<>();
-        InputParser parser1 = new InputParser("list CZ2003 Documentation");
-        CommandHandler commandHandler1 = new CommandHandler(parser1, projects1);
-        assertEquals("CZ2003 Documentation", commandHandler1.processProjectName(commandHandler1.getInfoFragments()));
-
-        //test case 2
-        ArrayList<Project> projects2 = new ArrayList<>();
-        InputParser parser2 = new InputParser("list ");
-        CommandHandler commandHandler2 = new CommandHandler(parser2, projects2);
-        assertEquals("", commandHandler2.processProjectName(commandHandler2.getInfoFragments()));
-
-        //test case 3
-        ArrayList<Project> projects3 = new ArrayList<>();
-        InputParser parser3 = new InputParser("list CS2113");
-        CommandHandler commandHandler3 = new CommandHandler(parser3, projects3);
-        assertEquals("CS2113", commandHandler3.processProjectName(commandHandler3.getInfoFragments()));
-    }
-
-    /**
-     * Test cases for checkIfProjectNameEmpty.
-     */
-    @Test
-    public void checkIfProjectNameEmpty() {
-        //test case 1
-        ArrayList<Project> projects1 = new ArrayList<>();
-        String userInput1 = "list CZ2003 Documentation";
-        InputParser parser1 = new InputParser(userInput1);
-        CommandHandler commandHandler1 = new CommandHandler(parser1, projects1);
-        String projectName1 = commandHandler1.processProjectName(commandHandler1.getInfoFragments());
-        assertEquals(false, commandHandler1.checkIfProjectNameEmpty(projectName1));
-
-        //test case 2
-        ArrayList<Project> projects2 = new ArrayList<>();
-        String userInput2 = "list ";
-        InputParser parser2 = new InputParser(userInput2);
-        CommandHandler commandHandler2 = new CommandHandler(parser2, projects2);
-        String projectName2 = commandHandler1.processProjectName(commandHandler2.getInfoFragments());
-        assertEquals(true, commandHandler2.checkIfProjectNameEmpty(projectName2));
-
-    }
-
     @Test
     public void printResourceList() {
         //TODO
