@@ -15,6 +15,7 @@ import seedu.duke.ui.MainUi;
 import java.util.ArrayList;
 
 public class CommandHandler {
+    //@@author jovanhuang
     private static final String ADD_COMMAND = "add";
     private static final String DELETE_COMMAND = "delete";
     private static final String EXIT_COMMAND = "exit";
@@ -27,6 +28,8 @@ public class CommandHandler {
     private static final String LOAD_COMMAND = "load";
     public static final String NEW_LINE = "\n";
     public static final String DIVIDER = "--------------------------------------------------------";
+
+    //@@author
     String command;
     String[] infoFragments;
     private final ArrayList<Project> projects;
