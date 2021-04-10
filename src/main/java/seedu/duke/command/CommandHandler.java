@@ -96,10 +96,10 @@ public class CommandHandler {
             listAllCommands();
             break;
         case SAVE_COMMAND:
-            Storage.updateStorage(ProjectManager.projects);
+            Storage.updateStorage(ProjectManager.getProjects());
             break;
         case LOAD_COMMAND:
-            ProjectManager.projects = Storage.readFromStorage();
+            ProjectManager.setProjects(Storage.readFromStorage());
             break;
         default:
             promptUserInvalidInput();

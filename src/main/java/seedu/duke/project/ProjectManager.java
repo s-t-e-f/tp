@@ -22,7 +22,15 @@ public class ProjectManager {
     public static final String MESSAGE_FOR_PRINTING_ALL_PROJECT_RESOURCES =
             "Here is the list of all project(s) and it's resource(s)!" + NEW_LINE;
 
-    public static ArrayList<Project> projects;
+    private static ArrayList<Project> projects;
+
+    public static ArrayList<Project> getProjects() {
+        return projects;
+    }
+
+    public static void setProjects(ArrayList<Project> projectsToUpdate) {
+        projects = projectsToUpdate;
+    }
 
     public static void getAllProjectsAndResourcesMatchingKeyword(String keyword, ArrayList<Project> projects) {
         int projectCount = 0;
