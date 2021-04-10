@@ -1,11 +1,35 @@
 # TraceYourProj's Developer Guide
 
-## Intro
+## Table of Contents 
+#### [1. Introduction](#intro)
+#### [2. Design and Implementation](#designAndImplementation)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2.1 Design](#design)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2.2 Implementation](#implementation)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Add projects and resources](#add)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List all projects & their respective resources](#listall)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List all the resources for a particular project](#list)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Deleting resource from a specified project](#delete)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Editing resource from a specified project](#edit)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Finding resource(s) in a project or all projects based on a keyword](#find)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Exiting TraceYourProj](#exit)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Saving and loading data](#save)
+#### [3. Product Scope](#productScope)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.1 Target user profile](#targetUser)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2 Value proposition](#valueProposition)
+#### [4. User Stories](#userStories)
+#### [5. Non-Functional Requirements](#nonFunctionalRequirements)
+#### [6. Glossary](#glossary)
+#### [7. Instructions for Manual Testing](#manualTesting)
+
+---
+
+## <a id="intro">Introduction</a>
 
 TraceYourProj is a desktop app for **tracking online resources** for **data science projects**, optimized
 for use via a Command Line Interface (CLI).
 
-## Design & implementation
+## <a id="designAndImplementation">Design & Implementation</a>
+
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}  
 {Coming in v2.1}
 --- 
@@ -17,16 +41,16 @@ The above shows the class diagram and relations of the classes.
 
 {Add more stuff to explain the relations and classes}
 
+### <a id="design">Design</a>
 
-### Design
 {insert design}  
 {Coming in v2.1}
 ---
 
-### Implementation
+### <a id="implementation">Implementation</a>
 This section describes some noteworthy details on how certain features are implemented.
 
-#### Add projects and resources
+#### <a id="add">Add projects and resources</a>
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the add mechanism behaves at each step.
@@ -68,7 +92,7 @@ Aspect: How add executes
 
 ---
 
-#### List all projects & their respective resources
+#### <a id="listall">List all projects & their respective resources</a>
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -100,7 +124,7 @@ The following sequence diagram shows how the list-all operation works:
 
 ---
 
-#### List all the resources for a particular project 
+#### <a id="listall">List all the resources for a particular project</a>
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -135,7 +159,7 @@ The following sequence diagram shows how the list PROJECTNAME operation works:
 
 ---
 
-#### Deleting resource from a specified project 
+#### <a id="delete">Deleting resource from a specified project </a>
 **Proposed Implementation**
 
 Given below is an example usage scenario and how deleting resource(s) works.
@@ -160,7 +184,7 @@ The following sequence diagram shows how the delete operation works:
 
 ---
 
-#### Editing resource from a specified project
+#### <a id="edit">Editing resource from a specified project</a>
 **Proposed Implementation**
 
 Given below is an example usage scenario and how editing a resource works.
@@ -184,7 +208,7 @@ The following sequence diagram shows how the delete operation works:
 ![edit_puml](puml_img/Edit.png)
 ---
 
-#### Finding resource(s) in a project or all projects based on a keyword
+#### <a id="find">Finding resource(s) in a project or all projects based on a keyword</a>
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the find mechanism behaves at each step.
@@ -220,7 +244,7 @@ Aspect: How find executes
 
 ---
 
-#### Exiting TraceYourProj
+#### <a id="exit">Exiting TraceYourProj</a>
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the exit mechanism behaves at each step.
@@ -251,7 +275,7 @@ Aspect: How exit executes
 
 ---
 
-#### Saving and loading data
+#### <a id="exit">Saving and loading data</a>
 
 **Proposed Implementation**
 
@@ -290,9 +314,9 @@ The following sequence diagram shows how the **load** operation works:
   * **Cons:** User may not be aware of the functionality without referring to the user guide.
 
 ---
+## <a id="productScope">Product scope</a>
 
-## Product scope
-### Target user profile
+### <a id="targetUser">Target user profile</a>
 
 * Students doing data science projects.
 * prefers desktop apps over other types
@@ -302,13 +326,15 @@ The following sequence diagram shows how the **load** operation works:
 
 ---
 
-### Value proposition
+### <a id="valueProposition">Value proposition</a>
+
 TraceYourProj will help students to keep track of resources (links) which they have previously saved or need to use for their data science project in the future. 
 It allows a single user to use it for multiple projects.
 
 ---
 
-## User Stories
+## <a id="userStories">User Stories</a>
+
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -320,22 +346,21 @@ It allows a single user to use it for multiple projects.
 |v2.0|user|see the list of resources for one of my project|recall what are the resources of one particular project in the database of TraceYourProj|
 
 ---
-
-## Non-Functional Requirements
+## <a id="nonFunctionalRequirements">Non-Functional Requirements</a>
 
 1. Should work on any **mainstream OS** as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Should be able to hold up to 1000 project resources without a noticeable sluggishness in performance for typical usage.
 
 ---
-
-## Glossary
+## <a id="glossary">Glossary</a>
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
 ---
 
-## Instructions for manual testing
+## <a id="manualTesting">Instructions for Manual Testing</a>
+
 Given below are instructions to test TraceYourProj manually.
 
 > **_NOTE:_**
