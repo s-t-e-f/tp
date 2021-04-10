@@ -57,4 +57,5 @@ public class MainUi {
     public static void listAllCommands() {
         System.out.print(ALL_COMMANDS_STRING + "\n");
     }
+
 }

@@ -91,7 +91,7 @@ public abstract class ResourceManager {
             if (projectInfo[3] != null) {
                 targetedResource.setResourceDescription(projectInfo[3]);
             }
-            // Both url/ and d/ are not specfied
+            // Both url/ and d/ are not specified
             if (projectInfo[2] == null & projectInfo[3] == null) {
                 System.out.print("The resource is not edited." + NEW_LINE);
                 return;
@@ -163,6 +163,22 @@ public abstract class ResourceManager {
     //@@author NgManSing
     private static boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
         return ProjectManager.getProject(projectIndex).isUrlAlreadyExist(projectUrl);
+    }
+
+    //@@author jovanhuang
+    /**
+     * This is a helper method that loops through a resource list and print it out.
+     *
+     * @param resources an arraylist containing resources for a project.
+     */
+    public static void printResourceList(ArrayList<Resource> resources) {
+        System.out.print("Resource(s):" + NEW_LINE);
+        int resourceCount = 1;
+        for (Resource resource : resources) {
+            System.out.print(resourceCount + "): " + resource + NEW_LINE);
+            resourceCount += 1;
+        }
+        assert true;
     }
 
 }
