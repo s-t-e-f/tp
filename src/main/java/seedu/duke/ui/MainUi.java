@@ -18,7 +18,7 @@ public class MainUi {
             + "edit: Edits a resource from the resource list for a specified project.\n"
             + "\tFormat: edit p/PROJECT_NAME i/INDEX url/URL_LINK [d/LINK_DESCRIPTION]\n"
             + "list: View the resource list for a specified project.\n"
-            + "\tFormat: list PROJECT_NAME\n"
+            + "\tFormat: list p/PROJECT_NAME\n"
             + "list-all: Shows the resource list for all projects.\n"
             + "find: Find resources in a specified project or all projects related to a keyword.\n"
             + "\tFormat: find k/KEYWORD [p/PROJECT_NAME]\n"
@@ -27,7 +27,7 @@ public class MainUi {
             + "exit: Exits the program.\n"
             + "------------------------------------------------------------------------\n";
     public static final String PROJECT_TEAM_ID = "Team Project of CS2113-W10-3.";
-    public static final String APP_NAME_AND_VERSION = "TraceYourProj - v0.1";
+    public static final String APP_NAME_AND_VERSION = "TraceYourProj";
     public static final String HOW_TO_GET_HELP = "Type 'help' for a list of command and related usage.";
     public static final String SIGNAL_FOR_USER_TO_INPUT = "Duke> ";
     public static final String EXIT_MESSAGE = "Thank you for using TraceYourProj!\n"

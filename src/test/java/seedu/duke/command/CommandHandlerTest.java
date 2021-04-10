@@ -93,7 +93,7 @@ class CommandHandlerTest {
 
         //test case 1
         String inputToCmd = "add p/CS2113 Documentation url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
-                + "list CS2113 Documentation\n"
+                + "list p/CS2113 Documentation\n"
                 + "exit";
 
         System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
