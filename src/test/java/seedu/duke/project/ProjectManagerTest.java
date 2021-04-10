@@ -57,9 +57,7 @@ class ProjectManagerTest {
     //@@author jovanhuang
     /**
      * Test case for printResourceListForAllProjects()
-     *
      * When no project exists in the list.
-     *
      */
     @Test
     public void testCase1PrintResourceListForAllProjects() {
@@ -74,8 +72,8 @@ class ProjectManagerTest {
         Duke.main(null);
 
         String targetString = MainUi.DUKE_STANDARD_HEADING
-                + "Here is the list of all project(s) and it's resource(s)!\n" +
-                "--------------------------------------------------------"
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------"
                 + CommandHandler.NEW_LINE
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
@@ -88,7 +86,6 @@ class ProjectManagerTest {
     //@@author jovanhuang
     /**
      * Test case for printResourceListForAllProjects()
-     *
      * When 1 project exists in the list.
      *
      */
@@ -128,7 +125,6 @@ class ProjectManagerTest {
     //@@author jovanhuang
     /**
      * Test case for printResourceListForAllProjects()
-     *
      * When 2 projects exist in the list.
      *
      */
@@ -183,14 +179,14 @@ class ProjectManagerTest {
     public void test1ValidateAndExtractProjectNameInput() throws NoProjectNameException, WrongInputFormatException {
         //Test case 1: when project name input is empty
         try {
-            String projectName= ProjectManager.validateAndExtractProjectNameInput("p/");
+            ProjectManager.validateAndExtractProjectNameInput("p/");
         } catch (NoProjectNameException e) {
             assertEquals(ProjectManager.NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE, e.getErrorMsg());
         }
 
         //Test case 2: when p/ is not used before project name
         try {
-            String projectName = ProjectManager.validateAndExtractProjectNameInput("CZ2003");
+            ProjectManager.validateAndExtractProjectNameInput("CZ2003");
         } catch (WrongInputFormatException e) {
             assertEquals(ProjectManager.WRONG_INPUT_FORMAT, e.getErrorMsg());
         }

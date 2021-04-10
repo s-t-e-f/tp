@@ -85,8 +85,7 @@ class CommandHandlerTest {
 
     //@@author jovanhuang
     /**
-     * Test Case 1 for printResourceListForAProject which is called by listAProjectResource().
-     *
+     * Test Case 1 for printResourceListForAProject which is called by listAProjectResource()
      * When there is one project in the project list.
      *
      */
@@ -124,8 +123,7 @@ class CommandHandlerTest {
 
     //@@author jovanhuang
     /**
-     * Test Case 2 for printResourceListForAProject which is called by listAProjectResource().
-     *
+     * Test Case 2 for printResourceListForAProject which is called by listAProjectResource()
      * When no project exists in the list.
      *
      */
@@ -153,8 +151,7 @@ class CommandHandlerTest {
 
     //@@author jovanhuang
     /**
-     * Test Case 3 for printResourceListForAProject which is called by listAProjectResource().
-     *
+     * Test Case 3 for printResourceListForAProject which is called by listAProjectResource()
      * When project is not inside the list.
      *
      */
@@ -183,8 +180,7 @@ class CommandHandlerTest {
 
     //@@author jovanhuang
     /**
-     * Test Case 4 for printResourceListForAProject() which is called by listAProjectResource().
-     *
+     * Test Case 4 for printResourceListForAProject() which is called by listAProjectResource()
      * When "p/" is not entered as part of user's inputs.
      *
      */

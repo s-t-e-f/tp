@@ -53,8 +53,7 @@ public class ResourceManagerTest {
 
     //@@author jovanhuang
     /**
-     * Test case 1 for printResourceList.
-     *
+     * Test case 1 for printResourceList()
      * When there are at least 1 resources in the list.
      *
      */
@@ -82,8 +81,7 @@ public class ResourceManagerTest {
 
     //@@author jovanhuang
     /**
-     * Test case 2 for printResourceList.
-     *
+     * Test case 2 for printResourceList()
      * When there are no resources in the list.
      *
      */
