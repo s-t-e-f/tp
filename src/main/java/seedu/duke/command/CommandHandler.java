@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Duke;
+import seedu.duke.exception.WrongInputFormatException;
 import seedu.duke.project.Project;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.NoProjectNameException;
@@ -30,6 +31,8 @@ public class CommandHandler {
     public static final String PROJECT_NOT_FOUND_ERROR_MESSAGE = "Project not found in database!" + NEW_LINE;
     public static final String NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE = "You did not key in the Project Name! "
             + "Please type \"help\" for more details." + NEW_LINE;
+    public static final String WRONG_INPUT_FORMAT = "You did not insert 'p/' before the project name!"
+            + " Please type \"help\" for more details. " + NEW_LINE;
     public static final String DIVIDER = "--------------------------------------------------------";
     String command;
     String[] infoFragments;
@@ -121,6 +124,8 @@ public class CommandHandler {
             System.out.print(NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
         } catch (ProjectNotFoundException e) {
             System.out.print(PROJECT_NOT_FOUND_ERROR_MESSAGE);
+        } catch (WrongInputFormatException e) {
+            System.out.print(WRONG_INPUT_FORMAT);
         }
     }
 
