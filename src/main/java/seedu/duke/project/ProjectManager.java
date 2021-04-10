@@ -110,11 +110,13 @@ public class ProjectManager {
     /**
      * This method will print the resources for a particular project.
      *
+     * @param infoFragments is an string array of inputs from users
+     *
      * @throws NoProjectNameException   when user did not enter project name.
      * @throws ProjectNotFoundException when project is not found in database.
-     * @param infoFragments is an string array of inputs from users
      */
-    public static void printResourceListForAProject(String[] infoFragments) throws NoProjectNameException, ProjectNotFoundException {
+    public static void printResourceListForAProject(String[] infoFragments)
+            throws NoProjectNameException, ProjectNotFoundException {
         String projectName = processProjectName(infoFragments);
         boolean isProjectNameEmpty = checkIfProjectNameEmpty(projectName);
         if (isProjectNameEmpty) {
