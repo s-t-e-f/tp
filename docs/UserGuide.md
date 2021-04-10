@@ -24,7 +24,7 @@ Upon running the jar file, you should see this on the command prompt console:
                                                                       |__/
 
 Team Project of CS2113-W10-3.
-TraceYourProj - v0.1
+TraceYourProj
 Type 'help' for a list of command and related usage.
 ```
 
@@ -41,7 +41,6 @@ Type 'help' for a list of command and related usage.
 * **Extra parameters** after commands that do not take in parameters such as `list-all` and `exit` will be **ignored**.  
   e.g.`exit 1234` will be interpreted as `exit`.  
   e.g.`list-all CZ2003` will be interpreted as `list-all`.
-  
 * All leading and trailing space of user input will be removed.
 
 * Command parameters have to be provided in correct formats and orders, which is provided in Feature session. 
@@ -72,7 +71,7 @@ delete: Deletes a resource from the resource list for a specified project.
 edit: Edits a resource from the resource list for a specified project.
 	Format: edit p/PROJECT_NAME i/INDEX [url/URL_LINK] [d/LINK_DESCRIPTION]
 list: View the resource list for a specified project.
-	Format: list PROJECT_NAME
+	Format: list p/PROJECT_NAME
 list-all: Shows the resource list for all projects.
 find: Find resources in a specified project or all projects related to a keyword.
 	Format: find k/KEYWORD [p/PROJECT_NAME]
@@ -141,7 +140,7 @@ Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION c/CHECK]`
    
    It will **append** the resource to the resource list of the project "NUS".  
 
-4. Assume the user's device could access internet:
+4. Assume the user's device could access internet:  
    **Input:**
    ```
    add p/NUS url/nusmods c/true
@@ -194,16 +193,16 @@ list-all
 ---
 
 
-### List the resources of one projects: `list PROJECTNAME`
-Shows a list of all resources in one project created in TraceYourProj.
+### List the resources of one projects: `list p/PROJECTNAME`
+Shows a list of all resources in **one** project created in TraceYourProj.
 
-Format: `list PROJECTNAME`
+Format: `list p/PROJECTNAME`
 
 **Example of usage:**
 
 **Input:**
 ```
-list NUS
+list p/NUS
 ```
 **Output:**
 ```
@@ -214,6 +213,11 @@ Resource(s):
 2): [2021-04-03] https://nusmods.com/
 --------------------------------------------------------
 ```
+
+For `list p/PROJECTNAME`, only one project name can be used at one time. This feature doesn't support multiple project names. 
+It doesn't support two parameters like `list p/CZ2003 p/IT3011`. Supporting more than 1 project name for this feature
+will be for our future implementations.
+
 
 ---
 ### Deleting resource(s) : `delete`
@@ -397,7 +401,7 @@ Hope you have a wonderful day.
 |add|`add p/PROJECT NAME url/URL [d/DESCRIPTION c/true]`|Add a resource to a project|
 |delete|`delete p/PROJECT_NAME [i/INDEX]`|Deletes the specified resource from the resource list based on the project.|
 |edit|`edit p/PROJECT_NAME i/INDEX url/LINK [d/DESCRIPTION]`|Edits an existing resource in the resource list based on the project.|
-|list|`list PROJECTNAME`|List a project's resources|
+|list|`list p/PROJECTNAME`|List a project's resources|
 |list-all|`list-all`|List all projects and their respective resources|
 |find|`find k/KEYWORD [p/PROJECT_NAME]`|Find resources|
 |exit|`exit`|Exit TraceYourProj|

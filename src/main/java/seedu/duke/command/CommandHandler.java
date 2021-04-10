@@ -195,13 +195,18 @@ public class CommandHandler {
     public void printResourceListForAProject() throws NoProjectNameException, ProjectNotFoundException {
         String projectName = processProjectName(getInfoFragments());
         boolean isProjectNameEmpty = checkIfProjectNameEmpty(projectName);
+
         if (isProjectNameEmpty) {
             throw new NoProjectNameException();
         }
+
+        String newProjectName = projectName.substring(2);
+
+
         for (Project project : projects) {
-            if (project.getProjectName().equals(projectName)) {
+            if (project.getProjectName().equals(newProjectName)) {
                 printDivider();
-                System.out.print("Project: " + projectName + NEW_LINE);
+                System.out.print("Project: " + newProjectName + NEW_LINE);
                 ArrayList<Resource> resources = project.getResources();
                 printResourceList(resources);
                 printDivider();

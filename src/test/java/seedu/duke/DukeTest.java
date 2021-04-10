@@ -442,7 +442,7 @@ class DukeTest {
                 + "edit: Edits a resource from the resource list for a specified project.\n"
                 + "\tFormat: edit p/PROJECT_NAME i/INDEX url/URL_LINK [d/LINK_DESCRIPTION]\n"
                 + "list: View the resource list for a specified project.\n"
-                + "\tFormat: list PROJECT_NAME\n"
+                + "\tFormat: list p/PROJECT_NAME\n"
                 + "list-all: Shows the resource list for all projects.\n"
                 + "find: Find resources in a specified project or all projects related to a keyword.\n"
                 + "\tFormat: find k/KEYWORD [p/PROJECT_NAME]\n"
