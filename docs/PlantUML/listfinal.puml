@@ -2,42 +2,31 @@
 hide footbox
 box list-all feature
 participant ":CommandHandler" as CH
-'participant "P1:Project" as P1
-'participant "P2:Project" as P2
-'participant "P3:Project" as P3
-participant ":ArrayList<Project>" as PA
-participant ":ArrayList<Resources>" as RA
+participant ":ProjectManager" as PM
+participant ":ResourceManager" as RM
+participant ":Project" as P
+participant ":Resource" as R
 
-
-create PA
-CH -> PA
-
-create RA
-PA -> RA
-
-[-> CH: processCommand()
+[-> CH: switchCommand()
 activate CH
 
-CH -> CH: printResourceListForAllProjects()
-activate CH
+CH -> PM: printResourceListForAllProjects()
+activate PM
 
-loop Length of ArrayList<Project>
-    CH -> PA
-    activate PA
-    PA -> RA: getResource()
-    activate RA
-    return
-    return
-    CH -> CH: printResourceList()
-    activate CH
-    loop Length of ArrayList<Resource>
-        CH -> CH: print()
+loop for each project
+    PM -> P: getResource()
+    activate P
+    return resources
+    PM -> RM: printResourceList(resources)
+    activate RM
+    loop for each resource
+        RM->R: print()
+        activate R
+        return
     end
 end
-endbox
 return
 return
-
-return
+return isLoop
 
 @enduml
