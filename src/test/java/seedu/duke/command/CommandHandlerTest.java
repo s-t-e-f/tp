@@ -93,7 +93,7 @@ class CommandHandlerTest {
 
         //test case 1
         String inputToCmd = "add p/CS2113 Documentation url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project\n"
-                + "list CS2113 Documentation\n"
+                + "list p/CS2113 Documentation\n"
                 + "exit";
 
         System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
@@ -126,7 +126,7 @@ class CommandHandlerTest {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
-        String inputToCmd = "list CS2113 Documentation\n"
+        String inputToCmd = "list p/CS2113 Documentation\n"
                 + "exit";
 
         System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
@@ -151,7 +151,7 @@ class CommandHandlerTest {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
-        String inputToCmd = "list \n"
+        String inputToCmd = "list p/\n"
                 + "exit";
 
         System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
@@ -170,50 +170,29 @@ class CommandHandlerTest {
     }
 
     /**
-     * Test cases for processProjectName.
+     * Test Case 4 for printResourceListForAProject.
      */
     @Test
-    public void testProcessProjectName() {
-        //test case 1
-        ArrayList<Project> projects1 = new ArrayList<>();
-        InputParser parser1 = new InputParser("list CZ2003 Documentation");
-        CommandHandler commandHandler1 = new CommandHandler(parser1, projects1);
-        assertEquals("CZ2003 Documentation", commandHandler1.processProjectName(commandHandler1.getInfoFragments()));
+    public void testCase4ForPrintResourceListForAProject() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
 
-        //test case 2
-        ArrayList<Project> projects2 = new ArrayList<>();
-        InputParser parser2 = new InputParser("list ");
-        CommandHandler commandHandler2 = new CommandHandler(parser2, projects2);
-        assertEquals("", commandHandler2.processProjectName(commandHandler2.getInfoFragments()));
+        String inputToCmd = "list \n"
+                + "exit";
 
-        //test case 3
-        ArrayList<Project> projects3 = new ArrayList<>();
-        InputParser parser3 = new InputParser("list CS2113");
-        CommandHandler commandHandler3 = new CommandHandler(parser3, projects3);
-        assertEquals("CS2113", commandHandler3.processProjectName(commandHandler3.getInfoFragments()));
-    }
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
 
-    /**
-     * Test cases for checkIfProjectNameEmpty.
-     */
-    @Test
-    public void checkIfProjectNameEmpty() {
-        //test case 1
-        ArrayList<Project> projects1 = new ArrayList<>();
-        String userInput1 = "list CZ2003 Documentation";
-        InputParser parser1 = new InputParser(userInput1);
-        CommandHandler commandHandler1 = new CommandHandler(parser1, projects1);
-        String projectName1 = commandHandler1.processProjectName(commandHandler1.getInfoFragments());
-        assertEquals(false, commandHandler1.checkIfProjectNameEmpty(projectName1));
+        Duke.main(null);
 
-        //test case 2
-        ArrayList<Project> projects2 = new ArrayList<>();
-        String userInput2 = "list ";
-        InputParser parser2 = new InputParser(userInput2);
-        CommandHandler commandHandler2 = new CommandHandler(parser2, projects2);
-        String projectName2 = commandHandler1.processProjectName(commandHandler2.getInfoFragments());
-        assertEquals(true, commandHandler2.checkIfProjectNameEmpty(projectName2));
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "You did not insert 'p/' before the project name! Please type \"help\" for more details. "
+                + CommandHandler.NEW_LINE
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
 
+        assertEquals(newOutputStream.toString(), targetString);
+
+        System.setOut(System.out);
     }
 
     @Test

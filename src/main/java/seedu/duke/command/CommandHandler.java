@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Duke;
+import seedu.duke.exception.WrongInputFormatException;
 import seedu.duke.project.Project;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.NoProjectNameException;
@@ -14,7 +15,6 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class CommandHandler {
     private static final String ADD_COMMAND = "add";
@@ -31,6 +31,8 @@ public class CommandHandler {
     public static final String PROJECT_NOT_FOUND_ERROR_MESSAGE = "Project not found in database!" + NEW_LINE;
     public static final String NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE = "You did not key in the Project Name! "
             + "Please type \"help\" for more details." + NEW_LINE;
+    public static final String WRONG_INPUT_FORMAT = "You did not insert 'p/' before the project name!"
+            + " Please type \"help\" for more details. " + NEW_LINE;
     public static final String DIVIDER = "--------------------------------------------------------";
     String command;
     String[] infoFragments;
@@ -79,10 +81,10 @@ public class CommandHandler {
             isLoop = false;
             break;
         case LIST_ALL_COMMAND:
-            printResourceListForAllProjects();
+            ProjectManager.printResourceListForAllProjects();
             break;
         case LIST_ONE_PROJECT_COMMAND:
-            listProjectResource();
+            listAProjectResource();
             break;
         case EDIT_COMMAND:
             processInputBeforeEditing();
@@ -94,10 +96,10 @@ public class CommandHandler {
             listAllCommands();
             break;
         case SAVE_COMMAND:
-            Storage.updateStorage(Duke.getProjects());
+            Storage.updateStorage(ProjectManager.projects);
             break;
         case LOAD_COMMAND:
-            Duke.setProjects(Storage.readFromStorage());
+            ProjectManager.projects = Storage.readFromStorage();
             break;
         default:
             promptUserInvalidInput();
@@ -111,27 +113,20 @@ public class CommandHandler {
         return command == null;
     }
 
-    //@@author
-    private void listProjectResource() {
+    //@@author jovanhuang
+    /**
+     * This method calls helper methods to print resources for a project.
+     */
+    private void listAProjectResource() {
         try {
-            printResourceListForAProject();
+            ProjectManager.printResourceListForAProject(getInfoFragments());
         } catch (NoProjectNameException e) {
             System.out.print(NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
         } catch (ProjectNotFoundException e) {
             System.out.print(PROJECT_NOT_FOUND_ERROR_MESSAGE);
+        } catch (WrongInputFormatException e) {
+            System.out.print(WRONG_INPUT_FORMAT);
         }
-    }
-
-    //@@author jovanhuang
-
-    /**
-     * This method will return the project name from userInput.
-     *
-     * @return Project Name is the name of the project.
-     */
-    public String processProjectName(String[] infoFragments) {
-        String projectName = String.join(" ", infoFragments);
-        return projectName;
     }
 
     //@@author NgManSing
@@ -181,88 +176,15 @@ public class CommandHandler {
             printErrorMsg("Resource failed to be edited. (Reason: " + e.getErrorMsg() + ")");
             return;
         }
-
         ResourceManager.editResource(projectInfo);
-    }
-
-    //@@author jovanhuang
-    /**
-     * This method will print the resources for a particular project.
-     *
-     * @throws NoProjectNameException   when user did not enter project name.
-     * @throws ProjectNotFoundException when project is not found in database.
-     */
-    public void printResourceListForAProject() throws NoProjectNameException, ProjectNotFoundException {
-        String projectName = processProjectName(getInfoFragments());
-        boolean isProjectNameEmpty = checkIfProjectNameEmpty(projectName);
-        if (isProjectNameEmpty) {
-            throw new NoProjectNameException();
-        }
-        for (Project project : projects) {
-            if (project.getProjectName().equals(projectName)) {
-                printDivider();
-                System.out.print("Project: " + projectName + NEW_LINE);
-                ArrayList<Resource> resources = project.getResources();
-                printResourceList(resources);
-                printDivider();
-                return;
-            }
-        }
-        throw new ProjectNotFoundException();
-    }
-
-    //@@author jovanhuang
-    /**
-     * This method will check if project name is empty.
-     *
-     * @param projectName This string user's input for projectName.
-     * @return true if empty, false if not empty.
-     */
-    public boolean checkIfProjectNameEmpty(String projectName) {
-        boolean isProjectNameEmpty = projectName.equals("");
-        return isProjectNameEmpty;
     }
 
     //@@author jovanhuang
     /**
      * This method will print divider.
      */
-    private void printDivider() {
+    public static void printDivider() {
         System.out.print(DIVIDER + NEW_LINE);
-    }
-
-    //@@author jovanhuang
-    /**
-     * This method will print the resource list for all projects.
-     */
-    public void printResourceListForAllProjects() {
-        int projectCount = 0;
-        System.out.print("Here is the list of all project(s) and it's resource(s)!" + NEW_LINE);
-        printDivider();
-        for (Project project : projects) {
-            projectCount += 1;
-            System.out.print("Project " + projectCount + ": " + project + NEW_LINE);
-            ArrayList<Resource> resources = project.getResources();
-            printResourceList(resources);
-            printDivider();
-        }
-        assert true;
-    }
-
-    //@@author jovanhuang
-    /**
-     * This is a helper method that loops through a resource list and print it out.
-     *
-     * @param resources an arraylist containing resources for a project.
-     */
-    public static void printResourceList(ArrayList<Resource> resources) {
-        System.out.print("Resource(s):" + NEW_LINE);
-        int resourceCount = 1;
-        for (Resource resource : resources) {
-            System.out.print(resourceCount + "): " + resource + NEW_LINE);
-            resourceCount += 1;
-        }
-        assert true;
     }
 
     //@@author

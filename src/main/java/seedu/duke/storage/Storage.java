@@ -2,6 +2,7 @@ package seedu.duke.storage;
 
 import seedu.duke.Duke;
 import seedu.duke.project.Project;
+import seedu.duke.project.ProjectManager;
 import seedu.duke.resource.Resource;
 
 import java.io.File;
@@ -105,7 +106,7 @@ public class Storage {
 
     private static void updateProjects() {
 
-        ArrayList<Project> dukeProjects = Duke.getProjects();
+        ArrayList<Project> dukeProjects = ProjectManager.projects;
 
         for (Project project: dukeProjects) {
             if (projects.contains(project)) {

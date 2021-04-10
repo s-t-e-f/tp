@@ -1,13 +1,26 @@
 package seedu.duke.project;
 
 import seedu.duke.Duke;
+import seedu.duke.exception.WrongInputFormatException;
+import seedu.duke.exception.NoProjectNameException;
+import seedu.duke.exception.ProjectNotFoundException;
 import seedu.duke.resource.Resource;
 import seedu.duke.resource.ResourceManager;
 
 import java.util.ArrayList;
 
+import static seedu.duke.command.CommandHandler.printDivider;
+
 public class ProjectManager {
     public static final String NEW_LINE = "\n";
+    public static final int LIST_PARAMETER_STARTING_INDEX = 0;
+    public static final int LIST_PARAMETER_ENDING_INDEX = 2;
+    public static final String LIST_PARAMETER = "p/";
+    public static final String EMPTY_STRING = "";
+    public static final int MINIMUM_LIST_PARAMETER_LENGTH = 2;
+    public static final int PROJECT_NAME_STARTING_INDEX = 2;
+    public static final String MESSAGE_FOR_PRINTING_ALL_PROJECT_RESOURCES =
+            "Here is the list of all project(s) and it's resource(s)!" + NEW_LINE;
 
     public static ArrayList<Project> projects;
 
@@ -82,5 +95,99 @@ public class ProjectManager {
     //@@author NgManSing
     public static void updateRecords() {
         projects = Duke.getProjects();
+    }
+
+    //@@author jovanhuang
+    /**
+     * This method will print the resource list for all projects.
+     */
+    public static void printResourceListForAllProjects() {
+        int projectCount = 0;
+        System.out.print(MESSAGE_FOR_PRINTING_ALL_PROJECT_RESOURCES);
+        printDivider();
+        for (Project project : projects) {
+            projectCount += 1;
+            System.out.print("Project " + projectCount + ": " + project + NEW_LINE);
+            ArrayList<Resource> resources = project.getResources();
+            ResourceManager.printResourceList(resources);
+            printDivider();
+        }
+        assert true;
+    }
+
+    //@@author jovanhuang
+    /**
+     * This method will print the resources for a particular project.
+     *
+     * @param infoFragments is an string array of input from users.
+     *
+     * @throws NoProjectNameException   when user did not enter project name.
+     * @throws ProjectNotFoundException when project is not found in database.
+     */
+    public static void printResourceListForAProject(String[] infoFragments)
+            throws NoProjectNameException, ProjectNotFoundException, WrongInputFormatException {
+
+        String userInputs = processInputs(infoFragments);
+        String projectName = validateAndExtractProjectNameInput(userInputs);
+        for (Project project : projects) {
+            if (project.getProjectName().equals(projectName)) {
+                printDivider();
+                System.out.print("Project: " + projectName + NEW_LINE);
+                ArrayList<Resource> resources = project.getResources();
+                ResourceManager.printResourceList(resources);
+                printDivider();
+                return;
+            }
+        }
+        throw new ProjectNotFoundException();
+    }
+
+    //@@author jovanhuang
+    /**
+     * This is a helper method to help check if user has the correct input for list PROJECT_NAME feature.
+     * @param userInputs is user input.
+     * @return projectName
+     * @throws WrongInputFormatException thrown if format not followed.
+     * @throws NoProjectNameException thrown if no project name is provided.
+     */
+    private static String validateAndExtractProjectNameInput(String userInputs)
+            throws WrongInputFormatException, NoProjectNameException {
+        if (userInputs.length() < MINIMUM_LIST_PARAMETER_LENGTH) {
+            throw new WrongInputFormatException();
+        }
+
+        String parameters = userInputs.substring(LIST_PARAMETER_STARTING_INDEX,LIST_PARAMETER_ENDING_INDEX);
+        if (!parameters.equals(LIST_PARAMETER) || parameters.equals(EMPTY_STRING)) {
+            throw new WrongInputFormatException();
+        }
+
+        String projectName = userInputs.substring(PROJECT_NAME_STARTING_INDEX);
+        boolean isProjectNameEmpty = checkIfStringIsEmpty(projectName);
+
+        if (isProjectNameEmpty) {
+            throw new NoProjectNameException();
+        }
+        return projectName;
+    }
+
+    //@@author jovanhuang
+    /**
+     * This method will return the userInput.
+     *
+     * @return user inputs.
+     */
+    public static String processInputs(String[] infoFragments) {
+        return String.join(" ", infoFragments);
+    }
+
+    //@@author jovanhuang
+    /**
+     * This method will check if string is empty.
+     *
+     * @param string is user's input.
+     * @return true if empty, false if not empty.
+     */
+    public static boolean checkIfStringIsEmpty(String string) {
+        return string.equals("");
     }
 }
