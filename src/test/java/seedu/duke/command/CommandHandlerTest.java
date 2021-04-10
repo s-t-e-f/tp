@@ -126,7 +126,7 @@ class CommandHandlerTest {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
-        String inputToCmd = "list p/CS2113 Documentation\n"
+        String inputToCmd = "list CS2113 Documentation\n"
                 + "exit";
 
         System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
@@ -151,32 +151,6 @@ class CommandHandlerTest {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOutputStream));
 
-        String inputToCmd = "list p/\n"
-                + "exit";
-
-        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
-
-        Duke.main(null);
-
-        String targetString = MainUi.DUKE_STANDARD_HEADING
-                + "You did not key in the Project Name! Please type \"help\" for more details."
-                + CommandHandler.NEW_LINE
-                + MainUi.SIGNAL_FOR_USER_TO_INPUT
-                + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
-
-        assertEquals(newOutputStream.toString(), targetString);
-
-        System.setOut(System.out);
-    }
-
-    /**
-     * Test Case 4 for printResourceListForAProject.
-     */
-    @Test
-    public void testCase4ForPrintResourceListForAProject() {
-        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(newOutputStream));
-
         String inputToCmd = "list \n"
                 + "exit";
 
@@ -185,7 +159,7 @@ class CommandHandlerTest {
         Duke.main(null);
 
         String targetString = MainUi.DUKE_STANDARD_HEADING
-                + "You did not insert 'p/' before the project name! Please type \"help\" for more details. "
+                + "You did not key in the Project Name! Please type \"help\" for more details."
                 + CommandHandler.NEW_LINE
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
