@@ -1,6 +1,6 @@
 @startuml
 hide footbox
-box list-all feature
+box List All Projects & their Resources
 participant ":CommandHandler" as CH
 participant ":ProjectManager" as PM
 participant ":ResourceManager" as RM

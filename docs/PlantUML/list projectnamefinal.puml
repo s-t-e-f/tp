@@ -1,6 +1,6 @@
 @startuml
 hide footbox
-box list p/PROJECTNAME feature
+box List Resources for One Project
 participant ":CommandHandler" as CH
 participant ":ProjectManager" as PM
 participant ":ResourceManager" as RM
@@ -28,7 +28,6 @@ loop for each project
         PM -> P: getResources()
         activate P
         return resources
-
         PM -> RM: printResourceList(resources)
         activate RM
         loop for each resource
@@ -36,13 +35,12 @@ loop for each project
             activate R
             return
         end
+
+        return
         return
         end
-
+        end
         return
-        return
-end
-
 return isLoop
 
 @enduml
