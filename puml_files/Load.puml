@@ -4,11 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":CommandHandler" as CommandHandler LOGIC_COLOR_T1
 participant ":Storage" as Storage LOGIC_COLOR_T1
-participant ":Duke" as Duke LOGIC_COLOR_T1
-end box
-
-box Model MODEL_COLOR_T1
-participant ":Model" as MODEL_COLOR
+participant ":ProjectManager" as ProjectManager LOGIC_COLOR_T1
 end box
 
 activate CommandHandler
@@ -20,11 +16,11 @@ activate Storage
 Storage --> CommandHandler : projects
 deactivate Storage
 
-CommandHandler -> Duke : setProjects(projects)
-activate Duke
+CommandHandler -> ProjectManager : setProjects(projects)
+activate ProjectManager
 
-Duke --> CommandHandler : "Projects loaded into TraceMyProj"
-deactivate Duke
+ProjectManager --> CommandHandler : "Projects loaded into TraceMyProj"
+deactivate ProjectManager
 
 deactivate CommandHandler
 
