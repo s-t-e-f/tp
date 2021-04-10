@@ -145,7 +145,6 @@ public class ProjectManager {
      */
     public static void printResourceListForAProject(String[] infoFragments)
             throws NoProjectNameException, ProjectNotFoundException, WrongInputFormatException {
-
         String userInputs = processInputs(infoFragments);
         String projectName = validateAndExtractProjectNameInput(userInputs);
         for (Project project : projects) {

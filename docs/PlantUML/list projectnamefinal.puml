@@ -1,59 +1,48 @@
 @startuml
 hide footbox
-box list PROJECTNAME feature
+box list p/PROJECTNAME feature
 participant ":CommandHandler" as CH
-participant ":ArrayList<Project>" as PA
-participant ":Project" as PC
-participant ":ArrayList<Resources>" as RA
+participant ":ProjectManager" as PM
+participant ":ResourceManager" as RM
+participant ":Project" as P
+participant ":Resource" as R
 
 
-create PA
-CH -> PA
-
-create RA
-PA -> RA
-
-[-> CH: processCommand()
+[-> CH: switchCommand()
 activate CH
 
-CH -> CH: printResourceListForAProject()
+CH -> CH: listAProjectResource()
 activate CH
 
-CH -> CH: processProjectName()
-activate CH
-return projectName
+CH -> PM: printResourceListForAProject(infoFragments)
+activate PM
 
-alt isProjectNameEmpty
-    CH -->[
-else
-    loop Length of ArrayList<Project>
-        CH -> PA
-        activate PA
-        PA -> PC: getProjectName()
-        activate PC
-        return
+PM -> PM: userInputs = processInputs(infoFragments)
+PM -> PM: userInputProjectName = validateAndExtractProjectNameInput(userInputs)
 
-        return
-        opt getProjectName().equals(projectName)
-            CH -> PA:
-            activate PA
-            PA -> RA: getResource()
-            activate RA
-            return
+loop for each project
+    PM -> P: getProjectName()
+    activate P
+    return projectName
+    opt if projectName.equals(userInputProjectName)
+        PM -> P: getResources()
+        activate P
+        return resources
 
+        PM -> RM: printResourceList(resources)
+        activate RM
+        loop for each resource
+            RM -> R: print()
+            activate R
             return
-            CH -> CH: printResourceList()
-            activate CH
-            loop Length of ArrayList<Resource>
-                CH -> CH: print()
-            end
-            return
-            return
-            CH -->[
         end
-    end
+        return
+        end
+
+        return
+        return
 end
-CH -->[
-endbox
+
+return isLoop
 
 @enduml
