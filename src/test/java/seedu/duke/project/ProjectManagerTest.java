@@ -28,7 +28,7 @@ class ProjectManagerTest {
      * Test cases for checkIfProjectNameEmpty.
      */
     @Test
-    public void testcheckForInputsIsEmpty() {
+    public void testCheckForInputsIsEmpty() {
         //test case 1
         String projectName1 = "CZ2003 Documentation";
         assertEquals(false, ProjectManager.checkIfStringIsEmpty(projectName1));
