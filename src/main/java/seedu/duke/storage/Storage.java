@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import seedu.duke.project.Project;
 import seedu.duke.project.ProjectManager;
 import seedu.duke.resource.Resource;
