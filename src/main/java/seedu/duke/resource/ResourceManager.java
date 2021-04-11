@@ -37,6 +37,7 @@ public abstract class ResourceManager {
      * @param projectInfo Processed user's command
      */
     public static void deleteResource(String[] projectInfo) {
+        assert projectInfo != null;
         Project targetedProj;
         String projectName = projectInfo[0];
         int idx;
@@ -72,6 +73,7 @@ public abstract class ResourceManager {
      * @param projectInfo Processed user's command
      */
     public static void editResource(String[] projectInfo) {
+        assert projectInfo != null;
         Project targetedProj;
         Resource targetedResource;
         String projectName = projectInfo[0];

@@ -378,6 +378,110 @@ class DukeTest {
         System.setOut(System.out);
     }
 
+    /**
+     * Positive case for delete feature.
+     * Delete a resource for a specified project.
+     */
+    @Test
+    public void testDeleteAResourceFromProject() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
+                + "list-all\n"
+                + "delete p/CS2113 Group Project i/2\n"
+                + "list-all\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "Resource(s):\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is deleted from the project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "Resource(s):\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(targetString, newOutputStream.toString());
+
+        System.setOut(System.out);
+    }
+
+    /**
+     * Positive case for delete feature.
+     * Delete entire project.
+     */
+    @Test
+    public void testDeleteEntireProject() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "add p/CS2113 Group Project url/https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html d/tp Website\n"
+                + "list-all\n"
+                + "delete p/CS2113 Group Project\n"
+                + "list-all\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is added to the existing project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + "Project 1: CS2113 Group Project\n"
+                + "Resource(s):\n"
+                + "1): "
+                + "[" + LocalDate.now() + "] "
+                + "https://ay2021s2-cs2113-w10-3.github.io/tp/ (Description: Team Project for CS2113)\n"
+                + "2): "
+                + "[" + LocalDate.now() + "] "
+                + "https://nus-cs2113-ay2021s2.github.io/website/admin/tp-expectations.html (Description: tp Website)\n"
+                + "--------------------------------------------------------\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "All the resources in CS2113 Group Project has been deleted.\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "Here is the list of all project(s) and it's resource(s)!\n"
+                + "--------------------------------------------------------" + "\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+
+        assertEquals(targetString, newOutputStream.toString());
+
+        System.setOut(System.out);
+    }
+
     @Test
     public void testEditNotFoundResource() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -425,7 +529,34 @@ class DukeTest {
 
         System.setOut(System.out);
     }
-    
+
+    /**
+     * Positive Test Case for edit feature.
+     */
+    @Test
+    public void testEditResource() {
+        ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOutputStream));
+
+        String inputToCmd = "add p/CS2113 Group Project url/https://ay2021s2-cs2113-w10-3.github.io/tp/ d/Team Project for CS2113\n"
+                + "edit p/CS2113 Group Project i/1 url/https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html\n"
+                + "exit";
+
+        System.setIn(new ByteArrayInputStream(inputToCmd.getBytes()));
+
+        Duke.main(null);
+
+        String targetString = MainUi.DUKE_STANDARD_HEADING
+                + "The resource is added into the new project \"CS2113 Group Project\".\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + "The resource is successfully edited to : " + "\n"
+                + "    [2021-04-11] https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html (Description: Team Project for CS2113)\n"
+                + MainUi.SIGNAL_FOR_USER_TO_INPUT
+                + MainUi.EXIT_MESSAGE + "\n";
+        assertEquals(targetString, newOutputStream.toString());
+
+        System.setOut(System.out);
+    }
 
     @Test
     public void testListAllCommands() {
