@@ -30,7 +30,11 @@ for use via a Command Line Interface (CLI).
 
 ## <a id="designAndImplementation">Design & Implementation</a>
 
-### 
+### Architecture
+![Architecture_png](puml_img/Architecture.png)
+
+The Architecture Diagram provided above illustrates the high-level design of TraceYourProj. Given below is a quick 
+overview of each component.
 --- 
 **Class Diagram:**
 
