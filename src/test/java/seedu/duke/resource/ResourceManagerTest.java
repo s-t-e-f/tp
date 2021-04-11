@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ResourceManagerTest {
 
+    //@author yyixue
     @Test
     public void testPrintResourcesMatchingKeyword() {
         ArrayList<Resource> resources = new ArrayList<>();
@@ -37,6 +38,7 @@ public class ResourceManagerTest {
         System.setOut(System.out);
     }
 
+    //@author yyixue
     @Test
     public void testPrintNoResourcesMatchingKeyword() {
         ArrayList<Resource> resources = new ArrayList<>();

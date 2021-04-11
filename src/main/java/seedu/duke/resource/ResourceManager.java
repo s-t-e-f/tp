@@ -15,9 +15,10 @@ public abstract class ResourceManager {
     public static final String NEW_LINE = "\n";
     public static final int INITIAL_RESOURCE_COUNT = 1;
     public static final int ONE_INCREMENT = 1;
-
+    
     private static Logger logger = Logger.getLogger("Foo");
 
+    //@author yyixue
     public static void printResourcesMatchingKeyword(ArrayList<Resource> resources, String keyword) {
         int resourceCount = 1;
         for (Resource resource : resources) {

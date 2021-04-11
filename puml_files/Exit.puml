@@ -6,13 +6,17 @@ participant ":MainUI" as MUI
 end box
 
 
-[-> CH : processCommand()]
+[-> CH : processCommand()
+activate CH
+
+CH -> CH : switchCommand()
 activate CH
 
 CH -> MUI : showExitMessage()
 activate MUI
 return
 
+return
 return isLoop
 
 
