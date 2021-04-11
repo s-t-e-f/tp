@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Duke;
 import seedu.duke.exception.WrongInputFormatException;
 import seedu.duke.project.Project;
 import seedu.duke.exception.InvalidArgumentException;
@@ -96,6 +97,7 @@ public class CommandHandler {
             break;
         case LOAD_COMMAND:
             ProjectManager.setProjects(Storage.readFromStorage());
+            Duke.setProjects(ProjectManager.getProjects());
             break;
         default:
             promptUserInvalidInput();
