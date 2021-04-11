@@ -379,8 +379,8 @@ class DukeTest {
     }
 
     /**
-     * Positive case for delete feature
-     * Delete a resource for a specified project
+     * Positive case for delete feature.
+     * Delete a resource for a specified project.
      */
     @Test
     public void testDeleteAResourceFromProject() {
@@ -434,8 +434,8 @@ class DukeTest {
     }
 
     /**
-     * Positive case for delete feature
-     * Delete entire project
+     * Positive case for delete feature.
+     * Delete entire project.
      */
     @Test
     public void testDeleteEntireProject() {
@@ -531,7 +531,7 @@ class DukeTest {
     }
 
     /**
-     * Positive Test Case for edit feature
+     * Positive Test Case for edit feature.
      */
     @Test
     public void testEditResource() {
