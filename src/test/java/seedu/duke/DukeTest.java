@@ -550,7 +550,7 @@ class DukeTest {
                 + "The resource is added into the new project \"CS2113 Group Project\".\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + "The resource is successfully edited to : " + "\n"
-                + "    [2021-04-11] https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html (Description: Team Project for CS2113)\n"
+                + "    [" + LocalDate.now() +  "] https://nus-cs2113-ay2021s2.github.io/dashboards/contents/tp-progress.html (Description: Team Project for CS2113)\n"
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
         assertEquals(targetString, newOutputStream.toString());

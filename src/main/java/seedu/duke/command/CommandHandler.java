@@ -13,6 +13,9 @@ import seedu.duke.resource.ResourceManager;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import java.util.ArrayList;
 
 public class CommandHandler {
@@ -29,7 +32,9 @@ public class CommandHandler {
     private static final String LOAD_COMMAND = "load";
     public static final String NEW_LINE = "\n";
     public static final String DIVIDER = "--------------------------------------------------------";
+    private static Logger logger = Logger.getLogger(CommandHandler.class.getName());
 
+    //@@author
     String command;
     String[] infoFragments;
     private final ArrayList<Project> projects;
@@ -118,10 +123,13 @@ public class CommandHandler {
         try {
             ProjectManager.printResourceListForAProject(getInfoFragments());
         } catch (NoProjectNameException e) {
+            logger.log(Level.WARNING, "Couldn't detect project name from user inputs.");
             System.out.print(e.getErrorMsg());
         } catch (ProjectNotFoundException e) {
+            logger.log(Level.WARNING, "Project couldn't be found.");
             System.out.print(e.getErrorMsg());
         } catch (WrongInputFormatException e) {
+            logger.log(Level.WARNING, "Wrong format for commands");
             System.out.print(e.getErrorMsg());
         }
     }
