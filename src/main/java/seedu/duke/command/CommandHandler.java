@@ -119,11 +119,11 @@ public class CommandHandler {
         try {
             ProjectManager.printResourceListForAProject(getInfoFragments());
         } catch (NoProjectNameException e) {
-            System.out.print(ProjectManager.NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
+            System.out.print(e.getErrorMsg());
         } catch (ProjectNotFoundException e) {
-            System.out.print(ProjectManager.PROJECT_NOT_FOUND_ERROR_MESSAGE);
+            System.out.print(e.getErrorMsg());
         } catch (WrongInputFormatException e) {
-            System.out.print(ProjectManager.WRONG_INPUT_FORMAT);
+            System.out.print(e.getErrorMsg());
         }
     }
 
