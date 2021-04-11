@@ -1,7 +1,6 @@
 package seedu.duke.ui;
 
 public class MainUi {
-    //@@author jovanhuang
     public static final String LOGO_STRING = " _____                                 "
             + "                 ___              _\n"
             + "/__   \\ _ __  __ _   ___  ___ /\\_/\\ ___   _   _  _ __  / _ \\ _ __  ___  (_)\n"

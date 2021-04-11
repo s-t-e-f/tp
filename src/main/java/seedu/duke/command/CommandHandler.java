@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Duke;
 import seedu.duke.exception.WrongInputFormatException;
 import seedu.duke.project.Project;
 import seedu.duke.exception.InvalidArgumentException;
@@ -96,6 +97,7 @@ public class CommandHandler {
             break;
         case LOAD_COMMAND:
             ProjectManager.setProjects(Storage.readFromStorage());
+            Duke.setProjects(ProjectManager.getProjects());
             break;
         default:
             promptUserInvalidInput();
@@ -117,11 +119,11 @@ public class CommandHandler {
         try {
             ProjectManager.printResourceListForAProject(getInfoFragments());
         } catch (NoProjectNameException e) {
-            System.out.print(ProjectManager.NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
+            System.out.print(e.getErrorMsg());
         } catch (ProjectNotFoundException e) {
-            System.out.print(ProjectManager.PROJECT_NOT_FOUND_ERROR_MESSAGE);
+            System.out.print(e.getErrorMsg());
         } catch (WrongInputFormatException e) {
-            System.out.print(ProjectManager.WRONG_INPUT_FORMAT);
+            System.out.print(e.getErrorMsg());
         }
     }
 

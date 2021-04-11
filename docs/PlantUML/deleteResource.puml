@@ -12,7 +12,7 @@ participant ":Project Manager" as ProjectManager
 activate CommandHandler
 
 
-CommandHandler -> CommandParser: decodeInfoFragment
+CommandHandler -> CommandParser: decodeInfoFragment()
 activate CommandParser
 CommandHandler <-- CommandParser : String[] projectInfo
 deactivate CommandParser
