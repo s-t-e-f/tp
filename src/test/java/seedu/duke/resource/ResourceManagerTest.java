@@ -113,7 +113,7 @@ public class ResourceManagerTest {
     public void testDeleteEntireProject() throws InvalidArgumentException {
 
         ArrayList<Project> projects = new ArrayList<>();
-        projects.add(new Project("CS2113", "www.test.com", "Test" ));
+        projects.add(new Project("CS2113", "www.test.com", "Test"));
         Duke.setProjects(projects);
         ProjectManager.updateRecords();
 
@@ -130,7 +130,7 @@ public class ResourceManagerTest {
     @Test
     public void testDeleteResource() throws InvalidArgumentException {
         ArrayList<Project> projects = new ArrayList<>();
-        projects.add(new Project("CS2113", "www.test.com", "Test" ));
+        projects.add(new Project("CS2113", "www.test.com", "Test"));
         Duke.setProjects(projects);
         ProjectManager.updateRecords();
 
@@ -146,7 +146,7 @@ public class ResourceManagerTest {
     @Test
     public void testEditResourceUrlOnly() {
         ArrayList<Project> projects = new ArrayList<>();
-        projects.add(new Project("CS2113", "www.test.com", "Test" ));
+        projects.add(new Project("CS2113", "www.test.com", "Test"));
         Duke.setProjects(projects);
         ProjectManager.updateRecords();
 
@@ -164,7 +164,7 @@ public class ResourceManagerTest {
     @Test
     public void testEditResourceUrlAndDescription() {
         ArrayList<Project> projects = new ArrayList<>();
-        projects.add(new Project("CS2113", "www.test.com", "Test" ));
+        projects.add(new Project("CS2113", "www.test.com", "Test"));
         Duke.setProjects(projects);
         ProjectManager.updateRecords();
 
