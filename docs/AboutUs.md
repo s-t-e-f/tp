@@ -6,4 +6,4 @@ Display | Name | Github Profile | Portfolio
 ![](https://via.placeholder.com/100.png?text=Photo) | Jovan Huang Tian Chun | [Github](https://github.com/jovanhuang) | [Portfolio](team/jovanhuang.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Stefanie Low Jing Ting | [Github](https://github.com/s-t-e-f) | [Portfolio](team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Yan Yi Xue | [Github](https://github.com/yyixue) | [Portfolio](team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Sean Goh | [Github](https://github.com/goats) | [Portfolio](team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Sean Goh | [Github](https://github.com/seangoats) | [Portfolio](team/seangoats.md)
