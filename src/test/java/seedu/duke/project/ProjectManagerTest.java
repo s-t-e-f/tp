@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -200,5 +201,17 @@ class ProjectManagerTest {
         } catch (NoProjectNameException e) {
             assertEquals("", e.getErrorMsg());
         }
+    }
+
+    //@@author s-t-e-f
+    @Test
+    public void testGetProjByName() {
+        ArrayList<Project> projects = new ArrayList<>();
+        Project testProject = new Project("CS2113", "www.test.com", "Test" );
+        projects.add(testProject);
+        Duke.setProjects(projects);
+        ProjectManager.updateRecords();
+
+        assertEquals(testProject, ProjectManager.getProjByProjName("CS2113"));
     }
 }
