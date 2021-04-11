@@ -120,7 +120,7 @@ Aspect: How list-all executes
 * Alternative 2 (none)
 
 The following sequence diagram shows how the list-all operation works:
-![add_png](puml_img/list-allfinal.png)
+![add_png](puml_img/ListAllProjectResources.png)
 
 ---
 
@@ -155,7 +155,7 @@ Aspect: How list p/PROJECTNAME executes
     * **Cons**: Harder to pinpoint the cause of the error if an error is thrown.
 
 The following sequence diagram shows how the `list p/PROJECTNAME` operation works:
-![add_png](puml_img/listPROJECTNAMEfinal.png)
+![add_png](puml_img/ListAProjectResources.png)
 
 ---
 
