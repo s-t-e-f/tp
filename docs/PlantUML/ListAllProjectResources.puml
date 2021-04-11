@@ -7,7 +7,10 @@ participant ":ResourceManager" as RM
 participant ":Project" as P
 participant ":Resource" as R
 
-[-> CH: switchCommand()
+[-> CH: processCommand()
+activate CH
+
+CH -> CH: switchCommand()
 activate CH
 
 CH -> PM: printResourceListForAllProjects()
@@ -25,6 +28,7 @@ loop for each project
         return
     end
 end
+return
 return
 return
 return isLoop

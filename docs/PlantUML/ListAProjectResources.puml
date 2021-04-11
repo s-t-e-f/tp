@@ -8,7 +8,10 @@ participant ":Project" as P
 participant ":Resource" as R
 
 
-[-> CH: switchCommand()
+[-> CH: processCommand()
+activate CH
+
+CH -> CH: switchCommand()
 activate CH
 
 CH -> CH: listAProjectResource()
@@ -40,6 +43,7 @@ loop for each project
         return
         end
         end
+        return
         return
 return isLoop
 
