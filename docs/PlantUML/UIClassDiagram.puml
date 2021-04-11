@@ -1,0 +1,64 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package ui <<Rectangle>> {
+    class MainUi {
+            + LOGO_STRING {static}
+            + ALL_COMMANDS_STRING {static}
+            + PROJECT_TEAM_ID {static}
+            + APP_NAME_AND_VERSION {static}
+            + HOW_TO_GET_HELP {static}
+            + SIGNAL_FOR_USER_TO_INPUT {static}
+            + EXIT_MESSAGE {static}
+            + DUKE_STANDARD_HEADING {static}
+            + printWelcomeText() {static}
+            + printSignalForUserToEnterInput() {static}
+            + showExitMessage() {static}
+            + listAllCommands() {static}
+    }
+
+}
+
+class Duke {
+        - projects : Project[] {static}
+        - scan : Scanner {static}
+        + main() {static}
+        + getProjects() {static}
+        + setProjects(projects) {static}
+        - startProgram() {static}
+        - initializeDuke() {static}
+        - getUserInput() {static}
+
+}
+
+package command <<Rectangle>> {
+
+     class CommandHandler {
+         command : String
+         infoFragments : String[]
+         - projects : Project[]
+         + getInfoFragments()
+         + processCommand()
+         + listAllCommands()
+         - isCommandNull()
+         - listAProjectResource()
+         - processInputBeforeDeleting()
+         - processInputBeforeFinding()
+         - processInputBeforeEditing()
+         - processInputBeforeFinding()
+         - findResources()
+         - printErrorMsg()
+         - promptUserInvalidInput()
+         + printDivider() {static}
+     }
+
+ }
+
+
+Duke -> command
+command --> ui
+Duke -> ui
+
+
+@enduml

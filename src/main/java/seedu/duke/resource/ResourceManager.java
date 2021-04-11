@@ -11,7 +11,10 @@ import java.util.ArrayList;
 public abstract class ResourceManager {
 
     public static final String NEW_LINE = "\n";
+    public static final int INITIAL_RESOURCE_COUNT = 1;
+    public static final int ONE_INCREMENT = 1;
 
+    //@author yyixue
     public static void printResourcesMatchingKeyword(ArrayList<Resource> resources, String keyword) {
         int resourceCount = 1;
         for (Resource resource : resources) {
@@ -35,6 +38,7 @@ public abstract class ResourceManager {
      * @param projectInfo Processed user's command
      */
     public static void deleteResource(String[] projectInfo) {
+        assert projectInfo != null;
         Project targetedProj;
         String projectName = projectInfo[0];
         int idx;
@@ -70,6 +74,7 @@ public abstract class ResourceManager {
      * @param projectInfo Processed user's command
      */
     public static void editResource(String[] projectInfo) {
+        assert projectInfo != null;
         Project targetedProj;
         Resource targetedResource;
         String projectName = projectInfo[0];
@@ -188,12 +193,11 @@ public abstract class ResourceManager {
      */
     public static void printResourceList(ArrayList<Resource> resources) {
         System.out.print("Resource(s):" + NEW_LINE);
-        int resourceCount = 1;
+        int resourceCount = INITIAL_RESOURCE_COUNT;
         for (Resource resource : resources) {
             System.out.print(resourceCount + "): " + resource + NEW_LINE);
-            resourceCount += 1;
+            resourceCount += ONE_INCREMENT;
         }
         assert true;
     }
-
 }

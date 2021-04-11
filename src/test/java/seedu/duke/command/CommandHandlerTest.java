@@ -80,8 +80,11 @@ class CommandHandlerTest {
         System.setOut(System.out);
     }
 
+    //@@author jovanhuang
     /**
-     * Test Case 1 for printResourceListForAProject.
+     * Test Case 1 for printResourceListForAProject which is called by listAProjectResource()
+     * When there is one project in the project list.
+     *
      */
     @Test
     public void testCase1ForPrintResourceListForAProject() {
@@ -110,13 +113,16 @@ class CommandHandlerTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString,newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
+    //@@author jovanhuang
     /**
-     * Test Case 2 for printResourceListForAProject.
+     * Test Case 2 for printResourceListForAProject which is called by listAProjectResource()
+     * When no project exists in the list.
+     *
      */
     @Test
     public void testCase2ForPrintResourceListForAProject() {
@@ -135,13 +141,16 @@ class CommandHandlerTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString,newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
+    //@@author jovanhuang
     /**
-     * Test Case 3 for printResourceListForAProject.
+     * Test Case 3 for printResourceListForAProject which is called by listAProjectResource()
+     * When project is not inside the list.
+     *
      */
     @Test
     public void testCase3ForPrintResourceListForAProject() {
@@ -161,13 +170,16 @@ class CommandHandlerTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString,newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
+    //@@author jovanhuang
     /**
-     * Test Case 4 for printResourceListForAProject.
+     * Test Case 4 for printResourceListForAProject() which is called by listAProjectResource()
+     * When "p/" is not entered as part of user's inputs.
+     *
      */
     @Test
     public void testCase4ForPrintResourceListForAProject() {
@@ -187,18 +199,9 @@ class CommandHandlerTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + CommandHandler.NEW_LINE;
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString,newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
-    @Test
-    public void printResourceList() {
-        //TODO
-    }
-
-    @Test
-    public void printResourceListForAllProjects() {
-        //TODO
-    }
 }

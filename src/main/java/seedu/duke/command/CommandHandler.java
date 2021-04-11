@@ -9,7 +9,6 @@ import seedu.duke.exception.ProjectNotFoundException;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.parser.InputParser;
 import seedu.duke.project.ProjectManager;
-import seedu.duke.resource.Resource;
 import seedu.duke.resource.ResourceManager;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
@@ -17,6 +16,7 @@ import seedu.duke.ui.MainUi;
 import java.util.ArrayList;
 
 public class CommandHandler {
+    //@@author jovanhuang
     private static final String ADD_COMMAND = "add";
     private static final String DELETE_COMMAND = "delete";
     private static final String EXIT_COMMAND = "exit";
@@ -28,12 +28,8 @@ public class CommandHandler {
     private static final String SAVE_COMMAND = "save";
     private static final String LOAD_COMMAND = "load";
     public static final String NEW_LINE = "\n";
-    public static final String PROJECT_NOT_FOUND_ERROR_MESSAGE = "Project not found in database!" + NEW_LINE;
-    public static final String NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE = "You did not key in the Project Name! "
-            + "Please type \"help\" for more details." + NEW_LINE;
-    public static final String WRONG_INPUT_FORMAT = "You did not insert 'p/' before the project name!"
-            + " Please type \"help\" for more details. " + NEW_LINE;
     public static final String DIVIDER = "--------------------------------------------------------";
+
     String command;
     String[] infoFragments;
     private final ArrayList<Project> projects;
@@ -100,6 +96,7 @@ public class CommandHandler {
             break;
         case LOAD_COMMAND:
             ProjectManager.setProjects(Storage.readFromStorage());
+            Duke.setProjects(ProjectManager.getProjects());
             break;
         default:
             promptUserInvalidInput();
@@ -121,11 +118,11 @@ public class CommandHandler {
         try {
             ProjectManager.printResourceListForAProject(getInfoFragments());
         } catch (NoProjectNameException e) {
-            System.out.print(NO_INPUT_FOR_PROJECT_NAME_ERROR_MESSAGE);
+            System.out.print(e.getErrorMsg());
         } catch (ProjectNotFoundException e) {
-            System.out.print(PROJECT_NOT_FOUND_ERROR_MESSAGE);
+            System.out.print(e.getErrorMsg());
         } catch (WrongInputFormatException e) {
-            System.out.print(WRONG_INPUT_FORMAT);
+            System.out.print(e.getErrorMsg());
         }
     }
 
@@ -192,7 +189,7 @@ public class CommandHandler {
         MainUi.listAllCommands();
     }
 
-    //@@author Yan Yi Xue
+    //@@author yyixue
     private void processInputBeforeFinding() {
         String[] keywords = {"k/", "p/"};
         int firstOptionalKeyword = 1;
@@ -207,7 +204,7 @@ public class CommandHandler {
         findResources(keywordInfo);
     }
 
-    //@@author Yan Yi Xue
+    //@@author yyixue
     private void findResources(String[] keywordInfo) {
         if (keywordInfo[1] == null) {
             String keyword = keywordInfo[0];

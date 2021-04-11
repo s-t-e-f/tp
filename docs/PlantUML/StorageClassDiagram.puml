@@ -1,0 +1,52 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package Logic <<Rectangle>> {
+    class ProjectManager {
+        - projects {static}
+        + getProjects() {static}
+        + setProjects(projects) {static}
+    }
+
+}
+package Storage <<Rectangle>> {
+    class StorageClass {
+        - projects {static}
+        + readFromStorage() {static}
+        + updateStorage(projects) {static}
+    }
+
+}
+
+
+
+package Main <<Rectangle>> {
+    class Duke {
+        - projects {static}
+        + setProjects(projects) {static}
+
+    }
+
+}
+
+package Model <<Rectangle>> {
+    class Resource {
+        + getResourceLink()
+        + getResourceDescriptionOnly()
+        + getDateOfCreation()
+        + Resource(link, description, dateOfCreation)
+    }
+    class Project {
+        + getProjectName()
+        + getNumberOfResources()
+        + Project(projectName)
+    }
+}
+
+Logic --> Storage
+Main <-- Storage
+Main -right-> Logic
+Storage --> Model
+
+@enduml

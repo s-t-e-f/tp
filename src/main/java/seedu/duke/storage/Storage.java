@@ -1,5 +1,10 @@
 package seedu.duke.storage;
 
+<<<<<<< HEAD
+=======
+import java.util.logging.Logger;
+import java.util.logging.Level;
+>>>>>>> master
 import seedu.duke.project.Project;
 import seedu.duke.project.ProjectManager;
 import seedu.duke.resource.Resource;
@@ -16,6 +21,7 @@ import java.util.regex.Pattern;
  */
 public class Storage {
     private static ArrayList<Project> projects = new ArrayList<>();
+    private static final Logger logger = Logger.getLogger("Foo");
 
     /**
      * Updates the storage based on the projects list that is passed into the method.
@@ -43,7 +49,7 @@ public class Storage {
             System.out.println("Saved projects to storage");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Datafile not found!");
+            logger.log(Level.WARNING, "Error in reading in data file.");
         }
     }
 
@@ -72,6 +78,7 @@ public class Storage {
 
     private static void createProjectsFromStorage() {
         clearProjects();
+        assert projects.isEmpty();
         try {
             File dataFile = new File("data.txt");
             if (!dataFile.exists()) {
@@ -94,7 +101,7 @@ public class Storage {
             updateProjects();
 
         } catch (IOException e) {
-            System.out.println("File not found");
+            logger.log(Level.WARNING, "Error in reading in data file.");
             e.printStackTrace();
         }
     }

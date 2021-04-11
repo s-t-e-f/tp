@@ -1,10 +1,9 @@
 @startuml
-!include Style.puml
 
-box Logic LOGIC_COLOR_T1
-participant ":CommandHandler" as CommandHandler LOGIC_COLOR_T1
-participant ":ProjectManager" as ProjectManager LOGIC_COLOR_T1
-participant ":Storage" as Storage LOGIC_COLOR_T1
+box
+participant ":CommandHandler" as CommandHandler
+participant ":ProjectManager" as ProjectManager
+participant ":Storage" as Storage
 end box
 
 activate CommandHandler

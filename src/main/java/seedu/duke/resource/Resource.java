@@ -24,6 +24,7 @@ public class Resource {
         return resourceLink;
     }
 
+
     public boolean checkIfDescriptionExists() {
         if (resourceDescription == null) {
             return false;
@@ -38,6 +39,7 @@ public class Resource {
         return "";
     }
 
+    //@yyixue
     public boolean checkKeywordMatch(String keyword) {
         if (resourceDescription != null) {
             return resourceDescription.toLowerCase().contains(keyword.toLowerCase())
