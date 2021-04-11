@@ -457,6 +457,7 @@ class DukeTest {
         System.setOut(System.out);
     }
 
+    //@author yyixue
     @Test
     public void testFindInAllProjects() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -493,11 +494,12 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
+    //@author yyixue
     @Test
     public void testExit() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -509,14 +511,15 @@ class DukeTest {
 
         Duke.main(null);
 
-        String helpExpectedOutput = MainUi.DUKE_STANDARD_HEADING
+        String targetString = MainUi.DUKE_STANDARD_HEADING
                 + MainUi.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), helpExpectedOutput);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
+    //@author yyixue
     @Test
     public void testFindInProject() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -545,11 +548,12 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
+    //@author yyixue
     @Test
     public void testFindInNotFoundProject() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -575,7 +579,7 @@ class DukeTest {
                 + MainUi.SIGNAL_FOR_USER_TO_INPUT
                 + MainUi.EXIT_MESSAGE + "\n";
 
-        assertEquals(newOutputStream.toString(), targetString);
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }

@@ -62,6 +62,7 @@ public class ResourceTest {
         assertTrue(result);
     }
 
+    //@author yyixue
     @Test
     public void testKeywordNotEquals() {
         Resource first = new Resource("github.com", "test1");
@@ -70,6 +71,7 @@ public class ResourceTest {
         assertFalse(result);
     }
 
+    //@author yyixue
     @Test
     public void testDescriptionExist() {
         Resource first = new Resource("github.com", "test1");
@@ -77,6 +79,7 @@ public class ResourceTest {
         assertTrue(result);
     }
 
+    //@author yyixue
     @Test
     public void testDescriptionNotExist() {
         Resource first = new Resource("github.com", null);
