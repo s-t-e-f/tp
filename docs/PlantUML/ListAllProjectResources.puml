@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+box List All Projects & their Resources
+participant ":CommandHandler" as CH
+participant ":ProjectManager" as PM
+participant ":ResourceManager" as RM
+participant ":Project" as P
+participant ":Resource" as R
+
+[-> CH: switchCommand()
+activate CH
+
+CH -> PM: printResourceListForAllProjects()
+activate PM
+
+loop for each project
+    PM -> P: getResource()
+    activate P
+    return resources
+    PM -> RM: printResourceList(resources)
+    activate RM
+    loop for each resource
+        RM->R: print()
+        activate R
+        return
+    end
+end
+return
+return
+return isLoop
+
+@enduml
