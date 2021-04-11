@@ -30,32 +30,50 @@ for use via a Command Line Interface (CLI).
 
 ## <a id="designAndImplementation">Design & Implementation</a>
 
---- 
-**Class Diagram:**
+### <a id="design">Design</a>
+
+---
+
+**Overall Class Diagram:**
 
 ![add_png](puml_img/ClassDiagram.png)
 
 The above shows the class diagram and relations of the classes.
 
-### <a id="design">Design</a>
-
 ---
-#### MainUI Component: Class Diagram
+
+#### MainUI Component
 
 ![UIClassDiagram](puml_img/UIClassDiagram.png)
 
-API: `MainUI.java`
+API: [`MainUI.java`](https://github.com/AY2021S2-CS2113-W10-3/tp/blob/master/src/main/java/seedu/duke/ui/MainUi.java)
 
 The `MainUI` Component
 
 * handles interactions with the user upon running TraceYourProj
 such as prompting user input and showing a list of available commands 
+
 ---
-#### Storage Component: Class Diagram
+
+#### Model Component
+
+![ModelClassDiagram_png](puml_img/ModelClassDiagram.png)
+
+API : [`Project.java`](https://github.com/AY2021S2-CS2113-W10-3/tp/blob/master/src/main/java/seedu/duke/project/Project.java) 
+& [`Resource.java`](https://github.com/AY2021S2-CS2113-W10-3/tp/blob/master/src/main/java/seedu/duke/resource/Resource.java)
+
+The `Model` Component
+
+* A Project object stores an array of Resource objects. Each resource object represents an online resource added by users.
+* stores the Projects & Resources data.
+* does not depend on any of the other three components.
+
+---
+#### Storage Component
 
 ![StorageClassDiagram_png](puml_img/StorageClassDiagram.png)
 
-API: `Storage.java`
+API: [`Storage.java`](https://github.com/AY2021S2-CS2113-W10-3/tp/blob/master/src/main/java/seedu/duke/storage/Storage.java)
 
 The `Storage` Component
 
@@ -63,10 +81,15 @@ The `Storage` Component
 * converts `Resource` and `Project` objects from strings from the storage text file, when the `load` command is called.
 * `projects` instance in `Duke` and `ProjectManager` are updated on `load`
 * `projects` instances from `ProjectManager` are saved upon `save`.
+
+---
+
 ### <a id="implementation">Implementation</a>
 This section describes some noteworthy details on how certain features are implemented.
 
+
 #### <a id="add">Add projects and resources</a>
+
 **Proposed Implementation**
 
 Given below is an example usage scenario and how the add mechanism behaves at each step.
