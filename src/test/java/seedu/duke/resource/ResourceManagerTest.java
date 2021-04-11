@@ -1,7 +1,13 @@
 package seedu.duke.resource;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Resources;
+import seedu.duke.Duke;
 import seedu.duke.command.CommandHandler;
+import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.project.Project;
+import seedu.duke.project.ProjectManager;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
@@ -100,6 +106,75 @@ public class ResourceManagerTest {
         assertEquals(targetString,newOutputStream.toString());
 
         System.setOut(System.out);
+    }
+
+    //@@author s-t-e-f
+    @Test
+    public void testDeleteEntireProject() throws InvalidArgumentException {
+
+        ArrayList<Project> projects = new ArrayList<>();
+        projects.add(new Project("CS2113", "www.test.com", "Test"));
+        Duke.setProjects(projects);
+        ProjectManager.updateRecords();
+
+        assertEquals(1, ProjectManager.getProjByProjName("CS2113").getNumberOfResources());
+
+        String[] projectInfo = {"CS2113", null};
+        ResourceManager.deleteResource(projectInfo);
+
+        assertEquals(null, ProjectManager.getProjByProjName("CS2113"));
+
+    }
+
+    //@@author s-t-e-f
+    @Test
+    public void testDeleteResource() throws InvalidArgumentException {
+        ArrayList<Project> projects = new ArrayList<>();
+        projects.add(new Project("CS2113", "www.test.com", "Test"));
+        Duke.setProjects(projects);
+        ProjectManager.updateRecords();
+
+        assertEquals(1, ProjectManager.getProjByProjName("CS2113").getNumberOfResources());
+
+        String[] projectInfo = {"CS2113", "1"};
+        ResourceManager.deleteResource(projectInfo);
+
+        assertEquals(0, ProjectManager.getProjByProjName("CS2113").getNumberOfResources());
+    }
+
+    //@@author s-t-e-f
+    @Test
+    public void testEditResourceUrlOnly() {
+        ArrayList<Project> projects = new ArrayList<>();
+        projects.add(new Project("CS2113", "www.test.com", "Test"));
+        Duke.setProjects(projects);
+        ProjectManager.updateRecords();
+
+        String[] projectInfo = {"CS2113", "1", "www.test2.com"};
+        ResourceManager.editResource(projectInfo);
+
+        Project p1 = new Project("CS2113", "1", "www.test2.com");
+        p1.getResources().get(0).setResourceDescription("Test");
+
+        assertEquals(p1, ProjectManager.getProjByProjName("CS2113"));
+
+    }
+
+    //@@author s-t-e-f
+    @Test
+    public void testEditResourceUrlAndDescription() {
+        ArrayList<Project> projects = new ArrayList<>();
+        projects.add(new Project("CS2113", "www.test.com", "Test"));
+        Duke.setProjects(projects);
+        ProjectManager.updateRecords();
+
+        String[] projectInfo = {"CS2113", "1", "www.test2.com", "Edited description"};
+        ResourceManager.editResource(projectInfo);
+
+        Project p1 = new Project("CS2113", "1", "www.test2.com");
+        p1.getResources().get(0).setResourceDescription("Edited description");
+
+        assertEquals(p1, ProjectManager.getProjByProjName("CS2113"));
     }
 
 

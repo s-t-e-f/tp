@@ -7,12 +7,16 @@ import seedu.duke.project.Project;
 import seedu.duke.project.ProjectManager;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class ResourceManager {
 
     public static final String NEW_LINE = "\n";
     public static final int INITIAL_RESOURCE_COUNT = 1;
     public static final int ONE_INCREMENT = 1;
+
+    private static Logger logger = Logger.getLogger("Foo");
 
     //@author yyixue
     public static void printResourcesMatchingKeyword(ArrayList<Resource> resources, String keyword) {
@@ -50,6 +54,7 @@ public abstract class ResourceManager {
         }
 
         try {
+            logger.log(Level.INFO, "Going to start processing");
             if (projectInfo[1] != null) {
                 idx = Integer.parseInt(projectInfo[1]) - 1;
                 targetedProj.getResources().remove(idx);
@@ -59,9 +64,11 @@ public abstract class ResourceManager {
                 ProjectManager.deleteWholeProject(targetedProj);
             }
         } catch (Exception e) {
+            logger.log(Level.WARNING, "Processing error");
             ResourceNotFoundException.printResourceNotFoundMsg();
             return;
         }
+        logger.log(Level.INFO, "End of processing");
     }
 
     //@@author s-t-e-f

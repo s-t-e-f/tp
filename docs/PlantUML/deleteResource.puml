@@ -7,8 +7,10 @@ participant ":Command Parser" as CommandParser
 participant ":Resource Manager" as ResourceManager
 participant ":Project Manager" as ProjectManager
 
-
-[-> CommandHandler : processInputBeforeDeleting()
+[-> CommandHandler : processCommand()
+activate CommandHandler
+CommandHandler -> CommandHandler : switchCommand()
+CommandHandler -> CommandHandler : processInputBeforeDeleting()
 activate CommandHandler
 
 
