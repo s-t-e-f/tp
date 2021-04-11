@@ -46,6 +46,17 @@ The above shows the class diagram and relations of the classes.
 {insert design}  
 {Coming in v2.1}
 ---
+#### MainUI Component: Class Diagram
+
+![UIClassDiagram](puml_img/UIClassDiagram.png)
+
+API: `MainUI.java`
+
+The `MainUI` Component
+
+* handles interactions with the user upon running TraceYourProj
+such as prompting user input and showing a list of available commands 
+---
 #### Storage Component: Class Diagram
 
 ![StorageClassDiagram_png](puml_img/StorageClassDiagram.png)

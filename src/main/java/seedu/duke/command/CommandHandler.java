@@ -30,7 +30,6 @@ public class CommandHandler {
     public static final String NEW_LINE = "\n";
     public static final String DIVIDER = "--------------------------------------------------------";
 
-    //@@author
     String command;
     String[] infoFragments;
     private final ArrayList<Project> projects;
