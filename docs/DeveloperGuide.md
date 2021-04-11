@@ -46,7 +46,18 @@ The above shows the class diagram and relations of the classes.
 {insert design}  
 {Coming in v2.1}
 ---
+#### Storage Component: Class Diagram
 
+![StorageClassDiagram_png](puml_img/StorageClassDiagram.png)
+
+API: `Storage.java`
+
+The `Storage` Component
+
+* converts `Resource` and `Project` objects as strings into the storage text file, when the `save` command is called.
+* converts `Resource` and `Project` objects from strings from the storage text file, when the `load` command is called.
+* `projects` instance in `Duke` and `ProjectManager` are updated on `load`
+* `projects` instances from `ProjectManager` are saved upon `save`.
 ### <a id="implementation">Implementation</a>
 This section describes some noteworthy details on how certain features are implemented.
 

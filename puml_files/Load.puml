@@ -1,10 +1,10 @@
 @startuml
-!include Style.puml
 
-box Logic LOGIC_COLOR_T1
-participant ":CommandHandler" as CommandHandler LOGIC_COLOR_T1
-participant ":Storage" as Storage LOGIC_COLOR_T1
-participant ":ProjectManager" as ProjectManager LOGIC_COLOR_T1
+box
+participant ":CommandHandler" as CommandHandler
+participant "Storage" as Storage
+participant "ProjectManager" as ProjectManager
+participant "Duke" as Duke
 end box
 
 activate CommandHandler
@@ -20,8 +20,17 @@ CommandHandler -> ProjectManager : setProjects(projects)
 activate ProjectManager
 
 ProjectManager --> CommandHandler : "Projects loaded into TraceMyProj"
+
+
+CommandHandler -> ProjectManager : getProjects()
+activate Duke
+
+ProjectManager --> CommandHandler : projects
 deactivate ProjectManager
 
+CommandHandler -> Duke : setProjects(projects)
+
 deactivate CommandHandler
+deactivate Duke
 
 @enduml
