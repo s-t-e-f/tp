@@ -62,7 +62,6 @@ public class ProjectManager {
      * @return Project object with the specified project name
      */
     public static Project getProjByProjName(String projName) {
-        projects = Duke.getProjects();
         for (Project project : projects) {
             if (project.getProjectName().equals(projName)) {
                 return project;
@@ -77,7 +76,6 @@ public class ProjectManager {
      * @param proj Project to be deleted
      */
     public static void deleteWholeProject(Project proj) {
-        projects = Duke.getProjects();
         proj.getResources().removeAll(proj.getResources());
         proj.getResources().removeAll(proj.getResources());
         System.out.printf("All the resources in %s has been deleted.\n", proj.getProjectName());
