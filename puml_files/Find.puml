@@ -9,7 +9,10 @@ participant ":ResourceManager" as RM
 participant ":Resource" as R
 
 
-[-> CH : processCommand()]
+[-> CH : processCommand()
+activate CH
+
+CH -> CH : switchCommand()
 activate CH
 
 CH -> CH : processInputBeforeFinding()
@@ -58,6 +61,7 @@ else Did Not Indicate Specific Project
     deactivate PM
 end
 
+return
 return
 return
 return isLoop
