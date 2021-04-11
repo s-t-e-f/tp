@@ -1,0 +1,35 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package Logic <<Rectangle>> {
+}
+
+package Storage <<Rectangle>> {
+}
+
+
+
+package Main <<Rectangle>> {
+}
+
+package Model <<Rectangle>> {
+    class Resource {
+        + getResourceLink()
+        + getResourceDescriptionOnly()
+        + getDateOfCreation()
+        + Resource(link, description, dateOfCreation)
+    }
+    class Project {
+        + getProjectName()
+        + getNumberOfResources()
+        + Project(projectName)
+    }
+    Logic --> Project
+    Storage --> Project
+    Main --> Project
+    Project *- Resource
+    Logic -[dotted]-> Resource
+    Storage -> Resource
+}
+@enduml

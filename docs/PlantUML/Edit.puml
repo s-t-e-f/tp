@@ -34,7 +34,6 @@ else else
         Resource -> Resource : setResourceDescription(projectInfo[3])
         end
     deactivate Resource
-
 end
 
 
