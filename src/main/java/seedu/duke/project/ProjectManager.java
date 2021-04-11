@@ -79,7 +79,7 @@ public class ProjectManager {
     public static void deleteWholeProject(Project proj) {
         proj.getResources().removeAll(proj.getResources());
         System.out.printf("All the resources in %s has been deleted.\n", proj.getProjectName());
-        assert proj.getResources().size()==0;
+        assert proj.getResources().size() == 0;
         projects.remove(proj);
     }
 

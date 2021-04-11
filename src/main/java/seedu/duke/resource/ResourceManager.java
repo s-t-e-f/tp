@@ -15,7 +15,7 @@ public abstract class ResourceManager {
     public static final String NEW_LINE = "\n";
     public static final int INITIAL_RESOURCE_COUNT = 1;
     public static final int ONE_INCREMENT = 1;
-    
+
     private static Logger logger = Logger.getLogger("Foo");
 
     //@author yyixue
