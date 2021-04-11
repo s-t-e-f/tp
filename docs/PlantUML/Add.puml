@@ -3,10 +3,14 @@
 box Adding Resource
 participant ":CommandHandler" as CH
 participant "<<class>>\n:CommandParser" as CP
+participant "<<class>>\n:ResourceManager" as RM
 participant ":Project" as P1
 participant "projectInStorage:Project" as P2
 
 [-> CH: processCommand()
+activate CH
+
+CH -> CH: switchCommand()
 activate CH
 
 CH -> CH: processInputBeforeAdding()
@@ -16,30 +20,30 @@ CH -> CP: decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword)
 activate CP
 return projectInfo
 
-CH -> CH: addResource(projectInfo)
-activate CH
-
+CH -> RM: addResource(projectInfo)
+activate RM
 opt ProjectNotExist
-    CH -> CH: createNewProject(projectName, projectUrl, descriptionOfUrl)
-    activate CH
+    RM -> RM: createNewProject(projectName, projectUrl, descriptionOfUrl)
+    activate RM
     create P1
-    CH -> P1:
+    RM -> P1:
     return
 end
 
 alt UrlAlreadyExist
-    CH -> CH: promptUserUrlAlreadyExist()
-    activate CH
+    RM -> RM: promptUserUrlAlreadyExist()
+    activate RM
     return
 else else
-    CH -> CH: addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex)
-    activate CH
-    CH -> P2: addResources(projectUrl, descriptionOfUrl)
+    RM -> RM: addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex)
+    activate RM
+    RM -> P2: addResources(projectUrl, descriptionOfUrl)
     activate P2
     return
     return
 end
 
+return
 return
 return
 return isLoop

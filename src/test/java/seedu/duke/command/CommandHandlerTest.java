@@ -2,15 +2,12 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.Duke;
-import seedu.duke.parser.InputParser;
-import seedu.duke.project.Project;
 import seedu.duke.ui.MainUi;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

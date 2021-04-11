@@ -1,6 +1,5 @@
 package seedu.duke.storage;
 
-import seedu.duke.Duke;
 import seedu.duke.project.Project;
 import seedu.duke.project.ProjectManager;
 import seedu.duke.resource.Resource;
@@ -58,7 +57,7 @@ public class Storage {
         return String.format("%s|%s|%s",
                 resource.getResourceLink(),
                 resource.getResourceDescriptionOnly(),
-                resource.getDateOfCreation().toString());
+                resource.getResourceDate().toString());
     }
 
     /**

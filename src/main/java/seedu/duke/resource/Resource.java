@@ -6,18 +6,18 @@ public class Resource {
 
     private String resourceLink;
     private String resourceDescription;
-    private LocalDate dateOfCreation;
+    private LocalDate date;
 
     public Resource(String resourceLink, String resourceDescription) {
         this.resourceLink = resourceLink;
         this.resourceDescription = resourceDescription;
-        this.dateOfCreation = LocalDate.now();
+        this.date = LocalDate.now();
     }
 
-    public Resource(String resourceLink, String resourceDescription, LocalDate dateOfCreation) {
+    public Resource(String resourceLink, String resourceDescription, LocalDate date) {
         this.resourceLink = resourceLink;
         this.resourceDescription = resourceDescription;
-        this.dateOfCreation = dateOfCreation;
+        this.date = date;
     }
 
     public String getResourceLink() {
@@ -60,13 +60,13 @@ public class Resource {
         this.resourceDescription = resourceDescription;
     }
 
-    public LocalDate getDateOfCreation() {
-        return dateOfCreation;
+    public LocalDate getResourceDate() {
+        return date;
     }
 
     @Override
     public String toString() {
-        return "[" + dateOfCreation + "] " + getResourceLink() + getResourceDescription();
+        return "[" + date + "] " + getResourceLink() + getResourceDescription();
     }
 
     @Override
@@ -82,5 +82,10 @@ public class Resource {
         Resource compareTo = (Resource) obj;
 
         return compareTo.getResourceLink().equals(this.resourceLink);
+    }
+
+    //@@author NgManSing
+    public void setResourceDate() {
+        date = LocalDate.now();
     }
 }

@@ -30,8 +30,7 @@ for use via a Command Line Interface (CLI).
 
 ## <a id="designAndImplementation">Design & Implementation</a>
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}  
-{Coming in v2.1}
+### 
 --- 
 **Class Diagram:**
 
@@ -88,7 +87,11 @@ Aspect: How add executes
     > * If resource with the same URL does not exist:
     >   * Append the new resource into the project resource list.
 
-* Alternative 2 (none)
+* Alternative 2:
+    * Only allow users to add resources into projects that are already existing.
+        * **Cons**: A new command has to added to create a new project before adding resources to it. This requires more 
+          lines of code for implementation and make the program less user-friendly since they need to type extra 
+          commands to create projects before adding resources.
 
 ---
 
@@ -338,9 +341,11 @@ It allows a single user to use it for multiple projects.
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
+|v1.0|user|add a resource to the resource list|record resources of various projects|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v1.0|user|exit TraceYourProj when I finish managing my resources|leave TraceYourProj|
 |v1.0|user|see the list of resources for all my projects|recall what are all the projects and resources in the database of TraceYourProj|
+|v2.0|user|tag the resources along with its “modified” date|know when the resources are created/modified|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 |v2.0|user|find resources I have that are related to a keyword I specify|easily find resources I need without going through each project and resources|
 |v2.0|user|see the list of resources for one of my project|recall what are the resources of one particular project in the database of TraceYourProj|
@@ -364,14 +369,14 @@ It allows a single user to use it for multiple projects.
 Given below are instructions to test TraceYourProj manually.
 
 > **_NOTE:_**
-These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing}
+These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory 
+> testing
 
 ### Adding a Resource
 1. Adding a resource to a new project
    1. No prerequisites
    2. Test case: `add p/CS2113 url/www.traceyourproj.com d/Project Website`
-      * Expected: New project CS2113 created. New resource is added to the project. Details of
-        resource is shown to the user.
+      * Expected: New project `CS2113` is created. New resource is added to the project as shown to the user.
    3. Test case: `add p/CS2113 d/Project Website`
       * Expected: No project is created and no resources are added. Error details shown
         to the user.
@@ -382,6 +387,8 @@ These instructions only provide a starting point for testers to work on; testers
       * Expected: No new project created. New resource is added to the existing CS2113 project. Details of
        resource is shown to the user. 
    3. Test case: `add p/CS2113 d/Project Website`
+       * Expected: No resources is added to CS2113. Error details shown to user.
+   4. Test case: `add p/CS2113 url/nusmods d/website c/true`
        * Expected: No resources is added to CS2113. Error details shown to user.
 
 ### Listing Resources

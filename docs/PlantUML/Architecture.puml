@@ -1,0 +1,15 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam componentStyle rectangle
+
+actor User
+rectangle Storage
+rectangle TraceYourProj{
+  User -left-> [Main]
+  [Main] -left-> [UI]
+  [Main] --> [Logic]
+  [Logic] -right-> [Model]
+  [Logic] -down-> [Storage]
+  [Storage] -down-> [Main]
+}
+@enduml

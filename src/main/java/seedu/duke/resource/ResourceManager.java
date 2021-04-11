@@ -85,11 +85,13 @@ public abstract class ResourceManager {
             targetedResource = targetedProj.getResources().get(idx);
             // Editing the url
             if (projectInfo[2] != null) {
-                targetedResource.setResourceLink(projectInfo[2]);
+                updateResourceLink(projectInfo[2], targetedResource);
+                updateResourceDate(targetedResource);
             }
             // Editing the resource description
             if (projectInfo[3] != null) {
-                targetedResource.setResourceDescription(projectInfo[3]);
+                updateResourceDescription(projectInfo[3], targetedResource);
+                updateResourceDate(targetedResource);
             }
             // Both url/ and d/ are not specified
             if (projectInfo[2] == null & projectInfo[3] == null) {
@@ -104,6 +106,19 @@ public abstract class ResourceManager {
         System.out.printf("The resource is successfully edited to : \n");
         System.out.printf("    " + targetedResource.toString() + NEW_LINE);
 
+    }
+
+    private static void updateResourceDescription(String resourceDescription, Resource targetedResource) {
+        targetedResource.setResourceDescription(resourceDescription);
+    }
+
+    private static void updateResourceLink(String resourceLink, Resource targetedResource) {
+        targetedResource.setResourceLink(resourceLink);
+    }
+
+    //@@author NgManSing
+    private static void updateResourceDate(Resource targetedResource) {
+        targetedResource.setResourceDate();
     }
 
     //@@author NgManSing
@@ -155,14 +170,14 @@ public abstract class ResourceManager {
 
     //@@author NgManSing
     private static void addNewResource(String projectName, String projectUrl, String description, int projectIndex) {
-        Project targetProject = ProjectManager.getProject(projectIndex);
+        Project targetProject = ProjectManager.getProjByProjIndex(projectIndex);
         targetProject.addResources(projectUrl, description);
         System.out.printf("The resource is added to the existing project \"%s\".\n", projectName);
     }
 
     //@@author NgManSing
     private static boolean isUrlAlreadyExist(int projectIndex, String projectUrl) {
-        return ProjectManager.getProject(projectIndex).isUrlAlreadyExist(projectUrl);
+        return ProjectManager.getProjByProjIndex(projectIndex).isUrlAlreadyExist(projectUrl);
     }
 
     //@@author jovanhuang
