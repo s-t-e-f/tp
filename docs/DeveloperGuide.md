@@ -163,7 +163,7 @@ The following sequence diagram shows how the list-all operation works:
 
 ---
 
-#### <a id="listall">List all the resources for a particular project</a>
+#### <a id="list">List all the resources for a particular project</a>
 **Proposed Implementation**  
 
 Given below is an example usage scenario and how the list-all mechanism behaves at each step.  
@@ -394,7 +394,7 @@ It allows a single user to use it for multiple projects.
 ---
 ## <a id="glossary">Glossary</a>
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, ~~~~Linux, Unix, OS-X
 
 ---
 

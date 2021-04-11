@@ -8,7 +8,7 @@
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Viewing help](#help)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Adding project(s) or resource(s)](#add)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List the resources of all projects](#listall)
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List the resources of one projects](#list)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List the resources of one project](#list)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Deleting resource(s)](#delete)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Editing a resource](#edit)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Finding resources](#find)
@@ -209,7 +209,7 @@ list-all
 
 ---
 
-### <a id="list">List the resources of one projects: `list p/PROJECTNAME`</a>
+### <a id="list">List the resources of one project: `list p/PROJECTNAME`</a>
 Shows a list of all resources in **one** project created in TraceYourProj.
 
 Format: `list p/PROJECTNAME`
