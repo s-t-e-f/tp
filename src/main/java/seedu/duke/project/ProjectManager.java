@@ -43,6 +43,7 @@ public class ProjectManager {
         projects = projectsToUpdate;
     }
 
+    //@author yyixue
     public static void getAllProjectsAndResourcesMatchingKeyword(String keyword, ArrayList<Project> projects) {
         int projectCount = 0;
         for (Project project : projects) {

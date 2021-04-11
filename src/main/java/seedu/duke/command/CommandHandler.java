@@ -190,7 +190,7 @@ public class CommandHandler {
         MainUi.listAllCommands();
     }
 
-    //@@author Yan Yi Xue
+    //@@author yyixue
     private void processInputBeforeFinding() {
         String[] keywords = {"k/", "p/"};
         int firstOptionalKeyword = 1;
@@ -205,7 +205,7 @@ public class CommandHandler {
         findResources(keywordInfo);
     }
 
-    //@@author Yan Yi Xue
+    //@@author yyixue
     private void findResources(String[] keywordInfo) {
         if (keywordInfo[1] == null) {
             String keyword = keywordInfo[0];
