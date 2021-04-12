@@ -32,6 +32,7 @@ Given below are my contributions to the project.
 * Added documentation to features `add`
 
 <i>Developers Guide</i>
+* Added documentation related to Architecture
 * Added documentation to features `add`
 
 UML diagrams:

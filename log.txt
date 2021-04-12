@@ -1,2 +1,18 @@
-Apr 12, 2021 8:20:57 AM seedu.duke.command.CommandHandler processInputBeforeAdding
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler processInputBeforeAdding
+WARNING: Resource failed to be added. (Reason: Argument cannot be empty.)
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler processInputBeforeAdding
 WARNING: Resource failed to be added. (Reason: Mandatory parameters are not provided or given provided in invalid order.)
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler processInputBeforeAdding
+WARNING: Resource failed to be added. (Reason: Argument cannot be empty.)
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler processInputBeforeAdding
+WARNING: Resource failed to be added. (Reason: Mandatory parameters are not provided or given provided in invalid order.)
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler processInputBeforeAdding
+WARNING: Resource failed to be added. (Reason: URL provided is not a valid URL.)
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler listAProjectResource
+WARNING: Couldn't detect project name from user inputs.
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler processInputBeforeAdding
+WARNING: Resource failed to be added. (Reason: Mandatory parameters are not provided or given provided in invalid order.)
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler listAProjectResource
+WARNING: Project couldn't be found.
+Apr 12, 2021 8:34:09 AM seedu.duke.command.CommandHandler listAProjectResource
+WARNING: Wrong format for commands
