@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.Duke;
 import seedu.duke.exception.WrongInputFormatException;
 import seedu.duke.project.Project;
 import seedu.duke.exception.InvalidArgumentException;
@@ -21,8 +20,6 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
-import java.util.ArrayList;
-
 public class CommandHandler {
     //@@author jovanhuang
     private static final String ADD_COMMAND = "add";
@@ -42,10 +39,9 @@ public class CommandHandler {
     //@@author NgManSing
     String command;
     String[] infoFragments;
-    private ArrayList<Project> projects;
 
-    public CommandHandler(InputParser userInput, ArrayList<Project> projects) {
-        initializeParameters(userInput, projects);
+    public CommandHandler(InputParser userInput) {
+        initializeParameters(userInput);
         initializeLogger();
     }
 
@@ -70,10 +66,9 @@ public class CommandHandler {
         }
     }
 
-    private void initializeParameters(InputParser userInput, ArrayList<Project> projects) {
+    private void initializeParameters(InputParser userInput) {
         this.command = userInput.getCommand();
         this.infoFragments = userInput.getInfoFragments();
-        this.projects = projects;
     }
 
     public String[] getInfoFragments() {
@@ -133,7 +128,6 @@ public class CommandHandler {
             break;
         case LOAD_COMMAND:
             ProjectManager.setProjects(Storage.readFromStorage());
-            Duke.setProjects(ProjectManager.getProjects());
             break;
         default:
             promptUserInvalidInput();
@@ -256,7 +250,7 @@ public class CommandHandler {
             String keyword = keywordInfo[0];
             System.out.print("Here is the list of all project(s) and its resource(s) matching the keyword!" + NEW_LINE);
             printDivider();
-            ProjectManager.getAllProjectsAndResourcesMatchingKeyword(keyword, projects);
+            ProjectManager.getAllProjectsAndResourcesMatchingKeyword(keyword);
             printDivider();
         } else {
             String keyword = keywordInfo[0];
@@ -265,7 +259,8 @@ public class CommandHandler {
             printDivider();
             if (projectIndex != -1) {
                 System.out.print("Project: " + projectName + NEW_LINE);
-                ResourceManager.printResourcesMatchingKeyword(projects.get(projectIndex).getResources(), keyword);
+                Project targetProj = ProjectManager.getProjByProjIndex(projectIndex);
+                ResourceManager.printResourcesMatchingKeyword(targetProj.getResources(), keyword);
             } else {
                 System.out.print("Project cannot be found! Please enter a valid project name!" + NEW_LINE);
             }

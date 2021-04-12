@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandHandlerTest {
 
+    //@@author NgManSing
     @Test
     public void testInputSpacing() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -35,6 +36,7 @@ class CommandHandlerTest {
         System.setOut(System.out);
     }
 
+    //@@author NgManSing
     @Test
     public void testInvalidInput() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();
@@ -57,6 +59,7 @@ class CommandHandlerTest {
         System.setOut(System.out);
     }
 
+    //@@author NgManSing
     @Test
     public void testInvalidInput2() {
         ByteArrayOutputStream newOutputStream = new ByteArrayOutputStream();

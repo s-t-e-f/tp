@@ -1,8 +1,6 @@
 package seedu.duke.resource;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Resources;
-import seedu.duke.Duke;
 import seedu.duke.command.CommandHandler;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.project.Project;
@@ -14,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ResourceManagerTest {
 
@@ -53,17 +52,17 @@ public class ResourceManagerTest {
         ResourceManager.printResourcesMatchingKeyword(resources, keyword);
 
         String targetString = "No resources matching keyword \"CS2113\" found!\n";
-        
+
         assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
     //@@author jovanhuang
+
     /**
      * Test case 1 for printResourceList()
      * When there are at least 1 resources in the list.
-     *
      */
     @Test
     public void test1PrintResourceList() {
@@ -71,7 +70,7 @@ public class ResourceManagerTest {
         System.setOut(new PrintStream(newOutputStream));
 
         Resource resource1 = new Resource("www.google.com", "Search");
-        Resource resource2 = new Resource("www.nus.com","School website");
+        Resource resource2 = new Resource("www.nus.com", "School website");
         ArrayList<Resource> resources = new ArrayList<>();
         resources.add(resource1);
         resources.add(resource2);
@@ -82,16 +81,16 @@ public class ResourceManagerTest {
                 + "1): [" + LocalDate.now() + "] www.google.com (Description: Search)" + CommandHandler.NEW_LINE
                 + "2): [" + LocalDate.now() + "] www.nus.com (Description: School website)" + CommandHandler.NEW_LINE;
 
-        assertEquals(targetString,newOutputStream.toString());
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
 
     //@@author jovanhuang
+
     /**
      * Test case 2 for printResourceList()
      * When there are no resources in the list.
-     *
      */
     @Test
     public void test2PrintResourceList() {
@@ -103,7 +102,7 @@ public class ResourceManagerTest {
 
         String targetString = "Resource(s):" + CommandHandler.NEW_LINE;
 
-        assertEquals(targetString,newOutputStream.toString());
+        assertEquals(targetString, newOutputStream.toString());
 
         System.setOut(System.out);
     }
@@ -114,8 +113,7 @@ public class ResourceManagerTest {
 
         ArrayList<Project> projects = new ArrayList<>();
         projects.add(new Project("CS2113", "www.test.com", "Test"));
-        Duke.setProjects(projects);
-        ProjectManager.updateRecords();
+        ProjectManager.setProjects(projects);
 
         assertEquals(1, ProjectManager.getProjByProjName("CS2113").getNumberOfResources());
 
@@ -131,8 +129,7 @@ public class ResourceManagerTest {
     public void testDeleteResource() throws InvalidArgumentException {
         ArrayList<Project> projects = new ArrayList<>();
         projects.add(new Project("CS2113", "www.test.com", "Test"));
-        Duke.setProjects(projects);
-        ProjectManager.updateRecords();
+        ProjectManager.setProjects(projects);
 
         assertEquals(1, ProjectManager.getProjByProjName("CS2113").getNumberOfResources());
 
@@ -147,8 +144,7 @@ public class ResourceManagerTest {
     public void testEditResourceUrlOnly() {
         ArrayList<Project> projects = new ArrayList<>();
         projects.add(new Project("CS2113", "www.test.com", "Test"));
-        Duke.setProjects(projects);
-        ProjectManager.updateRecords();
+        ProjectManager.setProjects(projects);
 
         String[] projectInfo = {"CS2113", "1", "www.test2.com"};
         ResourceManager.editResource(projectInfo);
@@ -165,8 +161,7 @@ public class ResourceManagerTest {
     public void testEditResourceUrlAndDescription() {
         ArrayList<Project> projects = new ArrayList<>();
         projects.add(new Project("CS2113", "www.test.com", "Test"));
-        Duke.setProjects(projects);
-        ProjectManager.updateRecords();
+        ProjectManager.setProjects(projects);
 
         String[] projectInfo = {"CS2113", "1", "www.test2.com", "Edited description"};
         ResourceManager.editResource(projectInfo);
@@ -177,5 +172,15 @@ public class ResourceManagerTest {
         assertEquals(p1, ProjectManager.getProjByProjName("CS2113"));
     }
 
+    //@@author NgManSing
+    @Test
+    public void testAddResourceWithValidInput() {
+        String[] projectInfo = {"project", "https://www.google.com/", "cs2113", "true"};
+        try {
+            ResourceManager.addResource(projectInfo);
+        } catch (InvalidArgumentException e) {
+            fail("It should not throw any exception");
+        }
+    }
 
 }

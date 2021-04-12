@@ -34,7 +34,7 @@ public abstract class ProjectManager {
     public static final String WRONG_INPUT_FORMAT = "You did not insert 'p/' before the project name!"
             + " Please type \"help\" for more details. " + CommandHandler.NEW_LINE;
 
-    private static ArrayList<Project> projects;
+    private static ArrayList<Project> projects = new ArrayList<>();
 
     public static ArrayList<Project> getProjects() {
         return projects;
@@ -45,7 +45,7 @@ public abstract class ProjectManager {
     }
 
     //@author yyixue
-    public static void getAllProjectsAndResourcesMatchingKeyword(String keyword, ArrayList<Project> projects) {
+    public static void getAllProjectsAndResourcesMatchingKeyword(String keyword) {
         int projectCount = 0;
         for (Project project : projects) {
             projectCount += 1;
@@ -114,11 +114,6 @@ public abstract class ProjectManager {
             }
         }
         return -1;
-    }
-
-    //@@author NgManSing
-    public static void updateRecords() {
-        projects = Duke.getProjects();
     }
 
     //@@author jovanhuang

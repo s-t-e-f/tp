@@ -118,6 +118,7 @@ Format : `add p/PROJECT_NAME url/URL [d/DESCRIPTION c/CHECK]`
   * A new project with the given project name will be created, and the resource will be appended to its resource list.
 * d/DESCRIPTION and c/true are optional.
 * If c/true is provided, a URL check will be performed (Requires online access).
+    *The program only accepts c/ture, c/{other words} (e.g. c/Happy) would be omitted.
 
 **Example of usage:**
 1. Project "NUS" **does not exist** in the list:  
@@ -401,11 +402,10 @@ Hope you have a wonderful day.
 ---
 ## <a id="faq">FAQ</a>
 
-## FAQ
 **Q**: Do I need to create a new project before adding resource to it?
 
 >No, you do not need to do so. With `add` command, if the provided project name is not found in the project list, 
-a new project will be automatically created, and the provided resources will be added to the newly created project.
+a new project will be created, and the provided resources will be added to the newly created project automatically.
 
 **Q**: Can I add a resource to a project without providing description?
 

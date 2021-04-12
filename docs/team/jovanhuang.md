@@ -21,16 +21,17 @@ Given below are my contributions to the project.
     
 
 * **Contributions to User Guide:**
-    
     * [Link](https://ay2021s2-cs2113-w10-3.github.io/tp/UserGuide.html#listall): Added instructions, sample inputs & outputs for `list-all` feature.
     * [Link](https://ay2021s2-cs2113-w10-3.github.io/tp/UserGuide.html#list): Added instructions, sample inputs & outputs for `list p/PROJECT_NAME` feature.
     
+  
 
 * **Contributions to the Developer Guide:**
     * [Link](https://ay2021s2-cs2113-w10-3.github.io/tp/DeveloperGuide.html#listall): Added documentations & sequence diagram for `list-all` feature.
     * [Link](https://ay2021s2-cs2113-w10-3.github.io/tp/DeveloperGuide.html#list): Added documentations & sequence diagram for `list p/PROJECT_NAME` feature.
     * [Link](https://ay2021s2-cs2113-w10-3.github.io/tp/DeveloperGuide.html#design): Added `Model Components` and its UML class diagram under **Design**.
     
+  
 
 * **Contributions to team-based tasks:** 
     * Refactor source code (To ensure good coding standards)
@@ -49,6 +50,7 @@ Given below are my contributions to the project.
       * Added sample outputs for `help`, `add`, `list-all`, `list p/PROJECTNAME`, `delete`, `save`, `load`.
 
 
+  
 
 * **Review/mentoring contributions:**
     * Review PRs:  
@@ -66,8 +68,9 @@ Given below are my contributions to the project.
       * [#23](https://github.com/AY2021S2-CS2113-W10-3/tp/pull/23)
       * [#21](https://github.com/AY2021S2-CS2113-W10-3/tp/pull/21)
     * Fix minor bugs from other PRs.
-
+    
   
+
 * **Contributions beyond the project team:**  
     * [Forum Link](https://github.com/nus-cs2113-AY2021S2/forum/issues/9#issuecomment-762811292): Helping others on forum
     * [Link](https://github.com/nus-cs2113-AY2021S2/tp/pull/31#pullrequestreview-624846061): Review other team's product
