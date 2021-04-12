@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static seedu.duke.command.CommandHandler.printDivider;
 
 
-abstract public class ProjectManager {
+public abstract class ProjectManager {
     public static final int LIST_PARAMETER_STARTING_INDEX = 0;
     public static final int LIST_PARAMETER_ENDING_INDEX = 2;
     public static final int MINIMUM_LIST_PARAMETER_LENGTH = 2;
@@ -56,10 +56,12 @@ abstract public class ProjectManager {
     }
 
     //@@author s-t-e-f
+
     /**
      * Search a project given the project name.
      * Return a project object if it is found.
      * Else, return null if the project name does not exist in the project list.
+     *
      * @param projName Name of the project to be searched
      * @return Project object with the specified project name
      */
@@ -73,8 +75,10 @@ abstract public class ProjectManager {
     }
 
     //@@author s-t-e-f
+
     /**
      * Delete all the resources in the project and the whole project from the project list.
+     *
      * @param proj Project to be deleted
      */
     public static void deleteWholeProject(Project proj) {
@@ -95,6 +99,7 @@ abstract public class ProjectManager {
     }
 
     //@@author NgManSing
+
     /**
      * Search a project with the provided project name within the project list. Index of the project is returned
      * if it is found.  if it is found. If no project in the list is named as the provided project name, -1 is returned.
@@ -117,6 +122,7 @@ abstract public class ProjectManager {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will print the resource list for all projects.
      */
@@ -135,11 +141,11 @@ abstract public class ProjectManager {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will print the resources for a particular project.
      *
      * @param infoFragments is an string array of input from users.
-     *
      * @throws NoProjectNameException   when user did not enter project name.
      * @throws ProjectNotFoundException when project is not found in database.
      */
@@ -161,12 +167,14 @@ abstract public class ProjectManager {
     }
 
     //@@author jovanhuang
+
     /**
      * This is a helper method to help check if user has the correct input for list PROJECT_NAME feature.
+     *
      * @param userInputs is user input.
      * @return projectName
      * @throws WrongInputFormatException thrown if format not followed.
-     * @throws NoProjectNameException thrown if no project name is provided.
+     * @throws NoProjectNameException    thrown if no project name is provided.
      */
     public static String validateAndExtractProjectNameInput(String userInputs)
             throws WrongInputFormatException, NoProjectNameException {
@@ -174,7 +182,7 @@ abstract public class ProjectManager {
             throw new WrongInputFormatException(WRONG_INPUT_FORMAT);
         }
 
-        String parameters = userInputs.substring(LIST_PARAMETER_STARTING_INDEX,LIST_PARAMETER_ENDING_INDEX);
+        String parameters = userInputs.substring(LIST_PARAMETER_STARTING_INDEX, LIST_PARAMETER_ENDING_INDEX);
         if (!parameters.equals(LIST_PARAMETER)) {
             throw new WrongInputFormatException(WRONG_INPUT_FORMAT);
         }
@@ -189,6 +197,7 @@ abstract public class ProjectManager {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will return the userInput.
      *
@@ -199,6 +208,7 @@ abstract public class ProjectManager {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will check if string is empty.
      *
