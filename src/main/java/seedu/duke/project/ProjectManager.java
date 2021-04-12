@@ -1,6 +1,5 @@
 package seedu.duke.project;
 
-import seedu.duke.Duke;
 import seedu.duke.command.CommandHandler;
 import seedu.duke.exception.WrongInputFormatException;
 import seedu.duke.exception.NoProjectNameException;

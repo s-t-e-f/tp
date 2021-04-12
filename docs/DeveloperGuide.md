@@ -237,7 +237,7 @@ The following sequence diagram shows how the `list p/PROJECTNAME` operation work
 
 ---
 
-#### <a id="delete">Deleting resource from a specified project </a>
+#### <a id="delete">Deleting resource(s) from a specified project </a>
 **Proposed Implementation**
 
 Given below is an example usage scenario and how deleting resource(s) works.
@@ -249,16 +249,39 @@ The user launches the application. The application state is initialised by the S
 The user executes the following command to delete the 2nd resource in the resource list of the project 'CS2113'.
 >delete p/CS2113 i/2
 
+<br> <b>Note</b> :The user can also choose to delete all the resources in a specified project and the project entirely,
+just by not specifying the index argument.
+For example, the user can execute the following command to delete the project 'CS2113' entirely.
+
+>delete p/CS2113
+
+
 **Step 3**:
-If PROJECT_NAME is not found in the database, the application prompts the user that the project is not found. 
-<br> If INDEX is invalid <i>(i.e. negative integer or exceeds the number of resources in that project)</i>, the application prompts the user to reenter a valid index.
-<br> Else, the system feedbacks to the user that the specified resource has been successfully deleted.
+
+* If PROJECT_NAME is not found in the database, the application prompts the user that the project is not found. 
+* If INDEX is invalid <i>(i.e. negative integer or exceeds the number of resources in that project)</i>, the application prompts the user to reenter a valid index.
+* Else, the system feedbacks to the user that the specified resource has been successfully deleted.
+
 
 **Step 4**:
 The user can execute `list p/CS2113` to verify that the specified resource has been deleted from the project.
 
+
 The following sequence diagram shows how the delete operation works:
-![delete_puml](puml_img/deleteResource.png)
+![delete_puml](puml_img/Delete.png)
+
+**Design Consideration**
+
+Aspect: How delete executes
+* Alternative 1 (current choice):
+    * Allows user to delete the entire project by not specifying index argument.
+    * **Pros**: Makes deletion of entire project much faster and efficient.
+    
+* Alternative 2:
+    * Separate command for deleting the entire the project
+    * **Pros**: Less prone to errors.
+    * **Cons**: It increases the complexity of the application and user has to remember more commands. It is also less efficient.
+
 
 ---
 
@@ -275,9 +298,10 @@ The user executes the following command to edit the url and link description of 
 >edit p/CS2113 i/2 url/www.CS2113tp.com d/This is tp site.
 
 **Step 3**:
-If PROJECT_NAME is not found in the database, the application prompts the user that the project is not found.
-<br> If INDEX is invalid <i>(i.e. negative integer or exceeds the number of resources in that project)</i>, the application prompts the user to reenter a valid index.
-<br> Else, the system feedbacks to the user that the specified resource has been successfully edited.
+
+* If PROJECT_NAME is not found in the database, the application prompts the user that the project is not found.
+* If INDEX is invalid <i>(i.e. negative integer or exceeds the number of resources in that project)</i>, the application prompts the user to reenter a valid index.
+* Else, the system feedbacks to the user that the specified resource has been successfully edited.
 
 **Step 4**:
 The user can execute `list p/CS2113` to verify that the specified resource has been successfully edited.
@@ -507,7 +531,7 @@ These instructions only provide a starting point for testers to work on; testers
     2. Test case: `exit`
         * Expected: Exit message shown to user. TraceYourProj stops running.
     
-#### Deleting Resource(s)
+### Deleting Resource(s)
 1. Deleting a resource from a specified project.
     1. Prerequisites: List all the resources in the specified project using list command. 
        Make sure the project exists and there is at least one resource in that project.
@@ -528,7 +552,7 @@ These instructions only provide a starting point for testers to work on; testers
         * Expected: All the resource in CS2113 will be deleted and CS2113 will be removed from the project list.
                     User can verify this using `list` command. CS2113 should not appear.
 
-#### Editing Resource
+### Editing Resource
 1. Editing a resource from a specified project.
     1. Prerequisites: List all the resources in the specified project using list command.
        Make sure the project exists and there is at least one resource in that project.
@@ -542,7 +566,7 @@ These instructions only provide a starting point for testers to work on; testers
    4. Test case: `edit p/CS2114 i/1 url/www.cs2113.com d/New link for CS2113` (where CS2114 is not in the project list)
        * Expected: Error details (project not found) will be shown to the user.
     
-#### Saving and Loading Data 
+### Saving and Loading Data 
 1. Saving data to storage and Loading data from storage.
     1. Prerequisites: List all projects and resources using `list-all` command. 
                        At least 1 project in list with at least 1 resource.

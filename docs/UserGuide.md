@@ -283,6 +283,7 @@ Format: `edit p/PROJECT_NAME i/INDEX url/LINK [d/DESCRIPTION]`
 * Edits the resource at the specified index of the specified project.
 * The index refers to the index number shown in the displayed resource list of the specified project.
 * This index must be a positive integer.
+* Note: `d/DESCRIPTION` is an optional parameter. If not specified, only the url will be edited.
 
 **Example of usage:**  
 
@@ -299,7 +300,7 @@ The resource is successfully edited to :
     [2021-04-03] https://www.kaggle.com/sameerdev7/joke-rating (Description: Jester Jokes Dataset)
 ```
 
-**Edits** the url and description of the 2nd resource in ‘Jester Jokes’ project to be https://www.kaggle.com/sameerdev7/joke-rating and Jester Jokes Dataset respectively.
+Edits the url and description of the 2nd resource in ‘Jester Jokes’ project to be https://www.kaggle.com/sameerdev7/joke-rating and Jester Jokes Dataset respectively.
 
 ---
 ### <a id="find">Finding resources: `find`</a>
