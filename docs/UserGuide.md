@@ -8,7 +8,7 @@
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Viewing help](#help)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Adding project(s) or resource(s)](#add)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List the resources of all projects](#listall)
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List the resources of one projects](#list)
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[List the resources of one project](#list)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Deleting resource(s)](#delete)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Editing a resource](#edit)
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Finding resources](#find)
@@ -209,7 +209,7 @@ list-all
 
 ---
 
-### <a id="list">List the resources of one projects: `list p/PROJECTNAME`</a>
+### <a id="list">List the resources of one project: `list p/PROJECTNAME`</a>
 Shows a list of all resources in **one** project created in TraceYourProj.
 
 Format: `list p/PROJECTNAME`
@@ -222,7 +222,7 @@ list p/NUS
 ```
 **Output:**
 ```
---------------------------------------------------------__
+--------------------------------------------------------
 Project: NUS
 Resource(s):
 1): [2021-04-03] https://www.nus.edu.sg/ (Description: NUS Offical Website)
@@ -230,7 +230,7 @@ Resource(s):
 --------------------------------------------------------
 ```
 
-For `list p/PROJECTNAME`, only one project name can be used at one time. This feature doesn't support multiple project names. 
+For `list p/PROJECT_NAME`, only one project name can be used at one time. This feature doesn't support multiple project names. 
 It doesn't support two parameters like `list p/CZ2003 p/IT3011`. Supporting more than 1 project name for this feature
 will be for our future implementations.
 
@@ -414,7 +414,7 @@ Hope you have a wonderful day.
 |add|`add p/PROJECT NAME url/URL [d/DESCRIPTION c/true]`|Add a resource to a project|
 |delete|`delete p/PROJECT_NAME [i/INDEX]`|Deletes the specified resource from the resource list based on the project.|
 |edit|`edit p/PROJECT_NAME i/INDEX url/LINK [d/DESCRIPTION]`|Edits an existing resource in the resource list based on the project.|
-|list|`list p/PROJECTNAME`|List a project's resources|
+|list|`list p/PROJECT_NAME`|List a project's resources|
 |list-all|`list-all`|List all projects and their respective resources|
 |find|`find k/KEYWORD [p/PROJECT_NAME]`|Find resources|
 |exit|`exit`|Exit TraceYourProj|
