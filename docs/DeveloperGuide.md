@@ -28,6 +28,11 @@
 TraceYourProj is a desktop app for **tracking online resources** for **data science projects**, optimized
 for use via a Command Line Interface (CLI).
 
+---
+
+## <a id="designAndImplementation">Design & Implementation</a>
+
+
 ## <a id="design">Design</a>
 
 ### Architecture
