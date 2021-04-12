@@ -28,10 +28,9 @@
 TraceYourProj is a desktop app for **tracking online resources** for **data science projects**, optimized
 for use via a Command Line Interface (CLI).
 
----
+<div style="page-break-after: always;"></div>
 
 ## <a id="designAndImplementation">Design & Implementation</a>
-
 
 ## <a id="design">Design</a>
 
@@ -60,6 +59,7 @@ The rest of TraceYourProj comprises the following components:
 The above shows the class diagram and relations of the classes.
 
 ---
+<div style="page-break-after: always;"></div>
 
 #### MainUI Component
 
@@ -73,6 +73,7 @@ The `MainUI` Component
 such as prompting user input and showing a list of available commands 
 
 ---
+<div style="page-break-after: always;"></div>
 
 #### Logic Component
 
@@ -104,6 +105,8 @@ The `Model` Component
 * does not depend on any of the other three components.
 
 ---
+<div style="page-break-after: always;"></div>
+
 #### Storage Component
 
 ![StorageClassDiagram_png](puml_img/StorageClassDiagram.png)
@@ -118,6 +121,7 @@ The `Storage` Component
 * `projects` instances from `ProjectManager` are saved upon `save`.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### <a id="implementation">Implementation</a>
 This section describes some noteworthy details on how certain features are implemented.
@@ -169,6 +173,7 @@ Aspect: How add executes
           since users need to type extra commands to create projects before adding resources.
 
 ---
+<div style="page-break-after: always;"></div>
 
 #### <a id="listall">List all projects & their respective resources</a>
 **Proposed Implementation**  
@@ -201,6 +206,8 @@ The following sequence diagram shows how the list-all operation works:
 ![add_png](puml_img/ListAllProjectResources.png)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### <a id="list">List all the resources for a particular project</a>
 **Proposed Implementation**  
@@ -236,6 +243,8 @@ The following sequence diagram shows how the `list p/PROJECTNAME` operation work
 ![add_png](puml_img/ListAProjectResources.png)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### <a id="delete">Deleting resource(s) from a specified project </a>
 **Proposed Implementation**
@@ -284,6 +293,7 @@ Aspect: How delete executes
 
 
 ---
+<div style="page-break-after: always;"></div>
 
 #### <a id="edit">Editing resource from a specified project</a>
 **Proposed Implementation**
@@ -309,6 +319,7 @@ The user can execute `list p/CS2113` to verify that the specified resource has b
 The following sequence diagram shows how the delete operation works:
 ![edit_puml](puml_img/Edit.png)
 ---
+<div style="page-break-after: always;"></div>
 
 #### <a id="find">Finding resource(s) in a project or all projects based on a keyword</a>
 **Proposed Implementation**
@@ -345,6 +356,7 @@ Aspect: How find executes
   * **Cons**: More functions and code required.
 
 ---
+<div style="page-break-after: always;"></div>
 
 #### <a id="exit">Exiting TraceYourProj</a>
 **Proposed Implementation**
@@ -376,6 +388,7 @@ Aspect: How exit executes
     called and catch that exception, so the JUnit test does not fail.
 
 ---
+<div style="page-break-after: always;"></div>
 
 #### <a id="exit">Saving and loading data</a>
 
@@ -416,6 +429,8 @@ The following sequence diagram shows how the **load** operation works:
   * **Cons:** User may not be aware of the functionality without referring to the user guide.
 
 ---
+<div style="page-break-after: always;"></div>
+
 ## <a id="productScope">Product scope</a>
 
 ### <a id="targetUser">Target user profile</a>
@@ -462,6 +477,7 @@ It allows a single user to use it for multiple projects.
 * **Mainstream OS**: Windows, ~~~~Linux, Unix, OS-X
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## <a id="manualTesting">Instructions for Manual Testing</a>
 

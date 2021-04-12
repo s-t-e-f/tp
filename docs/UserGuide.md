@@ -18,8 +18,8 @@
 #### [4. FAQ](#faq)
 #### [5. Command Summary](#commandSummary)
 
-
 ---
+
 ## <a id="intro">Introduction</a>
 
 TraceYourProj is a desktop app for **tracking online resources** for **data science projects**, optimized 
@@ -47,6 +47,9 @@ Team Project of CS2113-W10-3.
 TraceYourProj
 Type 'help' for a list of command and related usage.
 ```
+
+<div style="page-break-after: always;"></div>
+
 ## <a id="features">Features</a>
 
 ### <a id="notes">Notes about command</a>
@@ -401,6 +404,7 @@ Hope you have a wonderful day.
 ```
 
 ---
+
 ## <a id="faq">FAQ</a>
 
 **Q**: Do I need to create a new project before adding resource to it?
@@ -413,6 +417,8 @@ a new project will be created, and the provided resources will be added to the n
 >Yes, you can. It is because description is optional when adding a resource with `add` command.
 
 ---
+<div style="page-break-after: always;"></div>
+
 ## <a id="commandSummary">Command Summary</a>
 
 

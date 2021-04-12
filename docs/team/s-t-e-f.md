@@ -29,6 +29,8 @@ Given below are my contributions to the project.
 
 * Code contributed: [RepoSense link](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/#breakdown=true&search=s-t-e-f)
 
+<div style="page-break-after: always;"></div>
+
 #### Documentation
 
 <i>User Guide</i>
