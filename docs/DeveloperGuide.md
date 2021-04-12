@@ -134,8 +134,8 @@ The user executes the following commands in order to add a resources to a projec
 
 The following sequence diagram shows how the add operation works:
 ![add_png](puml_img/Add.png)
-> The arrow pointing from :CommandHandler to :Project should be pointed at the middle of :project. However, due to 
-> limitation of PlantUML, the arrow is pointed at the left-hand corner of :Project.
+> The arrow pointing from <<Class>>:ResourceManager to :Project should be pointed at the middle of :project. However, 
+> due to limitation of PlantUML, the arrow is pointed at the left-hand corner of :Project.
 
 > projectInStorage:Project represents a project that is already existing in the project list of the program.
 
@@ -159,9 +159,9 @@ Aspect: How add executes
 
 * Alternative 2:
     * Only allow users to add resources into projects that are already existing.
-        * **Cons**: A new command has to added to create a new project before adding resources to it. This requires more 
-          lines of code for implementation and make the program less user-friendly since they need to type extra 
-          commands to create projects before adding resources.
+        * **Cons**: A new command has to be added for creating new projects before adding resources to them. 
+          This requires unnecessarily more lines of code for the implementation and make the program less user-friendly 
+          since users need to type extra commands to create projects before adding resources.
 
 ---
 

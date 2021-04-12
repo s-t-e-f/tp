@@ -130,7 +130,6 @@ public class Storage {
         }
     }
 
-
     private static Project createProject(String input) {
         String[] parts = input.split(Pattern.quote("|"));
         String projectName = parts[1];
@@ -150,7 +149,5 @@ public class Storage {
         LocalDate dateOfCreation = LocalDate.parse(parts[2]);
         return new Resource(link, description, dateOfCreation);
     }
-
-
 
 }
