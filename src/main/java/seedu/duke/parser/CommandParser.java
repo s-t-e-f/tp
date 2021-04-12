@@ -21,6 +21,7 @@ public abstract class CommandParser {
      */
     public static String[] decodeInfoFragments(String[] infoFragments, String[] keywords, int firstOptionalKeyword)
             throws InvalidArgumentException {
+        assert infoFragments != null && keywords != null;
         int[] keywordLocations = getKeywordLocations(infoFragments, keywords);
 
         if (!isUserInputValid(keywordLocations, firstOptionalKeyword)) {

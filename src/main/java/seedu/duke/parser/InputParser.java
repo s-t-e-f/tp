@@ -11,9 +11,10 @@ public class InputParser {
     }
 
     private void parserInput(String rawInput) {
+        assert rawInput != null;
         String trimmedRawInput = trimRawInput(rawInput);
-        if (isRawInputValid(trimmedRawInput)) {
-            String[] inputFragments = splitString(trimmedRawInput);
+        String[] inputFragments = splitString(trimmedRawInput);
+        if (isInputValid(trimmedRawInput)) {
             this.command = inputFragments[0];
             this.infoFragments = Arrays.copyOfRange(inputFragments, 1, inputFragments.length);
         }
@@ -23,7 +24,7 @@ public class InputParser {
         return rawInput.trim();
     }
 
-    private boolean isRawInputValid(String trimmedRawInput) {
+    private boolean isInputValid(String trimmedRawInput) {
         return !(trimmedRawInput.length() == 0);
     }
 

@@ -60,9 +60,11 @@ Type 'help' for a list of command and related usage.
 * **Extra parameters** after commands that do not take in parameters such as `list-all` and `exit` will be **ignored**.  
   e.g.`exit 1234` will be interpreted as `exit`.  
   e.g.`list-all CZ2003` will be interpreted as `list-all`.
+  
 * All leading and trailing space of user input will be removed.
 
-* Command parameters have to be provided in correct formats and orders, which is provided in Feature session. 
+* Command parameters have to be provided in correct formats and orders, syntax of each command is provided in Feature 
+  session. 
 
 
 ---
@@ -84,7 +86,7 @@ Output:
 ------------------------------------------------------------------------
 Here are the available commands:
 add: Adds a resource to a project.
-	Format: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION]
+	Format: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION c/true]
 delete: Deletes a resource from the resource list for a specified project.
 	Format: delete p/PROJECT_NAME [i/INDEX]
 edit: Edits a resource from the resource list for a specified project.
@@ -399,10 +401,15 @@ Hope you have a wonderful day.
 ---
 ## <a id="faq">FAQ</a>
 
+## FAQ
+**Q**: Do I need to create a new project before adding resource to it?
+
+>No, you do not need to do so. With `add` command, if the provided project name is not found in the project list, 
+a new project will be automatically created, and the provided resources will be added to the newly created project.
 
 **Q**: Can I add a resource to a project without providing description?
 
-**A**: Yes, you can. It is because description is optional when adding a resource with `add` command.
+>Yes, you can. It is because description is optional when adding a resource with `add` command.
 
 ---
 ## <a id="commandSummary">Command Summary</a>

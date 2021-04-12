@@ -12,7 +12,7 @@ public class MainUi {
             + "-------------------------------\n"
             + "Here are the available commands:\n"
             + "add: Adds a resource to a project.\n"
-            + "\tFormat: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION]\n"
+            + "\tFormat: add p/PROJECT_NAME url/URL_LINK [d/LINK_DESCRIPTION c/true]\n"
             + "delete: Deletes a resource from the resource list for a specified project.\n"
             + "\tFormat: delete p/PROJECT_NAME [i/INDEX]\n"
             + "edit: Edits a resource from the resource list for a specified project.\n"
