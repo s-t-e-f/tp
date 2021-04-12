@@ -16,14 +16,14 @@ activate CH
 CH -> CH: processInputBeforeAdding()
 activate CH
 
-CH -> CP: decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword)
+CH -> CP: decodeInfoFragments()
 activate CP
 return projectInfo
 
-CH -> RM: addResource(projectInfo)
+CH -> RM: addResource()
 activate RM
 opt ProjectNotExist
-    RM -> RM: createNewProject(projectName, projectUrl, descriptionOfUrl)
+    RM -> RM: createNewProject()
     activate RM
     create P1
     RM -> P1:
@@ -35,9 +35,9 @@ alt UrlAlreadyExist
     activate RM
     return
 else else
-    RM -> RM: addNewResource(projectName, projectUrl, descriptionOfUrl, projectIndex)
+    RM -> RM: addNewResource()
     activate RM
-    RM -> P2: addResources(projectUrl, descriptionOfUrl)
+    RM -> P2: addResources()
     activate P2
     return
     return
@@ -46,6 +46,6 @@ end
 return
 return
 return
-return isLoop
+return
 
 @enduml

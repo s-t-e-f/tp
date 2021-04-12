@@ -209,8 +209,7 @@ class ProjectManagerTest {
         ArrayList<Project> projects = new ArrayList<>();
         Project testProject = new Project("CS2113", "www.test.com", "Test");
         projects.add(testProject);
-        Duke.setProjects(projects);
-        ProjectManager.updateRecords();
+        ProjectManager.setProjects(projects);
 
         assertEquals(testProject, ProjectManager.getProjByProjName("CS2113"));
     }
