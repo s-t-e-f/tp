@@ -7,10 +7,11 @@ participant ":Resource Manager" as ResourceManager
 participant ":Project Manager" as ProjectManager
 participant "targetedResource :Resource" as Resource
 
-
-[-> CommandHandler : processInputBeforeEditing()
+[-> CommandHandler : processCommand()
 activate CommandHandler
-
+CommandHandler -> CommandHandler : switchCommand()
+CommandHandler -> CommandHandler : processInputBeforeEditing()
+activate CommandHandler
 
 CommandHandler -> ResourceManager : editResource(projectInfo)
 activate ResourceManager
@@ -33,7 +34,6 @@ else else
         Resource -> Resource : setResourceDescription(projectInfo[3])
         end
     deactivate Resource
-
 end
 
 

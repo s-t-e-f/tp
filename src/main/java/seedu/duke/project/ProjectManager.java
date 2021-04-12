@@ -12,12 +12,8 @@ import java.util.ArrayList;
 
 import static seedu.duke.command.CommandHandler.printDivider;
 
-<<<<<<< HEAD
-abstract public class ProjectManager {
-    public static final String NEW_LINE = "\n";
-=======
+
 public class ProjectManager {
->>>>>>> master
     public static final int LIST_PARAMETER_STARTING_INDEX = 0;
     public static final int LIST_PARAMETER_ENDING_INDEX = 2;
     public static final int MINIMUM_LIST_PARAMETER_LENGTH = 2;
@@ -83,8 +79,8 @@ public class ProjectManager {
      */
     public static void deleteWholeProject(Project proj) {
         proj.getResources().removeAll(proj.getResources());
-        proj.getResources().removeAll(proj.getResources());
         System.out.printf("All the resources in %s has been deleted.\n", proj.getProjectName());
+        assert proj.getResources().size() == 0;
         projects.remove(proj);
     }
 

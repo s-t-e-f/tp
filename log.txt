@@ -1,0 +1,2 @@
+Apr 12, 2021 8:20:57 AM seedu.duke.command.CommandHandler processInputBeforeAdding
+WARNING: Resource failed to be added. (Reason: Mandatory parameters are not provided or given provided in invalid order.)

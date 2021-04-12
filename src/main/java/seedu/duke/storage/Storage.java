@@ -1,10 +1,7 @@
 package seedu.duke.storage;
 
-<<<<<<< HEAD
-=======
 import java.util.logging.Logger;
 import java.util.logging.Level;
->>>>>>> master
 import seedu.duke.project.Project;
 import seedu.duke.project.ProjectManager;
 import seedu.duke.resource.Resource;

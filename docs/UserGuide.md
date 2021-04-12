@@ -401,14 +401,11 @@ Hope you have a wonderful day.
 ---
 ## <a id="faq">FAQ</a>
 
-<<<<<<< HEAD
 ## FAQ
 **Q**: Do I need to create a new project before adding resource to it?
 
 >No, you do not need to do so. With `add` command, if the provided project name is not found in the project list, 
-a new project will be automatically created, and the provided resources will be added to the newly craeted project.
-=======
->>>>>>> master
+a new project will be automatically created, and the provided resources will be added to the newly created project.
 
 **Q**: Can I add a resource to a project without providing description?
 

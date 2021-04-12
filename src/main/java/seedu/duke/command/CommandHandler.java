@@ -13,6 +13,14 @@ import seedu.duke.resource.ResourceManager;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.MainUi;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.LogManager;
+import java.util.logging.Level;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
+
 import java.util.ArrayList;
 
 public class CommandHandler {
@@ -29,12 +37,40 @@ public class CommandHandler {
     private static final String LOAD_COMMAND = "load";
     public static final String NEW_LINE = "\n";
     public static final String DIVIDER = "--------------------------------------------------------";
+    private static Logger logger = null;
 
+    //@@author NgManSing
     String command;
     String[] infoFragments;
-    private final ArrayList<Project> projects;
+    private ArrayList<Project> projects;
 
     public CommandHandler(InputParser userInput, ArrayList<Project> projects) {
+        initializeParameters(userInput, projects);
+        initializeLogger();
+    }
+
+    //@@Author NgManSing
+    private static void initializeLogger() {
+        if (logger == null) {
+            logger = Logger.getLogger(CommandHandler.class.getName());
+            LogManager.getLogManager().reset();
+            logger.setLevel(Level.ALL);
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setLevel(Level.SEVERE);
+            logger.addHandler(consoleHandler);
+            try {
+                FileHandler fh = new FileHandler("log.txt");
+                fh.setLevel(Level.ALL);
+                logger.addHandler(fh);
+                SimpleFormatter formatter = new SimpleFormatter();
+                fh.setFormatter(formatter);
+            } catch (SecurityException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void initializeParameters(InputParser userInput, ArrayList<Project> projects) {
         this.command = userInput.getCommand();
         this.infoFragments = userInput.getInfoFragments();
         this.projects = projects;
@@ -45,6 +81,7 @@ public class CommandHandler {
     }
 
     //@@author NgManSing
+
     /**
      * Process the command given by the user if it is not null. A boolean value is returned to indicate whether to
      * continue looping, which is based on what command is executed. If command is null, the method returns true.
@@ -111,6 +148,7 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This method calls helper methods to print resources for a project.
      */
@@ -118,10 +156,13 @@ public class CommandHandler {
         try {
             ProjectManager.printResourceListForAProject(getInfoFragments());
         } catch (NoProjectNameException e) {
+            logger.log(Level.WARNING, "Couldn't detect project name from user inputs.");
             System.out.print(e.getErrorMsg());
         } catch (ProjectNotFoundException e) {
+            logger.log(Level.WARNING, "Project couldn't be found.");
             System.out.print(e.getErrorMsg());
         } catch (WrongInputFormatException e) {
+            logger.log(Level.WARNING, "Wrong format for commands");
             System.out.print(e.getErrorMsg());
         }
     }
@@ -135,11 +176,14 @@ public class CommandHandler {
             projectInfo = CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
             ResourceManager.addResource(projectInfo);
         } catch (InvalidArgumentException e) {
-            printErrorMsg("Resource failed to be added. (Reason: " + e.getErrorMsg() + ")");
+            String errorMsg = "Resource failed to be added. (Reason: " + e.getErrorMsg() + ")";
+            logger.log(Level.WARNING, errorMsg);
+            printErrorMsg(errorMsg);
         }
     }
 
     //@@author s-t-e-f
+
     /**
      * Process user's command for deleting resource(s).
      * Check if all the mandatory keywords are present in the correct order.
@@ -159,6 +203,7 @@ public class CommandHandler {
     }
 
     //@@author s-t-e-f
+
     /**
      * Process user's command for editing a resource.
      * Check if all the mandatory keywords are present in the correct order.
@@ -177,6 +222,7 @@ public class CommandHandler {
     }
 
     //@@author jovanhuang
+
     /**
      * This method will print divider.
      */

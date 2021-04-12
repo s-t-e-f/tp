@@ -5,7 +5,9 @@ import seedu.duke.parser.InputParser;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InputParserTest {
     @Test
@@ -19,10 +21,10 @@ public class InputParserTest {
     @Test
     public void testNullInput() {
         String rawInput = null;
-        try{
+        try {
             new InputParser(rawInput);
             fail("It should have thrown any exception");
-        } catch (AssertionError e){
+        } catch (AssertionError e) {
             System.out.println("Test OK");
         }
     }
