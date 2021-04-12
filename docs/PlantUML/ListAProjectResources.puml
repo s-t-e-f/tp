@@ -17,21 +17,21 @@ activate CH
 CH -> CH: listAProjectResource()
 activate CH
 
-CH -> PM: printResourceListForAProject(infoFragments)
+CH -> PM: printResourceListForAProject()
 activate PM
 
-PM -> PM: userInputs = processInputs(infoFragments)
-PM -> PM: userInputProjectName = validateAndExtractProjectNameInput(userInputs)
+PM -> PM: userInputs = processInputs()
+PM -> PM: userInputProjectName = validateAndExtractProjectNameInput()
 
 loop for each project
     PM -> P: getProjectName()
     activate P
-    return projectName
+    return
     opt if projectName.equals(userInputProjectName)
         PM -> P: getResources()
         activate P
-        return resources
-        PM -> RM: printResourceList(resources)
+        return
+        PM -> RM: printResourceList()
         activate RM
         loop for each resource
             RM -> R: print()
@@ -45,6 +45,6 @@ loop for each project
         end
         return
         return
-return isLoop
+return
 
 @enduml
