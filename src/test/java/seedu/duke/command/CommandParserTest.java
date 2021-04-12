@@ -26,6 +26,20 @@ public class CommandParserTest {
     }
 
     @Test
+    public void testNullInput() {
+        int firstOptionalKeyword = 2;
+        String[] keywords = null;
+        String[] infoFragments = null;
+        try {
+            CommandParser.decodeInfoFragments(infoFragments, keywords, firstOptionalKeyword);
+            fail("It should have thrown any exception");
+        } catch (AssertionError | InvalidArgumentException e) {
+            System.out.println("Test OK");
+        }
+
+    }
+
+    @Test
     public void testEmptyCompulsoryArgument() {
         int firstOptionalKeyword = 2;
         String[] keywords = {"p/", "url/", "d/", "c/"};

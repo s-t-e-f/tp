@@ -60,7 +60,7 @@ public class Storage {
         return String.format("%s|%s|%s",
                 resource.getResourceLink(),
                 resource.getResourceDescriptionOnly(),
-                resource.getDateOfCreation().toString());
+                resource.getResourceDate().toString());
     }
 
     /**

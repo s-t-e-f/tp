@@ -1,0 +1,70 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+package MainUi <<Rectangle>>{
+}
+
+package Main <<Rectangle>>{
+}
+
+package Storage <<Rectangle>>{
+}
+
+package Model <<Rectangle>>{
+}
+
+package Logic {
+    class CommandHandler {
+        - projects
+        + processCommand()
+        - processInputBeforeAdding()
+        - processInputBeforeDeleting()
+        - processInputBeforeFinding()
+        - processInputBeforeEditing()
+        + listAllCommands()
+    }
+
+    class CommandParser {
+        + {static} decodeInfoFragments()
+        - {static} isUserInputValid()
+        - {static} getUsefulInfo()
+    }
+
+    class InputParser {
+        + InputParser(rawInput)
+        ~ command
+        ~ infoFragments
+    }
+
+    class "{abstract}\nResourceManager"{
+        + printResourcesMatchingKeyword() {static}
+        + addResource(projectInfo) {static}
+        + deleteResource(projectInfo) {static}
+        + editResource(projectInfo) {static}
+    }
+
+    class "{abstract}\nProjectManager"{
+        + getAllProjectsAndResourcesMatchingKeyword(keyword, projects) {static}
+        + getProjByProjName(projName) {static}
+        + deleteWholeProject(proj) {static}
+        + newProject(projectName, projectUrl, description) {static}
+        + getProject(projectIndex) {static}
+        + searchExistingProjectIndex(projectName) {static}
+        + updateRecords() {static}
+    }
+
+    CommandHandler "1"-->"1" CommandParser:uses
+    CommandHandler .> InputParser
+    CommandHandler --> "{abstract}\nResourceManager":uses
+    CommandHandler --> "{abstract}\nProjectManager":uses
+    CommandHandler --> Storage
+    CommandHandler --> Model
+
+}
+
+Main --> CommandHandler
+CommandHandler --> MainUi
+
+@enduml
