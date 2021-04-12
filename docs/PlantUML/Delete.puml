@@ -6,6 +6,7 @@ participant ":Command Handler" as CommandHandler
 participant ":Command Parser" as CommandParser
 participant ":Resource Manager" as ResourceManager
 participant ":Project Manager" as ProjectManager
+participant "targetProj:Project" as targetedProj
 
 [-> CommandHandler : processCommand()
 activate CommandHandler
@@ -37,7 +38,7 @@ else indexNotIndicated
     deactivate ProjectManager
 
 else else
-    [<-- ResourceManager : targetedProj.getResources().remove(idx)
+    ResourceManager -> targetedProj : targetedProj.getResources().remove(idx)
     deactivate
 end
 
