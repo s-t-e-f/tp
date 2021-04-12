@@ -19,8 +19,8 @@ activate PM
 loop for each project
     PM -> P: getResource()
     activate P
-    return resources
-    PM -> RM: printResourceList(resources)
+    return
+    PM -> RM: printResourceList()
     activate RM
     loop for each resource
         RM->R: print()
@@ -31,6 +31,6 @@ end
 return
 return
 return
-return isLoop
+return
 
 @enduml
