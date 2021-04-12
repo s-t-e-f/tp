@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 'https://plantuml.com/sequence-diagram
 
 box Editing Resource
@@ -33,7 +34,11 @@ else else
     alt projectInfo[3] != null
         Resource -> Resource : setResourceDescription(projectInfo[3])
         end
+    return
     deactivate Resource
+
+return
+return
 end
 
 

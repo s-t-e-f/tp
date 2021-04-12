@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 
 box
 participant ":CommandHandler" as CommandHandler
@@ -29,8 +30,11 @@ ProjectManager --> CommandHandler : projects
 deactivate ProjectManager
 
 CommandHandler -> Duke : setProjects(projects)
+[<-- CommandHandler :
 
 deactivate CommandHandler
 deactivate Duke
+
+
 
 @enduml

@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 
 box
 participant ":CommandHandler" as CommandHandler
@@ -20,6 +21,6 @@ activate Storage
 
 Storage --> CommandHandler : "Saved projects to storage"
 deactivate Storage
+[<-- CommandHandler :
 deactivate CommandHandler
-
 @enduml
