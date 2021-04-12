@@ -28,13 +28,24 @@
 TraceYourProj is a desktop app for **tracking online resources** for **data science projects**, optimized
 for use via a Command Line Interface (CLI).
 
-## <a id="designAndImplementation">Design & Implementation</a>
+## <a id="design">Design</a>
 
 ### Architecture
 ![Architecture_png](puml_img/Architecture.png)
 
 The Architecture Diagram provided above illustrates the high-level design of TraceYourProj. Given below is a quick 
 overview of each component.
+
+`Main` is consisted of a class, namely Duke. The main function of it is to:
+1. Initialize project list
+2. Receive inputs from the user until he/she types `exit` command to terminate the program
+
+The rest of TraceYourProj comprises the following components:
+- `MainUi`: The user interface of the application.
+- `Logic`: The core of the application that is to execute commands from the user.
+- `Model`: It stores the data of the application in memory.
+- `Storage`: It reads/writes the data to the hard disk (local file system).
+
 ---
 
 **Overall Class Diagram:**
@@ -56,6 +67,22 @@ The `MainUI` Component
 * handles interactions with the user upon running TraceYourProj
 such as prompting user input and showing a list of available commands 
 
+---
+
+#### Logic Component
+
+![UIClassDiagram](puml_img/LogicClassDiagram.png)
+
+API: [`CommandHandler.java`](https://github.com/AY2021S2-CS2113-W10-3/tp/blob/master/src/main/java/seedu/duke/command/CommandHandler.java)
+
+The `Logic` Component
+
+* The API of `Logic` is the class CommandHandler.
+* Class `CommandHandler` uses class `CommandParser` to parse infoFragments from class `InputParser`.
+* The parsed arguments would be passed to suitable classes (`ResourceManager/ProjectManager`) for command execution.
+* Class `ResourceManager/ProjectManager` executes user command based on the parsed arguments.
+* The Model may be modified during command execution(e.g. added/deleted a resource)
+  
 ---
 
 #### Model Component

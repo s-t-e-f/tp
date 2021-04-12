@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static seedu.duke.command.CommandHandler.printDivider;
 
 
-public class ProjectManager {
+abstract public class ProjectManager {
     public static final int LIST_PARAMETER_STARTING_INDEX = 0;
     public static final int LIST_PARAMETER_ENDING_INDEX = 2;
     public static final int MINIMUM_LIST_PARAMETER_LENGTH = 2;
